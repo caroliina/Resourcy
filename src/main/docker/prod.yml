@@ -1,0 +1,18 @@
+resourcy-elasticsearch:
+  container_name: resourcy-elasticsearch
+  image: elasticsearch:1.7.3
+  # volumes:
+  #   - ~/volumes/jhipster/Resourcy/elasticsearch/:/usr/share/elasticsearch/data/
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+resourcy-postgresql:
+  container_name: resourcy-postgresql
+  image: postgres:9.4.5
+  # volumes:
+  #   - ~/volumes/jhipster/Resourcy/postgresql/:/var/lib/postgresql/
+  environment:
+    - POSTGRES_USER=Resourcy
+    - POSTGRES_PASSWORD=
+  ports:
+    - "5432:5432"

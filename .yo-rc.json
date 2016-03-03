@@ -1,0 +1,24 @@
+{
+  "generator-jhipster": {
+    "baseName": "Resourcy",
+    "packageName": "com.resourcy.app",
+    "packageFolder": "com/resourcy/app",
+    "authenticationType": "session",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "useSass": true,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "enableTranslation": false,
+    "enableSocialSignIn": false,
+    "rememberMeKey": "865ed0f9c8080b31a637c09322805ba352fbbc30",
+    "testFrameworks": [
+      "gatling"
+    ]
+  }
+}
