@@ -8,7 +8,7 @@ angular.module('resourcyApp')
                 url: '/user-management',
                 data: {
                     authorities: ['ROLE_ADMIN'],
-                    pageTitle: 'Users'
+                    pageTitle: 'user-management.home.title'
                 },
                 views: {
                     'content@': {
@@ -17,7 +17,10 @@ angular.module('resourcyApp')
                     }
                 },
                 resolve: {
-                    
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('user.management');
+                        return $translate.refresh();
+                    }]
                 }
             })
             .state('user-management-detail', {
@@ -25,7 +28,7 @@ angular.module('resourcyApp')
                 url: '/user/:login',
                 data: {
                     authorities: ['ROLE_ADMIN'],
-                    pageTitle: 'User'
+                    pageTitle: 'user-management.detail.title'
                 },
                 views: {
                     'content@': {
@@ -34,7 +37,10 @@ angular.module('resourcyApp')
                     }
                 },
                 resolve: {
-                    
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('user.management');
+                        return $translate.refresh();
+                    }]
                 }
             })
             .state('user-management.new', {

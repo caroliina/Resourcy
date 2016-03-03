@@ -8,7 +8,7 @@ angular.module('resourcyApp')
                 url: '/docs',
                 data: {
                     authorities: ['ROLE_ADMIN'],
-                    pageTitle: 'API'
+                    pageTitle: 'global.menu.admin.apidocs'
                 },
                 views: {
                     'content@': {
@@ -16,7 +16,9 @@ angular.module('resourcyApp')
                     }
                 },
                 resolve: {
-                    
+                    translatePartialLoader: ['$translate', function ($translate) {
+                        return $translate.refresh();
+                    }]
                 }
             });
     });

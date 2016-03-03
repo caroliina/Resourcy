@@ -8,7 +8,7 @@ angular.module('resourcyApp')
                 url: '/login',
                 data: {
                     authorities: [], 
-                    pageTitle: 'Sign in'
+                    pageTitle: 'login.title'
                 },
                 views: {
                     'content@': {
@@ -17,7 +17,10 @@ angular.module('resourcyApp')
                     }
                 },
                 resolve: {
-                    
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('login');
+                        return $translate.refresh();
+                    }]
                 }
             });
     });

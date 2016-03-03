@@ -8,7 +8,7 @@ angular.module('resourcyApp')
                 url: '/activate?key',
                 data: {
                     authorities: [],
-                    pageTitle: 'Activation'
+                    pageTitle: 'activate.title'
                 },
                 views: {
                     'content@': {
@@ -17,7 +17,10 @@ angular.module('resourcyApp')
                     }
                 },
                 resolve: {
-                    
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('activate');
+                        return $translate.refresh();
+                    }]
                 }
             });
     });

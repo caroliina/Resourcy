@@ -16,7 +16,10 @@ angular.module('resourcyApp')
                     }
                 },
                 resolve: {
-                    
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('reset');
+                        return $translate.refresh();
+                    }]
                 }
             });
     });

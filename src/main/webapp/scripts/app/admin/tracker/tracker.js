@@ -6,7 +6,7 @@ angular.module('resourcyApp')
                 url: '/tracker',
                 data: {
                     authorities: ['ROLE_ADMIN'],
-                    pageTitle: 'Real-time user activities'
+                    pageTitle: 'tracker.title'
                 },
                 views: {
                     'content@': {
@@ -15,7 +15,10 @@ angular.module('resourcyApp')
                     }
                 },
                 resolve: {
-                    
+                    mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('tracker');
+                        return $translate.refresh();
+                    }]
                 },
                 onEnter: function(Tracker) {
                     Tracker.subscribe();

@@ -4,7 +4,7 @@ angular.module('resourcyApp')
     .provider('AlertService', function () {
         this.toast = false;
 
-        this.$get = ['$timeout', '$sce', function($timeout, $sce) {
+        this.$get = ['$timeout', '$sce', '$translate', function($timeout, $sce,$translate) {
 
             var exports = {
                 factory: factory,
@@ -102,6 +102,7 @@ angular.module('resourcyApp')
 
             function addAlert(alertOptions, extAlerts) {
                 alertOptions.alertId = alertId++;
+                alertOptions.msg = $translate.instant(alertOptions.msg, alertOptions.params);
                 var that = this;
                 var alert = this.factory(alertOptions);
                 if (alertOptions.timeout && alertOptions.timeout > 0) {

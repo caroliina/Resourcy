@@ -1,11 +1,14 @@
 'use strict';
 
 angular.module('resourcyApp').controller('UserManagementDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'User', 
-        function($scope, $stateParams, $uibModalInstance, entity, User) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'User', 'Language',
+        function($scope, $stateParams, $uibModalInstance, entity, User, Language) {
 
         $scope.user = entity;
         $scope.authorities = ["ROLE_USER", "ROLE_ADMIN"];
+        Language.getAll().then(function (languages) {
+            $scope.languages = languages;
+        });
         var onSaveSuccess = function (result) {
             $scope.isSaving = false;
             $uibModalInstance.close(result);
@@ -20,7 +23,6 @@ angular.module('resourcyApp').controller('UserManagementDialogController',
             if ($scope.user.id != null) {
                 User.update($scope.user, onSaveSuccess, onSaveError);
             } else {
-                $scope.user.langKey = 'en';
                 User.save($scope.user, onSaveSuccess, onSaveError);
             }
         };

@@ -8,7 +8,7 @@ angular.module('resourcyApp')
                 url: '/audits',
                 data: {
                     authorities: ['ROLE_ADMIN'],
-                    pageTitle: 'Audits'
+                    pageTitle: 'audits.title'
                 },
                 views: {
                     'content@': {
@@ -17,7 +17,10 @@ angular.module('resourcyApp')
                     }
                 },
                 resolve: {
-                    
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('audits');
+                        return $translate.refresh();
+                    }]
                 }
             });
     });

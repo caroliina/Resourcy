@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('resourcyApp')
-    .controller('UserManagementController', function ($scope, Principal, User, ParseLinks) {
+    .controller('UserManagementController', function ($scope, Principal, User, ParseLinks, Language) {
         $scope.users = [];
         $scope.authorities = ["ROLE_USER", "ROLE_ADMIN"];
+        Language.getAll().then(function (languages) {
+            $scope.languages = languages;
+        });
 		
 		Principal.identity().then(function(account) {
             $scope.currentAccount = account;
