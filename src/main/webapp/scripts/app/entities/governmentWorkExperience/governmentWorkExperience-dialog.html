@@ -1,0 +1,60 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myGovernmentWorkExperienceLabel" translate="resourcyApp.governmentWorkExperience.home.createOrEditLabel">Create or edit a GovernmentWorkExperience</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="governmentWorkExperience.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="resourcyApp.governmentWorkExperience.periodStart" for="field_periodStart">PeriodStart</label>
+            <input id="field_periodStart" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="governmentWorkExperience.periodStart" is-open="datePickerForPeriodStart.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForPeriodStartOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="resourcyApp.governmentWorkExperience.periodEnd" for="field_periodEnd">PeriodEnd</label>
+            <input id="field_periodEnd" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="governmentWorkExperience.periodEnd" is-open="datePickerForPeriodEnd.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForPeriodEndOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="resourcyApp.governmentWorkExperience.personalWorkHours" for="field_personalWorkHours">PersonalWorkHours</label>
+            <input type="number" class="form-control" name="personalWorkHours" id="field_personalWorkHours"
+                    ng-model="governmentWorkExperience.personalWorkHours"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="resourcyApp.governmentWorkExperience.curriculumVitae" for="field_curriculumVitae">curriculumVitae</label>
+            <select class="form-control" id="field_curriculumVitae" name="curriculumVitae" ng-model="governmentWorkExperience.curriculumVitaeId" ng-options="curriculumVitae.id as curriculumVitae.id for curriculumVitae in curriculumvitaes">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="resourcyApp.governmentWorkExperience.governmentProject" for="field_governmentProject">governmentProject</label>
+            <select class="form-control" id="field_governmentProject" name="governmentProject" ng-model="governmentWorkExperience.governmentProjectId" ng-options="governmentProject.id as governmentProject.id for governmentProject in governmentprojects | orderBy:'id'">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

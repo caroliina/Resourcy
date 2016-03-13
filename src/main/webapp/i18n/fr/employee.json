@@ -1,0 +1,28 @@
+{
+    "resourcyApp": {
+        "employee" : {
+            "home": {
+                "title": "Employees",
+                "createLabel": "Créer un nouveau employee",
+                "createOrEditLabel": "Créer ou éditer un employee",
+                "search": "Search for employee"
+            },
+            "created": "Un nouveau employee a été créé avec l'identifiant {{ param }}",
+            "updated": "Le employee avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le employee avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le employee {{ id }} ?"
+            },
+            "detail": {
+                "title": "Employee"
+            },
+            "firstName": "First name",
+            "lastName": "Last name",
+            "birthday": "Birthday",
+            "nationality": "Nationality",
+            "email": "Email",
+            "curriculumVitae": "Curriculum Vitae"
+        }
+    }
+}
+

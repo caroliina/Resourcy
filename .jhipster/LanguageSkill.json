@@ -1,0 +1,32 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "curriculumVitae",
+            "otherEntityName": "curriculumVitae",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "language",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "speaking",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "writing",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160313195117",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "pagination": "no"
+}

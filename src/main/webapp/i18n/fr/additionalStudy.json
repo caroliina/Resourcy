@@ -1,0 +1,27 @@
+{
+    "resourcyApp": {
+        "additionalStudy" : {
+            "home": {
+                "title": "AdditionalStudys",
+                "createLabel": "Créer un nouveau AdditionalStudy",
+                "createOrEditLabel": "Créer ou éditer un AdditionalStudy",
+                "search": "Search for AdditionalStudy"
+            },
+            "created": "Un nouveau AdditionalStudy a été créé avec l'identifiant {{ param }}",
+            "updated": "Le AdditionalStudy avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le AdditionalStudy avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le AdditionalStudy {{ id }} ?"
+            },
+            "detail": {
+                "title": "AdditionalStudy"
+            },
+            "periodStart": "PeriodStart",
+            "periodEnd": "PeriodEnd",
+            "institution": "Institution",
+            "description": "Description",
+            "curriculumVitae": "CurriculumVitae"
+        }
+    }
+}
+

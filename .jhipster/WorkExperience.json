@@ -1,0 +1,49 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "curriculumVitae",
+            "otherEntityName": "curriculumVitae",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "workAssignment",
+            "otherEntityName": "workAssignment",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "workExperience"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "position",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "periodStart",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "periodEnd",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "location",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "organization",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160313194219",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "pagination": "no"
+}

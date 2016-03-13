@@ -1,0 +1,44 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myGovernmentProjectLabel" translate="resourcyApp.governmentProject.home.createOrEditLabel">Create or edit a GovernmentProject</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="governmentProject.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="resourcyApp.governmentProject.buyer" for="field_buyer">Buyer</label>
+            <input type="text" class="form-control" name="buyer" id="field_buyer"
+                    ng-model="governmentProject.buyer"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="resourcyApp.governmentProject.serviceName" for="field_serviceName">ServiceName</label>
+            <input type="text" class="form-control" name="serviceName" id="field_serviceName"
+                    ng-model="governmentProject.serviceName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="resourcyApp.governmentProject.totalProjectWorkHours" for="field_totalProjectWorkHours">TotalProjectWorkHours</label>
+            <input type="number" class="form-control" name="totalProjectWorkHours" id="field_totalProjectWorkHours"
+                    ng-model="governmentProject.totalProjectWorkHours"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

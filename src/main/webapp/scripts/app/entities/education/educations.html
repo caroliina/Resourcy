@@ -1,0 +1,80 @@
+<div>
+    <h2 translate="resourcyApp.education.home.title">Educations</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="education.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span
+class="hidden-xs"                        translate="resourcyApp.education.home.createLabel">Create new Education
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'resourcyApp.education.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="search()">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="resourcyApp.education.institution">Institution</span></th>
+                    <th><span translate="resourcyApp.education.periodStart">PeriodStart</span></th>
+                    <th><span translate="resourcyApp.education.periodEnd">PeriodEnd</span></th>
+                    <th><span translate="resourcyApp.education.speciality">Speciality</span></th>
+                    <th><span translate="resourcyApp.education.degree">Degree</span></th>
+                    <th><span translate="resourcyApp.education.curriculumVitae">CurriculumVitae</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="education in educations track by education.id">
+                    <td><a ui-sref="education.detail({id:education.id})">{{education.id}}</a></td>
+                    <td>{{education.institution}}</td>
+                        <td>{{education.periodStart | date:'mediumDate'}}</td>
+                        <td>{{education.periodEnd | date:'mediumDate'}}</td>
+                    <td>{{education.speciality}}</td>
+                    <td>{{education.degree}}</td>
+                    <td>
+                        <a ui-sref="curriculumVitae.detail({id:education.curriculumVitaeId})">{{education.curriculumVitaeId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="education.detail({id:education.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="education.edit({id:education.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="education.delete({id:education.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

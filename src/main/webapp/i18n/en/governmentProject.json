@@ -1,0 +1,26 @@
+{
+    "resourcyApp": {
+        "governmentProject" : {
+            "home": {
+                "title": "Government projects",
+                "createLabel": "Create a new government project",
+                "createOrEditLabel": "Create or edit a government project",
+                "search": "Search for government project"
+            },
+            "created": "A new government project is created with identifier {{ param }}",
+            "updated": "A government project is updated with identifier {{ param }}",
+            "deleted": "A government project is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete government project {{ id }}?"
+            },
+            "detail": {
+                "title": "Government project"
+            },
+            "buyer": "Buyer",
+            "serviceName": "Service name",
+            "totalProjectWorkHours": "Total project work hours",
+            "governmentWorkExperience": "Government work experience",
+            "technology": "Technology"
+        }
+    }
+}
