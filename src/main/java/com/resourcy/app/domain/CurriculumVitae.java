@@ -18,7 +18,7 @@ import java.util.Objects;
 @Table(name = "curriculum_vitae")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "curriculumvitae")
-public class CurriculumVitae implements Serializable {
+public class CurriculumVitae extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

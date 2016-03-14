@@ -3,14 +3,14 @@ package com.resourcy.app.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.LocalDate;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A WorkExperience.
@@ -19,7 +19,7 @@ import java.util.Objects;
 @Table(name = "work_experience")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "workexperience")
-public class WorkExperience implements Serializable {
+public class WorkExperience extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,19 +27,19 @@ public class WorkExperience implements Serializable {
 
     @Column(name = "position")
     private String position;
-    
+
     @Column(name = "period_start")
     private LocalDate periodStart;
-    
+
     @Column(name = "period_end")
     private LocalDate periodEnd;
-    
+
     @Column(name = "location")
     private String location;
-    
+
     @Column(name = "organization")
     private String organization;
-    
+
     @ManyToOne
     @JoinColumn(name = "curriculum_vitae_id")
     private CurriculumVitae curriculumVitae;
@@ -60,7 +60,7 @@ public class WorkExperience implements Serializable {
     public String getPosition() {
         return position;
     }
-    
+
     public void setPosition(String position) {
         this.position = position;
     }
@@ -68,7 +68,7 @@ public class WorkExperience implements Serializable {
     public LocalDate getPeriodStart() {
         return periodStart;
     }
-    
+
     public void setPeriodStart(LocalDate periodStart) {
         this.periodStart = periodStart;
     }
@@ -76,7 +76,7 @@ public class WorkExperience implements Serializable {
     public LocalDate getPeriodEnd() {
         return periodEnd;
     }
-    
+
     public void setPeriodEnd(LocalDate periodEnd) {
         this.periodEnd = periodEnd;
     }
@@ -84,7 +84,7 @@ public class WorkExperience implements Serializable {
     public String getLocation() {
         return location;
     }
-    
+
     public void setLocation(String location) {
         this.location = location;
     }
@@ -92,7 +92,7 @@ public class WorkExperience implements Serializable {
     public String getOrganization() {
         return organization;
     }
-    
+
     public void setOrganization(String organization) {
         this.organization = organization;
     }

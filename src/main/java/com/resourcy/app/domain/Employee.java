@@ -3,14 +3,14 @@ package com.resourcy.app.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.LocalDate;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Employee.
@@ -19,7 +19,7 @@ import java.util.Objects;
 @Table(name = "employee")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "employee")
-public class Employee implements Serializable {
+public class Employee extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,19 +27,19 @@ public class Employee implements Serializable {
 
     @Column(name = "first_name")
     private String firstName;
-    
+
     @Column(name = "last_name")
     private String lastName;
-    
+
     @Column(name = "birthday")
     private LocalDate birthday;
-    
+
     @Column(name = "nationality")
     private String nationality;
-    
+
     @Column(name = "email")
     private String email;
-    
+
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -56,7 +56,7 @@ public class Employee implements Serializable {
     public String getFirstName() {
         return firstName;
     }
-    
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -64,7 +64,7 @@ public class Employee implements Serializable {
     public String getLastName() {
         return lastName;
     }
-    
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -72,7 +72,7 @@ public class Employee implements Serializable {
     public LocalDate getBirthday() {
         return birthday;
     }
-    
+
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
@@ -80,7 +80,7 @@ public class Employee implements Serializable {
     public String getNationality() {
         return nationality;
     }
-    
+
     public void setNationality(String nationality) {
         this.nationality = nationality;
     }
@@ -88,7 +88,7 @@ public class Employee implements Serializable {
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }

@@ -1,15 +1,13 @@
 package com.resourcy.app.web.rest.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 
 /**
  * A DTO for the WorkAssignment entity.
  */
-public class WorkAssignmentDTO implements Serializable {
+public class WorkAssignmentDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;
 

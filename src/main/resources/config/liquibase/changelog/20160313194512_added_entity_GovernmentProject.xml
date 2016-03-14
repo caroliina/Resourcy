@@ -22,13 +22,18 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="buyer" type="varchar(255)"/>
-            
+
             <column name="service_name" type="varchar(255)"/>
-            
+
             <column name="total_project_work_hours" type="integer"/>
-            
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
+    </changeSet>
+
+    <changeSet id="Add columns created_date, modified_date to government_project table" author="Kreete">
+        <addColumn tableName="government_project"><column name="created_date" type="TIMESTAMP"/></addColumn>
+        <addColumn tableName="government_project"><column name="last_modified_date" type="TIMESTAMP"/></addColumn>
     </changeSet>
 </databaseChangeLog>

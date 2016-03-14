@@ -22,18 +22,23 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="type" type="varchar(255)"/>
-            
+
             <column name="description" type="varchar(255)"/>
-            
+
             <column name="government_project_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
         <addForeignKeyConstraint baseColumnNames="government_project_id"
                                  baseTableName="technology"
                                  constraintName="fk_technology_governmentproject_id"
                                  referencedColumnNames="id"
                                  referencedTableName="government_project"/>
 
+    </changeSet>
+
+    <changeSet id="Add columns created_date, modified_date to technology table" author="Kreete">
+        <addColumn tableName="technology"><column name="created_date" type="TIMESTAMP"/></addColumn>
+        <addColumn tableName="technology"><column name="last_modified_date" type="TIMESTAMP"/></addColumn>
     </changeSet>
 </databaseChangeLog>

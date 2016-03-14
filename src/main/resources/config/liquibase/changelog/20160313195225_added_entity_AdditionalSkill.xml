@@ -22,18 +22,23 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="type" type="varchar(255)"/>
-            
+
             <column name="description" type="varchar(255)"/>
-            
+
             <column name="curriculum_vitae_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
         <addForeignKeyConstraint baseColumnNames="curriculum_vitae_id"
                                  baseTableName="additional_skill"
                                  constraintName="fk_additionalskill_curriculumvitae_id"
                                  referencedColumnNames="id"
                                  referencedTableName="curriculum_vitae"/>
 
+    </changeSet>
+
+    <changeSet id="Add columns created_date, modified_date to additional_skill table" author="Kreete">
+        <addColumn tableName="additional_skill"><column name="created_date" type="TIMESTAMP"/></addColumn>
+        <addColumn tableName="additional_skill"><column name="last_modified_date" type="TIMESTAMP"/></addColumn>
     </changeSet>
 </databaseChangeLog>

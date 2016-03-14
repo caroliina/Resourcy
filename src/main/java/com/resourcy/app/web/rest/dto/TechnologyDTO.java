@@ -1,15 +1,13 @@
 package com.resourcy.app.web.rest.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 
 /**
  * A DTO for the Technology entity.
  */
-public class TechnologyDTO implements Serializable {
+public class TechnologyDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;
 

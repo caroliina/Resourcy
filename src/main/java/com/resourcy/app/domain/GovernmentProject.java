@@ -18,7 +18,7 @@ import java.util.Objects;
 @Table(name = "government_project")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "governmentproject")
-public class GovernmentProject implements Serializable {
+public class GovernmentProject extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,13 +26,13 @@ public class GovernmentProject implements Serializable {
 
     @Column(name = "buyer")
     private String buyer;
-    
+
     @Column(name = "service_name")
     private String serviceName;
-    
+
     @Column(name = "total_project_work_hours")
     private Integer totalProjectWorkHours;
-    
+
     @OneToOne(mappedBy = "governmentProject")
     @JsonIgnore
     private GovernmentWorkExperience governmentWorkExperience;
@@ -53,7 +53,7 @@ public class GovernmentProject implements Serializable {
     public String getBuyer() {
         return buyer;
     }
-    
+
     public void setBuyer(String buyer) {
         this.buyer = buyer;
     }
@@ -61,7 +61,7 @@ public class GovernmentProject implements Serializable {
     public String getServiceName() {
         return serviceName;
     }
-    
+
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
     }
@@ -69,7 +69,7 @@ public class GovernmentProject implements Serializable {
     public Integer getTotalProjectWorkHours() {
         return totalProjectWorkHours;
     }
-    
+
     public void setTotalProjectWorkHours(Integer totalProjectWorkHours) {
         this.totalProjectWorkHours = totalProjectWorkHours;
     }

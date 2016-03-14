@@ -1,15 +1,13 @@
 package com.resourcy.app.web.rest.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 
 /**
  * A DTO for the AdditionalSkill entity.
  */
-public class AdditionalSkillDTO implements Serializable {
+public class AdditionalSkillDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;
 

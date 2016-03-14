@@ -22,12 +22,12 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="description" type="varchar(255)"/>
-            
+
             <column name="work_experience_id" type="bigint"/>
             <column name="government_work_experience_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
         <addForeignKeyConstraint baseColumnNames="work_experience_id"
                                  baseTableName="work_assignment"
                                  constraintName="fk_workassignment_workexperience_id"
@@ -40,5 +40,10 @@
                                  referencedColumnNames="id"
                                  referencedTableName="government_work_experience"/>
 
+    </changeSet>
+
+    <changeSet id="Add columns created_date, modified_date to work_assignment table" author="Kreete">
+        <addColumn tableName="work_assignment"><column name="created_date" type="TIMESTAMP"/></addColumn>
+        <addColumn tableName="work_assignment"><column name="last_modified_date" type="TIMESTAMP"/></addColumn>
     </changeSet>
 </databaseChangeLog>

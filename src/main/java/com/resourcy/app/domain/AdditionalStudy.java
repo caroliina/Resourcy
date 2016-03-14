@@ -2,13 +2,11 @@ package com.resourcy.app.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.LocalDate;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -18,7 +16,7 @@ import java.util.Objects;
 @Table(name = "additional_study")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "additionalstudy")
-public class AdditionalStudy implements Serializable {
+public class AdditionalStudy extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,16 +24,16 @@ public class AdditionalStudy implements Serializable {
 
     @Column(name = "period_start")
     private LocalDate periodStart;
-    
+
     @Column(name = "period_end")
     private LocalDate periodEnd;
-    
+
     @Column(name = "institution")
     private String institution;
-    
+
     @Column(name = "description")
     private String description;
-    
+
     @ManyToOne
     @JoinColumn(name = "curriculum_vitae_id")
     private CurriculumVitae curriculumVitae;
@@ -51,7 +49,7 @@ public class AdditionalStudy implements Serializable {
     public LocalDate getPeriodStart() {
         return periodStart;
     }
-    
+
     public void setPeriodStart(LocalDate periodStart) {
         this.periodStart = periodStart;
     }
@@ -59,7 +57,7 @@ public class AdditionalStudy implements Serializable {
     public LocalDate getPeriodEnd() {
         return periodEnd;
     }
-    
+
     public void setPeriodEnd(LocalDate periodEnd) {
         this.periodEnd = periodEnd;
     }
@@ -67,7 +65,7 @@ public class AdditionalStudy implements Serializable {
     public String getInstitution() {
         return institution;
     }
-    
+
     public void setInstitution(String institution) {
         this.institution = institution;
     }
@@ -75,7 +73,7 @@ public class AdditionalStudy implements Serializable {
     public String getDescription() {
         return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }

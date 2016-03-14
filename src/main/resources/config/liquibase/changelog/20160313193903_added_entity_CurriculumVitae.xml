@@ -24,12 +24,17 @@
             <column name="employee_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
         <addForeignKeyConstraint baseColumnNames="employee_id"
                                  baseTableName="curriculum_vitae"
                                  constraintName="fk_curriculumvitae_employee_id"
                                  referencedColumnNames="id"
                                  referencedTableName="employee"/>
 
+    </changeSet>
+
+    <changeSet id="Add columns created_date, modified_date to curriculum_vitae table" author="Kreete">
+        <addColumn tableName="curriculum_vitae"><column name="created_date" type="TIMESTAMP"/></addColumn>
+        <addColumn tableName="curriculum_vitae"><column name="modified_date" type="TIMESTAMP"/></addColumn>
     </changeSet>
 </databaseChangeLog>

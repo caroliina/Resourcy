@@ -1,16 +1,14 @@
 package com.resourcy.app.web.rest.dto;
 
-import java.time.LocalDate;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
 import java.util.Objects;
 
 
 /**
  * A DTO for the GovernmentWorkExperience entity.
  */
-public class GovernmentWorkExperienceDTO implements Serializable {
+public class GovernmentWorkExperienceDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;
 

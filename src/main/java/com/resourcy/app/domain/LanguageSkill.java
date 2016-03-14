@@ -15,7 +15,7 @@ import java.util.Objects;
 @Table(name = "language_skill")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "languageskill")
-public class LanguageSkill implements Serializable {
+public class LanguageSkill extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

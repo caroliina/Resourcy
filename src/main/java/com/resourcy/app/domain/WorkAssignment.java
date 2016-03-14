@@ -6,8 +6,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -17,7 +15,7 @@ import java.util.Objects;
 @Table(name = "work_assignment")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "workassignment")
-public class WorkAssignment implements Serializable {
+public class WorkAssignment extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +23,7 @@ public class WorkAssignment implements Serializable {
 
     @Column(name = "description")
     private String description;
-    
+
     @ManyToOne
     @JoinColumn(name = "work_experience_id")
     private WorkExperience workExperience;
@@ -45,7 +43,7 @@ public class WorkAssignment implements Serializable {
     public String getDescription() {
         return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }

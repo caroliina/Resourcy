@@ -22,17 +22,23 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="first_name" type="varchar(255)"/>
-            
+
             <column name="last_name" type="varchar(255)"/>
-            
+
             <column name="birthday" type="date"/>
-            
+
             <column name="nationality" type="varchar(255)"/>
-            
+
             <column name="email" type="varchar(255)"/>
-            
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
+
+    <changeSet id="Add columns created_date, modified_date to employee table" author="Kreete">
+        <addColumn tableName="employee"><column name="created_date" type="TIMESTAMP"/></addColumn>
+        <addColumn tableName="employee"><column name="modified_date" type="TIMESTAMP"/></addColumn>
+    </changeSet>
+
 </databaseChangeLog>

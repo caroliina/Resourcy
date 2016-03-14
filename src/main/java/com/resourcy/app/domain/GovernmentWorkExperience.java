@@ -3,14 +3,14 @@ package com.resourcy.app.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.LocalDate;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A GovernmentWorkExperience.
@@ -19,7 +19,7 @@ import java.util.Objects;
 @Table(name = "government_work_experience")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "governmentworkexperience")
-public class GovernmentWorkExperience implements Serializable {
+public class GovernmentWorkExperience extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,13 +27,13 @@ public class GovernmentWorkExperience implements Serializable {
 
     @Column(name = "period_start")
     private LocalDate periodStart;
-    
+
     @Column(name = "period_end")
     private LocalDate periodEnd;
-    
+
     @Column(name = "personal_work_hours")
     private Integer personalWorkHours;
-    
+
     @ManyToOne
     @JoinColumn(name = "curriculum_vitae_id")
     private CurriculumVitae curriculumVitae;
@@ -57,7 +57,7 @@ public class GovernmentWorkExperience implements Serializable {
     public LocalDate getPeriodStart() {
         return periodStart;
     }
-    
+
     public void setPeriodStart(LocalDate periodStart) {
         this.periodStart = periodStart;
     }
@@ -65,7 +65,7 @@ public class GovernmentWorkExperience implements Serializable {
     public LocalDate getPeriodEnd() {
         return periodEnd;
     }
-    
+
     public void setPeriodEnd(LocalDate periodEnd) {
         this.periodEnd = periodEnd;
     }
@@ -73,7 +73,7 @@ public class GovernmentWorkExperience implements Serializable {
     public Integer getPersonalWorkHours() {
         return personalWorkHours;
     }
-    
+
     public void setPersonalWorkHours(Integer personalWorkHours) {
         this.personalWorkHours = personalWorkHours;
     }

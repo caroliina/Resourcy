@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * A DTO for the LanguageSkill entity.
  */
-public class LanguageSkillDTO implements Serializable {
+public class LanguageSkillDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;
 

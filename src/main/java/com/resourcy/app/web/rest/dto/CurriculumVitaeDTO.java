@@ -1,15 +1,13 @@
 package com.resourcy.app.web.rest.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 
 /**
  * A DTO for the CurriculumVitae entity.
  */
-public class CurriculumVitaeDTO implements Serializable {
+public class CurriculumVitaeDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;
 
