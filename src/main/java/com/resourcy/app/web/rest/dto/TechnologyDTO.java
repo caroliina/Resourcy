@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-/**
- * A DTO for the Technology entity.
- */
 public class TechnologyDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;

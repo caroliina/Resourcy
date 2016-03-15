@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-/**
- * A DTO for the GovernmentProject entity.
- */
 public class GovernmentProjectDTO extends AbstractAuditingEntityDTO  implements Serializable {
 
     private Long id;

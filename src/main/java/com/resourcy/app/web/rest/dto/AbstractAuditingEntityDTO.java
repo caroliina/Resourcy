@@ -3,14 +3,15 @@ package com.resourcy.app.web.rest.dto;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
-/**
- * Created by kreete.peedo on 3/14/2016.
- */
 public class AbstractAuditingEntityDTO implements Serializable {
 
     private ZonedDateTime createdDate;
 
     private ZonedDateTime lastModifiedDate;
+
+    private String createdBy;
+
+    private String lastModifiedBy;
 
     public ZonedDateTime getCreatedDate() {
         return createdDate;
@@ -28,7 +29,19 @@ public class AbstractAuditingEntityDTO implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public String getCreatedBy() {
+        return createdBy;
+    }
 
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
 
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
 
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
 }

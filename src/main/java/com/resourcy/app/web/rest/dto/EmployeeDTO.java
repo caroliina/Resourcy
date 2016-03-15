@@ -5,9 +5,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 
-/**
- * A DTO for the Employee entity.
- */
 public class EmployeeDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;

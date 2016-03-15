@@ -5,9 +5,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 
-/**
- * A DTO for the AdditionalStudy entity.
- */
 public class AdditionalStudyDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;

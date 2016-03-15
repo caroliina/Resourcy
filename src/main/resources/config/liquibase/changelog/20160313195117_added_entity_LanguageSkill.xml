@@ -13,21 +13,18 @@
     <property name="floatType" value="float4" dbms="postgresql, h2"/>
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
-    <!--
-        Added the entity LanguageSkill.
-    -->
-    <changeSet id="20160313195117" author="jhipster">
+    <changeSet id="Create table language_skill" author="Kreete">
         <createTable tableName="language_skill">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}"><constraints primaryKey="true" nullable="false"/></column>
             <column name="language" type="varchar(255)"/>
-
             <column name="speaking" type="varchar(255)"/>
-
             <column name="writing" type="varchar(255)"/>
-
+            <column name="created_date" type="TIMESTAMP"/>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP"/>
+            <column name="last_modified_by" type="varchar(50)"/>
             <column name="curriculum_vitae_id" type="bigint"/>
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
 
@@ -37,10 +34,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="curriculum_vitae"/>
 
-    </changeSet>
-
-    <changeSet id="Add columns created_date, modified_date to language_skill table" author="Kreete">
-        <addColumn tableName="language_skill"><column name="created_date" type="TIMESTAMP"/></addColumn>
-        <addColumn tableName="language_skill"><column name="last_modified_date" type="TIMESTAMP"/></addColumn>
     </changeSet>
 </databaseChangeLog>

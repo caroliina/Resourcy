@@ -5,9 +5,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-/**
- * A DTO for the Education entity.
- */
 public class EducationDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;

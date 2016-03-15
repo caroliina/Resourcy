@@ -6,7 +6,7 @@
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="governmentWorkExperience.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span 
+                    <span
 class="hidden-xs"                        translate="resourcyApp.governmentWorkExperience.home.createLabel">Create new GovernmentWorkExperience
                     </span>
                 </button>
@@ -31,6 +31,7 @@ class="hidden-xs"                        translate="resourcyApp.governmentWorkEx
             <thead>
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="resourcyApp.governmentWorkExperience.position">Position</span></th>
                     <th><span translate="resourcyApp.governmentWorkExperience.periodStart">PeriodStart</span></th>
                     <th><span translate="resourcyApp.governmentWorkExperience.periodEnd">PeriodEnd</span></th>
                     <th><span translate="resourcyApp.governmentWorkExperience.personalWorkHours">PersonalWorkHours</span></th>
@@ -42,8 +43,9 @@ class="hidden-xs"                        translate="resourcyApp.governmentWorkEx
             <tbody>
                 <tr ng-repeat="governmentWorkExperience in governmentWorkExperiences track by governmentWorkExperience.id">
                     <td><a ui-sref="governmentWorkExperience.detail({id:governmentWorkExperience.id})">{{governmentWorkExperience.id}}</a></td>
-                        <td>{{governmentWorkExperience.periodStart | date:'mediumDate'}}</td>
-                        <td>{{governmentWorkExperience.periodEnd | date:'mediumDate'}}</td>
+                    <td>{{governmentWorkExperience.position}}</td>
+                    <td>{{governmentWorkExperience.periodStart | date:'mediumDate'}}</td>
+                    <td>{{governmentWorkExperience.periodEnd | date:'mediumDate'}}</td>
                     <td>{{governmentWorkExperience.personalWorkHours}}</td>
                     <td>
                         <a ui-sref="curriculumVitae.detail({id:governmentWorkExperience.curriculumVitaeId})">{{governmentWorkExperience.curriculumVitaeId}}</a>
@@ -55,7 +57,7 @@ class="hidden-xs"                        translate="resourcyApp.governmentWorkEx
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="governmentWorkExperience.detail({id:governmentWorkExperience.id})"
-                                    class="btn btn-info btn-sm"> 
+                                    class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
@@ -67,7 +69,7 @@ class="hidden-xs"                        translate="resourcyApp.governmentWorkEx
                             </button>
                             <button type="submit"
                                     ui-sref="governmentWorkExperience.delete({id:governmentWorkExperience.id})"
-                                    class="btn btn-danger btn-sm">                                    
+                                    class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
                             </button>

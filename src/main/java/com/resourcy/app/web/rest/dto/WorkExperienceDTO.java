@@ -5,9 +5,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 
-/**
- * A DTO for the WorkExperience entity.
- */
 public class WorkExperienceDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;

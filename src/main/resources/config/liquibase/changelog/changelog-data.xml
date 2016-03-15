@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle"/>
+
+    <changeSet id="add default data" author="kreete">
+        <insert tableName="employee">
+            <column name="first_name" value="Mart"/>
+            <column name="last_name" value="Tamm"/>
+            <column name="birthday" valueDate="1987-12-01"/>
+            <column name="nationality" value="Eesti"/>
+            <column name="email" value="mart.tamm@cgi.com"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="curriculum_vitae">
+            <column name="employee_id" valueComputed="(SELECT id FROM employee WHERE lower(first_name) = 'mart')"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="education">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="institution" value="Tartu Ülikool"/>
+            <column name="period_start" valueDate="2009-09-01"/>
+            <column name="period_end" valueDate="2011-05-30"/>
+            <column name="speciality" value="Informaatika"/>
+            <column name="degree" value="Magister"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="education">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="institution" value="Tartu Ülikool"/>
+            <column name="period_start" valueDate="2009-09-01"/>
+            <column name="period_end" valueDate="2011-05-30"/>
+            <column name="speciality" value="Informaatika"/>
+            <column name="degree" value="Magister"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="education">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="institution" value="Tartu Ülikool"/>
+            <column name="period_start" valueDate="2006-09-01"/>
+            <column name="period_end" valueDate="2009-05-30"/>
+            <column name="speciality" value="Informaatika"/>
+            <column name="degree" value="Bakalaureus"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="education">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="institution" value="Tallinna Polütehnikum"/>
+            <column name="period_start" valueDate="2004-09-01"/>
+            <column name="period_end" valueDate="2006-05-30"/>
+            <column name="speciality" value="Tarkvara arendus"/>
+            <column name="degree" value="Keskeriharidus"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="work_experience">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="position" value="Programmeerija"/>
+            <column name="period_start" valueDate="2015-12-01"/>
+            <column name="location" value="Tartu"/>
+            <column name="organization" value="AS CGI Eesti"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="work_experience">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="position" value="Programmeerija"/>
+            <column name="period_start" value="2009-01-01"/>
+            <column name="period_end" value="2015-11-30"/>
+            <column name="location" value="Tallinn"/>
+            <column name="organization" value="OÜ Mees ja Kaabel"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="work_experience">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="position" value="Programmeerija"/>
+            <column name="period_start" value="2007-01-01"/>
+            <column name="period_end" value="2008-12-30"/>
+            <column name="location" value="Tallinn"/>
+            <column name="organization" value="OÜ Mees, kus mu nett on?"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="government_project">
+            <column name="buyer" value="RMIT"/>
+            <column name="service_name" value="Töötamise register"/>
+            <column name="total_project_work_hours" value="7000"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="government_work_experience">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'rmit')"/>
+            <column name="position" value="programmeerija"/>
+            <column name="period_start" valueDate="2014-03-01"/>
+            <column name="period_end" valueDate="2014-09-01"/>
+            <column name="personal_work_hours" value="800"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="technology">
+            <column name="type" value="Programmeerimiskeel"/>
+            <column name="description" value="Java"/>
+            <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'rmit')"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="technology">
+            <column name="type" value="Programmeerimiskeel"/>
+            <column name="description" value="HTML5"/>
+            <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'rmit')"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="technology">
+            <column name="type" value="Andmebaas"/>
+            <column name="description" value="Oracle"/>
+            <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'rmit')"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="government_project">
+            <column name="buyer" value="CGI Soome"/>
+            <column name="service_name" value="Merlot Medi Reports"/>
+            <column name="total_project_work_hours" value="5000"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="government_work_experience">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'cgi soome')"/>
+            <column name="position" value="programmeerija"/>
+            <column name="period_start" valueDate="2011-04-01"/>
+            <column name="period_end" valueDate="2012-05-01"/>
+            <column name="personal_work_hours" value="2080"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="technology">
+            <column name="type" value="Programmeerimiskeel"/>
+            <column name="description" value="Asp.Net"/>
+            <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'cgi soome')"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="technology">
+            <column name="type" value="Programmeerimiskeel"/>
+            <column name="description" value="HTML"/>
+            <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'cgi soome')"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="technology">
+            <column name="type" value="Andmebaas"/>
+            <column name="description" value="MS SQL"/>
+            <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'cgi soome')"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="work_assignment">
+            <column name="description" value="programmeerimine"/>
+            <column name="work_experience_id" valueComputed="(SELECT id FROM work_experience WHERE lower(organization) = 'AS CGI Eesti')"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="work_assignment">
+            <column name="description" value="programmeerimine"/>
+            <column name="work_experience_id" valueComputed="(SELECT id FROM work_experience WHERE lower(organization) = 'OÜ Mees ja Kaabel')"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="work_assignment">
+            <column name="description" value="programmeerimine"/>
+            <column name="work_experience_id" valueComputed="(SELECT id FROM work_experience WHERE lower(organization) = 'OÜ Mees, kus mu nett on?')"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="additional_study">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="period_start" valueDate="2015-12-01"/>
+            <column name="institution" value="Clarified Security OÜ"/>
+            <column name="description" value="Web application security"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="additional_study">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="period_start" valueDate="2014-06-01"/>
+            <column name="institution" value="It Koolitus"/>
+            <column name="description" value="Andmebaasid, andmehaldus"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="additional_study">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="period_start" valueDate="2013-05-01"/>
+            <column name="institution" value="BCS"/>
+            <column name="description" value="Entity Framework"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="language_skill">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="language" value="Eesti keel"/>
+            <column name="speaking" value="Emakeel"/>
+            <column name="writing" value="Emakeel"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="language_skill">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="language" value="Inglise keel"/>
+            <column name="speaking" value="C2"/>
+            <column name="writing" value="C2"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="language_skill">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="language" value="Vene keel"/>
+            <column name="speaking" value="A2"/>
+            <column name="writing" value="A1"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="additional_skill">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="type" value="Programmeerimiskeel"/>
+            <column name="description" value="Java"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="additional_skill">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="type" value="Programmeerimiskeel"/>
+            <column name="description" value="Python"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="additional_skill">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="type" value="Andmebaas"/>
+            <column name="description" value="MySql"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="additional_skill">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="type" value="Andmebaas"/>
+            <column name="description" value="PostgreSQL"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <insert tableName="additional_skill">
+            <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
+            <column name="type" value="Arendusvahend"/>
+            <column name="description" value="Intellij"/>
+            <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
+
+            <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

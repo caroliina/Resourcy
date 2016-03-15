@@ -9,9 +9,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-/**
- * A Education.
- */
 @Entity
 @Table(name = "education")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

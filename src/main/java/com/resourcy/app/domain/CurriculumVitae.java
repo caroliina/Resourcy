@@ -11,9 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
-/**
- * A CurriculumVitae.
- */
 @Entity
 @Table(name = "curriculum_vitae")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

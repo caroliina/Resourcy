@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-/**
- * A DTO for the WorkAssignment entity.
- */
 public class WorkAssignmentDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;

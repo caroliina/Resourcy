@@ -29,6 +29,7 @@ angular.module('resourcyApp')
 
         $scope.clear = function () {
             $scope.governmentWorkExperience = {
+                position:null,
                 periodStart: null,
                 periodEnd: null,
                 personalWorkHours: null,

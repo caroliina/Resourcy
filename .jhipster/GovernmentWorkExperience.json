@@ -27,16 +27,21 @@
     "fields": [
         {
             "fieldId": 1,
+            "fieldName": "position",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
             "fieldName": "periodStart",
             "fieldType": "LocalDate"
         },
         {
-            "fieldId": 2,
+            "fieldId": 3,
             "fieldName": "periodEnd",
             "fieldType": "LocalDate"
         },
         {
-            "fieldId": 3,
+            "fieldId": 4,
             "fieldName": "personalWorkHours",
             "fieldType": "Integer"
         }

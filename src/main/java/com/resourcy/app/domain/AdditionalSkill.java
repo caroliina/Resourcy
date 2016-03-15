@@ -8,9 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * A AdditionalSkill.
- */
 @Entity
 @Table(name = "additional_skill")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

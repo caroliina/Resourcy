@@ -16,6 +16,7 @@
             "detail": {
                 "title": "GovernmentWorkExperience"
             },
+            "position": "Position",
             "periodStart": "PeriodStart",
             "periodEnd": "PeriodEnd",
             "personalWorkHours": "PersonalWorkHours",

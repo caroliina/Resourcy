@@ -12,9 +12,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-/**
- * A WorkExperience.
- */
 @Entity
 @Table(name = "work_experience")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

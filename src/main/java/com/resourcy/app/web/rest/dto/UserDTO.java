@@ -8,9 +8,6 @@ import org.hibernate.validator.constraints.Email;
 import javax.validation.constraints.*;
 import java.util.Set;
 import java.util.stream.Collectors;
-/**
- * A DTO representing a user, with his authorities.
- */
 public class UserDTO {
 
     public static final int PASSWORD_MIN_LENGTH = 5;

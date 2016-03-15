@@ -33,5 +33,6 @@
         <dropTable cascadeConstraints="true" tableName="additional_study"/>
         <dropTable cascadeConstraints="true" tableName="language_skill"/>
         <dropTable cascadeConstraints="true" tableName="additional_skill"/>
+        <dropSequence sequenceName="hibernate_sequence"/>
     </changeSet>
 </databaseChangeLog>

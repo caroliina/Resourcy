@@ -11,9 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
-/**
- * A GovernmentProject.
- */
 @Entity
 @Table(name = "government_project")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

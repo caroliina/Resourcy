@@ -14,6 +14,12 @@
                     ng-model="governmentWorkExperience.id" readonly />
         </div>
         <div class="form-group">
+            <label class="control-label" translate="resourcyApp.governmentWorkExperience.position" for="field_position">Position</label>
+            <input type="text" class="form-control" name="position" id="field_position"
+                   ng-model="governmentWorkExperience.position"
+            />
+        </div>
+        <div class="form-group">
             <label class="control-label" translate="resourcyApp.governmentWorkExperience.periodStart" for="field_periodStart">PeriodStart</label>
             <input id="field_periodStart" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="governmentWorkExperience.periodStart" is-open="datePickerForPeriodStart.status.opened"
             />

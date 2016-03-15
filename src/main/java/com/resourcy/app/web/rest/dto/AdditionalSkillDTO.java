@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-/**
- * A DTO for the AdditionalSkill entity.
- */
 public class AdditionalSkillDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;

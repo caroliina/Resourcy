@@ -12,9 +12,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-/**
- * A GovernmentWorkExperience.
- */
 @Entity
 @Table(name = "government_work_experience")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -33,6 +30,9 @@ public class GovernmentWorkExperience extends AbstractAuditingEntity implements 
 
     @Column(name = "personal_work_hours")
     private Integer personalWorkHours;
+
+    @Column(name = "position")
+    private String position;
 
     @ManyToOne
     @JoinColumn(name = "curriculum_vitae_id")
@@ -100,6 +100,14 @@ public class GovernmentWorkExperience extends AbstractAuditingEntity implements 
 
     public void setWorkAssignments(Set<WorkAssignment> workAssignments) {
         this.workAssignments = workAssignments;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     @Override

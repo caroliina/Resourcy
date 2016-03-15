@@ -5,21 +5,17 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 
-/**
- * A DTO for the GovernmentWorkExperience entity.
- */
 public class GovernmentWorkExperienceDTO extends AbstractAuditingEntityDTO implements Serializable {
 
     private Long id;
 
     private LocalDate periodStart;
 
-
     private LocalDate periodEnd;
-
 
     private Integer personalWorkHours;
 
+    private String position;
 
     private Long curriculumVitaeId;
     private Long governmentProjectId;
@@ -66,6 +62,15 @@ public class GovernmentWorkExperienceDTO extends AbstractAuditingEntityDTO imple
     public void setGovernmentProjectId(Long governmentProjectId) {
         this.governmentProjectId = governmentProjectId;
     }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

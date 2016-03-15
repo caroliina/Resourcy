@@ -13,18 +13,17 @@
     <property name="floatType" value="float4" dbms="postgresql, h2"/>
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
-    <!--
-        Added the entity WorkAssignment.
-    -->
-    <changeSet id="20160313194909" author="jhipster">
+    <changeSet id="Create table work_assignment" author="Kreete">
         <createTable tableName="work_assignment">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}"><constraints primaryKey="true" nullable="false"/></column>
             <column name="description" type="varchar(255)"/>
-
+            <column name="created_date" type="TIMESTAMP"/>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP"/>
+            <column name="last_modified_by" type="varchar(50)"/>
             <column name="work_experience_id" type="bigint"/>
             <column name="government_work_experience_id" type="bigint"/>
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
 
@@ -40,10 +39,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="government_work_experience"/>
 
-    </changeSet>
-
-    <changeSet id="Add columns created_date, modified_date to work_assignment table" author="Kreete">
-        <addColumn tableName="work_assignment"><column name="created_date" type="TIMESTAMP"/></addColumn>
-        <addColumn tableName="work_assignment"><column name="last_modified_date" type="TIMESTAMP"/></addColumn>
     </changeSet>
 </databaseChangeLog>
