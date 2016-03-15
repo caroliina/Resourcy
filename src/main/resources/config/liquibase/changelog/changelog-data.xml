@@ -194,21 +194,21 @@
 
         <insert tableName="work_assignment">
             <column name="description" value="programmeerimine"/>
-            <column name="work_experience_id" valueComputed="(SELECT id FROM work_experience WHERE lower(organization) = 'AS CGI Eesti')"/>
+            <column name="work_experience_id" valueComputed="(SELECT id FROM work_experience WHERE organization = 'AS CGI Eesti')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
 
         <insert tableName="work_assignment">
             <column name="description" value="programmeerimine"/>
-            <column name="work_experience_id" valueComputed="(SELECT id FROM work_experience WHERE lower(organization) = 'OÜ Mees ja Kaabel')"/>
+            <column name="work_experience_id" valueComputed="(SELECT id FROM work_experience WHERE organization = 'OÜ Mees ja Kaabel')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
 
         <insert tableName="work_assignment">
             <column name="description" value="programmeerimine"/>
-            <column name="work_experience_id" valueComputed="(SELECT id FROM work_experience WHERE lower(organization) = 'OÜ Mees, kus mu nett on?')"/>
+            <column name="work_experience_id" valueComputed="(SELECT id FROM work_experience WHERE organization = 'OÜ Mees, kus mu nett on?')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
         </insert>
