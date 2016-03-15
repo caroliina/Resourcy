@@ -1,0 +1,24 @@
+{
+    "resourcyApp": {
+        "workAssignment" : {
+            "home": {
+                "title": "Work assignments",
+                "createLabel": "Create a new work assignment",
+                "createOrEditLabel": "Create or edit a work assignment",
+                "search": "Search for work assignment"
+            },
+            "created": "A new work assignment is created with identifier {{ param }}",
+            "updated": "A work assignment is updated with identifier {{ param }}",
+            "deleted": "A work assignment is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete work assignment {{ id }}?"
+            },
+            "detail": {
+                "title": "Work assignment"
+            },
+            "description": "Description",
+            "workExperience": "Work experience",
+            "governmentWorkExperience": "Government work experience"
+        }
+    }
+}

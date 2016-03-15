@@ -1,0 +1,24 @@
+{
+    "resourcyApp": {
+        "additionalSkill" : {
+            "home": {
+                "title": "Additional skills",
+                "createLabel": "Create a new additional skill",
+                "createOrEditLabel": "Create or edit a additional skill",
+                "search": "Search for additional skill"
+            },
+            "created": "A new additional skill is created with identifier {{ param }}",
+            "updated": "A additional skill is updated with identifier {{ param }}",
+            "deleted": "A additional skill is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete additional skill {{ id }}?"
+            },
+            "detail": {
+                "title": "Additional skill"
+            },
+            "type": "Type",
+            "description": "Description",
+            "curriculumVitae": "Curriculum Vitae"
+        }
+    }
+}

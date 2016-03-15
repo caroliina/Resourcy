@@ -1,0 +1,27 @@
+{
+    "resourcyApp": {
+        "education" : {
+            "home": {
+                "title": "Educations",
+                "createLabel": "Créer un nouveau education",
+                "createOrEditLabel": "Créer ou éditer un education",
+                "search": "Search for education"
+            },
+            "created": "Un nouveau education a été créé avec l'identifiant {{ param }}",
+            "updated": "Le education avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le education avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le education {{ id }} ?"
+            },
+            "detail": {
+                "title": "Education"
+            },
+            "institution": "Institution",
+            "periodStart": "Period start",
+            "periodEnd": "Period end",
+            "speciality": "Speciality",
+            "degree": "Degree"
+        }
+    }
+}
+

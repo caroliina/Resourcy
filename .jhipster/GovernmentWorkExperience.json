@@ -1,0 +1,53 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "curriculumVitae",
+            "otherEntityName": "curriculumVitae",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "governmentProject",
+            "otherEntityName": "governmentProject",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "governmentWorkExperience"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "workAssignment",
+            "otherEntityName": "workAssignment",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "governmentWorkExperience"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "position",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "periodStart",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "periodEnd",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "personalWorkHours",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20160313194810",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "pagination": "no"
+}

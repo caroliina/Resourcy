@@ -1,0 +1,28 @@
+{
+    "resourcyApp": {
+        "governmentWorkExperience" : {
+            "home": {
+                "title": "GovernmentWorkExperiences",
+                "createLabel": "Create a new GovernmentWorkExperience",
+                "createOrEditLabel": "Create or edit a GovernmentWorkExperience",
+                "search": "Search for GovernmentWorkExperience"
+            },
+            "created": "A new GovernmentWorkExperience is created with identifier {{ param }}",
+            "updated": "A GovernmentWorkExperience is updated with identifier {{ param }}",
+            "deleted": "A GovernmentWorkExperience is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete GovernmentWorkExperience {{ id }}?"
+            },
+            "detail": {
+                "title": "GovernmentWorkExperience"
+            },
+            "position": "Position",
+            "periodStart": "PeriodStart",
+            "periodEnd": "PeriodEnd",
+            "personalWorkHours": "PersonalWorkHours",
+            "curriculumVitae": "CurriculumVitae",
+            "governmentProject": "GovernmentProject",
+            "workAssignment": "WorkAssignment"
+        }
+    }
+}

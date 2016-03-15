@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span translate="resourcyApp.workExperience.detail.title">WorkExperience</span> {{workExperience.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="resourcyApp.workExperience.position">Position</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workExperience.position}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="resourcyApp.workExperience.periodStart">PeriodStart</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workExperience.periodStart | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="resourcyApp.workExperience.periodEnd">PeriodEnd</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workExperience.periodEnd | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="resourcyApp.workExperience.location">Location</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workExperience.location}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="resourcyApp.workExperience.organization">Organization</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workExperience.organization}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="resourcyApp.workExperience.curriculumVitae">curriculumVitae</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="curriculumVitae.detail({id:workExperience.curriculumVitaeId})">{{workExperience.curriculumVitaeId}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

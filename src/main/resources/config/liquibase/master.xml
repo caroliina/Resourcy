@@ -5,5 +5,17 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160313193640_added_entity_Employee.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160313193903_added_entity_CurriculumVitae.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160313194024_added_entity_Education.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160313194219_added_entity_WorkExperience.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160313194512_added_entity_GovernmentProject.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160313194605_added_entity_Technology.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160313194810_added_entity_GovernmentWorkExperience.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160313194909_added_entity_WorkAssignment.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160313195027_added_entity_AdditionalStudy.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160313195117_added_entity_LanguageSkill.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160313195225_added_entity_AdditionalSkill.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/changelog-data.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

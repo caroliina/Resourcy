@@ -1,0 +1,58 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "employee",
+            "otherEntityName": "employee",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "education",
+            "otherEntityName": "education",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "curriculumVitae"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "workExperience",
+            "otherEntityName": "workExperience",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "curriculumVitae"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "governmentWorkExperience",
+            "otherEntityName": "governmentWorkExperience",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "curriculumVitae"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "additionalStudy",
+            "otherEntityName": "additionalStudy",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "curriculumVitae"
+        },
+        {
+            "relationshipId": 6,
+            "relationshipName": "languageSkill",
+            "otherEntityName": "languageSkill",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "curriculumVitae"
+        },
+        {
+            "relationshipId": 7,
+            "relationshipName": "additionalSkill",
+            "otherEntityName": "additionalSkill",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "curriculumVitae"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20160313193903",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "pagination": "infinite-scroll"
+}

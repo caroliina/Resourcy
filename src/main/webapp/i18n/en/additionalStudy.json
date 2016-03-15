@@ -1,0 +1,26 @@
+{
+    "resourcyApp": {
+        "additionalStudy" : {
+            "home": {
+                "title": "Additional Studies",
+                "createLabel": "Create a new additional study",
+                "createOrEditLabel": "Create or edit a additional study",
+                "search": "Search for additional study"
+            },
+            "created": "A new additional study is created with identifier {{ param }}",
+            "updated": "A additional study is updated with identifier {{ param }}",
+            "deleted": "A additional study is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete additional study {{ id }}?"
+            },
+            "detail": {
+                "title": "Additional study"
+            },
+            "periodStart": "Period start",
+            "periodEnd": "Period end",
+            "institution": "Institution",
+            "description": "Description",
+            "curriculumVitae": "Curriculum Vitae"
+        }
+    }
+}

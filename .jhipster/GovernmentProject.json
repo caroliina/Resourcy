@@ -1,0 +1,40 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "governmentWorkExperience",
+            "otherEntityName": "governmentWorkExperience",
+            "relationshipType": "one-to-one",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "governmentProject"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "technology",
+            "otherEntityName": "technology",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "governmentProject"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "buyer",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "serviceName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "totalProjectWorkHours",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20160313194512",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "pagination": "no"
+}

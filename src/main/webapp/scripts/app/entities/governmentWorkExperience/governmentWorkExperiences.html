@@ -1,0 +1,82 @@
+<div>
+    <h2 translate="resourcyApp.governmentWorkExperience.home.title">GovernmentWorkExperiences</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="governmentWorkExperience.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span
+class="hidden-xs"                        translate="resourcyApp.governmentWorkExperience.home.createLabel">Create new GovernmentWorkExperience
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'resourcyApp.governmentWorkExperience.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="search()">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="resourcyApp.governmentWorkExperience.position">Position</span></th>
+                    <th><span translate="resourcyApp.governmentWorkExperience.periodStart">PeriodStart</span></th>
+                    <th><span translate="resourcyApp.governmentWorkExperience.periodEnd">PeriodEnd</span></th>
+                    <th><span translate="resourcyApp.governmentWorkExperience.personalWorkHours">PersonalWorkHours</span></th>
+                    <th><span translate="resourcyApp.governmentWorkExperience.curriculumVitae">curriculumVitae</span></th>
+                    <th><span translate="resourcyApp.governmentWorkExperience.governmentProject">governmentProject</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="governmentWorkExperience in governmentWorkExperiences track by governmentWorkExperience.id">
+                    <td><a ui-sref="governmentWorkExperience.detail({id:governmentWorkExperience.id})">{{governmentWorkExperience.id}}</a></td>
+                    <td>{{governmentWorkExperience.position}}</td>
+                    <td>{{governmentWorkExperience.periodStart | date:'mediumDate'}}</td>
+                    <td>{{governmentWorkExperience.periodEnd | date:'mediumDate'}}</td>
+                    <td>{{governmentWorkExperience.personalWorkHours}}</td>
+                    <td>
+                        <a ui-sref="curriculumVitae.detail({id:governmentWorkExperience.curriculumVitaeId})">{{governmentWorkExperience.curriculumVitaeId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="governmentProject.detail({id:governmentWorkExperience.governmentProjectId})">{{governmentWorkExperience.governmentProjectId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="governmentWorkExperience.detail({id:governmentWorkExperience.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="governmentWorkExperience.edit({id:governmentWorkExperience.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="governmentWorkExperience.delete({id:governmentWorkExperience.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
