@@ -19,7 +19,7 @@
     }
 
     // Defaults
-    fallbackLocale = locale = locale || "en";
+    fallbackLocale = locale = locale || "et";
     pluralFunc = pluralFunc || MessageFormat.locale[ fallbackLocale = MessageFormat.Utils.getFallbackLocale( locale ) ];
 
     if ( ! pluralFunc ) {
@@ -60,7 +60,7 @@
 
   // Set up the locales object. Add in english by default
   MessageFormat.locale = {
-    "en" : function ( n ) {
+    "et" : function ( n ) {
       if ( n === 1 ) {
         return "one";
       }

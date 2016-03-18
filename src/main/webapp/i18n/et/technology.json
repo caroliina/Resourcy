@@ -1,0 +1,24 @@
+{
+    "resourcyApp": {
+        "technology" : {
+            "home": {
+                "title": "Tehnoloogiad",
+                "createLabel": "Lisa uus",
+                "createOrEditLabel": "Lisa või muuda",
+                "search": "Otsi"
+            },
+            "created": "Lisatud",
+            "updated": "Salvestatud",
+            "deleted": "Kustutatud",
+            "delete": {
+                "question":  "Olete kindel, et soovite kustutada?"
+            },
+            "detail": {
+                "title": "Tehnoloogia"
+            },
+            "type": "Tüüp",
+            "description": "Kirjeldus",
+            "governmentProject": "Riigiprojekt"
+        }
+    }
+}

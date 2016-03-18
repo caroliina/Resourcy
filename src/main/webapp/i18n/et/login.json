@@ -1,0 +1,19 @@
+{
+    "login": {
+        "title": "Sisse logimine",
+        "form": {
+            "password": "Salasõna",
+            "password.placeholder": "Sisesta salasõna",
+            "rememberme": "Jäta meelde",
+            "button": "Logi sisse"
+        },
+        "messages": {
+            "error": {
+                "authentication": "<strong>Ebaõnnestus!</strong> Proovige uuesti."
+            }
+        },
+        "password" : {
+            "forgot": "Unustasite salasõna?"
+        }
+    }
+}

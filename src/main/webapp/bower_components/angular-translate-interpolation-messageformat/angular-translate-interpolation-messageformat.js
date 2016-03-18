@@ -55,8 +55,8 @@ function $translateMessageFormatInterpolation($translateSanitization, $cacheFact
 
   var $translateInterpolator = {},
       $cache = $cacheFactory.get(TRANSLATE_MF_INTERPOLATION_CACHE),
-      // instantiate with default locale (which is 'en')
-      $mf = new MessageFormat('en'),
+      // instantiate with default locale (which is 'et')
+      $mf = new MessageFormat('et'),
       $identifier = 'messageformat';
 
   if (!$cache) {
@@ -64,7 +64,7 @@ function $translateMessageFormatInterpolation($translateSanitization, $cacheFact
     $cache = $cacheFactory(TRANSLATE_MF_INTERPOLATION_CACHE);
   }
 
-  $cache.put('en', $mf);
+  $cache.put('et', $mf);
 
   /**
    * @ngdoc function

@@ -35,7 +35,7 @@ angular.module('resourcyApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pasca
             Language.getCurrent().then(function (language) {
                 $translate.use(language);
             });
-            
+
         });
 
         $rootScope.$on('$stateChangeSuccess',  function(event, toState, toParams, fromState, fromParams) {
@@ -112,7 +112,7 @@ angular.module('resourcyApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pasca
             urlTemplate: 'i18n/{lang}/{part}.json'
         });
 
-        $translateProvider.preferredLanguage('en');
+        $translateProvider.preferredLanguage('et');
         $translateProvider.useCookieStorage();
         $translateProvider.useSanitizeValueStrategy('escaped');
         $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
