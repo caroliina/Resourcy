@@ -1,0 +1,9 @@
+{
+    "main": {
+        "title": "Tere tulemast!!",
+        "subtitle": "Avaleht",
+        "logged": {
+            "message": "Aktiive kasutaja \"{{username}}\"."
+        }
+    }
+}

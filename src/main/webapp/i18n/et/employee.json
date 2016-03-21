@@ -1,0 +1,27 @@
+{
+    "resourcyApp": {
+        "employee" : {
+            "home": {
+                "title": "Töötajad",
+                "createLabel": "Lisa uus",
+                "createOrEditLabel": "Lisa või muuda",
+                "search": "Otsi"
+            },
+            "created": "Lisatud",
+            "updated": "Salvestatud",
+            "deleted": "Kustutatud",
+            "delete": {
+                "question": "Olete kindel, et soovite kustutada?"
+            },
+            "detail": {
+                "title": "Töötaja"
+            },
+            "firstName": "Eesnimi",
+            "lastName": "Perenimi",
+            "birthday": "Sünniaeg",
+            "nationality": "Kodakondsus",
+            "email": "E-post",
+            "curriculumVitae": "Curriculum Vitae"
+        }
+    }
+}

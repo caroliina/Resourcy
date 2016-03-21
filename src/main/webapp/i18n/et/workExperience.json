@@ -1,0 +1,28 @@
+{
+    "resourcyApp": {
+        "workExperience" : {
+            "home": {
+                "title": "Töökogemused",
+                "createLabel": "Lisa uus",
+                "createOrEditLabel": "Lisa või muuda",
+                "search": "Otsi"
+            },
+            "created": "Lisatud",
+            "updated": "Salvestatud",
+            "deleted": "Kustutatud",
+            "delete": {
+                "question":  "Olete kindel, et soovite kustutada?"
+            },
+            "detail": {
+                "title": "Töökogemus"
+            },
+            "position": "Ametikoht",
+            "periodStart": "Ajaperiood alates",
+            "periodEnd": "Ajaperiood kuni",
+            "location": "Asukoht",
+            "organization": "Ettevõte/Organisatsioon",
+            "curriculumVitae": "CV",
+            "workAssignment": "Peamised tööülesanded"
+        }
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "resourcyApp": {
+        "additionalSkill" : {
+            "home": {
+                "title": "Muud oskused",
+                "createLabel": "Lisa uus",
+                "createOrEditLabel": "Lisa või muuda",
+                "search": "Otsi"
+            },
+            "created": "Lisatud",
+            "updated": "Salvestatud",
+            "deleted": "Kustutatud",
+            "delete": {
+                "question": "Olete kindel, et soovite kustutada?"
+            },
+            "detail": {
+                "title": "Oskus"
+            },
+            "type": "Tüüp",
+            "description": "Kirjeldus",
+            "curriculumVitae": "CV"
+        }
+    }
+}

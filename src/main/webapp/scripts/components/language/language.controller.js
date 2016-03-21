@@ -17,6 +17,7 @@ angular.module('resourcyApp')
                 "ca": "Català",
                 "da": "Dansk",
                 "de": "Deutsch",
+                "et": "Eesti",
                 "en": "English",
                 "es": "Español",
                 "fr": "Français",

@@ -8,7 +8,7 @@ angular.module('resourcyApp')
                 var language = $translate.storage().get('NG_TRANSLATE_LANG_KEY');
 
                 if (angular.isUndefined(language)) {
-                    language = 'en';
+                    language = 'et';
                 }
 
                 deferred.resolve(language);
@@ -27,7 +27,7 @@ angular.module('resourcyApp')
  They are written in English to avoid character encoding issues (not a perfect solution)
  */
     .constant('LANGUAGES', [
-        'en', 'fr'
+        'et', 'en', 'fr'
         // jhipster-needle-006 - JHipster will add new languages here
     ]
 );
