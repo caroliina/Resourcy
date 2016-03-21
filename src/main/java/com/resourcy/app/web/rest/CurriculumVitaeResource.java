@@ -2,11 +2,12 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.domain.CurriculumVitae;
+import com.resourcy.app.domain.LanguageType;
 import com.resourcy.app.service.CurriculumVitaeService;
-import com.resourcy.app.web.rest.util.HeaderUtil;
-import com.resourcy.app.web.rest.util.PaginationUtil;
 import com.resourcy.app.web.rest.dto.CurriculumVitaeDTO;
 import com.resourcy.app.web.rest.mapper.CurriculumVitaeMapper;
+import com.resourcy.app.web.rest.util.HeaderUtil;
+import com.resourcy.app.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -25,9 +26,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import java.util.stream.Stream;
 
 /**
  * REST controller for managing CurriculumVitae.
@@ -139,5 +138,11 @@ public class CurriculumVitaeResource {
     public List<CurriculumVitaeDTO> searchCurriculumVitaes(@PathVariable String query) {
         log.debug("Request to search CurriculumVitaes for query {}", query);
         return curriculumVitaeService.search(query);
+    }
+
+    @RequestMapping(value = "/curriculumVitaes/languageTypes", method = RequestMethod.GET)
+    @ResponseBody
+    public String[] languageTypes(){
+        return Stream.of(LanguageType.values()).map(LanguageType::name).toArray(String[]::new);
     }
 }
