@@ -16,6 +16,7 @@
             "detail": {
                 "title": "Curriculum Vitae"
             },
+            "languageType":"Type",
             "employee": "Employee",
             "education": "Education",
             "workExperience": "Work experience",

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('resourcyApp').controller('CurriculumVitaeDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CurriculumVitae', 'Employee', 'Education', 'WorkExperience', 'GovernmentWorkExperience', 'AdditionalStudy', 'LanguageSkill', 'AdditionalSkill',
-        function($scope, $stateParams, $uibModalInstance, entity, CurriculumVitae, Employee, Education, WorkExperience, GovernmentWorkExperience, AdditionalStudy, LanguageSkill, AdditionalSkill) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CurriculumVitae', 'Employee', 'Education', 'WorkExperience', 'GovernmentWorkExperience', 'AdditionalStudy', 'LanguageSkill', 'AdditionalSkill','Restangular',
+        function($scope, $stateParams, $uibModalInstance, entity, CurriculumVitae, Employee, Education, WorkExperience, GovernmentWorkExperience, AdditionalStudy, LanguageSkill, AdditionalSkill, Restangular) {
 
         $scope.curriculumVitae = entity;
         $scope.employees = Employee.query();
@@ -40,4 +40,10 @@ angular.module('resourcyApp').controller('CurriculumVitaeDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
+
+        $scope.getLanguageTypes = function () {
+            Restangular.all("api").all("curriculumVitaes").all("languageTypes").getList().then(function (resp) {
+                $scope.languageTypes = resp;
+            });
+        }
 }]);

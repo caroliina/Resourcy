@@ -16,6 +16,7 @@
             "detail": {
                 "title": "Curriculum Vitae"
             },
+            "languageType":"Tüüp",
             "employee": "Töötaja",
             "education": "Hariduskäik",
             "workExperience": "Töökogemus",
