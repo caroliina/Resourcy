@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -48,6 +50,7 @@ public class AdditionalSkillServiceImpl implements AdditionalSkillService{
         additionalSkill = additionalSkillRepository.save(additionalSkill);
         AdditionalSkillDTO result = additionalSkillMapper.additionalSkillToAdditionalSkillDTO(additionalSkill);
         additionalSkillSearchRepository.save(additionalSkill);
+        additionalSkill.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
         return result;
     }
 
