@@ -236,7 +236,7 @@ ul#strength {
 /* jhipster-needle-scss-add-main JHipster will add new css style */
 
 .form-group .form_field {
-    width: 33.33%;
+    width: 20%;
     float: left;
 }
 .form_field label {
@@ -266,7 +266,36 @@ a.addbutton {
     color: #373737;
     text-transform: uppercase;
 }
-
+.sections {
+    float: left;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.list_of_options {
+    position: fixed;
+    width: 100%;
+    max-width: 1170px;
+    margin: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.options {
+    float: left;
+    width: calc(100% /6);
+    line-height: 50px;
+    background-color: #fff;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.form-group {
+    margin-bottom: 15px;
+    float: left;
+    width: 100%;
+}
 ::-webkit-datetime-edit { padding: 1em; }
 ::-webkit-datetime-edit-fields-wrapper {}
 ::-webkit-datetime-edit-text { }
