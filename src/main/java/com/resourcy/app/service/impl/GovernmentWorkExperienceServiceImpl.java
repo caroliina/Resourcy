@@ -27,21 +27,22 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @Service
 @Transactional
-public class GovernmentWorkExperienceServiceImpl implements GovernmentWorkExperienceService{
+public class GovernmentWorkExperienceServiceImpl implements GovernmentWorkExperienceService {
 
     private final Logger log = LoggerFactory.getLogger(GovernmentWorkExperienceServiceImpl.class);
-    
+
     @Inject
     private GovernmentWorkExperienceRepository governmentWorkExperienceRepository;
-    
+
     @Inject
     private GovernmentWorkExperienceMapper governmentWorkExperienceMapper;
-    
+
     @Inject
     private GovernmentWorkExperienceSearchRepository governmentWorkExperienceSearchRepository;
-    
+
     /**
      * Save a governmentWorkExperience.
+     *
      * @return the persisted entity
      */
     public GovernmentWorkExperienceDTO save(GovernmentWorkExperienceDTO governmentWorkExperienceDTO) {
@@ -50,28 +51,32 @@ public class GovernmentWorkExperienceServiceImpl implements GovernmentWorkExperi
         governmentWorkExperience = governmentWorkExperienceRepository.save(governmentWorkExperience);
         GovernmentWorkExperienceDTO result = governmentWorkExperienceMapper.governmentWorkExperienceToGovernmentWorkExperienceDTO(governmentWorkExperience);
         governmentWorkExperienceSearchRepository.save(governmentWorkExperience);
-        governmentWorkExperience.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        if (governmentWorkExperience.getCurriculumVitae() != null) {
+            governmentWorkExperience.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
         return result;
     }
 
     /**
-     *  get all the governmentWorkExperiences.
-     *  @return the list of entities
+     * get all the governmentWorkExperiences.
+     *
+     * @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<GovernmentWorkExperienceDTO> findAll() {
         log.debug("Request to get all GovernmentWorkExperiences");
         List<GovernmentWorkExperienceDTO> result = governmentWorkExperienceRepository.findAll().stream()
-            .map(governmentWorkExperienceMapper::governmentWorkExperienceToGovernmentWorkExperienceDTO)
-            .collect(Collectors.toCollection(LinkedList::new));
+                .map(governmentWorkExperienceMapper::governmentWorkExperienceToGovernmentWorkExperienceDTO)
+                .collect(Collectors.toCollection(LinkedList::new));
         return result;
     }
 
     /**
-     *  get one governmentWorkExperience by id.
-     *  @return the entity
+     * get one governmentWorkExperience by id.
+     *
+     * @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public GovernmentWorkExperienceDTO findOne(Long id) {
         log.debug("Request to get GovernmentWorkExperience : {}", id);
         GovernmentWorkExperience governmentWorkExperience = governmentWorkExperienceRepository.findOne(id);
@@ -80,7 +85,7 @@ public class GovernmentWorkExperienceServiceImpl implements GovernmentWorkExperi
     }
 
     /**
-     *  delete the  governmentWorkExperience by id.
+     * delete the  governmentWorkExperience by id.
      */
     public void delete(Long id) {
         log.debug("Request to delete GovernmentWorkExperience : {}", id);
@@ -92,13 +97,13 @@ public class GovernmentWorkExperienceServiceImpl implements GovernmentWorkExperi
      * search for the governmentWorkExperience corresponding
      * to the query.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<GovernmentWorkExperienceDTO> search(String query) {
-        
+
         log.debug("REST request to search GovernmentWorkExperiences for query {}", query);
         return StreamSupport
-            .stream(governmentWorkExperienceSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(governmentWorkExperienceMapper::governmentWorkExperienceToGovernmentWorkExperienceDTO)
-            .collect(Collectors.toList());
+                .stream(governmentWorkExperienceSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+                .map(governmentWorkExperienceMapper::governmentWorkExperienceToGovernmentWorkExperienceDTO)
+                .collect(Collectors.toList());
     }
 }

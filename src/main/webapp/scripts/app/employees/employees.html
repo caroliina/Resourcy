@@ -1,0 +1,34 @@
+<div>
+
+    <h1>
+        Kaka ja kevad
+    </h1>
+    <pre>{{employees | json}}</pre>
+    <!-- Table -->
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                <th jh-sort-by="firstName"><span translate="resourcyApp.employee.firstName">FirstName</span> <span
+                        class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="email"><span translate="resourcyApp.employee.email">Email</span> <span
+                        class="glyphicon glyphicon-sort"></span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+            <tr ng-repeat="employee in employees track by employee.id">
+                <td>{{employee.firstName}} {{employee.lastName}}</td>
+                <td>{{employee.email}}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default">EST</button>
+                        <button type="button" class="btn btn-default">ENG</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

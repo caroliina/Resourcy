@@ -50,7 +50,9 @@ public class AdditionalStudyServiceImpl implements AdditionalStudyService{
         additionalStudy = additionalStudyRepository.save(additionalStudy);
         AdditionalStudyDTO result = additionalStudyMapper.additionalStudyToAdditionalStudyDTO(additionalStudy);
         additionalStudySearchRepository.save(additionalStudy);
-        additionalStudy.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        if (additionalStudy.getCurriculumVitae() != null) {
+            additionalStudy.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
         return result;
     }
 

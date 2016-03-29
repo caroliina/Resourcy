@@ -50,7 +50,9 @@ public class LanguageSkillServiceImpl implements LanguageSkillService{
         languageSkill = languageSkillRepository.save(languageSkill);
         LanguageSkillDTO result = languageSkillMapper.languageSkillToLanguageSkillDTO(languageSkill);
         languageSkillSearchRepository.save(languageSkill);
-        languageSkill.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        if (languageSkill.getCurriculumVitae() != null) {
+            languageSkill.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
         return result;
     }
 

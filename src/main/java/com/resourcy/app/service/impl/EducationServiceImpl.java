@@ -27,21 +27,22 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @Service
 @Transactional
-public class EducationServiceImpl implements EducationService{
+public class EducationServiceImpl implements EducationService {
 
     private final Logger log = LoggerFactory.getLogger(EducationServiceImpl.class);
-    
+
     @Inject
     private EducationRepository educationRepository;
-    
+
     @Inject
     private EducationMapper educationMapper;
-    
+
     @Inject
     private EducationSearchRepository educationSearchRepository;
-    
+
     /**
      * Save a education.
+     *
      * @return the persisted entity
      */
     public EducationDTO save(EducationDTO educationDTO) {
@@ -50,28 +51,32 @@ public class EducationServiceImpl implements EducationService{
         education = educationRepository.save(education);
         EducationDTO result = educationMapper.educationToEducationDTO(education);
         educationSearchRepository.save(education);
-        education.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        if (education.getCurriculumVitae() != null) {
+            education.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
         return result;
     }
 
     /**
-     *  get all the educations.
-     *  @return the list of entities
+     * get all the educations.
+     *
+     * @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<EducationDTO> findAll() {
         log.debug("Request to get all Educations");
         List<EducationDTO> result = educationRepository.findAll().stream()
-            .map(educationMapper::educationToEducationDTO)
-            .collect(Collectors.toCollection(LinkedList::new));
+                .map(educationMapper::educationToEducationDTO)
+                .collect(Collectors.toCollection(LinkedList::new));
         return result;
     }
 
     /**
-     *  get one education by id.
-     *  @return the entity
+     * get one education by id.
+     *
+     * @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public EducationDTO findOne(Long id) {
         log.debug("Request to get Education : {}", id);
         Education education = educationRepository.findOne(id);
@@ -80,7 +85,7 @@ public class EducationServiceImpl implements EducationService{
     }
 
     /**
-     *  delete the  education by id.
+     * delete the  education by id.
      */
     public void delete(Long id) {
         log.debug("Request to delete Education : {}", id);
@@ -92,13 +97,13 @@ public class EducationServiceImpl implements EducationService{
      * search for the education corresponding
      * to the query.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<EducationDTO> search(String query) {
-        
+
         log.debug("REST request to search Educations for query {}", query);
         return StreamSupport
-            .stream(educationSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(educationMapper::educationToEducationDTO)
-            .collect(Collectors.toList());
+                .stream(educationSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+                .map(educationMapper::educationToEducationDTO)
+                .collect(Collectors.toList());
     }
 }
