@@ -24,7 +24,6 @@
         <awaitility.version>1.4.0</awaitility.version>
         <commons-io.version>2.4</commons-io.version>
         <commons-lang.version>2.6</commons-lang.version>
-        <commons-collections.version>4.1</commons-collections.version>
         <gatling-maven-plugin.version>2.1.7</gatling-maven-plugin.version>
         <gatling.version>2.1.7</gatling.version>
         <hibernate.version>4.3.11.Final</hibernate.version>
@@ -149,11 +148,6 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>${commons-lang.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>${commons-collections.version}</version>
         </dependency>
         <!-- reporting -->
         <dependency>

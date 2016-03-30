@@ -1,9 +1,7 @@
 <div>
-
     <h1>
         Kaka ja kevad
     </h1>
-    <pre>{{employees | json}}</pre>
     <!-- Table -->
     <div class="table-responsive">
         <table class="jh-table table table-striped">
@@ -22,13 +20,14 @@
                 <td>{{employee.email}}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default">EST</button>
-                        <button type="button" class="btn btn-default">ENG</button>
+                        <a ng-repeat="cv in employee.cvList" ng-href="/#/curriculumVitae/{{cv.id}}"
+                           ng-bind="cv.languageType ? cv.languageType : 'CV-' + $index"
+                           class="btn btn-default">
+                        </a>
                     </div>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-
 </div>
