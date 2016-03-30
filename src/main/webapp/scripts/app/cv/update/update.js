@@ -12,7 +12,7 @@ angular.module('resourcyApp')
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/cv/update/update.html',
-                        controller: 'InsertController'
+                        controller: 'UpdateController'
                     }
                 },
                 resolve: {
@@ -21,5 +21,15 @@ angular.module('resourcyApp')
                         return $translate.refresh();
                     }]
                 }
+            }).state('update.edit', {
+                parent: 'update',
+                url: '/{id}',
+                data: {
+                    authorities: ['ROLE_USER'],
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    
+                    return $stateParams.id;
+                }]
             });
     });

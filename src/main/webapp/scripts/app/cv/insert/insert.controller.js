@@ -2,6 +2,7 @@
 
 angular.module('resourcyApp')
     .controller('InsertController', function ($scope, $state,$http,Employee,ParseLinks,EmployeeSearch,Education) {
+        
         $scope.cvs = [];
         $scope.selected = {value: 0};    
         $scope.cvID = 0;
@@ -168,7 +169,7 @@ angular.module('resourcyApp')
 
             })
         };
-        $scope.saveLanguage = function(id) {
+        $scope.saveLxanguage = function(id) {
             $.each($scope.additionalLanguage, function(i,val){
                 val['curriculumVitaeId'] = id;
                 $http.put("api/languageSkills",val).then(function(response){
