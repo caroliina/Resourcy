@@ -1,0 +1,68 @@
+{
+    "main": {
+        "title": "Welcome, Java Hipster!",
+        "subtitle": "This is your homepage",
+        "logged": {
+            "message": "You are logged in as user \"{{username}}\"."
+        },
+        "question": "If you have any question on JHipster:",
+        "link": {
+            "homepage": "JHipster homepage",
+            "stackoverflow": "JHipster on Stack Overflow",
+            "bugtracker": "JHipster bug tracker",
+            "chat": "JHipster public chat room",
+            "contact": "contact @java_hipster on Twitter"
+        },
+        "like": "If you like JHipster, don't forget to give us a star on",
+        "github": "Github"
+    },
+    "form": {
+        "personal" : "Personal info",
+        "firstname":"First name",
+        "lastname":"Last name",
+        "birthday":"Day of birth",
+        "nationality":"Nationality",
+        "email":"E-mail",
+        "education":"Education",
+        "noeducation":"Education missing",
+        "institution":"Institution",
+        "start":"Start time",
+        "end":"End time",
+        "speciality":"Speciality",
+        "degree":"Degree/Diploma",
+        "xp":"Work XP",
+        "noxp":"Work XP missing",
+        "position":"Position",
+        "location":"Location",
+        "organization":"Organization",
+        "goverment":"Goverment XP",
+        "nogoverment":"Goverment XP missing",
+        "hours":"Hours",
+        "buyer":"Buyer",
+        "servicename":"Service name",
+        "totalhours":"Total hours",
+        "type":"Type",
+        "description":"Description",
+        "addtech":"Add Technology",
+        "study":"Studys",
+        "nostudy":"Studys missing",
+        "institution":"Institution",
+        "description":"Description",
+        "skill":"Skills",
+        "noskill":"Skills missing",
+        "language":"Language",
+        "nolanguage":"Language missing",
+        "languagename":"Language name",
+        "speaking":"Speaking",
+        "writing":"Writing",
+        "savecv":"Save CV",
+        "addeducation":"Add education",
+        "addxp":"Add XP",
+        "addgov":"Add goverment",
+        "addstudy":"Add study",
+        "addskill":"Add skill",
+        "addlang":"Add language",
+        "remove":"x"
+    }
+
+}

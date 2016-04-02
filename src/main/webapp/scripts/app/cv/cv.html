@@ -1,0 +1,32 @@
+<div ng-cloak>
+    <div class="row">
+        <div class="col-md-4">
+            <span class="hipster img-responsive img-rounded"></span>
+        </div>
+        <div class="col-md-8">
+            <div>
+                <div ng-repeat="employee in employees track by employee.id">
+                    
+                    <div><span>{{employee.firstName}} {{employee.lastName}}</span></div>
+                    <div class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            
+                            <button type="submit"
+                                    ui-sref="update.edit({id:employee.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            
+                        </div>
+                    </div>
+                </div>
+                <a type="submit"
+                                    ui-sref="insert.new()"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="insertnew">New CV</span>
+                            </a>
+            </div>
+        </div>
+    </div>
+</div>
