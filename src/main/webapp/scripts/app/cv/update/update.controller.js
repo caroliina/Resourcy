@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('resourcyApp')
-    .controller('UpdateController', function ($q,$scope, $state,$http,LanguageSkill,AdditionalSkill,AdditionalStudy,GovernmentWorkExperience,GovernmentProject,WorkExperience,Employee,ParseLinks,CurriculumVitae,EmployeeSearch,Education) {
+    .controller('UpdateController', function (cfpLoadingBar,$q,$scope, $state,$http,Technology,LanguageSkill,AdditionalSkill,AdditionalStudy,GovernmentWorkExperience,GovernmentProject,WorkExperience,Employee,ParseLinks,CurriculumVitae,EmployeeSearch,Education) {
         $scope.datePickerForPerson= {status:{}};
         $scope.datePickerForPerson.status;
         $scope.datePickerForEduPeriodStart= {status:{opened: {}}};
@@ -20,29 +20,45 @@ angular.module('resourcyApp')
         $scope.datePickerForStudyPeriodStart.status.opened = {};
         $scope.datePickerForStudyPeriodEnd= {status:{opened: {}}};
         $scope.datePickerForStudyPeriodEnd.status.opened = {};
-        $scope.personID = $state.params.id;
+        $scope.personID = 65;
             Employee.get({id: $scope.personID}, function(result) {
                 $scope.persons = result;
             });
         CurriculumVitae.get({id: $scope.personID}, function(result) {
               $scope.cv_id = result;
         });
+        $scope.start = function() {
 
+          cfpLoadingBar.start();
+        };
+        $scope.complete = function() {
+          console.log(cfpLoadingBar.status())
+          if(cfpLoadingBar.status() === 1){
+            cfpLoadingBar.complete();
+            $('.loading').fadeOut();
+          }else{
+            $('.loading').fadeIn();
+          }
+          
+
+        };
+        
         $scope.loadPerson = function(){
+          
           Employee.get({id: $scope.personID}, function(result) {
                 $scope.persons = result;
-                console.log(result)
+                $scope.complete()
             });
           $scope.datePickerForPerson.status= {opened : false};
 
         }
         $scope.loadEdu = function(){
+          
           $scope.educations = [];
           Education.query(function(result) {
               $scope.nr = 0;
               $.each(result,function(i,val){
                 if(val.curriculumVitaeId===parseInt($scope.personID)){
-                  console.log(val);
                   $scope.educations.push(val);
                   $scope.datePickerForEduPeriodStart.status.opened[ $scope.nr] = false;
                   $scope.datePickerForEduPeriodEnd.status.opened[ $scope.nr] = false;
@@ -50,9 +66,11 @@ angular.module('resourcyApp')
                   
                 }
               })
+              $scope.complete()
           })
         }
         $scope.loadStudy = function(){
+          
           $scope.additionalStudy = [];
           AdditionalStudy.query(function(result) {
               $scope.nr = 0;
@@ -66,9 +84,11 @@ angular.module('resourcyApp')
                   
                 }
               })
+              $scope.complete()
           })
         }
         $scope.loadLanguage = function(){
+          
           $scope.additionalLanguage = [];
           LanguageSkill.query(function(result) {
               $scope.nr = 0;
@@ -79,9 +99,11 @@ angular.module('resourcyApp')
                   
                 }
               })
+              $scope.complete()              
           })
         }
         $scope.loadSkill = function(){
+          
           $scope.additionalSkill = [];
           AdditionalSkill.query(function(result) {
               $scope.nr = 0;
@@ -95,9 +117,11 @@ angular.module('resourcyApp')
                   
                 }
               })
+              $scope.complete()
           })
         }
         $scope.loadXP = function(){
+          
           $scope.workExperience = [];
 
           WorkExperience.query({curriculumVitaeId: $scope.personID},function(result) {
@@ -113,21 +137,36 @@ angular.module('resourcyApp')
                   
                 }
               })
+              $scope.complete()
           })
         }
         $scope.loadGov = function(){
+         
           $scope.govWorkExperience = [];
-
+           
           GovernmentWorkExperience.query(function(result) {
+
               
               $scope.nr = 0;
               $.each(result,function(i,val){
                 if(val.curriculumVitaeId===parseInt($scope.personID)){
                   GovernmentProject.get({id: val.governmentProjectId},function(result2) {
-                    $scope.govWorkExperience.push({gov:val,project:result2});
+                
+                    $scope.technology=[];
+                   
+                    Technology.query(function(result3){
+
+                      $.each(result3,function(i,projects){
+                        
+                        if(result2.id === projects.governmentProjectId){
+                          $scope.technology.push(projects);
+                        }
+                      })
+                      
+                    });
+                    $scope.govWorkExperience.push({gov:val,project:result2,tech:$scope.technology});
                     
                   })
-                  //$scope.govWorkExperience.push({gov:{},project:{}});
 
                   $scope.datePickerForGovPeriodStart.status.opened[ $scope.nr] = false;
                   $scope.datePickerForGovPeriodEnd.status.opened[ $scope.nr] = false;
@@ -135,17 +174,18 @@ angular.module('resourcyApp')
                   
                 }
               })
+              $scope.complete()
           })
         }
-
+        $scope.start();
         $scope.loadPerson();
         $scope.loadEdu();
         $scope.loadXP();
-        $scope.loadGov();
         $scope.loadStudy();
         $scope.loadSkill();
         $scope.loadLanguage();
-
+        $scope.loadGov();
+        $scope.complete();              
         $scope.datePickerForPerson = function($event) {
             $scope.datePickerForPerson.status={opened: true};
         };
@@ -224,13 +264,16 @@ angular.module('resourcyApp')
                 serviceName:null,
                 totalProjectWorkHours:null
 
-            }
+            },
+            tech:[]
            
         
         }
 
         $scope.govTechnology = [];
         $scope.newgovTechnology = {
+            governmentProjectId:null,
+            id:null,
             type : null,
             description : null,
            
@@ -286,9 +329,10 @@ angular.module('resourcyApp')
                 }
         };
         $scope.addgovpro = function(index) {
-                $scope.newgovTechnology['govid']=index;
-                $scope.govTechnology.push($scope.newgovTechnology);
+                $scope.govWorkExperience[index].tech.push($scope.newgovTechnology);
                 $scope.newgovTechnology = {
+                   governmentProjectId:null,
+                   id:null,
                    type : null,
                    description : null,
 
@@ -310,41 +354,115 @@ angular.module('resourcyApp')
                         serviceName:null,
                         totalProjectWorkHours:null
 
-                    }
+                    },
+                    tech:[]
                    
                 
                 }
         };
+        $scope.removeedu = function(id) {
+            if($scope.educations[id].id){
+              Education.delete({id:$scope.educations[id].id});
+            }else{
+            }
+            $scope.educations.splice(id, 1);
+        }
+        $scope.removexp = function(id) {
+            if($scope.workExperience[id].id){
+              WorkExperience.delete({id:$scope.workExperience[id].id});
+            }else{
+            }
+            $scope.workExperience.splice(id, 1);
+        }
+        $scope.removestudy = function(id) {
+            
+            if($scope.additionalStudy[id].id){
+              AdditionalStudy.delete({id:$scope.additionalStudy[id].id});
+            }else{
+            }
+            $scope.additionalStudy.splice(id, 1);
+        }
+        $scope.removelang = function(id) {
+            if($scope.additionalLanguage[id].id){
+              LanguageSkill.delete({id:$scope.additionalLanguage[id].id});
+            }else{
+            }
+            $scope.additionalLanguage.splice(id, 1);
+        }
+        $scope.removeskill = function(id) {
+            if($scope.additionalSkill[id].id){
+              AdditionalSkill.delete({id:$scope.additionalSkill[id].id});
+            }else{
+            }
+            $scope.additionalSkill.splice(id, 1);
+        }
+        $scope.removegov = function(id) {
+            if($scope.govWorkExperience[id].gov.id){
+              GovernmentWorkExperience.delete({id:$scope.govWorkExperience[id].gov.id});
+            }else{
+            }
+            $scope.govWorkExperience.splice(id, 1);
+        }
+        $scope.removetech = function(val,id) {
+            if($scope.govWorkExperience[id].tech[val].id){
+              Technology.delete({id:$scope.govWorkExperience[id].tech[val].id});
+            }else{
+            }
+            $scope.govWorkExperience[id].tech.splice(val, 1);
 
+        }
         $scope.saveEducation = function(id) {
             $.each($scope.educations, function(i,val){
                 val['curriculumVitaeId'] = id;
+                
                 $http.put("api/educations",val).then(function(response){
+                 $scope.complete()
                 });
             })
         };
         $scope.saveGovXP = function(id) {
             $.each($scope.govWorkExperience, function(i,val){
+                
                 $http.put("api/governmentProjects",val.project).then(function(response){
+                
+                  
                     val.gov['curriculumVitaeId'] = id;
                     val.gov['governmentProjectId'] = response.data.id;
+                
                     $http.put("api/governmentWorkExperiences",val.gov).then(function(data){
+        
+
+
+                      $.each(val.tech, function(i,techs){
+                        techs['governmentProjectId'] = response.data.id;
+                        
+
+                        $http.put("api/technologys",techs).then(function(techsave){
+                          $scope.complete()
+                        })
+                      })
+                      $scope.complete()
                     });
                 });
 
             })
+            $scope.complete()
         };
         $scope.saveLanguage = function(id) {
             $.each($scope.additionalLanguage, function(i,val){
                 val['curriculumVitaeId'] = id;
+               
                 $http.put("api/languageSkills",val).then(function(response){
+                 $scope.complete()
                 });
             })
         };
         $scope.saveStudy = function(id) {
             $.each($scope.additionalStudy, function(i,val){
                 val['curriculumVitaeId'] = id;
+               
                 $http.put("api/additionalStudys",val).then(function(response){
+                  $scope.complete()
                 });
             })
             
@@ -352,31 +470,36 @@ angular.module('resourcyApp')
         $scope.saveXP = function(id) {
             $.each($scope.workExperience, function(i,val){
                 val['curriculumVitaeId'] = id;
+                
                 $http.put("api/workExperiences",val).then(function(response){
+                  $scope.complete()
                 });
             })
         };
         $scope.saveSkills = function(id) {
             $.each($scope.additionalSkill, function(i,val){
+              
                 val['curriculumVitaeId'] = id;
                 $http.put("api/additionalSkills",val).then(function(response){
+                  $scope.complete()
                 },function(e){})
 
             })
         };
         $scope.save_cv = function(){
             if($scope.cvForm.$valid){
-                console.log($scope.persons.birthday);
+                $scope.start();
+                $('.loading').fadeIn();
                 $scope.date = new Date($scope.persons.birthday); 
                 if($scope.date.getTimezoneOffset()*60000 > 0){
                   $scope.date = new Date($scope.date.getTime() + $scope.date.getTimezoneOffset()*60000); 
                 }else{
                   $scope.date = new Date($scope.date.getTime() - $scope.date.getTimezoneOffset()*60000); 
                 };
-                
                 $scope.persons.birthday = $scope.date; 
-                console.log($scope.persons.birthday);
+                
                 $http.put("api/employees/",$scope.persons).then(function(response){
+     
                     
                 });
                 $q.all([
@@ -387,22 +510,24 @@ angular.module('resourcyApp')
                 $scope.saveGovXP($scope.personID),
                 $scope.saveSkills($scope.personID),
                 ]).then(function(){
-                    $scope.loadPerson();
-                    $scope.loadEdu();
-                    $scope.loadXP();
-                    $scope.loadGov();
-                    $scope.loadStudy();
-                    $scope.loadSkill();
-                    $scope.loadLanguage();
-                });
                     
-                   
+                      $scope.loadPerson();
+                      $scope.loadEdu();
+                      $scope.loadXP();
+                      $scope.loadStudy();
+                      $scope.loadSkill();
+                      $scope.loadLanguage();
+                      $scope.loadGov();
+                    
+                });
+                
 
             }else{
+              
             }
 
-         
 
         }
 
     });
+

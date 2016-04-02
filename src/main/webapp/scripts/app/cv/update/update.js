@@ -7,7 +7,7 @@ angular.module('resourcyApp')
                 parent: 'cv',
                 url: '/update',
                 data: {
-                    authorities: ['ROLE_ADMIN']
+                    authorities: ['ROLE_USER']
                 },
                 views: {
                     'content@': {

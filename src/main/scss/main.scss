@@ -295,6 +295,7 @@ a.addbutton {
     margin-bottom: 15px;
     float: left;
     width: 100%;
+    position: relative;
 }
 ::-webkit-datetime-edit { padding: 1em; }
 ::-webkit-datetime-edit-fields-wrapper {}
@@ -304,3 +305,55 @@ a.addbutton {
 ::-webkit-datetime-edit-year-field {  }
 ::-webkit-inner-spin-button { display: none; }
 ::-webkit-calendar-picker-indicator { top:10px; }
+
+.loading {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background-color: rgba(237,237,237,0.8);
+}
+
+.loading img {
+    position: absolute;
+    top: 0;
+    bottom: -60px;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+.loadingtct {
+    font-size: 36px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #00b2ff;
+    position: absolute;
+    text-align: center;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: -80px;
+    bottom: 0;
+    float: left;
+    height: 60px;
+    width: 200px;
+    display: block;
+}
+.removebutton {
+    position: absolute;
+    top: 60px;
+    left: -30px;
+    width: 20px;
+    height: 20px;
+    line-height: 0px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0;
+    font-weight: bold;
+    border-radius: 50%;
+    border: none;
+    background-color: #D20909;
+    color: #fff;
+}
