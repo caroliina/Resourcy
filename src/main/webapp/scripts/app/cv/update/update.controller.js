@@ -20,7 +20,7 @@ angular.module('resourcyApp')
         $scope.datePickerForStudyPeriodStart.status.opened = {};
         $scope.datePickerForStudyPeriodEnd= {status:{opened: {}}};
         $scope.datePickerForStudyPeriodEnd.status.opened = {};
-        $scope.personID = 65;
+        $scope.personID = 2;
             Employee.get({id: $scope.personID}, function(result) {
                 $scope.persons = result;
             });
