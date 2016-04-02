@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -48,6 +50,7 @@ public class EducationServiceImpl implements EducationService{
         education = educationRepository.save(education);
         EducationDTO result = educationMapper.educationToEducationDTO(education);
         educationSearchRepository.save(education);
+        education.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
         return result;
     }
 

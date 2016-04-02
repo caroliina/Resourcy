@@ -1,9 +1,11 @@
 {
     "main": {
-        "title": "Tere tulemast!!",
+        "title": "Tere tulemast, {{username}}!",
         "subtitle": "Avaleht",
         "logged": {
             "message": "Aktiive kasutaja \"{{username}}\"."
-        }
+        },
+        "lastUpdated": "Viimati uuendatud CV-d",
+        "noUpdate": "Kaua uuendamata CV-d"
     }
 }

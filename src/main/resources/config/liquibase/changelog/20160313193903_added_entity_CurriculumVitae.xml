@@ -31,4 +31,10 @@
                                  referencedColumnNames="id"
                                  referencedTableName="employee"/>
     </changeSet>
+
+    <changeSet id="Add column type to table curriculum_vitae" author="Kreete">
+        <addColumn tableName="curriculum_vitae">
+            <column name="language_type" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

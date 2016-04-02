@@ -1,5 +1,7 @@
 package com.resourcy.app.web.rest.dto;
 
+import com.resourcy.app.domain.LanguageType;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,7 +10,10 @@ public class CurriculumVitaeDTO extends AbstractAuditingEntityDTO implements Ser
 
     private Long id;
 
+    private LanguageType languageType;
+
     private Long employeeId;
+
     public Long getId() {
         return id;
     }
@@ -24,6 +29,15 @@ public class CurriculumVitaeDTO extends AbstractAuditingEntityDTO implements Ser
     public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
+
+    public LanguageType getLanguageType() {
+        return languageType;
+    }
+
+    public void setLanguageType(LanguageType languageType) {
+        this.languageType = languageType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
