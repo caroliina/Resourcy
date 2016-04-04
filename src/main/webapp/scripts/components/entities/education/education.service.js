@@ -7,6 +7,7 @@ angular.module('resourcyApp')
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
+                    console.log(data);
                     data = angular.fromJson(data);
                     data.periodStart = DateUtils.convertLocaleDateFromServer(data.periodStart);
                     data.periodEnd = DateUtils.convertLocaleDateFromServer(data.periodEnd);
