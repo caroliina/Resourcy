@@ -22,12 +22,16 @@
             <column name="email" value="mart.tamm@cgi.com"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="curriculum_vitae">
             <column name="employee_id" valueComputed="(SELECT id FROM employee WHERE lower(first_name) = 'mart')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="education">
@@ -39,6 +43,8 @@
             <column name="degree" value="Magister"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="education">
@@ -50,6 +56,8 @@
             <column name="degree" value="Magister"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="education">
@@ -61,6 +69,8 @@
             <column name="degree" value="Bakalaureus"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="education">
@@ -72,6 +82,8 @@
             <column name="degree" value="Keskeriharidus"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="work_experience">
@@ -82,6 +94,8 @@
             <column name="organization" value="AS CGI Eesti"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="work_experience">
@@ -93,6 +107,8 @@
             <column name="organization" value="OÜ Mees ja Kaabel"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="work_experience">
@@ -104,6 +120,8 @@
             <column name="organization" value="OÜ Mees, kus mu nett on?"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="government_project">
@@ -112,6 +130,8 @@
             <column name="total_project_work_hours" value="7000"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="government_work_experience">
@@ -123,6 +143,8 @@
             <column name="personal_work_hours" value="800"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="technology">
@@ -131,6 +153,8 @@
             <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'rmit')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="technology">
@@ -139,6 +163,8 @@
             <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'rmit')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="technology">
@@ -147,6 +173,8 @@
             <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'rmit')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="government_project">
@@ -155,6 +183,8 @@
             <column name="total_project_work_hours" value="5000"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="government_work_experience">
@@ -166,6 +196,8 @@
             <column name="personal_work_hours" value="2080"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="technology">
@@ -174,6 +206,8 @@
             <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'cgi soome')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="technology">
@@ -182,6 +216,8 @@
             <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'cgi soome')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="technology">
@@ -190,6 +226,8 @@
             <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'cgi soome')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="work_assignment">
@@ -197,6 +235,8 @@
             <column name="work_experience_id" valueComputed="(SELECT id FROM work_experience WHERE organization = 'AS CGI Eesti')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="work_assignment">
@@ -204,6 +244,8 @@
             <column name="work_experience_id" valueComputed="(SELECT id FROM work_experience WHERE organization = 'OÜ Mees ja Kaabel')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="work_assignment">
@@ -211,6 +253,8 @@
             <column name="work_experience_id" valueComputed="(SELECT id FROM work_experience WHERE organization = 'OÜ Mees, kus mu nett on?')"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="additional_study">
@@ -220,6 +264,8 @@
             <column name="description" value="Web application security"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="additional_study">
@@ -229,6 +275,8 @@
             <column name="description" value="Andmebaasid, andmehaldus"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="additional_study">
@@ -238,6 +286,8 @@
             <column name="description" value="Entity Framework"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="language_skill">
@@ -247,6 +297,8 @@
             <column name="writing" value="Emakeel"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="language_skill">
@@ -256,6 +308,8 @@
             <column name="writing" value="C2"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="language_skill">
@@ -265,6 +319,8 @@
             <column name="writing" value="A1"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="additional_skill">
@@ -273,6 +329,8 @@
             <column name="description" value="Java"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="additional_skill">
@@ -281,6 +339,8 @@
             <column name="description" value="Python"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="additional_skill">
@@ -289,6 +349,8 @@
             <column name="description" value="MySql"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="additional_skill">
@@ -297,6 +359,8 @@
             <column name="description" value="PostgreSQL"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
         <insert tableName="additional_skill">
@@ -304,8 +368,9 @@
             <column name="type" value="Arendusvahend"/>
             <column name="description" value="Intellij"/>
             <column name="created_date" valueDate="CURRENT_TIMESTAMP"/>
-
             <column name="last_modified_date" valueDate="CURRENT_TIMESTAMP"/>
+            <column name="created_by" value="system"/>
+            <column name="last_modified_by" value="system"/>
         </insert>
 
     </changeSet>
