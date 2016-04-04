@@ -50,7 +50,9 @@ public class WorkExperienceServiceImpl implements WorkExperienceService{
         workExperience = workExperienceRepository.save(workExperience);
         WorkExperienceDTO result = workExperienceMapper.workExperienceToWorkExperienceDTO(workExperience);
         workExperienceSearchRepository.save(workExperience);
-        workExperience.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        if (workExperience.getCurriculumVitae() != null) {
+            workExperience.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
         return result;
     }
 

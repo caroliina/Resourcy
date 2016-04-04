@@ -50,7 +50,9 @@ public class AdditionalSkillServiceImpl implements AdditionalSkillService{
         additionalSkill = additionalSkillRepository.save(additionalSkill);
         AdditionalSkillDTO result = additionalSkillMapper.additionalSkillToAdditionalSkillDTO(additionalSkill);
         additionalSkillSearchRepository.save(additionalSkill);
-        additionalSkill.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        if (additionalSkill.getCurriculumVitae() != null) {
+            additionalSkill.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
         return result;
     }
 

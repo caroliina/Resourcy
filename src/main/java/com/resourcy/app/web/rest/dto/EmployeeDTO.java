@@ -2,6 +2,7 @@ package com.resourcy.app.web.rest.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -23,6 +24,8 @@ public class EmployeeDTO extends AbstractAuditingEntityDTO implements Serializab
 
     private String email;
 
+
+    private List<CurriculumVitaeDTO> cvList;
 
     public Long getId() {
         return id;
@@ -98,5 +101,12 @@ public class EmployeeDTO extends AbstractAuditingEntityDTO implements Serializab
             ", nationality='" + nationality + "'" +
             ", email='" + email + "'" +
             '}';
+    }
+    public List<CurriculumVitaeDTO> getCvList() {
+        return cvList;
+    }
+
+    public void setCvList(List<CurriculumVitaeDTO> cvList) {
+        this.cvList = cvList;
     }
 }
