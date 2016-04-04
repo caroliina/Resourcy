@@ -20,7 +20,7 @@ angular.module('resourcyApp')
         $scope.datePickerForStudyPeriodStart.status.opened = {};
         $scope.datePickerForStudyPeriodEnd= {status:{opened: {}}};
         $scope.datePickerForStudyPeriodEnd.status.opened = {};
-        $scope.personID = 65;
+        $scope.personID = 1;
             Employee.get({id: $scope.personID}, function(result) {
                 $scope.persons = result;
             });
@@ -215,7 +215,7 @@ angular.module('resourcyApp')
         };
         $scope.cvs = [];
         $scope.selected = {value: 0};    
-        $scope.cvID = 0;
+        $scope.cvID = 1;
         $scope.educations = [];
         $scope.newEducation = {
            institution : null,
