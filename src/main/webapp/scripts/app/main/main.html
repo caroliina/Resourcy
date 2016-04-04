@@ -7,17 +7,17 @@
 
             <div ng-switch="isAuthenticated()">
                 <h1 translate="main.title" translate-values="{username: '{{account.login}}'}">Welcome, {{account.login}}!</h1>
-                <div class="alert alert-info" ng-switch-when="true">
+                <div class="alert alert-info" ng-switch-when="true" has-authority="ROLE_ADMIN">
                     <h3 translate="main.lastUpdated">Viimati uuendatud CV-d:</h3>
                     <div ng-repeat="cv in curriculumVitaesSorted | limitTo:3">
-                        <a href="#/curriculumVitae/{{cv.id}}">{{cv.employeeName}} CV ( {{cv.languageType}} )</a> ( {{cv.lastModifiedDate | date:'yyyy-MM-dd HH:mm:ss'}} )
+                        <a href="#/cv/update?id={{cv.id}}">{{cv.employeeName}} CV ( {{cv.languageType}} )</a> ( {{cv.lastModifiedDate | date:'yyyy-MM-dd HH:mm:ss'}} )
                     </div>
                 </div>
 
-                <div class="alert alert-warning" ng-switch-when="true">
+                <div class="alert alert-warning" ng-switch-when="true" has-authority="ROLE_ADMIN">
                     <h3 translate="main.noUpdate">Kaua uuendamata CV-d:</h3>
                     <div ng-repeat="cv in curriculumVitaesSorted | limitTo:-3">
-                        <a href="#/curriculumVitae/{{cv.id}}">{{cv.employeeName}} CV ( {{cv.languageType}} )</a> ( {{cv.lastModifiedDate | date:'yyyy-MM-dd HH:mm:ss'}} )
+                        <a href="#/cv/update?id={{cv.id}}">{{cv.employeeName}} CV ( {{cv.languageType}} )</a> ( {{cv.lastModifiedDate | date:'yyyy-MM-dd HH:mm:ss'}} )
                     </div>
                 </div>
 
