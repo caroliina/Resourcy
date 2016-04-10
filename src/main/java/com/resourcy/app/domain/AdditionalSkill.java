@@ -28,6 +28,9 @@ public class AdditionalSkill extends AbstractAuditingEntity implements Serializa
     @JoinColumn(name = "curriculum_vitae_id")
     private CurriculumVitae curriculumVitae;
 
+    @Column(name="experience")
+    private double experience;
+
     public Long getId() {
         return id;
     }
@@ -58,6 +61,14 @@ public class AdditionalSkill extends AbstractAuditingEntity implements Serializa
 
     public void setCurriculumVitae(CurriculumVitae curriculumVitae) {
         this.curriculumVitae = curriculumVitae;
+    }
+
+    public double getExperience() {
+        return experience;
+    }
+
+    public void setExperience(double experience) {
+        this.experience = experience;
     }
 
     @Override

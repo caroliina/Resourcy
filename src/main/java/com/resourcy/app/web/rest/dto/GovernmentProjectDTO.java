@@ -1,6 +1,7 @@
 package com.resourcy.app.web.rest.dto;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -13,9 +14,9 @@ public class GovernmentProjectDTO extends AbstractAuditingEntityDTO  implements 
 
     private String serviceName;
 
-
     private Integer totalProjectWorkHours;
 
+    private List<TechnologyDTO> technologies;
 
     public Long getId() {
         return id;
@@ -44,6 +45,14 @@ public class GovernmentProjectDTO extends AbstractAuditingEntityDTO  implements 
 
     public void setTotalProjectWorkHours(Integer totalProjectWorkHours) {
         this.totalProjectWorkHours = totalProjectWorkHours;
+    }
+
+    public List<TechnologyDTO> getTechnologies() {
+        return technologies;
+    }
+
+    public void setTechnologies(List<TechnologyDTO> technologies) {
+        this.technologies = technologies;
     }
 
     @Override

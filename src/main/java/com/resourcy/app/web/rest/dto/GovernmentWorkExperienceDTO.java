@@ -2,6 +2,7 @@ package com.resourcy.app.web.rest.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -17,8 +18,12 @@ public class GovernmentWorkExperienceDTO extends AbstractAuditingEntityDTO imple
 
     private String position;
 
+    private List<WorkAssignmentDTO> workAssignments;
+
     private Long curriculumVitaeId;
-    private Long governmentProjectId;
+
+    private GovernmentProjectDTO governmentProject;
+
     public Long getId() {
         return id;
     }
@@ -55,12 +60,13 @@ public class GovernmentWorkExperienceDTO extends AbstractAuditingEntityDTO imple
     public void setCurriculumVitaeId(Long curriculumVitaeId) {
         this.curriculumVitaeId = curriculumVitaeId;
     }
-    public Long getGovernmentProjectId() {
-        return governmentProjectId;
+
+    public GovernmentProjectDTO getGovernmentProject() {
+        return governmentProject;
     }
 
-    public void setGovernmentProjectId(Long governmentProjectId) {
-        this.governmentProjectId = governmentProjectId;
+    public void setGovernmentProject(GovernmentProjectDTO governmentProject) {
+        this.governmentProject = governmentProject;
     }
 
     public String getPosition() {
@@ -69,6 +75,14 @@ public class GovernmentWorkExperienceDTO extends AbstractAuditingEntityDTO imple
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public List<WorkAssignmentDTO> getWorkAssignments() {
+        return workAssignments;
+    }
+
+    public void setWorkAssignments(List<WorkAssignmentDTO> workAssignments) {
+        this.workAssignments = workAssignments;
     }
 
     @Override

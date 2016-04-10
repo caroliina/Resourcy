@@ -12,18 +12,17 @@ public class EmployeeDTO extends AbstractAuditingEntityDTO implements Serializab
 
     private String firstName;
 
-
     private String lastName;
-
 
     private LocalDate birthday;
 
-
     private String nationality;
-
 
     private String email;
 
+    private String idCode;
+
+    private Long userId;
 
     private List<CurriculumVitaeDTO> cvList;
 
@@ -70,6 +69,22 @@ public class EmployeeDTO extends AbstractAuditingEntityDTO implements Serializab
         this.email = email;
     }
 
+    public String getIdCode() {
+        return idCode;
+    }
+
+    public void setIdCode(String idCode) {
+        this.idCode = idCode;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long user) {
+        this.userId = userId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -102,6 +117,7 @@ public class EmployeeDTO extends AbstractAuditingEntityDTO implements Serializab
             ", email='" + email + "'" +
             '}';
     }
+
     public List<CurriculumVitaeDTO> getCvList() {
         return cvList;
     }

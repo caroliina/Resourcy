@@ -32,6 +32,8 @@ public class UserDTO {
     @Size(min = 5, max = 100)
     private String email;
 
+    private Long employeeId;
+
     private boolean activated = false;
 
     @Size(min = 2, max = 5)
@@ -92,6 +94,14 @@ public class UserDTO {
 
     public Set<String> getAuthorities() {
         return authorities;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
     @Override

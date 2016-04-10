@@ -5,7 +5,6 @@ import com.resourcy.app.web.rest.dto.CurriculumVitaeDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -41,4 +40,6 @@ public interface CurriculumVitaeService {
      * to the query.
      */
     public List<CurriculumVitaeDTO> search(String query);
+
+    CurriculumVitaeDTO getEmployeeCvEst();
 }

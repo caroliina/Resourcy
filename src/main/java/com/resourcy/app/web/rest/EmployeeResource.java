@@ -137,4 +137,9 @@ public class EmployeeResource {
         log.debug("Request to search Employees for query {}", query);
         return employeeService.search(query);
     }
+
+    @RequestMapping(value = "/currentEmployee", method = RequestMethod.GET)
+    public EmployeeDTO getCurrentEmployee() {
+        return employeeService.getCurrentEmployee();
+    }
 }

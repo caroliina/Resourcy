@@ -7,9 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "government_project")
@@ -37,7 +35,7 @@ public class GovernmentProject extends AbstractAuditingEntity implements Seriali
     @OneToMany(mappedBy = "governmentProject")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Technology> technologys = new HashSet<>();
+    private List<Technology> technologys = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -79,11 +77,11 @@ public class GovernmentProject extends AbstractAuditingEntity implements Seriali
         this.governmentWorkExperience = governmentWorkExperience;
     }
 
-    public Set<Technology> getTechnologys() {
+    public List<Technology> getTechnologys() {
         return technologys;
     }
 
-    public void setTechnologys(Set<Technology> technologys) {
+    public void setTechnologys(List<Technology> technologys) {
         this.technologys = technologys;
     }
 

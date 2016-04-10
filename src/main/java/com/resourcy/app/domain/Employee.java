@@ -42,6 +42,13 @@ public class Employee extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<CurriculumVitae> curriculumVitaes = new HashSet<>();
 
+    @JsonIgnore
+    @Column(name = "id_code")
+    private String idCode;
+
+    @OneToOne
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -96,6 +103,22 @@ public class Employee extends AbstractAuditingEntity implements Serializable {
 
     public void setCurriculumVitaes(Set<CurriculumVitae> curriculumVitaes) {
         this.curriculumVitaes = curriculumVitaes;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getIdCode() {
+        return idCode;
+    }
+
+    public void setIdCode(String idCode) {
+        this.idCode = idCode;
     }
 
     @Override

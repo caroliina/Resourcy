@@ -8,9 +8,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "government_work_experience")
@@ -44,7 +44,7 @@ public class GovernmentWorkExperience extends AbstractAuditingEntity implements 
     @OneToMany(mappedBy = "governmentWorkExperience")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<WorkAssignment> workAssignments = new HashSet<>();
+    private List<WorkAssignment> workAssignments = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -94,11 +94,11 @@ public class GovernmentWorkExperience extends AbstractAuditingEntity implements 
         this.governmentProject = governmentProject;
     }
 
-    public Set<WorkAssignment> getWorkAssignments() {
+    public List<WorkAssignment> getWorkAssignments() {
         return workAssignments;
     }
 
-    public void setWorkAssignments(Set<WorkAssignment> workAssignments) {
+    public void setWorkAssignments(List<WorkAssignment> workAssignments) {
         this.workAssignments = workAssignments;
     }
 

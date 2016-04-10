@@ -29,4 +29,18 @@
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
     </changeSet>
+
+    <changeSet id="Add id_code and user_id columns" author="Kreete">
+        <addColumn tableName="employee">
+            <column name="id_code" type="varchar(20)"/>
+            <column name="user_id" type="bigint"><constraints unique="true"/></column>
+        </addColumn>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="employee"
+                                 constraintName="fk_employee_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+    </changeSet>
+
 </databaseChangeLog>

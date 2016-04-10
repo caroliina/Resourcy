@@ -1,26 +1,26 @@
 package com.resourcy.app.service.impl;
 
-import com.resourcy.app.service.CurriculumVitaeService;
 import com.resourcy.app.domain.CurriculumVitae;
+import com.resourcy.app.domain.LanguageType;
 import com.resourcy.app.repository.CurriculumVitaeRepository;
 import com.resourcy.app.repository.search.CurriculumVitaeSearchRepository;
+import com.resourcy.app.service.CurriculumVitaeService;
+import com.resourcy.app.service.UserService;
 import com.resourcy.app.web.rest.dto.CurriculumVitaeDTO;
 import com.resourcy.app.web.rest.mapper.CurriculumVitaeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing CurriculumVitae.
@@ -39,6 +39,9 @@ public class CurriculumVitaeServiceImpl implements CurriculumVitaeService{
     
     @Inject
     private CurriculumVitaeSearchRepository curriculumVitaeSearchRepository;
+
+    @Inject
+    private UserService userService;
     
     /**
      * Save a curriculumVitae.
@@ -47,6 +50,7 @@ public class CurriculumVitaeServiceImpl implements CurriculumVitaeService{
     public CurriculumVitaeDTO save(CurriculumVitaeDTO curriculumVitaeDTO) {
         log.debug("Request to save CurriculumVitae : {}", curriculumVitaeDTO);
         CurriculumVitae curriculumVitae = curriculumVitaeMapper.curriculumVitaeDTOToCurriculumVitae(curriculumVitaeDTO);
+        curriculumVitae.setEmployee(userService.getUserWithAuthorities().getEmployee());
         curriculumVitae = curriculumVitaeRepository.save(curriculumVitae);
         CurriculumVitaeDTO result = curriculumVitaeMapper.curriculumVitaeToCurriculumVitaeDTO(curriculumVitae);
         curriculumVitaeSearchRepository.save(curriculumVitae);
@@ -97,5 +101,15 @@ public class CurriculumVitaeServiceImpl implements CurriculumVitaeService{
             .stream(curriculumVitaeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(curriculumVitaeMapper::curriculumVitaeToCurriculumVitaeDTO)
             .collect(Collectors.toList());
+    }
+
+
+    @Transactional(readOnly = true)
+    public CurriculumVitaeDTO getEmployeeCvEst() {
+
+        CurriculumVitae result = curriculumVitaeRepository
+           .findByEmployeeIdAndLanguageType(userService.getUserWithAuthorities().getEmployee().getId(), LanguageType.EST);
+
+        return curriculumVitaeMapper.curriculumVitaeToCurriculumVitaeDTO(result);
     }
 }

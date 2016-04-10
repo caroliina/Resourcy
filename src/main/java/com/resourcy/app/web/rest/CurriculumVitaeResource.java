@@ -140,6 +140,11 @@ public class CurriculumVitaeResource {
         return curriculumVitaeService.search(query);
     }
 
+    @RequestMapping(value = "/curriculums", method = RequestMethod.GET)
+    public CurriculumVitaeDTO getEmployeeCurriculumVitaeEst() {
+        return curriculumVitaeService.getEmployeeCvEst();
+    }
+
     @RequestMapping(value = "/curriculumVitaes/languageTypes", method = RequestMethod.GET)
     @ResponseBody
     public String[] languageTypes(){
