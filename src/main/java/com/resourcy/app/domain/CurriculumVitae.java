@@ -8,9 +8,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "curriculum_vitae")
@@ -34,32 +32,32 @@ public class CurriculumVitae extends AbstractAuditingEntity implements Serializa
     @OneToMany(mappedBy = "curriculumVitae")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Education> educations = new HashSet<>();
+    private List<Education> educations = new ArrayList<>();
 
     @OneToMany(mappedBy = "curriculumVitae")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<WorkExperience> workExperiences = new HashSet<>();
+    private List<WorkExperience> workExperiences = new ArrayList<>();
 
     @OneToMany(mappedBy = "curriculumVitae")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<GovernmentWorkExperience> governmentWorkExperiences = new HashSet<>();
+    private List<GovernmentWorkExperience> governmentWorkExperiences = new ArrayList<>();
 
     @OneToMany(mappedBy = "curriculumVitae")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<AdditionalStudy> additionalStudys = new HashSet<>();
+    private List<AdditionalStudy> additionalStudys = new ArrayList<>();
 
     @OneToMany(mappedBy = "curriculumVitae")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<LanguageSkill> languageSkills = new HashSet<>();
+    private List<LanguageSkill> languageSkills = new ArrayList<>();
 
     @OneToMany(mappedBy = "curriculumVitae")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<AdditionalSkill> additionalSkills = new HashSet<>();
+    private List<AdditionalSkill> additionalSkills = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -77,51 +75,51 @@ public class CurriculumVitae extends AbstractAuditingEntity implements Serializa
         this.employee = employee;
     }
 
-    public Set<Education> getEducations() {
+    public List<Education> getEducations() {
         return educations;
     }
 
-    public void setEducations(Set<Education> educations) {
+    public void setEducations(List<Education> educations) {
         this.educations = educations;
     }
 
-    public Set<WorkExperience> getWorkExperiences() {
+    public List<WorkExperience> getWorkExperiences() {
         return workExperiences;
     }
 
-    public void setWorkExperiences(Set<WorkExperience> workExperiences) {
+    public void setWorkExperiences(List<WorkExperience> workExperiences) {
         this.workExperiences = workExperiences;
     }
 
-    public Set<GovernmentWorkExperience> getGovernmentWorkExperiences() {
+    public List<GovernmentWorkExperience> getGovernmentWorkExperiences() {
         return governmentWorkExperiences;
     }
 
-    public void setGovernmentWorkExperiences(Set<GovernmentWorkExperience> governmentWorkExperiences) {
+    public void setGovernmentWorkExperiences(List<GovernmentWorkExperience> governmentWorkExperiences) {
         this.governmentWorkExperiences = governmentWorkExperiences;
     }
 
-    public Set<AdditionalStudy> getAdditionalStudys() {
+    public List<AdditionalStudy> getAdditionalStudys() {
         return additionalStudys;
     }
 
-    public void setAdditionalStudys(Set<AdditionalStudy> additionalStudys) {
+    public void setAdditionalStudys(List<AdditionalStudy> additionalStudys) {
         this.additionalStudys = additionalStudys;
     }
 
-    public Set<LanguageSkill> getLanguageSkills() {
+    public List<LanguageSkill> getLanguageSkills() {
         return languageSkills;
     }
 
-    public void setLanguageSkills(Set<LanguageSkill> languageSkills) {
+    public void setLanguageSkills(List<LanguageSkill> languageSkills) {
         this.languageSkills = languageSkills;
     }
 
-    public Set<AdditionalSkill> getAdditionalSkills() {
+    public List<AdditionalSkill> getAdditionalSkills() {
         return additionalSkills;
     }
 
-    public void setAdditionalSkills(Set<AdditionalSkill> additionalSkills) {
+    public void setAdditionalSkills(List<AdditionalSkill> additionalSkills) {
         this.additionalSkills = additionalSkills;
     }
 

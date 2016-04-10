@@ -21,14 +21,14 @@ angular.module('resourcyApp')
         $scope.datePickerForStudyPeriodEnd= {status:{opened: {}}};
         $scope.datePickerForStudyPeriodEnd.status.opened = {};
         if (!$location.search().id) {
-            $location.search().id = 2; // TODO - replace with current employee id
+            $location.search().id = 1; // TODO - replace with current employee id
         }
         $scope.personID = $location.search().id;
             Employee.get({id: $scope.personID}, function(result) {
                 $scope.persons = result;
             });
         CurriculumVitae.get({id: $scope.personID}, function(result) {
-              $scope.cv_id = result;
+              $scope.cv_id = 1;
         });
         $scope.start = function() {
 

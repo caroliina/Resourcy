@@ -1,26 +1,25 @@
 package com.resourcy.app.service.impl;
 
-import com.resourcy.app.service.EmployeeService;
 import com.resourcy.app.domain.Employee;
 import com.resourcy.app.repository.EmployeeRepository;
 import com.resourcy.app.repository.search.EmployeeSearchRepository;
+import com.resourcy.app.service.EmployeeService;
+import com.resourcy.app.service.UserService;
 import com.resourcy.app.web.rest.dto.EmployeeDTO;
 import com.resourcy.app.web.rest.mapper.EmployeeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing Employee.
@@ -39,6 +38,9 @@ public class EmployeeServiceImpl implements EmployeeService{
     
     @Inject
     private EmployeeSearchRepository employeeSearchRepository;
+
+    @Inject
+    private UserService userService;
     
     /**
      * Save a employee.
@@ -47,6 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     public EmployeeDTO save(EmployeeDTO employeeDTO) {
         log.debug("Request to save Employee : {}", employeeDTO);
         Employee employee = employeeMapper.employeeDTOToEmployee(employeeDTO);
+        employee.setUser(userService.getUserWithAuthorities());
         employee = employeeRepository.save(employee);
         EmployeeDTO result = employeeMapper.employeeToEmployeeDTO(employee);
         employeeSearchRepository.save(employee);
@@ -97,5 +100,11 @@ public class EmployeeServiceImpl implements EmployeeService{
             .stream(employeeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(employeeMapper::employeeToEmployeeDTO)
             .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public EmployeeDTO getCurrentEmployee() {
+        Employee employee = employeeRepository.findOne(userService.getUserWithAuthorities().getEmployee().getId());
+        return employeeMapper.employeeToEmployeeDTO(employee);
     }
 }

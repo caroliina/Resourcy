@@ -34,4 +34,11 @@
                                  referencedTableName="curriculum_vitae"/>
 
     </changeSet>
+
+    <changeSet id="Add column experience to table additional_skill" author="Kreete">
+        <addColumn tableName="additional_skill">
+            <column name="experience" type="double"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

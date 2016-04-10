@@ -2,6 +2,7 @@ package com.resourcy.app.web.rest.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -23,6 +24,7 @@ public class WorkExperienceDTO extends AbstractAuditingEntityDTO implements Seri
 
     private String organization;
 
+    private List<WorkAssignmentDTO> workAssignments;
 
     private Long curriculumVitaeId;
     public Long getId() {
@@ -75,6 +77,15 @@ public class WorkExperienceDTO extends AbstractAuditingEntityDTO implements Seri
     public void setCurriculumVitaeId(Long curriculumVitaeId) {
         this.curriculumVitaeId = curriculumVitaeId;
     }
+
+    public List<WorkAssignmentDTO> getWorkAssignments() {
+        return workAssignments;
+    }
+
+    public void setWorkAssignments(List<WorkAssignmentDTO> workAssignments) {
+        this.workAssignments = workAssignments;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
