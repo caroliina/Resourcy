@@ -37,6 +37,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "password_hash",length = 60)
     private String password;
 
+    @Size(max = 100)
+    @Column(name = "username", length = 100)
+    private String username;
+
+
     @Size(max = 50)
     @Column(name = "first_name", length = 50)
     private String firstName;
@@ -197,6 +202,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
