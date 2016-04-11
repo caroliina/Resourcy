@@ -4,7 +4,7 @@ angular.module('resourcyApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('update', {
-                parent: 'cv',
+                parent: 'site',
                 url: '/update',
                 data: {
                     authorities: ['ROLE_USER']

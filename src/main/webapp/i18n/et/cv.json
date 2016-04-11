@@ -52,6 +52,7 @@
 		"addstudy":"Lisa koolitus",
 		"addskill":"Lisa oskus",
 		"addlang":"Lisa keeleoskus",
-		"remove":"x"
+		"remove":"x",
+        "idcode": "Isikukood"
     }
 }
