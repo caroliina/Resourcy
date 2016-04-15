@@ -2,6 +2,7 @@ package com.resourcy.app.web.rest.mapper.mapperImpl;
 
 import com.resourcy.app.domain.CurriculumVitae;
 import com.resourcy.app.domain.GovernmentWorkExperience;
+import com.resourcy.app.domain.Position;
 import com.resourcy.app.domain.WorkAssignment;
 import com.resourcy.app.web.rest.dto.GovernmentWorkExperienceDTO;
 import com.resourcy.app.web.rest.dto.WorkAssignmentDTO;
@@ -42,7 +43,8 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
         governmentWorkExperienceDTO.setPeriodStart( governmentWorkExperience.getPeriodStart() );
         governmentWorkExperienceDTO.setPeriodEnd( governmentWorkExperience.getPeriodEnd() );
         governmentWorkExperienceDTO.setPersonalWorkHours( governmentWorkExperience.getPersonalWorkHours() );
-        governmentWorkExperienceDTO.setPosition( governmentWorkExperience.getPosition() );
+        governmentWorkExperienceDTO.setPosition( governmentWorkExperience.getPosition().toString() );
+
 
 
         if(governmentWorkExperience.getWorkAssignments()!=null){
@@ -75,8 +77,7 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
         governmentWorkExperience.setPeriodStart( governmentWorkExperienceDTO.getPeriodStart() );
         governmentWorkExperience.setPeriodEnd( governmentWorkExperienceDTO.getPeriodEnd() );
         governmentWorkExperience.setPersonalWorkHours( governmentWorkExperienceDTO.getPersonalWorkHours() );
-        governmentWorkExperience.setPosition( governmentWorkExperienceDTO.getPosition() );
-
+        governmentWorkExperience.setPosition(stringToPosition(governmentWorkExperienceDTO.getPosition()));
 
         if(governmentWorkExperienceDTO.getWorkAssignments()!=null){
 
@@ -91,6 +92,14 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
         return governmentWorkExperience;
     }
 
+    private Position stringToPosition(String position) {
+        for(Position e : Position.values()) {
+            if((e.val).equals(position)) {
+                return e;
+            }
+        }
+        return null;
+    }
 
     private Long governmentWorkExperienceCurriculumVitaeId(GovernmentWorkExperience governmentWorkExperience) {
 

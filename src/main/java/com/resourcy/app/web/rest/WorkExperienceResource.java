@@ -1,6 +1,7 @@
 package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.resourcy.app.domain.Position;
 import com.resourcy.app.domain.WorkExperience;
 import com.resourcy.app.service.WorkExperienceService;
 import com.resourcy.app.web.rest.util.HeaderUtil;
@@ -18,10 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -131,5 +131,15 @@ public class WorkExperienceResource {
     public List<WorkExperienceDTO> searchWorkExperiences(@PathVariable String query) {
         log.debug("Request to search WorkExperiences for query {}", query);
         return workExperienceService.search(query);
+    }
+
+    @RequestMapping(value = "/workExperiences/positions", method = RequestMethod.GET)
+    @ResponseBody
+    public List<String> positions(){
+        List<String> positionNames = new ArrayList<String>();
+        for (Position p : Position.values()) {
+            positionNames.add(p.toString());
+        }
+        return positionNames;
     }
 }

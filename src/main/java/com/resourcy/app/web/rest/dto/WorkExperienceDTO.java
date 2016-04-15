@@ -1,5 +1,6 @@
 package com.resourcy.app.web.rest.dto;
 
+import com.resourcy.app.domain.Position;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -10,7 +11,7 @@ public class WorkExperienceDTO extends AbstractAuditingEntityDTO implements Seri
 
     private Long id;
 
-    private String position;
+    private Position position;
 
 
     private LocalDate periodStart;
@@ -34,13 +35,22 @@ public class WorkExperienceDTO extends AbstractAuditingEntityDTO implements Seri
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getPosition() {
-        return position;
+        return position.toString();
     }
 
     public void setPosition(String position) {
-        this.position = position;
+        for(Position e : Position.values()) {
+            if(e.val.equals(position)) {
+                this.position = e;
+                break;
+            } else {
+                this.position = null;
+            }
+        }
     }
+
     public LocalDate getPeriodStart() {
         return periodStart;
     }
