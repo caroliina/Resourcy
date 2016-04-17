@@ -38,13 +38,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the GovernmentWorkExperienceResource REST controller.
  *
- * @see GovernmentWorkExperienceResource
+ * @see GovernmentWorkExperienceController
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class GovernmentWorkExperienceResourceIntTest {
+public class GovernmentWorkExperienceControllerIntTest {
 
 
     private static final LocalDate DEFAULT_PERIOD_START = LocalDate.ofEpochDay(0L);
@@ -78,10 +78,10 @@ public class GovernmentWorkExperienceResourceIntTest {
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        GovernmentWorkExperienceResource governmentWorkExperienceResource = new GovernmentWorkExperienceResource();
-        ReflectionTestUtils.setField(governmentWorkExperienceResource, "governmentWorkExperienceService", governmentWorkExperienceService);
-        ReflectionTestUtils.setField(governmentWorkExperienceResource, "governmentWorkExperienceMapper", governmentWorkExperienceMapper);
-        this.restGovernmentWorkExperienceMockMvc = MockMvcBuilders.standaloneSetup(governmentWorkExperienceResource)
+        GovernmentWorkExperienceController governmentWorkExperienceController = new GovernmentWorkExperienceController();
+        ReflectionTestUtils.setField(governmentWorkExperienceController, "governmentWorkExperienceService", governmentWorkExperienceService);
+        ReflectionTestUtils.setField(governmentWorkExperienceController, "governmentWorkExperienceMapper", governmentWorkExperienceMapper);
+        this.restGovernmentWorkExperienceMockMvc = MockMvcBuilders.standaloneSetup(governmentWorkExperienceController)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }

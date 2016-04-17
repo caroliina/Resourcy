@@ -45,7 +45,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class AccountResourceIntTest {
+public class AccountControllerIntTest {
 
     @Inject
     private UserRepository userRepository;
@@ -71,17 +71,17 @@ public class AccountResourceIntTest {
         MockitoAnnotations.initMocks(this);
         doNothing().when(mockMailService).sendActivationEmail((User) anyObject(), anyString());
 
-        AccountResource accountResource = new AccountResource();
-        ReflectionTestUtils.setField(accountResource, "userRepository", userRepository);
-        ReflectionTestUtils.setField(accountResource, "userService", userService);
-        ReflectionTestUtils.setField(accountResource, "mailService", mockMailService);
+        AccountController accountController = new AccountController();
+        ReflectionTestUtils.setField(accountController, "userRepository", userRepository);
+        ReflectionTestUtils.setField(accountController, "userService", userService);
+        ReflectionTestUtils.setField(accountController, "mailService", mockMailService);
 
-        AccountResource accountUserMockResource = new AccountResource();
+        AccountController accountUserMockResource = new AccountController();
         ReflectionTestUtils.setField(accountUserMockResource, "userRepository", userRepository);
         ReflectionTestUtils.setField(accountUserMockResource, "userService", mockUserService);
         ReflectionTestUtils.setField(accountUserMockResource, "mailService", mockMailService);
 
-        this.restMvc = MockMvcBuilders.standaloneSetup(accountResource).build();
+        this.restMvc = MockMvcBuilders.standaloneSetup(accountController).build();
         this.restUserMockMvc = MockMvcBuilders.standaloneSetup(accountUserMockResource).build();
     }
 

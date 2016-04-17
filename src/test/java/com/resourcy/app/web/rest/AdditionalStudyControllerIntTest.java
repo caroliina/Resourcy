@@ -38,13 +38,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the AdditionalStudyResource REST controller.
  *
- * @see AdditionalStudyResource
+ * @see AdditionalStudyController
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class AdditionalStudyResourceIntTest {
+public class AdditionalStudyControllerIntTest {
 
 
     private static final LocalDate DEFAULT_PERIOD_START = LocalDate.ofEpochDay(0L);
@@ -79,10 +79,10 @@ public class AdditionalStudyResourceIntTest {
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        AdditionalStudyResource additionalStudyResource = new AdditionalStudyResource();
-        ReflectionTestUtils.setField(additionalStudyResource, "additionalStudyService", additionalStudyService);
-        ReflectionTestUtils.setField(additionalStudyResource, "additionalStudyMapper", additionalStudyMapper);
-        this.restAdditionalStudyMockMvc = MockMvcBuilders.standaloneSetup(additionalStudyResource)
+        AdditionalStudyController additionalStudyController = new AdditionalStudyController();
+        ReflectionTestUtils.setField(additionalStudyController, "additionalStudyService", additionalStudyService);
+        ReflectionTestUtils.setField(additionalStudyController, "additionalStudyMapper", additionalStudyMapper);
+        this.restAdditionalStudyMockMvc = MockMvcBuilders.standaloneSetup(additionalStudyController)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }

@@ -18,12 +18,12 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/api/audits", produces = MediaType.APPLICATION_JSON_VALUE)
-public class AuditResource {
+public class AuditController {
 
     private AuditEventService auditEventService;
 
     @Inject
-    public AuditResource(AuditEventService auditEventService) {
+    public AuditController(AuditEventService auditEventService) {
         this.auditEventService = auditEventService;
     }
 

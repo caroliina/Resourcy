@@ -10,7 +10,6 @@ import com.resourcy.app.security.AuthoritiesConstants;
 import com.resourcy.app.service.MailService;
 import com.resourcy.app.service.UserService;
 import com.resourcy.app.web.rest.dto.ManagedUserDTO;
-import com.resourcy.app.web.rest.dto.UserDTO;
 import com.resourcy.app.web.rest.util.HeaderUtil;
 import com.resourcy.app.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -61,9 +60,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @RestController
 @RequestMapping("/api")
-public class UserResource {
+public class UserController {
 
-    private final Logger log = LoggerFactory.getLogger(UserResource.class);
+    private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Inject
     private UserRepository userRepository;

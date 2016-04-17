@@ -38,13 +38,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the EmployeeResource REST controller.
  *
- * @see EmployeeResource
+ * @see EmployeeController
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class EmployeeResourceIntTest {
+public class EmployeeControllerIntTest {
 
     private static final String DEFAULT_FIRST_NAME = "AAAAA";
     private static final String UPDATED_FIRST_NAME = "BBBBB";
@@ -80,10 +80,10 @@ public class EmployeeResourceIntTest {
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        EmployeeResource employeeResource = new EmployeeResource();
-        ReflectionTestUtils.setField(employeeResource, "employeeService", employeeService);
-        ReflectionTestUtils.setField(employeeResource, "employeeMapper", employeeMapper);
-        this.restEmployeeMockMvc = MockMvcBuilders.standaloneSetup(employeeResource)
+        EmployeeController employeeController = new EmployeeController();
+        ReflectionTestUtils.setField(employeeController, "employeeService", employeeService);
+        ReflectionTestUtils.setField(employeeController, "employeeMapper", employeeMapper);
+        this.restEmployeeMockMvc = MockMvcBuilders.standaloneSetup(employeeController)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }

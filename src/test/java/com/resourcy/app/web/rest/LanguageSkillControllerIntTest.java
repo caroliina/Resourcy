@@ -36,13 +36,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the LanguageSkillResource REST controller.
  *
- * @see LanguageSkillResource
+ * @see LanguageSkillController
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class LanguageSkillResourceIntTest {
+public class LanguageSkillControllerIntTest {
 
     private static final String DEFAULT_LANGUAGE = "AAAAA";
     private static final String UPDATED_LANGUAGE = "BBBBB";
@@ -73,10 +73,10 @@ public class LanguageSkillResourceIntTest {
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        LanguageSkillResource languageSkillResource = new LanguageSkillResource();
-        ReflectionTestUtils.setField(languageSkillResource, "languageSkillService", languageSkillService);
-        ReflectionTestUtils.setField(languageSkillResource, "languageSkillMapper", languageSkillMapper);
-        this.restLanguageSkillMockMvc = MockMvcBuilders.standaloneSetup(languageSkillResource)
+        LanguageSkillController languageSkillController = new LanguageSkillController();
+        ReflectionTestUtils.setField(languageSkillController, "languageSkillService", languageSkillService);
+        ReflectionTestUtils.setField(languageSkillController, "languageSkillMapper", languageSkillMapper);
+        this.restLanguageSkillMockMvc = MockMvcBuilders.standaloneSetup(languageSkillController)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }

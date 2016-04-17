@@ -33,9 +33,9 @@ import java.util.stream.Stream;
  */
 @RestController
 @RequestMapping("/api")
-public class CurriculumVitaeResource {
+public class CurriculumVitaeController {
 
-    private final Logger log = LoggerFactory.getLogger(CurriculumVitaeResource.class);
+    private final Logger log = LoggerFactory.getLogger(CurriculumVitaeController.class);
         
     @Inject
     private CurriculumVitaeService curriculumVitaeService;

@@ -36,13 +36,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the AdditionalSkillResource REST controller.
  *
- * @see AdditionalSkillResource
+ * @see AdditionalSkillController
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class AdditionalSkillResourceIntTest {
+public class AdditionalSkillControllerIntTest {
 
     private static final String DEFAULT_TYPE = "AAAAA";
     private static final String UPDATED_TYPE = "BBBBB";
@@ -71,10 +71,10 @@ public class AdditionalSkillResourceIntTest {
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        AdditionalSkillResource additionalSkillResource = new AdditionalSkillResource();
-        ReflectionTestUtils.setField(additionalSkillResource, "additionalSkillService", additionalSkillService);
-        ReflectionTestUtils.setField(additionalSkillResource, "additionalSkillMapper", additionalSkillMapper);
-        this.restAdditionalSkillMockMvc = MockMvcBuilders.standaloneSetup(additionalSkillResource)
+        AdditionalSkillController additionalSkillController = new AdditionalSkillController();
+        ReflectionTestUtils.setField(additionalSkillController, "additionalSkillService", additionalSkillService);
+        ReflectionTestUtils.setField(additionalSkillController, "additionalSkillMapper", additionalSkillMapper);
+        this.restAdditionalSkillMockMvc = MockMvcBuilders.standaloneSetup(additionalSkillController)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }

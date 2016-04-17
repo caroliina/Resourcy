@@ -38,13 +38,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the EducationResource REST controller.
  *
- * @see EducationResource
+ * @see EducationController
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class EducationResourceIntTest {
+public class EducationControllerIntTest {
 
     private static final String DEFAULT_INSTITUTION = "AAAAA";
     private static final String UPDATED_INSTITUTION = "BBBBB";
@@ -81,10 +81,10 @@ public class EducationResourceIntTest {
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        EducationResource educationResource = new EducationResource();
-        ReflectionTestUtils.setField(educationResource, "educationService", educationService);
-        ReflectionTestUtils.setField(educationResource, "educationMapper", educationMapper);
-        this.restEducationMockMvc = MockMvcBuilders.standaloneSetup(educationResource)
+        EducationController educationController = new EducationController();
+        ReflectionTestUtils.setField(educationController, "educationService", educationService);
+        ReflectionTestUtils.setField(educationController, "educationMapper", educationMapper);
+        this.restEducationMockMvc = MockMvcBuilders.standaloneSetup(educationController)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }

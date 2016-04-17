@@ -36,13 +36,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the WorkAssignmentResource REST controller.
  *
- * @see WorkAssignmentResource
+ * @see WorkAssignmentController
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class WorkAssignmentResourceIntTest {
+public class WorkAssignmentControllerIntTest {
 
     private static final String DEFAULT_DESCRIPTION = "AAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBB";
@@ -69,10 +69,10 @@ public class WorkAssignmentResourceIntTest {
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        WorkAssignmentResource workAssignmentResource = new WorkAssignmentResource();
-        ReflectionTestUtils.setField(workAssignmentResource, "workAssignmentService", workAssignmentService);
-        ReflectionTestUtils.setField(workAssignmentResource, "workAssignmentMapper", workAssignmentMapper);
-        this.restWorkAssignmentMockMvc = MockMvcBuilders.standaloneSetup(workAssignmentResource)
+        WorkAssignmentController workAssignmentController = new WorkAssignmentController();
+        ReflectionTestUtils.setField(workAssignmentController, "workAssignmentService", workAssignmentService);
+        ReflectionTestUtils.setField(workAssignmentController, "workAssignmentMapper", workAssignmentMapper);
+        this.restWorkAssignmentMockMvc = MockMvcBuilders.standaloneSetup(workAssignmentController)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }

@@ -31,9 +31,9 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/api")
-public class EmployeeResource {
+public class EmployeeController {
 
-    private final Logger log = LoggerFactory.getLogger(EmployeeResource.class);
+    private final Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
     @Inject
     private EmployeeService employeeService;

@@ -36,13 +36,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the CurriculumVitaeResource REST controller.
  *
- * @see CurriculumVitaeResource
+ * @see CurriculumVitaeController
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class CurriculumVitaeResourceIntTest {
+public class CurriculumVitaeControllerIntTest {
 
 
     @Inject
@@ -67,10 +67,10 @@ public class CurriculumVitaeResourceIntTest {
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        CurriculumVitaeResource curriculumVitaeResource = new CurriculumVitaeResource();
-        ReflectionTestUtils.setField(curriculumVitaeResource, "curriculumVitaeService", curriculumVitaeService);
-        ReflectionTestUtils.setField(curriculumVitaeResource, "curriculumVitaeMapper", curriculumVitaeMapper);
-        this.restCurriculumVitaeMockMvc = MockMvcBuilders.standaloneSetup(curriculumVitaeResource)
+        CurriculumVitaeController curriculumVitaeController = new CurriculumVitaeController();
+        ReflectionTestUtils.setField(curriculumVitaeController, "curriculumVitaeService", curriculumVitaeService);
+        ReflectionTestUtils.setField(curriculumVitaeController, "curriculumVitaeMapper", curriculumVitaeMapper);
+        this.restCurriculumVitaeMockMvc = MockMvcBuilders.standaloneSetup(curriculumVitaeController)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }

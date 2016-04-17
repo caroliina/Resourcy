@@ -36,13 +36,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the GovernmentProjectResource REST controller.
  *
- * @see GovernmentProjectResource
+ * @see GovernmentProjectController
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class GovernmentProjectResourceIntTest {
+public class GovernmentProjectControllerIntTest {
 
     private static final String DEFAULT_BUYER = "AAAAA";
     private static final String UPDATED_BUYER = "BBBBB";
@@ -74,10 +74,10 @@ public class GovernmentProjectResourceIntTest {
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        GovernmentProjectResource governmentProjectResource = new GovernmentProjectResource();
-        ReflectionTestUtils.setField(governmentProjectResource, "governmentProjectService", governmentProjectService);
-        ReflectionTestUtils.setField(governmentProjectResource, "governmentProjectMapper", governmentProjectMapper);
-        this.restGovernmentProjectMockMvc = MockMvcBuilders.standaloneSetup(governmentProjectResource)
+        GovernmentProjectController governmentProjectController = new GovernmentProjectController();
+        ReflectionTestUtils.setField(governmentProjectController, "governmentProjectService", governmentProjectService);
+        ReflectionTestUtils.setField(governmentProjectController, "governmentProjectMapper", governmentProjectMapper);
+        this.restGovernmentProjectMockMvc = MockMvcBuilders.standaloneSetup(governmentProjectController)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }

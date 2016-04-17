@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 @IntegrationTest
 @Transactional
-public class AuditResourceIntTest {
+public class AuditControllerIntTest {
 
     private static final String SAMPLE_PRINCIPAL = "SAMPLE_PRINCIPAL";
     private static final String SAMPLE_TYPE = "SAMPLE_TYPE";
@@ -56,8 +56,8 @@ public class AuditResourceIntTest {
         MockitoAnnotations.initMocks(this);
         AuditEventService auditEventService =
                 new AuditEventService(auditEventRepository, auditEventConverter);
-        AuditResource auditResource = new AuditResource(auditEventService);
-        this.restAuditMockMvc = MockMvcBuilders.standaloneSetup(auditResource).build();
+        AuditController auditController = new AuditController(auditEventService);
+        this.restAuditMockMvc = MockMvcBuilders.standaloneSetup(auditController).build();
     }
 
     @Before

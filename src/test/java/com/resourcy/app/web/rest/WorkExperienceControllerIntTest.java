@@ -38,13 +38,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the WorkExperienceResource REST controller.
  *
- * @see WorkExperienceResource
+ * @see WorkExperienceController
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class WorkExperienceResourceIntTest {
+public class WorkExperienceControllerIntTest {
 
     private static final String DEFAULT_POSITION = "AAAAA";
     private static final String UPDATED_POSITION = "BBBBB";
@@ -81,10 +81,10 @@ public class WorkExperienceResourceIntTest {
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        WorkExperienceResource workExperienceResource = new WorkExperienceResource();
-        ReflectionTestUtils.setField(workExperienceResource, "workExperienceService", workExperienceService);
-        ReflectionTestUtils.setField(workExperienceResource, "workExperienceMapper", workExperienceMapper);
-        this.restWorkExperienceMockMvc = MockMvcBuilders.standaloneSetup(workExperienceResource)
+        WorkExperienceController workExperienceController = new WorkExperienceController();
+        ReflectionTestUtils.setField(workExperienceController, "workExperienceService", workExperienceService);
+        ReflectionTestUtils.setField(workExperienceController, "workExperienceMapper", workExperienceMapper);
+        this.restWorkExperienceMockMvc = MockMvcBuilders.standaloneSetup(workExperienceController)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }

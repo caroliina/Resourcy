@@ -36,13 +36,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the TechnologyResource REST controller.
  *
- * @see TechnologyResource
+ * @see TechnologyController
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class TechnologyResourceIntTest {
+public class TechnologyControllerIntTest {
 
     private static final String DEFAULT_TYPE = "AAAAA";
     private static final String UPDATED_TYPE = "BBBBB";
@@ -71,10 +71,10 @@ public class TechnologyResourceIntTest {
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        TechnologyResource technologyResource = new TechnologyResource();
-        ReflectionTestUtils.setField(technologyResource, "technologyService", technologyService);
-        ReflectionTestUtils.setField(technologyResource, "technologyMapper", technologyMapper);
-        this.restTechnologyMockMvc = MockMvcBuilders.standaloneSetup(technologyResource)
+        TechnologyController technologyController = new TechnologyController();
+        ReflectionTestUtils.setField(technologyController, "technologyService", technologyService);
+        ReflectionTestUtils.setField(technologyController, "technologyMapper", technologyMapper);
+        this.restTechnologyMockMvc = MockMvcBuilders.standaloneSetup(technologyController)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
