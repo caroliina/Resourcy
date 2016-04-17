@@ -10,12 +10,12 @@
     	"personal" : "Isikuandmed",
 		"firstname":"Eesnimi",
 		"lastname":"Perekonnanimi",
-		"birthday":"Sünni kuupäev",
-		"nationality":"Rahvus",
+		"birthday":"Sünniaeg",
+		"nationality":"Kodakondsus",
 		"email":"E-post",
 		"education":"Hariduskäik",
 		"noeducation":"Hariduskäik puudub",
-		"institution":"Kool",
+		"institution":"Haridusasutus",
 		"start":"Algusaeg",
 		"end":"Lõppaeg",
 		"speciality":"Eriala",
@@ -53,6 +53,7 @@
 		"addskill":"Lisa oskus",
 		"addlang":"Lisa keeleoskus",
 		"remove":"x",
-        "idcode": "Isikukood"
+        "idcode": "Isikukood",
+        "maintasks":"Peamised tööülesanded"
     }
 }
