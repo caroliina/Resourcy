@@ -1,8 +1,6 @@
 package com.resourcy.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -14,7 +12,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "work_experience")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "workexperience")
 public class WorkExperience extends AbstractAuditingEntity implements Serializable {
 
@@ -43,7 +40,6 @@ public class WorkExperience extends AbstractAuditingEntity implements Serializab
 
     @OneToMany(mappedBy = "workExperience")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List<WorkAssignment> workAssignments = new ArrayList<>();
 
     public Long getId() {

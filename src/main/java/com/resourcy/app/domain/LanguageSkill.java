@@ -1,7 +1,5 @@
 package com.resourcy.app.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -10,7 +8,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "language_skill")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "languageskill")
 public class LanguageSkill extends AbstractAuditingEntity implements Serializable {
 
