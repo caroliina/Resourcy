@@ -1,35 +1,25 @@
 <div ng-cloak>
     <div class="row">
-        <div class="col-md-4">
-            <span class="hipster img-responsive img-rounded"></span>
-        </div>
-        <div class="col-md-8">
-
-            <div ng-switch="isAuthenticated()">
-                <h1 translate="main.title" translate-values="{username: '{{account.login}}'}">Welcome, {{account.login}}!</h1>
-                <div class="alert alert-info" ng-switch-when="true" has-authority="ROLE_ADMIN">
-                    <h3 translate="main.lastUpdated">Viimati uuendatud CV-d:</h3>
-                    <div ng-repeat="cv in curriculumVitaesSorted | limitTo:3">
-                        <a href="#/cv/update?id={{cv.id}}">{{cv.employeeName}} CV ( {{cv.languageType}} )</a> ( {{cv.lastModifiedDate | date:'yyyy-MM-dd HH:mm:ss'}} )
+        <div >
+            <div ng-switch="isAuthenticated()" has-authority="ROLE_USER">
+                <div class="col-sm-offset-3">
+                    <h1 translate="main.title" translate-values="{username: '{{account.login}}'}">Welcome,{{account.login}}!</h1>
+                </div>
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="alert alert-info" ng-switch-when="true" has-authority="ROLE_ADMIN">
+                        <h3 translate="main.lastUpdated">Viimati uuendatud CV-d:</h3>
+                        <div ng-repeat="cv in curriculumVitaesSorted | limitTo:3">
+                            <a href="#/cv/update?id={{cv.id}}">{{cv.employeeName}} CV ( {{cv.languageType}} )</a> ({{cv.lastModifiedDate | date:'yyyy-MM-dd HH:mm:ss'}} )
+                        </div>
                     </div>
-                </div>
-
-                <div class="alert alert-warning" ng-switch-when="true" has-authority="ROLE_ADMIN">
-                    <h3 translate="main.noUpdate">Kaua uuendamata CV-d:</h3>
-                    <div ng-repeat="cv in curriculumVitaesSorted | limitTo:-3">
-                        <a href="#/cv/update?id={{cv.id}}">{{cv.employeeName}} CV ( {{cv.languageType}} )</a> ( {{cv.lastModifiedDate | date:'yyyy-MM-dd HH:mm:ss'}} )
+                    <div class="alert alert-warning" ng-switch-when="true" has-authority="ROLE_ADMIN">
+                        <h3 translate="main.noUpdate">Kaua uuendamata CV-d:</h3>
+                        <div ng-repeat="cv in curriculumVitaesSorted | limitTo:-3">
+                            <a href="#/cv/update?id={{cv.id}}">{{cv.employeeName}} CV ( {{cv.languageType}} )</a> ({{cv.lastModifiedDate | date:'yyyy-MM-dd HH:mm:ss'}} )
+                        </div>
                     </div>
-                </div>
-
-                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.authenticated">
-                    If you want to <a class="alert-link" href="#/login">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
-                </div>
-
-                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.register">
-                    You don't have an account yet? <a class="alert-link" href="#/register">Register a new account</a>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
