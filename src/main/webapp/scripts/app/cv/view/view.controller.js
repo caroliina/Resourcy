@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('resourcyApp')
-    .controller('ViewController', function ($scope, $state,$http,Restangular,Education,$window) {
+    .controller('ViewController', function ($scope, $state,$http,Restangular,$window) {
         console.log($state.current.name)
-
+        $scope.editmode = false;
+        $scope.sorting = true;
         $scope.eduopened = [];
         $scope.eduopen = function($event,key) {
           $scope.eduopened[key] = true;
@@ -36,15 +37,19 @@ angular.module('resourcyApp')
         $scope.studyclose = function($event,key) {
           $scope.studyclosed[key] = true;
         };
+        $scope.changeView=function(){
+          console.log('tere')
+          if(!$scope.editmode){
+            $scope.loadCurriculum();
+            $scope.editmode = true;
+            $scope.sorting = false;
+          }else{
+            $scope.editmode = false;
+            $scope.sorting = true;
+          }
+        };
 
-
-        if($state.current.name === "view.edit"){
-          $scope.editmode = true;
-          $scope.sorting = false;
-        }else{
-          $scope.editmode = false;
-          $scope.sorting = true;
-        }
+        
         Restangular.one("api").one("currentEmployee").get().then(function (resp) {
            
             $scope.persons = resp;
@@ -62,7 +67,7 @@ angular.module('resourcyApp')
               $scope.additionalSkill = resp.additionalSkills;
               $scope.workExperience = resp.workExperiences;
               $scope.govWorkExperience = resp.governmentWorkExperiences;
-              console.log($scope.additionalStudy)
+              console.log(resp)
           });
 
         }
@@ -110,6 +115,7 @@ angular.module('resourcyApp')
         $scope.newSkill = {
             type: null,
             description: null,
+            experience:null
         }
         $scope.newLanguage = {
             language: null,
@@ -132,6 +138,7 @@ angular.module('resourcyApp')
             $scope.newSkill = {
                 type: null,
                 description: null,
+                experience:null
             }
         }
         
@@ -209,53 +216,53 @@ angular.module('resourcyApp')
         $scope.saveCV = function(){
           angular.forEach($scope.educations,function(val,key){
             val['curriculumVitaeId'] = $scope.cv_id;
-            //$http.put("api/educations", val).then(function (response) {
-              //console.log(response)
-            //});
+            $http.put("api/educations", val).then(function (response) {
+              console.log(response)
+            });
           })
           angular.forEach($scope.workExperience,function(val,key){
             val['curriculumVitaeId'] = $scope.cv_id;
-            console.log(val)
-            //$http.put("api/workExperiences", val).then(function (response) {
-              //console.log(response)
-              //angular.forEach($scope.workExperience.workAssignments,function(assign,key){
+            //console.log(val)
+            $http.put("api/workExperiences", val).then(function (response) {
+              console.log(response)
+              angular.forEach(val.workAssignments,function(assign,key){
 
-                //val['workExperienceId'] = response.id;
-                //$http.put("api/workAssignments", val).then(function (responses) {
-                  //console.log(responses)
-                //})
-              //})
+                val['workExperienceId'] = response.id;
+                $http.put("api/workAssignments", val).then(function (responses) {
+                  console.log(responses)
+                })
+              })
                 
-            //});
+            });
           })
           angular.forEach($scope.additionalStudy,function(val,key){
             val['curriculumVitaeId'] = $scope.cv_id;
             //console.log(val)
-            //$http.put("api/additionalStudys", val).then(function (response) {
-              //console.log(response)                
-            //});
+            $http.put("api/additionalStudys", val).then(function (response) {
+              console.log(response)                
+            });
           })
           angular.forEach($scope.additionalLanguage,function(val,key){
             val['curriculumVitaeId'] = $scope.cv_id;
             //console.log(val)
-            //$http.put("api/languageSkills", val).then(function (response) {
-              //console.log(response)                
-            //});
+            $http.put("api/languageSkills", val).then(function (response) {
+              console.log(response)                
+            });
           })
           angular.forEach($scope.additionalSkill,function(val,key){
             val['curriculumVitaeId'] = $scope.cv_id;
             //console.log(val)
-            //$http.put("api/additionalSkills", val).then(function (response) {
-              //console.log(response)                
-            //});
+            $http.put("api/additionalSkills", val).then(function (response) {
+              console.log(response)                
+            });
           })
           angular.forEach($scope.govWorkExperience,function(val,key){
             val['curriculumVitaeId'] = $scope.cv_id;
             //console.log(val)
-            //$http.put("api/governmentProjects", val).then(function (response) {
-              //console.log(response)                
-            //});
+            
+      
           })
+          $scope.editmode = false;
           //$window.location.reload();
 
         }

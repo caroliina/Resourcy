@@ -7,7 +7,7 @@ angular.module('resourcyApp')
                 parent: 'site',
                 url: '/view',
                 data: {
-                    authorities: ['ROLE_ADMIN']
+                    authorities: ['ROLE_USER','ROLE_ADMIN']
                 },
                 views: {
                     'content@': {
@@ -22,11 +22,4 @@ angular.module('resourcyApp')
                     }]
                 }
             })
-            .state('view.edit', {
-                parent: 'view',
-                url: '/edit',
-                data: {
-                    authorities: ['ROLE_USER','ROLE_ADMIN']
-                }
-            });
     });
