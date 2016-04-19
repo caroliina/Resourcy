@@ -20,7 +20,7 @@
                 <td>{{employee.email}}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="...">
-                        <a ng-repeat="cv in employee.cvList" ng-href="/#/cv/update?id={{cv.id}}"
+                        <a ng-repeat="cv in employee.cvList" ng-href="/#/view"
                            ng-bind="languageType ? languageType : 'CV-' + $index"
                            class="btn btn-default">
                         </a>

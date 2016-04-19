@@ -357,3 +357,23 @@ a.addbutton {
     background-color: #D20909;
     color: #fff;
 }
+span[contenteditable="true"] {
+    border: 1px solid;
+    padding: 0px 10px;
+    display:inline-block;
+    min-width:100px;
+}
+.editabledate[contenteditable="true"] {
+    width: 100%;
+    float: left;
+}
+.addbutton {
+    display: inline-block;
+    margin-left: 15px;
+    border-radius: 50%;
+    color: #fff;
+    background-color: green;
+    width: 25px;
+    text-align: center;
+    line-height: 25px;
+}
