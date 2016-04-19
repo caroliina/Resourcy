@@ -62,7 +62,8 @@
         "addstudy":"Add study",
         "addskill":"Add skill",
         "addlang":"Add language",
-        "remove":"x"
+        "remove":"x",
+        "idcode": "Isikukood"
     }
 
 }
