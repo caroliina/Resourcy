@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,8 +32,10 @@ public class GovernmentWorkExperience extends AbstractAuditingEntity implements 
     @Column(name = "personal_work_hours")
     private Integer personalWorkHours;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "position")
-    private String position;
+    private Position position;
 
     @ManyToOne
     @JoinColumn(name = "curriculum_vitae_id")
@@ -102,11 +105,11 @@ public class GovernmentWorkExperience extends AbstractAuditingEntity implements 
         this.workAssignments = workAssignments;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 

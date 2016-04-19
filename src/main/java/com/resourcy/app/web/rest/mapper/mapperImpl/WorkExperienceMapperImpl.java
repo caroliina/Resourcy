@@ -1,6 +1,7 @@
 package com.resourcy.app.web.rest.mapper.mapperImpl;
 
 import com.resourcy.app.domain.CurriculumVitae;
+import com.resourcy.app.domain.Position;
 import com.resourcy.app.domain.WorkAssignment;
 import com.resourcy.app.domain.WorkExperience;
 import com.resourcy.app.web.rest.dto.WorkAssignmentDTO;
@@ -33,7 +34,7 @@ public class WorkExperienceMapperImpl implements WorkExperienceMapper {
         workExperienceDTO.setCreatedBy( workExperience.getCreatedBy() );
         workExperienceDTO.setLastModifiedBy( workExperience.getLastModifiedBy() );
         workExperienceDTO.setId( workExperience.getId() );
-        workExperienceDTO.setPosition( workExperience.getPosition() );
+        workExperienceDTO.setPosition( workExperience.getPosition().toString() );
         workExperienceDTO.setPeriodStart( workExperience.getPeriodStart() );
         workExperienceDTO.setPeriodEnd( workExperience.getPeriodEnd() );
         workExperienceDTO.setLocation( workExperience.getLocation() );
@@ -65,7 +66,7 @@ public class WorkExperienceMapperImpl implements WorkExperienceMapper {
         workExperience.setLastModifiedBy( workExperienceDTO.getLastModifiedBy() );
         workExperience.setLastModifiedDate( workExperienceDTO.getLastModifiedDate() );
         workExperience.setId( workExperienceDTO.getId() );
-        workExperience.setPosition( workExperienceDTO.getPosition() );
+        workExperience.setPosition(stringToPosition(workExperienceDTO.getPosition()));
         workExperience.setPeriodStart( workExperienceDTO.getPeriodStart() );
         workExperience.setPeriodEnd( workExperienceDTO.getPeriodEnd() );
         workExperience.setLocation( workExperienceDTO.getLocation() );
@@ -81,6 +82,15 @@ public class WorkExperienceMapperImpl implements WorkExperienceMapper {
 
         }
         return workExperience;
+    }
+
+    private Position stringToPosition(String position) {
+        for(Position e : Position.values()) {
+            if((e.val).equals(position)) {
+                return e;
+            }
+        }
+        return null;
     }
 
     private Long workExperienceCurriculumVitaeId(WorkExperience workExperience) {

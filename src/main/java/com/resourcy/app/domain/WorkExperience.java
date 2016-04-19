@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,8 +23,10 @@ public class WorkExperience extends AbstractAuditingEntity implements Serializab
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "position")
-    private String position;
+    private Position position;
 
     @Column(name = "period_start")
     private LocalDate periodStart;
@@ -54,11 +57,11 @@ public class WorkExperience extends AbstractAuditingEntity implements Serializab
         this.id = id;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 
