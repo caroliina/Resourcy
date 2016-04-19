@@ -320,7 +320,7 @@ angular.module('resourcyApp')
             })
         };
         $scope.save_cv = function () {
-            if ($scope.cvForm.$valid) {
+
                 $scope.date = new Date($scope.persons.birthday);
                 if ($scope.date.getTimezoneOffset() * 60000 > 0) {
                     $scope.date = new Date($scope.date.getTime() + $scope.date.getTimezoneOffset() * 60000);
@@ -341,9 +341,7 @@ angular.module('resourcyApp')
 
 
                 });
-            } else {
 
-            }
         }
 
     });
