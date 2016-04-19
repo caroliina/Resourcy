@@ -2,9 +2,9 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.AdditionalStudyService;
-import com.resourcy.app.web.rest.util.HeaderUtil;
 import com.resourcy.app.web.rest.dto.AdditionalStudyDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalStudyMapper;
+import com.resourcy.app.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -124,5 +124,10 @@ public class AdditionalStudyController {
     public List<AdditionalStudyDTO> searchAdditionalStudys(@PathVariable String query) {
         log.debug("Request to search AdditionalStudys for query {}", query);
         return additionalStudyService.search(query);
+    }
+
+    @RequestMapping(value = "/addStudy", method = RequestMethod.POST)
+    public AdditionalStudyDTO addStudies(@RequestBody AdditionalStudyDTO additionalStudyDTO) {
+        return additionalStudyService.addStudy(additionalStudyDTO);
     }
 }

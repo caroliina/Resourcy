@@ -1,9 +1,7 @@
 package com.resourcy.app.service;
 
-import com.resourcy.app.domain.AdditionalSkill;
 import com.resourcy.app.web.rest.dto.AdditionalSkillDTO;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -39,4 +37,6 @@ public interface AdditionalSkillService {
      * to the query.
      */
     public List<AdditionalSkillDTO> search(String query);
+
+    AdditionalSkillDTO addSkill(AdditionalSkillDTO additionalSkillDTO);
 }

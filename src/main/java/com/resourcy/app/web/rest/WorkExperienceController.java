@@ -2,9 +2,9 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.WorkExperienceService;
-import com.resourcy.app.web.rest.util.HeaderUtil;
 import com.resourcy.app.web.rest.dto.WorkExperienceDTO;
 import com.resourcy.app.web.rest.mapper.WorkExperienceMapper;
+import com.resourcy.app.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -124,5 +124,10 @@ public class WorkExperienceController {
     public List<WorkExperienceDTO> searchWorkExperiences(@PathVariable String query) {
         log.debug("Request to search WorkExperiences for query {}", query);
         return workExperienceService.search(query);
+    }
+
+    @RequestMapping(value = "/workExperience", method = RequestMethod.POST)
+    public WorkExperienceDTO addWorkExperience(@RequestBody WorkExperienceDTO dto) {
+        return workExperienceService.addWorkExperience(dto);
     }
 }

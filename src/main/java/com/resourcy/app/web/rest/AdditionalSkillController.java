@@ -2,9 +2,9 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.AdditionalSkillService;
-import com.resourcy.app.web.rest.util.HeaderUtil;
 import com.resourcy.app.web.rest.dto.AdditionalSkillDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalSkillMapper;
+import com.resourcy.app.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -124,5 +124,10 @@ public class AdditionalSkillController {
     public List<AdditionalSkillDTO> searchAdditionalSkills(@PathVariable String query) {
         log.debug("Request to search AdditionalSkills for query {}", query);
         return additionalSkillService.search(query);
+    }
+
+    @RequestMapping(value = "/addSkill", method = RequestMethod.POST)
+    public AdditionalSkillDTO addSkills(@RequestBody AdditionalSkillDTO additionalSkillDTO) {
+        return additionalSkillService.addSkill(additionalSkillDTO);
     }
 }

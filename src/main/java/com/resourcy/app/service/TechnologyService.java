@@ -1,9 +1,7 @@
 package com.resourcy.app.service;
 
-import com.resourcy.app.domain.Technology;
 import com.resourcy.app.web.rest.dto.TechnologyDTO;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -39,4 +37,6 @@ public interface TechnologyService {
      * to the query.
      */
     public List<TechnologyDTO> search(String query);
+
+    TechnologyDTO addTechnology(TechnologyDTO dto);
 }

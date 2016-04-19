@@ -2,9 +2,9 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.TechnologyService;
-import com.resourcy.app.web.rest.util.HeaderUtil;
 import com.resourcy.app.web.rest.dto.TechnologyDTO;
 import com.resourcy.app.web.rest.mapper.TechnologyMapper;
+import com.resourcy.app.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -124,5 +124,10 @@ public class TechnologyController {
     public List<TechnologyDTO> searchTechnologys(@PathVariable String query) {
         log.debug("Request to search Technologys for query {}", query);
         return technologyService.search(query);
+    }
+
+    @RequestMapping(value = "/tech", method = RequestMethod.POST)
+    public TechnologyDTO addTechnologies(@RequestBody TechnologyDTO dto) {
+        return technologyService.addTechnology(dto);
     }
 }

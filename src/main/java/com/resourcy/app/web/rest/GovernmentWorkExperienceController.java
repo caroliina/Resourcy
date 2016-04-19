@@ -2,9 +2,9 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.GovernmentWorkExperienceService;
-import com.resourcy.app.web.rest.util.HeaderUtil;
 import com.resourcy.app.web.rest.dto.GovernmentWorkExperienceDTO;
 import com.resourcy.app.web.rest.mapper.GovernmentWorkExperienceMapper;
+import com.resourcy.app.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -124,5 +124,10 @@ public class GovernmentWorkExperienceController {
     public List<GovernmentWorkExperienceDTO> searchGovernmentWorkExperiences(@PathVariable String query) {
         log.debug("Request to search GovernmentWorkExperiences for query {}", query);
         return governmentWorkExperienceService.search(query);
+    }
+
+    @RequestMapping(value = "/govWorkExperience", method = RequestMethod.POST)
+    public GovernmentWorkExperienceDTO addGovernmentWorkExperience(@RequestBody GovernmentWorkExperienceDTO dto) {
+        return governmentWorkExperienceService.addGovernmentWorkExperience(dto);
     }
 }

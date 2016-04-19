@@ -2,9 +2,9 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.GovernmentProjectService;
-import com.resourcy.app.web.rest.util.HeaderUtil;
 import com.resourcy.app.web.rest.dto.GovernmentProjectDTO;
 import com.resourcy.app.web.rest.mapper.GovernmentProjectMapper;
+import com.resourcy.app.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -128,5 +128,10 @@ public class GovernmentProjectController {
     public List<GovernmentProjectDTO> searchGovernmentProjects(@PathVariable String query) {
         log.debug("Request to search GovernmentProjects for query {}", query);
         return governmentProjectService.search(query);
+    }
+
+    @RequestMapping(value = "/govProject", method = RequestMethod.POST)
+    public GovernmentProjectDTO addGovernmentProject(@RequestBody GovernmentProjectDTO dto) {
+        return governmentProjectService.addGovernmentProject(dto);
     }
 }

@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class EmployeeController {
     /**
      * POST  /employees -> Create a new employee.
      */
-    @RequestMapping(value = "/employees",
+/*    @RequestMapping(value = "/employees",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -57,16 +56,16 @@ public class EmployeeController {
         return ResponseEntity.created(new URI("/api/employees/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("employee", result.getId().toString()))
             .body(result);
-    }
+    }*/
 
     /**
      * PUT  /employees -> Updates an existing employee.
      */
-    @RequestMapping(value = "/employees",
+/*    @RequestMapping(value = "/employees",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<EmployeeDTO> updateEmployee(@RequestBody EmployeeDTO employeeDTO) throws URISyntaxException {
+    @Timed*/
+/*    public ResponseEntity<EmployeeDTO> updateEmployee(@RequestBody EmployeeDTO employeeDTO) throws URISyntaxException {
         log.debug("REST request to update Employee : {}", employeeDTO);
         if (employeeDTO.getId() == null) {
             return createEmployee(employeeDTO);
@@ -75,7 +74,7 @@ public class EmployeeController {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("employee", employeeDTO.getId().toString()))
             .body(result);
-    }
+    }*/
 
     /**
      * GET  /employees -> get all the employees.
@@ -141,5 +140,10 @@ public class EmployeeController {
     @RequestMapping(value = "/currentEmployee", method = RequestMethod.GET)
     public EmployeeDTO getCurrentEmployee() {
         return employeeService.getCurrentEmployee();
+    }
+
+    @RequestMapping(value = "/employee", method = RequestMethod.POST)
+    public EmployeeDTO saveEmployee (@RequestBody EmployeeDTO employeeDTO) throws Exception {
+        return employeeService.saveEmployee(employeeDTO);
     }
 }

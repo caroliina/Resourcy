@@ -2,9 +2,9 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.LanguageSkillService;
-import com.resourcy.app.web.rest.util.HeaderUtil;
 import com.resourcy.app.web.rest.dto.LanguageSkillDTO;
 import com.resourcy.app.web.rest.mapper.LanguageSkillMapper;
+import com.resourcy.app.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -124,5 +124,10 @@ public class LanguageSkillController {
     public List<LanguageSkillDTO> searchLanguageSkills(@PathVariable String query) {
         log.debug("Request to search LanguageSkills for query {}", query);
         return languageSkillService.search(query);
+    }
+
+    @RequestMapping(value = "/addLanguage", method = RequestMethod.POST)
+    public LanguageSkillDTO addLanguages(@RequestBody LanguageSkillDTO languageSkillDTO) {
+        return languageSkillService.addLanguage(languageSkillDTO);
     }
 }

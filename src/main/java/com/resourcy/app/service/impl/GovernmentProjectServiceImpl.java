@@ -1,24 +1,24 @@
 package com.resourcy.app.service.impl;
 
-import com.resourcy.app.service.GovernmentProjectService;
 import com.resourcy.app.domain.GovernmentProject;
 import com.resourcy.app.repository.GovernmentProjectRepository;
+import com.resourcy.app.repository.GovernmentWorkExperienceRepository;
 import com.resourcy.app.repository.search.GovernmentProjectSearchRepository;
+import com.resourcy.app.service.GovernmentProjectService;
 import com.resourcy.app.web.rest.dto.GovernmentProjectDTO;
 import com.resourcy.app.web.rest.mapper.GovernmentProjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing GovernmentProject.
@@ -37,6 +37,9 @@ public class GovernmentProjectServiceImpl implements GovernmentProjectService{
     
     @Inject
     private GovernmentProjectSearchRepository governmentProjectSearchRepository;
+
+    @Inject
+    private GovernmentWorkExperienceRepository govWorkExperienceRepository;
     
     /**
      * Save a governmentProject.
@@ -112,5 +115,12 @@ public class GovernmentProjectServiceImpl implements GovernmentProjectService{
             .stream(governmentProjectSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(governmentProjectMapper::governmentProjectToGovernmentProjectDTO)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public GovernmentProjectDTO addGovernmentProject(GovernmentProjectDTO dto) {
+        GovernmentProject govProject = governmentProjectMapper.governmentProjectDTOToGovernmentProject(dto);
+        governmentProjectRepository.save(govProject);
+        return governmentProjectMapper.governmentProjectToGovernmentProjectDTO(govProject);
     }
 }

@@ -2,9 +2,9 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.WorkAssignmentService;
-import com.resourcy.app.web.rest.util.HeaderUtil;
 import com.resourcy.app.web.rest.dto.WorkAssignmentDTO;
 import com.resourcy.app.web.rest.mapper.WorkAssignmentMapper;
+import com.resourcy.app.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -124,5 +124,10 @@ public class WorkAssignmentController {
     public List<WorkAssignmentDTO> searchWorkAssignments(@PathVariable String query) {
         log.debug("Request to search WorkAssignments for query {}", query);
         return workAssignmentService.search(query);
+    }
+
+    @RequestMapping(value = "/workAssignment", method = RequestMethod.POST)
+    public WorkAssignmentDTO addWorkAssignment(@RequestBody WorkAssignmentDTO dto) {
+        return workAssignmentService.addWorkAssignment(dto);
     }
 }

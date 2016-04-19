@@ -31,7 +31,9 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
 
         GovernmentWorkExperienceDTO governmentWorkExperienceDTO = new GovernmentWorkExperienceDTO();
 
-        governmentWorkExperienceDTO.setGovernmentProject(governmentProjectMapper.governmentProjectToGovernmentProjectDTO(governmentWorkExperience.getGovernmentProject()));
+        if(governmentWorkExperience.getGovernmentProject() != null ){
+            governmentWorkExperienceDTO.setGovernmentProject(governmentProjectMapper.governmentProjectToGovernmentProjectDTO(governmentWorkExperience.getGovernmentProject()));
+        }
 
         governmentWorkExperienceDTO.setCurriculumVitaeId( governmentWorkExperienceCurriculumVitaeId( governmentWorkExperience ) );
         governmentWorkExperienceDTO.setCreatedDate( governmentWorkExperience.getCreatedDate() );
@@ -43,7 +45,6 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
         governmentWorkExperienceDTO.setPeriodEnd( governmentWorkExperience.getPeriodEnd() );
         governmentWorkExperienceDTO.setPersonalWorkHours( governmentWorkExperience.getPersonalWorkHours() );
         governmentWorkExperienceDTO.setPosition( governmentWorkExperience.getPosition() );
-
 
         if(governmentWorkExperience.getWorkAssignments()!=null){
 
@@ -65,7 +66,9 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
 
         GovernmentWorkExperience governmentWorkExperience = new GovernmentWorkExperience();
 
-        governmentWorkExperience.setGovernmentProject(governmentProjectFromId(governmentWorkExperienceDTO.getGovernmentProject().getId()));
+        if (governmentWorkExperienceDTO.getGovernmentProject() != null) {
+            governmentWorkExperience.setGovernmentProject(governmentProjectFromId(governmentWorkExperienceDTO.getGovernmentProject().getId()));
+        }
         governmentWorkExperience.setCurriculumVitae( curriculumVitaeFromId( governmentWorkExperienceDTO.getCurriculumVitaeId() ) );
         governmentWorkExperience.setCreatedBy( governmentWorkExperienceDTO.getCreatedBy() );
         governmentWorkExperience.setCreatedDate( governmentWorkExperienceDTO.getCreatedDate() );

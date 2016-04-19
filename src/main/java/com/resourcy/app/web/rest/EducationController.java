@@ -1,10 +1,11 @@
 package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.resourcy.app.repository.EducationRepository;
 import com.resourcy.app.service.EducationService;
-import com.resourcy.app.web.rest.util.HeaderUtil;
 import com.resourcy.app.web.rest.dto.EducationDTO;
 import com.resourcy.app.web.rest.mapper.EducationMapper;
+import com.resourcy.app.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,9 @@ public class EducationController {
     
     @Inject
     private EducationMapper educationMapper;
+
+    @Inject
+    private EducationRepository educationRepository;
     
     /**
      * POST  /educations -> Create a new education.
@@ -124,5 +128,10 @@ public class EducationController {
     public List<EducationDTO> searchEducations(@PathVariable String query) {
         log.debug("Request to search Educations for query {}", query);
         return educationService.search(query);
+    }
+
+    @RequestMapping(value = "/educations", method = RequestMethod.POST)
+    public EducationDTO addEducation(@RequestBody EducationDTO educationDTO) {
+        return educationService.addEducation(educationDTO);
     }
 }

@@ -1,9 +1,7 @@
 package com.resourcy.app.service;
 
-import com.resourcy.app.domain.AdditionalStudy;
 import com.resourcy.app.web.rest.dto.AdditionalStudyDTO;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -39,4 +37,6 @@ public interface AdditionalStudyService {
      * to the query.
      */
     public List<AdditionalStudyDTO> search(String query);
+
+    AdditionalStudyDTO addStudy(AdditionalStudyDTO additionalStudyDTO);
 }

@@ -1,24 +1,24 @@
 package com.resourcy.app.service.impl;
 
-import com.resourcy.app.service.TechnologyService;
 import com.resourcy.app.domain.Technology;
+import com.resourcy.app.repository.GovernmentProjectRepository;
 import com.resourcy.app.repository.TechnologyRepository;
 import com.resourcy.app.repository.search.TechnologySearchRepository;
+import com.resourcy.app.service.TechnologyService;
 import com.resourcy.app.web.rest.dto.TechnologyDTO;
 import com.resourcy.app.web.rest.mapper.TechnologyMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing Technology.
@@ -34,6 +34,9 @@ public class TechnologyServiceImpl implements TechnologyService{
     
     @Inject
     private TechnologyMapper technologyMapper;
+
+    @Inject
+    private GovernmentProjectRepository governmentProjectRepository;
     
     @Inject
     private TechnologySearchRepository technologySearchRepository;
@@ -97,5 +100,13 @@ public class TechnologyServiceImpl implements TechnologyService{
             .stream(technologySearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(technologyMapper::technologyToTechnologyDTO)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public TechnologyDTO addTechnology(TechnologyDTO dto) {
+        Technology tech = technologyMapper.technologyDTOToTechnology(dto);
+        tech.setGovernmentProject(governmentProjectRepository.findOne(dto.getGovernmentProjectId()));
+        technologyRepository.save(tech);
+        return technologyMapper.technologyToTechnologyDTO(tech);
     }
 }
