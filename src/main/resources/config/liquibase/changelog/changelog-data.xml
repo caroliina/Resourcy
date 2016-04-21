@@ -78,7 +78,7 @@
 
         <insert tableName="work_experience">
             <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
-            <column name="position" value="PROGRAMMEERIJA"/>
+            <column name="position" value="ANALYYTIK"/>
             <column name="period_start" valueDate="2015-12-01"/>
             <column name="location" value="Tartu"/>
             <column name="organization" value="AS CGI Eesti"/>
@@ -90,7 +90,7 @@
 
         <insert tableName="work_experience">
             <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
-            <column name="position" value="PROGRAMMEERIJA"/>
+            <column name="position" value="SYSANALYYTIK"/>
             <column name="period_start" value="2009-01-01"/>
             <column name="period_end" value="2015-11-30"/>
             <column name="location" value="Tallinn"/>
