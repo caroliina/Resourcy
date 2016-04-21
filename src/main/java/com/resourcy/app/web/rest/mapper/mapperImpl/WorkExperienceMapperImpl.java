@@ -34,7 +34,7 @@ public class WorkExperienceMapperImpl implements WorkExperienceMapper {
         workExperienceDTO.setCreatedBy( workExperience.getCreatedBy() );
         workExperienceDTO.setLastModifiedBy( workExperience.getLastModifiedBy() );
         workExperienceDTO.setId( workExperience.getId() );
-        workExperienceDTO.setPosition( workExperience.getPosition().toString() );
+        workExperienceDTO.setPosition(workExperience.getPosition());
         workExperienceDTO.setPeriodStart( workExperience.getPeriodStart() );
         workExperienceDTO.setPeriodEnd( workExperience.getPeriodEnd() );
         workExperienceDTO.setLocation( workExperience.getLocation() );
@@ -66,7 +66,7 @@ public class WorkExperienceMapperImpl implements WorkExperienceMapper {
         workExperience.setLastModifiedBy( workExperienceDTO.getLastModifiedBy() );
         workExperience.setLastModifiedDate( workExperienceDTO.getLastModifiedDate() );
         workExperience.setId( workExperienceDTO.getId() );
-        workExperience.setPosition(stringToPosition(workExperienceDTO.getPosition()));
+        workExperience.setPosition(workExperienceDTO.getPosition());
         workExperience.setPeriodStart( workExperienceDTO.getPeriodStart() );
         workExperience.setPeriodEnd( workExperienceDTO.getPeriodEnd() );
         workExperience.setLocation( workExperienceDTO.getLocation() );
@@ -82,15 +82,6 @@ public class WorkExperienceMapperImpl implements WorkExperienceMapper {
 
         }
         return workExperience;
-    }
-
-    private Position stringToPosition(String position) {
-        for(Position e : Position.values()) {
-            if((e.val).equals(position)) {
-                return e;
-            }
-        }
-        return null;
     }
 
     private Long workExperienceCurriculumVitaeId(WorkExperience workExperience) {

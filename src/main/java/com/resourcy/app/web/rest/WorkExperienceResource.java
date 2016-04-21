@@ -135,11 +135,7 @@ public class WorkExperienceResource {
 
     @RequestMapping(value = "/workExperiences/positions", method = RequestMethod.GET)
     @ResponseBody
-    public List<String> positions(){
-        List<String> positionNames = new ArrayList<String>();
-        for (Position p : Position.values()) {
-            positionNames.add(p.toString());
-        }
-        return positionNames;
+    public List<Position> positions(){
+        return Arrays.asList(Position.values());
     }
 }

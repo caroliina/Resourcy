@@ -36,19 +36,12 @@ public class WorkExperienceDTO extends AbstractAuditingEntityDTO implements Seri
         this.id = id;
     }
 
-    public String getPosition() {
-        return position.toString();
+    public Position getPosition() {
+        return position;
     }
 
-    public void setPosition(String position) {
-        for(Position e : Position.values()) {
-            if(e.val.equals(position)) {
-                this.position = e;
-                break;
-            } else {
-                this.position = null;
-            }
-        }
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public LocalDate getPeriodStart() {

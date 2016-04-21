@@ -1,10 +1,10 @@
 package com.resourcy.app.domain;
 
 public enum Position {
-    ANALÜÜTIK("Analüütik-konsultant"),
+    ANALYYTIK("Analüütik-konsultant"),
     DIVISJONIJUHT("Divisjonijuht"),
-    EELTÖÖTLUS("Eeltöötluse operaator"),
-    JUHTIV_ANALÜÜTIK("Juhtiv analüütik-konsultant"),
+    EELTOOTLUS("Eeltöötluse operaator"),
+    JUHTIV_ANALYYTIK("Juhtiv analüütik-konsultant"),
     JUHTIVPROJEKTEERIJA("Juhtivprojekteerija"),
     JUHTIVTESTIJA("Juhtivtestija"),
     KASUTAJATUGI("Kasutajatoe spetsialist"),
@@ -13,7 +13,7 @@ public enum Position {
     MEESKONNAJUHT("Meeskonnajuht"),
     NOOREMPROGRAMMEERIJA("Nooremprogrammeerija"),
     PROGRAMMEERIJA_PRAKTIKANT("Nooremprogrammeerija/praktikant"),
-    NOOREMSYSANALÜÜTIK("Nooremsüsteemianalüütik"),
+    NOOREMSYSANALYYTIK("Nooremsüsteemianalüütik"),
     TESTIJA_PRAKTIKANT("Nooremtestija/praktikant"),
     ORACLEDBA("OracleDBA"),
     PROGRAMMEERIJA("Programmeerija"),
@@ -21,13 +21,13 @@ public enum Position {
     PROJEKTIJUHT("Projektijuht"),
     RAKENDUSADMIN("Rakendusadministraator"),
     RELIISIJUHT("Reliisijuht"),
-    SÜSANALÜÜTIK("Süsteemianalüütik"),
+    SYSANALYYTIK("Süsteemianalüütik"),
     TARKVARAARENDAJA("Tarkvara arendaja"),
     TARKVARAARHITEKT("Tarkvaraarhitekt"),
     TESTIJA("Testija"),
     TESTIMISEJUHT("Testimise juht"),
     VANEMPROGRAMMEERIJA("Vanemprogrameerija"),
-    ÄRIKONSULTANT("Ärirakendustarkvara konsultant");
+    ARIKONSULTANT("Ärirakendustarkvara konsultant");
 
     public final String val;
 

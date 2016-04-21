@@ -43,7 +43,7 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
         governmentWorkExperienceDTO.setPeriodStart( governmentWorkExperience.getPeriodStart() );
         governmentWorkExperienceDTO.setPeriodEnd( governmentWorkExperience.getPeriodEnd() );
         governmentWorkExperienceDTO.setPersonalWorkHours( governmentWorkExperience.getPersonalWorkHours() );
-        governmentWorkExperienceDTO.setPosition( governmentWorkExperience.getPosition().toString() );
+        governmentWorkExperienceDTO.setPosition(governmentWorkExperience.getPosition());
 
 
 
@@ -77,7 +77,7 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
         governmentWorkExperience.setPeriodStart( governmentWorkExperienceDTO.getPeriodStart() );
         governmentWorkExperience.setPeriodEnd( governmentWorkExperienceDTO.getPeriodEnd() );
         governmentWorkExperience.setPersonalWorkHours( governmentWorkExperienceDTO.getPersonalWorkHours() );
-        governmentWorkExperience.setPosition(stringToPosition(governmentWorkExperienceDTO.getPosition()));
+        governmentWorkExperience.setPosition(governmentWorkExperienceDTO.getPosition());
 
         if(governmentWorkExperienceDTO.getWorkAssignments()!=null){
 
@@ -90,15 +90,6 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
 
 
         return governmentWorkExperience;
-    }
-
-    private Position stringToPosition(String position) {
-        for(Position e : Position.values()) {
-            if((e.val).equals(position)) {
-                return e;
-            }
-        }
-        return null;
     }
 
     private Long governmentWorkExperienceCurriculumVitaeId(GovernmentWorkExperience governmentWorkExperience) {
