@@ -78,7 +78,7 @@
 
         <insert tableName="work_experience">
             <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
-            <column name="position" value="Programmeerija"/>
+            <column name="position" value="ANALYYTIK"/>
             <column name="period_start" valueDate="2015-12-01"/>
             <column name="location" value="Tartu"/>
             <column name="organization" value="AS CGI Eesti"/>
@@ -90,7 +90,7 @@
 
         <insert tableName="work_experience">
             <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
-            <column name="position" value="Programmeerija"/>
+            <column name="position" value="SYSANALYYTIK"/>
             <column name="period_start" value="2009-01-01"/>
             <column name="period_end" value="2015-11-30"/>
             <column name="location" value="Tallinn"/>
@@ -103,7 +103,7 @@
 
         <insert tableName="work_experience">
             <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
-            <column name="position" value="Programmeerija"/>
+            <column name="position" value="PROGRAMMEERIJA"/>
             <column name="period_start" value="2007-01-01"/>
             <column name="period_end" value="2008-12-30"/>
             <column name="location" value="Tallinn"/>
@@ -127,7 +127,7 @@
         <insert tableName="government_work_experience">
             <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
             <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'rmit')"/>
-            <column name="position" value="programmeerija"/>
+            <column name="position" value="PROGRAMMEERIJA"/>
             <column name="period_start" valueDate="2014-03-01"/>
             <column name="period_end" valueDate="2014-09-01"/>
             <column name="personal_work_hours" value="800"/>
@@ -180,7 +180,7 @@
         <insert tableName="government_work_experience">
             <column name="curriculum_vitae_id" valueComputed="(SELECT curriculum_vitae.id FROM curriculum_vitae INNER JOIN employee ON curriculum_vitae.employee_id=employee.id WHERE lower(first_name) = 'mart')"/>
             <column name="government_project_id" valueComputed="(SELECT id FROM government_project WHERE lower(buyer) = 'cgi soome')"/>
-            <column name="position" value="programmeerija"/>
+            <column name="position" value="PROGRAMMEERIJA"/>
             <column name="period_start" valueDate="2011-04-01"/>
             <column name="period_end" valueDate="2012-05-01"/>
             <column name="personal_work_hours" value="2080"/>
