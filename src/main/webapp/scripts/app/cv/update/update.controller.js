@@ -25,9 +25,11 @@ angular.module('resourcyApp')
             $scope.persons = resp;
             $scope.personID = resp.id;
             $scope.datePickerForPerson.status = {opened: false};
+            console.log(resp)
         });
 
-        Restangular.one("api").one("curriculums").get().then(function (resp) {
+        Restangular.one("api").one("curriculums",$scope.personID).get().then(function (resp) {
+            console.log(resp);
             $scope.cv_id = resp.id;
             $scope.educations = resp.educations;
             $scope.additionalStudy = resp.additionalStudys;
@@ -206,7 +208,7 @@ angular.module('resourcyApp')
 
             }
         };
-
+        
         $scope.removeedu = function (id) {
             if ($scope.educations[id].id) {
                 Education.delete({id: $scope.educations[id].id});
@@ -330,17 +332,13 @@ angular.module('resourcyApp')
                 $scope.persons.birthday = $scope.date;
                 $http.put("api/employees/", $scope.persons).then(function (response) {
                 });
-                $q.all([
-                    $scope.saveEducation($scope.personID),
-                    $scope.saveXP($scope.personID),
-                    $scope.saveStudy($scope.personID),
-                    $scope.saveLanguage($scope.personID),
-                    $scope.saveGovXP($scope.personID),
-                    $scope.saveSkills($scope.personID)
-                ]).then(function () {
-
-
-                });
+                $scope.saveEducation($scope.personID),
+                $scope.saveXP($scope.personID),
+                $scope.saveStudy($scope.personID),
+                $scope.saveLanguage($scope.personID),
+                $scope.saveGovXP($scope.personID),
+                $scope.saveSkills($scope.personID)
+                
             } else {
 
             }

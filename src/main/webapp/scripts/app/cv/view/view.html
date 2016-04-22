@@ -1,0 +1,319 @@
+<div ng-cloak>
+    <div class="row">
+        <div class="col-md-12">
+        <div clasS="changeview">
+            <button ng-click="changeView()" ><span ng-if="!editmode">Edit</span><span ng-if="editmode">Cancel</span></button>
+        </div>
+        <form name="cvForm">
+            <table class="fullcv" cellpadding="0" cellspacing="0" width="100%">
+                <tr valign="top">
+                    <td><h1 >CV {{persons.firstName}} {{persons.lastName}} </h1></td>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        <div>1. <span translate="form.lastname"></span>:<span contenteditable="{{ editmode ? 'true' : 'false'}}" strip-br="true"
+        strip-tags="true" ng-model="persons.lastName"> </span></div>
+                        <div>2. <span translate="form.firstname"></span>:<span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="persons.firstName"> </span></div>
+                        <div>3. <span translate="form.birthday"></span>:<span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="persons.birthday"></span></div>
+                        <div ng-if="editmode">
+                            3.1. <span translate="form.idcode"></span>:<span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="persons.idCode"></span>
+                        </div>
+                        <div>4. <span translate="form.nationality"></span>:<span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="persons.nationality"> </span></div>
+                        <div>5. <span translate="form.email"></span>:<span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="persons.email"></span></div>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        <div><h3>6. <span translate="form.education"></span><div class="addbutton"  ng-if="editmode"  ng-click="addEducation()">+</div></h3></div>
+                        <table class="edication" width="100%" border="1px" >
+                            <tr valign="top">
+                                <th  style="padding: 5px 10px" width="20%" class="hidden">
+                                    <span translate="form.institution"></span>
+                                </th>
+                                <th  style="padding: 5px 10px" width="20%">
+                                    <span translate="form.institution"></span>
+                                </th>
+                                <th  style="padding: 5px 10px" width="20%">
+                                    <span translate="form.start"></span>
+                                </th>
+                                <th  style="padding: 5px 10px" width="20%">
+                                    <span translate="form.end"></span>
+                                </th>
+                                <th  style="padding: 5px 10px" width="20%">
+                                    <span translate="form.speciality"></span>
+                                </th>
+                                <th  style="padding: 5px 10px" width="20%">
+                                    <span translate="form.degree"></span>
+                                </th>
+                            </tr>
+                            
+                            <tr valign="top" ng-repeat="(key,education) in educations | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" class="hidden" ng-model="education.id"></td>
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="education.institution"></td>
+                                <td style="padding: 5px 10px"  >
+                                        
+                                    <div ng-if="editmode == false">
+                                        <span >{{education.periodStart | date:'dd.MM.yyyy'}}</span>
+                                    </div> 
+                                        <div ng-if="editmode == true">
+                                            <input type="text"  class="form-control" uib-datepicker-popup="{{format}}" ng-model="education.periodStart" is-open="eduopened[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                        
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" ng-click="eduopen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                </td>
+                               
+                                <td style="padding: 5px 10px" >
+                                    <div ng-if="editmode == true">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="education.periodEnd" is-open="educlosed[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                    
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="educlose($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                    </div> 
+                                    <div ng-if="editmode == false">
+                                        <span >{{education.periodEnd | date:"dd.MM.yyyy"}}</span>
+                                    </div> 
+                                </td>
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="education.speciality"></td>
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="education.degree"></td>
+                                <td style="padding: 5px 10px" ng-if="editmode" ng-click="removeEdu(key)">X</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        <div><h3>7. <span translate="form.xp"></span><div class="addbutton"  ng-if="editmode"  ng-click="addworkXP()">+</div></h3></div>
+                        <table class="xp" width="100%" border="1px" style="margin-bottom: 30px;" ng-repeat="(key,workxp) in workExperience | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+                            
+                            <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" class="hidden" ng-model="workxp.id"></td>
+                                
+                            <tr valign="top">
+                                <td style="padding: 5px 10px" colspan="2"><span translate="form.position"></span>: <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="workxp.position"></span></td>
+                            </tr>
+                            <tr valign="top">
+                                <td width="30%" style="padding: 5px 10px" >Ajaperiood (<span translate="form.start"></span> <span translate="form.end"></span>):</td>
+                                <td style="padding: 5px 10px" >
+                                    <span ng-if="editmode == false">
+                                        <span >{{workxp.periodStart | date:'dd.MM.yyyy'}}</span>
+                                    </span> 
+                                    <div ng-if="editmode == true">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="workxp.periodStart" is-open="workopened[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="workopen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                    </div>
+                                    - 
+                                    <span ng-if="editmode == false">
+                                        <span >{{workxp.periodEnd | date:"dd.MM.yyyy"}}</span>
+                                    </span> 
+                                    <div ng-if="editmode == true">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="workxp.periodEnd" is-open="workclosed[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="workclose($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td width="30%" style="padding: 5px 10px" ><span translate="form.organization"></span>:</td>
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="workxp.organization" ></td>
+                            </tr>
+                            <tr valign="top">
+                                <td width="30%" style="padding: 5px 10px" ><span translate="form.location"></span>:</td>
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="workxp.location" ></td>
+                            </tr>
+                            <tr valign="top">
+                                <td width="30%" style="padding: 5px 10px" ><span translate="form.maintasks"></span>:</td>
+                                <td style="padding: 5px 10px" ><span ng-repeat="(key,tasks) in workxp.workAssignments">
+                                <span  contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="tasks.description"></span>
+                                <span ng-if="!$last">, </span></span> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        <div><h3>8. Töökogemus riigihanke objektiga sarnastel objektidel, nende loetelu ja töö maht:<div class="addbutton"  ng-if="editmode"  ng-click="addGov()">+</div></h3></div>
+                        <table valign="top" class="edication" width="100%" border="1px" >
+                            <tr valign="top">
+                                <th  style="padding: 5px 10px" width="15%">
+                                    Ajaperiood
+                                </th>
+                                <th  style="padding: 5px 10px" width="20%">
+                                    Ostja
+                                </th>
+                                <th  style="padding: 5px 10px" width="15%">
+                                    Teenuse nimetus
+                                </th>
+                                <th  style="padding: 5px 10px" width="20%">
+                                    Ametikoht
+                                </th>
+                                <th  style="padding: 5px 10px" width="30%">
+                                    Muu
+                                </th>
+                            </tr>
+                            
+                            <tr valign="top" ng-repeat="(key,govxp) in govWorkExperience | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+                                <td style="padding: 5px 10px" >
+                                
+                                      
+                                    <span ng-if="editmode == false">
+                                        <span >{{govxp.periodStart | date:'dd.MM.yyyy'}}</span>
+                                    </span> 
+                                    <div ng-if="editmode == true">
+                                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="govxp.periodStart" is-open="govopened[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                     <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="govopen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                    </div>
+                                     
+
+                                    - 
+                                    <span ng-if="editmode == false">
+                                        <span >{{govxp.periodEnd | date:"dd.MM.yyyy"}}</span>
+                                    </span> 
+                                    <div ng-if="editmode == true">
+                                         <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="govxp.periodEnd" is-open="govclosed[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="govclose($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                    </div>
+                                   
+                                   
+                                </td>
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="govxp.governmentProject.buyer"></td>
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="govxp.governmentProject.serviceName"></td>
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="govxp.position"></td>
+                                <td style="padding: 5px 10px" >
+                                    <div>Tööülesanded:
+                                    <div class="addbutton"  ng-if="editmode"  ng-click="addGovAssignment(key)">+</div>
+                                        <div ng-repeat="(key,assign) in govxp.workAssignments"><span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="assign.description"></span></span>
+                                        </div>
+                                    </div><br>
+                                    <div>
+                                    <span >Isiklike töötundide maht projekti raames: <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="govxp.personalWorkHours"></span></span>
+                                    </div><br>
+                                    <div>
+                                    Projekti kogumaht: <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="govxp.governmentProject.totalProjectWorkHours"></span>
+                                    </div><br>
+                                    <div>
+                                        Kasutatud platvormid/prog keeled:  
+                                        <div class="addbutton"  ng-if="editmode"  ng-click="addGovTechs(key)">+</div>
+                                        <div ng-repeat="(key,techs) in govxp.governmentProject.technologies"><span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="techs.type"></span> - <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="techs.description"></span><span nf-if="!$last"></span>
+                                        </div>
+                                    </div>
+
+                                   
+
+                                    
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        <div><h3>9. Erialane täiendkoolitus:<div class="addbutton"  ng-if="editmode"  ng-click="addStudy()">+</div></h3></div>
+                        <table valign="top" class="edication" width="100%" border="1px" >
+                            <tr valign="top">
+                                <th  style="padding: 5px 10px" width="15%">
+                                    Ajaperiood
+                                </th>
+                                <th  style="padding: 5px 10px" width="30%">
+                                    Koolitusasutus
+                                </th>
+                                <th  style="padding: 5px 10px" width="45%">
+                                    Täiendkursuse nimetus ja kirjeldus
+                                </th>
+                                
+                            </tr>
+                            
+                            <tr valign="top" ng-repeat="(key,study) in additionalStudy | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+                                <td style="padding: 5px 10px" >
+                                    <span ng-if="editmode == false">
+                                        <span >{{study.periodStart | date:'dd.MM.yyyy'}}</span>
+                                    </span> 
+                                    <div ng-if="editmode == true">
+                                       <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="study.periodStart" is-open="studyopened[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="studyopen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                    </div>
+                                   
+                                    - 
+                                    <span ng-if="editmode == false">
+                                        <span >{{study.periodEnd | date:"dd.MM.yyyy"}}</span>
+                                    </span> 
+                                    <div ng-if="editmode == true">
+                                      <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="study.periodEnd" is-open="studyclosed[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="studyclose($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                    </div>
+                                    
+                                </td>
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="study.institution">{{study.institution}}</td>
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="study.description">{{study.description}}</td>
+                               
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        <div><h3>10. Keelteoskus: Tasemed A1-C2. <div class="addbutton"  ng-if="editmode"  ng-click="addLanguage()">+</div></h3></div>
+                        <table valign="top" class="edication" width="100%" border="1px" >
+                            <tr valign="top">
+                                <th  style="padding: 5px 10px" width="15%">
+                                    Keel
+                                </th>
+                                <th  style="padding: 5px 10px" width="30%">
+                                    Kõnes
+                                </th>
+                                <th  style="padding: 5px 10px" width="45%">
+                                    Kirjas
+                                </th>
+                                
+                            </tr>
+                            
+                            <tr valign="top" ng-repeat="(key,language) in additionalLanguage | orderBy:(sorting? 'language':''):(sorting? 'true':'')">
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="language.language"></td>
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="language.speaking"></td>
+                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="language.writing"></td>
+                               
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        <div><h3>11. Muud oskused (arvutioskus):<div class="addbutton"  ng-if="editmode"  ng-click="addSkills()">+</div></h3></div>
+                            <ul >
+                                <div ng-if="sorting">
+                                  <li ng-repeat="(type, skills) in additionalSkill |  ownerGrouping">
+                                    {{ type }}: <span ng-repeat="skill in skills">{{ skill.description }}<span ng-if="!$last">, </span></span> 
+                                  </li>
+                                </div>
+                                <div ng-if="editmode">
+                                  <li ng-repeat="(key, skills) in additionalSkill">
+                                    <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="skills.type"></span> : <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="skills.description"></span> -- kogemust : <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="skills.experience"></span> aasta(t) 
+                                  </li>
+                                </div>
+                            </ul>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="savebutton"  ng-if="editmode"  ng-click="saveCV()">Salvesta</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        </div>
+    </div>
+</div>

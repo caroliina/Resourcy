@@ -3,16 +3,16 @@
 angular.module('resourcyApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('insert', {
-                parent: 'cv',
-                url: '/insert',
+            .state('view', {
+                parent: 'site',
+                url: '/view',
                 data: {
-                    authorities: ['ROLE_ADMIN']
+                    authorities: ['ROLE_USER','ROLE_ADMIN']
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/cv/insert/insert.html',
-                        controller: 'InsertController'
+                        templateUrl: 'scripts/app/cv/view/view.html',
+                        controller: 'ViewController'
                     }
                 },
                 resolve: {
@@ -21,11 +21,5 @@ angular.module('resourcyApp')
                         return $translate.refresh();
                     }]
                 }
-            }).state('insert.new', {
-                parent: 'insert',
-                url: '/new',
-                data: {
-                    authorities: ['ROLE_USER'],
-                }
-            });
+            })
     });
