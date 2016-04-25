@@ -2,6 +2,34 @@
 
 This application was generated using JHipster, you can find documentation and help at [https://jhipster.github.io](https://jhipster.github.io).
 
+This is a Spring Boot application which means that we have embedded Tomcat and there is no need for war deployment. Spring Boot dependency is included in our pom.xml and does not need to be installed separately.
+
+This project uses `JDK 1.8` and at least `Maven 3.0` is required.
+
+There are two profiles for running the application:
+* `dev` for development which focuses on ease of development and productivity
+* `prod` for production which focuses on performance and scalability
+
+The Maven profiles are used at build time: `mvn -Pprod package` will package a production application (in order to have an executable WAR file).
+
+By default, `dev` profile will be used. You can run this application in production directly using Maven: `mvn -Pprod`
+
+When running production application use `./java -jar jhipster-0.0.1-SNAPSHOT.war --spring.profiles.active=prod`
+
+There are also two additional Spring profiles used as switches and can be used with Maven as follows:
+* `mvn -Pprod "-Drun.profiles=no-liquibase"` - disables Liquibase
+* `mvn -Pprod "-Drun.profiles=no-swagger"` - disables Swagger
+
+For development H2 database is used. This means you have an in-memory databse running inside your application, and it can be accessed from [http://localhost:8080/h2-console](http://localhost:8080/h2-console) by default. For production PostgreSQL database is being used.
+
+If you add or modify a JPA entity, you will need to update your database schema. Liquibase manages the database updates and stores its configuration in the `/src/main/resources/config/liquibase/` directory.
+
+All team members used `Intellij IDEA` for development. To import this project there should be nothing more to do than just import it - Maven should be detected and the project will build automatically.
+
+Some suggestions:
+* Right-click on `src/main/webapp/bower_components` and "Mark Directory As" "Excluded"
+* You should also exclude `.tmp/`, `node_modules/` and `src/main/webapp/dist`
+
 Before you can build this project, you must install and configure the following dependencies on your machine:
 
 1. [Node.js][]: We use Node to run a development web server and build the project.
