@@ -1,26 +1,26 @@
 package com.resourcy.app.service.impl;
 
-import com.resourcy.app.service.AdditionalStudyService;
 import com.resourcy.app.domain.AdditionalStudy;
 import com.resourcy.app.repository.AdditionalStudyRepository;
+import com.resourcy.app.repository.CurriculumVitaeRepository;
 import com.resourcy.app.repository.search.AdditionalStudySearchRepository;
+import com.resourcy.app.service.AdditionalStudyService;
 import com.resourcy.app.web.rest.dto.AdditionalStudyDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalStudyMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing AdditionalStudy.
@@ -39,6 +39,9 @@ public class AdditionalStudyServiceImpl implements AdditionalStudyService{
     
     @Inject
     private AdditionalStudySearchRepository additionalStudySearchRepository;
+
+    @Inject
+    private CurriculumVitaeRepository cvRepository;
     
     /**
      * Save a additionalStudy.
@@ -102,5 +105,16 @@ public class AdditionalStudyServiceImpl implements AdditionalStudyService{
             .stream(additionalStudySearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(additionalStudyMapper::additionalStudyToAdditionalStudyDTO)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public AdditionalStudyDTO addStudy(AdditionalStudyDTO dto) {
+        AdditionalStudy study = additionalStudyMapper.additionalStudyDTOToAdditionalStudy(dto);
+        study.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
+        additionalStudyRepository.save(study);
+        if (study.getCurriculumVitae() != null) {
+            study.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
+        return additionalStudyMapper.additionalStudyToAdditionalStudyDTO(study);
     }
 }

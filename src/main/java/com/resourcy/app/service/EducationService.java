@@ -1,9 +1,7 @@
 package com.resourcy.app.service;
 
-import com.resourcy.app.domain.Education;
 import com.resourcy.app.web.rest.dto.EducationDTO;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -39,4 +37,6 @@ public interface EducationService {
      * to the query.
      */
     public List<EducationDTO> search(String query);
+
+    EducationDTO addEducation(EducationDTO educationDTO);
 }

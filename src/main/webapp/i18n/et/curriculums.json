@@ -27,7 +27,7 @@
     },
     "employee" : {
       "home": {
-        "title": "Töötajad",
+        "title": "Töötaja",
         "createLabel": "Lisa uus",
         "createOrEditLabel": "Lisa või muuda",
         "search": "Otsi"

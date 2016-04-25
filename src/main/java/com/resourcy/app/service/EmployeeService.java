@@ -42,4 +42,6 @@ public interface EmployeeService {
     public List<EmployeeDTO> search(String query);
 
     EmployeeDTO getCurrentEmployee();
+
+    EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) throws Exception;
 }

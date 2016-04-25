@@ -1,0 +1,251 @@
+{
+  "resourcyApp": {
+    "curriculumVitae": {
+      "home": {
+        "title": "Curriculum Vitaes",
+        "createLabel": "Create a new Curriculum Vitae",
+        "createOrEditLabel": "Create or edit a Curriculum Vitae",
+        "search": "Search for CurriculumVitae"
+      },
+      "created": "A new Curriculum Vitae is created with identifier {{ param }}",
+      "updated": "A Curriculum Vitae is updated with identifier {{ param }}",
+      "deleted": "A Curriculum Vitae is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Curriculum Vitae {{ id }}?"
+
+    },
+      "detail": {
+        "title": "Curriculum Vitae"
+      },
+    "languageType":"Type",
+    "employee": "Employee",
+    "education": "Education",
+    "workExperience": "Work experience",
+    "governmentWorkExperience": "Government work experience",
+    "additionalStudy": "Additional study",
+    "languageSkill": "Language skill",
+    "additionalSkill": "Additional skill"
+  },
+    "education": {
+      "home": {
+        "title": "Educations",
+        "createLabel": "Create a new education",
+        "createOrEditLabel": "Create or edit a education",
+        "search": "Search for eaducation"
+      },
+      "created": "A new education is created with identifier {{ param }}",
+      "updated": "A education is updated with identifier {{ param }}",
+      "deleted": "A education is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete education {{ id }}?"
+      },
+      "detail": {
+        "title": "Education"
+      },
+      "institution": "Institution",
+      "periodStart": "Period start",
+      "periodEnd": "Period end",
+      "speciality": "Speciality",
+      "degree": "Degree",
+      "curriculumVitae": "Curriculum Vitae"
+    },
+    "employee": {
+      "home": {
+        "title": "Employee",
+        "createLabel": "Create a new employee",
+        "createOrEditLabel": "Create or edit a employee",
+        "search": "Search for employee"
+      },
+      "created": "A new employee is created with identifier {{ param }}",
+      "updated": "A employee is updated with identifier {{ param }}",
+      "deleted": "A employee is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete employee {{ id }}?"
+      },
+      "detail": {
+        "title": "Employee"
+      },
+      "firstName": "First name",
+      "lastName": "Last name",
+      "birthday": "Birthday",
+      "nationality": "Nationality",
+      "email": "Email",
+      "idCode": "Id code",
+      "curriculumVitae": "Curriculum Vitae"
+    },
+    "additionalStudy": {
+      "home": {
+        "title": "Additional Studies",
+        "createLabel": "Create a new additional study",
+        "createOrEditLabel": "Create or edit a additional study",
+        "search": "Search for additional study"
+      },
+      "created": "A new additional study is created with identifier {{ param }}",
+      "updated": "A additional study is updated with identifier {{ param }}",
+      "deleted": "A additional study is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete additional study {{ id }}?"
+      },
+      "detail": {
+        "title": "Additional study"
+      },
+      "periodStart": "Period start",
+      "periodEnd": "Period end",
+      "institution": "Institution",
+      "description": "Description",
+      "curriculumVitae": "Curriculum Vitae"
+    },
+    "languageSkill": {
+      "home": {
+        "title": "Language skills",
+        "createLabel": "Create a new language skill",
+        "createOrEditLabel": "Create or edit a language skill",
+        "search": "Search for language skill"
+      },
+      "created": "A new language skill is created with identifier {{ param }}",
+      "updated": "A language skill is updated with identifier {{ param }}",
+      "deleted": "A language skill is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete language skill {{ id }}?"
+      },
+      "detail": {
+        "title": "LanguageSkill"
+      },
+      "language": "Language",
+      "speaking": "Speaking",
+      "writing": "Writing",
+      "curriculumVitae": "Curriculum vitae"
+    },
+    "additionalSkill": {
+      "home": {
+        "title": "Additional skills",
+        "createLabel": "Create a new additional skill",
+        "createOrEditLabel": "Create or edit a additional skill",
+        "search": "Search for additional skill"
+      },
+      "created": "A new additional skill is created with identifier {{ param }}",
+      "updated": "A additional skill is updated with identifier {{ param }}",
+      "deleted": "A additional skill is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete additional skill {{ id }}?"
+      },
+      "detail": {
+        "title": "Additional skill"
+      },
+      "type": "Type",
+      "description": "Description",
+      "experience": "Experience",
+      "curriculumVitae": "Curriculum Vitae"
+    },
+    "workAssignment": {
+      "home": {
+        "title": "Work assignments",
+        "createLabel": "Create a new work assignment",
+        "createOrEditLabel": "Create or edit a work assignment",
+        "search": "Search for work assignment"
+      },
+      "created": "A new work assignment is created with identifier {{ param }}",
+      "updated": "A work assignment is updated with identifier {{ param }}",
+      "deleted": "A work assignment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete work assignment {{ id }}?"
+      },
+      "detail": {
+        "title": "Work assignment"
+      },
+      "description": "Description",
+      "workExperience": "Work experience",
+      "governmentWorkExperience": "Government work experience"
+    },
+    "workExperience": {
+      "home": {
+        "title": "Work Experiences",
+        "createLabel": "Create a new work experience",
+        "createOrEditLabel": "Create or edit a work experience",
+        "search": "Search for work experience"
+      },
+      "created": "A new work experience is created with identifier {{ param }}",
+      "updated": "A work experience is updated with identifier {{ param }}",
+      "deleted": "A work experience is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete work experience {{ id }}?"
+      },
+      "detail": {
+        "title": "Work experience"
+      },
+      "position": "Position",
+      "periodStart": "Period start",
+      "periodEnd": "Period end",
+      "location": "Location",
+      "organization": "Organization",
+      "curriculumVitae": "Curriculum Vitae",
+      "workAssignment": "Work assignment"
+    },
+    "governmentWorkExperience": {
+      "home": {
+        "title": "Government Work Experiences",
+        "createLabel": "Create a new Government Work Experience",
+        "createOrEditLabel": "Create or edit a Government Work Experience",
+        "search": "Search for Government Work Experience"
+      },
+      "created": "A new GovernmentWorkExperience is created with identifier {{ param }}",
+      "updated": "A GovernmentWorkExperience is updated with identifier {{ param }}",
+      "deleted": "A GovernmentWorkExperience is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete GovernmentWorkExperience {{ id }}?"
+      },
+      "detail": {
+        "title": "Government Work Experience"
+      },
+      "position": "Position",
+      "periodStart": "Period Start",
+      "periodEnd": "Period End",
+      "personalWorkHours": "Personal Work Hours",
+      "curriculumVitae": "Curriculum Vitae",
+      "governmentProject": "Government Project",
+      "workAssignment": "Work Assignment"
+    },
+    "governmentProject": {
+      "home": {
+        "title": "Government projects",
+        "createLabel": "Create a new government project",
+        "createOrEditLabel": "Create or edit a government project",
+        "search": "Search for government project"
+      },
+      "created": "A new government project is created with identifier {{ param }}",
+      "updated": "A government project is updated with identifier {{ param }}",
+      "deleted": "A government project is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete government project {{ id }}?"
+      },
+      "detail": {
+        "title": "Government project"
+      },
+      "buyer": "Buyer",
+      "serviceName": "Service name",
+      "totalProjectWorkHours": "Total project work hours",
+      "governmentWorkExperience": "Government work experience",
+      "technology": "Technology"
+    },
+    "technology": {
+      "home": {
+        "title": "Technologies",
+        "createLabel": "Create a new technology",
+        "createOrEditLabel": "Create or edit a technology",
+        "search": "Search for technology"
+      },
+      "created": "A new technology is created with identifier {{ param }}",
+      "updated": "A technology is updated with identifier {{ param }}",
+      "deleted": "A technology is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete technology {{ id }}?"
+      },
+      "detail": {
+        "title": "Technology"
+      },
+      "type": "Type",
+      "description": "Description",
+      "governmentProject": "Government project"
+    }
+  }
+}

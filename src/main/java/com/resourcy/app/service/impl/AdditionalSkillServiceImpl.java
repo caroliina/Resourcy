@@ -1,26 +1,26 @@
 package com.resourcy.app.service.impl;
 
-import com.resourcy.app.service.AdditionalSkillService;
 import com.resourcy.app.domain.AdditionalSkill;
 import com.resourcy.app.repository.AdditionalSkillRepository;
+import com.resourcy.app.repository.CurriculumVitaeRepository;
 import com.resourcy.app.repository.search.AdditionalSkillSearchRepository;
+import com.resourcy.app.service.AdditionalSkillService;
 import com.resourcy.app.web.rest.dto.AdditionalSkillDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalSkillMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing AdditionalSkill.
@@ -33,6 +33,9 @@ public class AdditionalSkillServiceImpl implements AdditionalSkillService{
     
     @Inject
     private AdditionalSkillRepository additionalSkillRepository;
+
+    @Inject
+    private CurriculumVitaeRepository cvRepository;
     
     @Inject
     private AdditionalSkillMapper additionalSkillMapper;
@@ -102,5 +105,17 @@ public class AdditionalSkillServiceImpl implements AdditionalSkillService{
             .stream(additionalSkillSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(additionalSkillMapper::additionalSkillToAdditionalSkillDTO)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public AdditionalSkillDTO addSkill(AdditionalSkillDTO dto) {
+        AdditionalSkill skill = additionalSkillMapper.additionalSkillDTOToAdditionalSkill(dto);
+        skill.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
+        additionalSkillRepository.save(skill);
+        if (skill.getCurriculumVitae() != null) {
+            skill.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
+        return additionalSkillMapper.additionalSkillToAdditionalSkillDTO(skill);
+
     }
 }

@@ -1,26 +1,26 @@
 package com.resourcy.app.service.impl;
 
-import com.resourcy.app.service.WorkExperienceService;
 import com.resourcy.app.domain.WorkExperience;
+import com.resourcy.app.repository.CurriculumVitaeRepository;
 import com.resourcy.app.repository.WorkExperienceRepository;
 import com.resourcy.app.repository.search.WorkExperienceSearchRepository;
+import com.resourcy.app.service.WorkExperienceService;
 import com.resourcy.app.web.rest.dto.WorkExperienceDTO;
 import com.resourcy.app.web.rest.mapper.WorkExperienceMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing WorkExperience.
@@ -39,6 +39,9 @@ public class WorkExperienceServiceImpl implements WorkExperienceService{
     
     @Inject
     private WorkExperienceSearchRepository workExperienceSearchRepository;
+
+    @Inject
+    private CurriculumVitaeRepository cvRepository;
     
     /**
      * Save a workExperience.
@@ -102,5 +105,16 @@ public class WorkExperienceServiceImpl implements WorkExperienceService{
             .stream(workExperienceSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(workExperienceMapper::workExperienceToWorkExperienceDTO)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public WorkExperienceDTO addWorkExperience(WorkExperienceDTO dto) {
+        WorkExperience workExperience = workExperienceMapper.workExperienceDTOToWorkExperience(dto);
+        workExperience.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
+        workExperienceRepository.save(workExperience);
+        if (workExperience.getCurriculumVitae() != null) {
+            workExperience.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
+        return workExperienceMapper.workExperienceToWorkExperienceDTO(workExperience);
     }
 }

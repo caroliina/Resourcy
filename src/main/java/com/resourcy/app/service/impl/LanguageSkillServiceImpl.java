@@ -1,26 +1,26 @@
 package com.resourcy.app.service.impl;
 
-import com.resourcy.app.service.LanguageSkillService;
 import com.resourcy.app.domain.LanguageSkill;
+import com.resourcy.app.repository.CurriculumVitaeRepository;
 import com.resourcy.app.repository.LanguageSkillRepository;
 import com.resourcy.app.repository.search.LanguageSkillSearchRepository;
+import com.resourcy.app.service.LanguageSkillService;
 import com.resourcy.app.web.rest.dto.LanguageSkillDTO;
 import com.resourcy.app.web.rest.mapper.LanguageSkillMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing LanguageSkill.
@@ -39,6 +39,9 @@ public class LanguageSkillServiceImpl implements LanguageSkillService{
     
     @Inject
     private LanguageSkillSearchRepository languageSkillSearchRepository;
+
+    @Inject
+    private CurriculumVitaeRepository cvRepository;
     
     /**
      * Save a languageSkill.
@@ -102,5 +105,16 @@ public class LanguageSkillServiceImpl implements LanguageSkillService{
             .stream(languageSkillSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(languageSkillMapper::languageSkillToLanguageSkillDTO)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public LanguageSkillDTO addLanguage(LanguageSkillDTO dto) {
+        LanguageSkill language = languageSkillMapper.languageSkillDTOToLanguageSkill(dto);
+        language.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
+        languageSkillRepository.save(language);
+        if (language.getCurriculumVitae() != null) {
+            language.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
+        return languageSkillMapper.languageSkillToLanguageSkillDTO(language);
     }
 }

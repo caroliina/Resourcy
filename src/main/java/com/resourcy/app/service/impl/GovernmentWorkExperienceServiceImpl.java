@@ -1,26 +1,27 @@
 package com.resourcy.app.service.impl;
 
-import com.resourcy.app.service.GovernmentWorkExperienceService;
 import com.resourcy.app.domain.GovernmentWorkExperience;
+import com.resourcy.app.repository.CurriculumVitaeRepository;
+import com.resourcy.app.repository.GovernmentProjectRepository;
 import com.resourcy.app.repository.GovernmentWorkExperienceRepository;
 import com.resourcy.app.repository.search.GovernmentWorkExperienceSearchRepository;
+import com.resourcy.app.service.GovernmentWorkExperienceService;
 import com.resourcy.app.web.rest.dto.GovernmentWorkExperienceDTO;
 import com.resourcy.app.web.rest.mapper.GovernmentWorkExperienceMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing GovernmentWorkExperience.
@@ -40,6 +41,11 @@ public class GovernmentWorkExperienceServiceImpl implements GovernmentWorkExperi
     @Inject
     private GovernmentWorkExperienceSearchRepository governmentWorkExperienceSearchRepository;
 
+    @Inject
+    private CurriculumVitaeRepository cvRepository;
+
+    @Inject
+    private GovernmentProjectRepository govProjectRepository;
     /**
      * Save a governmentWorkExperience.
      *
@@ -105,5 +111,17 @@ public class GovernmentWorkExperienceServiceImpl implements GovernmentWorkExperi
                 .stream(governmentWorkExperienceSearchRepository.search(queryStringQuery(query)).spliterator(), false)
                 .map(governmentWorkExperienceMapper::governmentWorkExperienceToGovernmentWorkExperienceDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public GovernmentWorkExperienceDTO addGovernmentWorkExperience(GovernmentWorkExperienceDTO dto) {
+        GovernmentWorkExperience govWorkExperience = governmentWorkExperienceMapper.governmentWorkExperienceDTOToGovernmentWorkExperience(dto);
+        govWorkExperience.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
+        govWorkExperience.setGovernmentProject(govProjectRepository.findOne(dto.getGovernmentProject().getId()));
+        governmentWorkExperienceRepository.save(govWorkExperience);
+        if (govWorkExperience.getCurriculumVitae() != null) {
+            govWorkExperience.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
+        return governmentWorkExperienceMapper.governmentWorkExperienceToGovernmentWorkExperienceDTO(govWorkExperience);
     }
 }

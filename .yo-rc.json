@@ -4,7 +4,6 @@
     "packageName": "com.resourcy.app",
     "packageFolder": "com/resourcy/app",
     "authenticationType": "session",
-    "hibernateCache": "ehcache",
     "clusteredHttpSession": "no",
     "websocket": "spring-websocket",
     "databaseType": "sql",

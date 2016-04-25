@@ -1,9 +1,7 @@
 package com.resourcy.app.service;
 
-import com.resourcy.app.domain.WorkExperience;
 import com.resourcy.app.web.rest.dto.WorkExperienceDTO;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -39,4 +37,6 @@ public interface WorkExperienceService {
      * to the query.
      */
     public List<WorkExperienceDTO> search(String query);
+
+    WorkExperienceDTO addWorkExperience(WorkExperienceDTO dto);
 }
