@@ -81,14 +81,6 @@ To ensure everything worked, run:
 
 Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 
-# Testing
-
-Unit tests are run by [Karma][] and written with [Jasmine][]. They're located in `src/test/javascript` and can be run with:
-
-    grunt test
-
-
-
 # Continuous Integration
 
 To setup this project in Jenkins, use the following configuration:
