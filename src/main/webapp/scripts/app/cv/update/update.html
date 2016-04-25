@@ -1,308 +1,401 @@
 <div ng-cloak>
     <div class="row">
-        
         <form name="cvForm">
             <div class="person sections">
                 <div class="form-group">
                     <h1 translate="form.personal">Isikuandmed</h1>
-                    <input type="text" class="hidden" ng-model="persons.id" ></input>
-                    <div class="form_field" >
-                        <label translate="form.firstname">firstName:</label> 
+                    <input type="text" class="hidden" ng-model="persons.id"></input>
+                    <div class="form_field">
+                        <label translate="form.firstname">firstName:</label>
                         <input type="text" ng-model="persons.firstName" ng-required="true"/>
                     </div>
-                    <div class="form_field" >
-                        <label translate="form.lastname">lastName:</label> 
+                    <div class="form_field">
+                        <label translate="form.lastname">lastName:</label>
                         <input type="text" ng-model="persons.lastName" ng-required="true"/>
                     </div>
                     <div class="form_field">
-                        <label class="control-label" for="field_periodStart"  translate="form.birthday">Birthday</label>
-                            <input id="field_periodStart" type="text" class="form-control" uib-datepicker-popup="" ng-model="persons.birthday" is-open="datePickerForPerson.status.opened" ng-required="true"
-                            />
+                        <label class="control-label" for="field_periodStart" translate="form.birthday">Birthday</label>
+                        <input id="field_periodStart" type="text" class="form-control" uib-datepicker-popup=""
+                               ng-model="persons.birthday" is-open="datePickerForPerson.status.opened"
+                               ng-required="true"
+                        />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="datePickerForPerson($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-default" ng-click="datePickerForPerson($event)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
                             </span>
-                    
+
                     </div>
-                    <div class="form_field" >
-                        <label translate="form.nationality">nationality:</label > 
+                    <div class="form_field">
+                        <label translate="form.nationality">nationality:</label>
                         <input type="text" ng-model="persons.nationality" ng-required="true"/>
                     </div>
                     <div class="form_field">
-                        <label translate="form.email">email:</label> 
+                        <label translate="form.email">email:</label>
                         <input type="email" ng-model="persons.email" ng-required="true"/>
                     </div>
+                    <div class="form_field">
+                        <label translate="form.idcode">Isikukood:</label>
+                        <input type="text" ng-model="persons.idCode" ng-required="true"/>
+                    </div>
                 </div>
-                
-                
             </div>
             <div class="education sections">
                 <h1 translate="form.education">Haridus</h1>
                 <div ng-show="!educations.length" translate="form.noeducation">Haridus puudub</div>
                 <div class="form-group" ng-repeat="(key,education) in educations">
-                    <input type="text" class="hidden" ng-model="education.id" ></input>
+                    <input type="text" class="hidden" ng-model="education.id"></input>
                     <div class="form_field">
-                        <label translate="form.institution">Name:</label> 
+                        <label translate="form.institution">Name:</label>
                         <input type="text" ng-model="education.institution" ng-required="true"/>
                     </div>
                     <div class="form_field">
                         <label class="control-label" for="field_periodStart" translate="form.start">PeriodStart</label>
-                            <input id="field_periodStart" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="education.periodStart" is-open="datePickerForEduPeriodStart.status.opened[key]" ng-required="true"
-                            />
+                        <input id="field_periodStart" type="text" class="form-control"
+                               uib-datepicker-popup="{{dateformat}}" ng-model="education.periodStart"
+                               is-open="datePickerForEduPeriodStart.status.opened[key]" ng-required="true"
+                        />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="datePickerForEduPeriodStartOpen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-default"
+                                        ng-click="datePickerForEduPeriodStartOpen($event,key)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
                             </span>
                     </div>
                     <div class="form_field">
                         <label class="control-label" for="field_periodStart" translate="form.end">End</label>
-                            <input id="field_periodEnd" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="education.periodEnd" is-open="datePickerForEduPeriodEnd.status.opened[key]" ng-required="true"
-                            />
+                        <input id="field_periodEnd" type="text" class="form-control"
+                               uib-datepicker-popup="{{dateformat}}" ng-model="education.periodEnd"
+                               is-open="datePickerForEduPeriodEnd.status.opened[key]" ng-required="true"
+                        />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="datePickerForEduPeriodEndOpen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-default"
+                                        ng-click="datePickerForEduPeriodEndOpen($event,key)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
                             </span>
-                    
+
                     </div>
                     <div class="form_field">
-                        <label translate="form.speciality">Speciality:</label> 
+                        <label translate="form.speciality">Speciality:</label>
                         <input type="text" ng-model="education.speciality" ng-required="true"/>
                     </div>
                     <div class="form_field">
-                        <label translate="form.degree">degree:</label> 
+                        <label translate="form.degree">degree:</label>
                         <input type="text" ng-model="education.degree" ng-required="true"/>
                     </div>
                     <button class="removebutton" ng-click="removeedu(key)" translate="form.remove"></button>
-                    
+
                 </div>
                 <div class="form-group hidden">
-                    <div class="form_field"><label>Name:</label> <input type="text" ng-model="newEducation.institution" /></div>
-                    <div class="form_field"><label>Start:</label> <input type="text" ng-model="newEducation.periodStart" /></div>
-                    <div class="form_field"><label>end:</label> <input type="text" ng-model="newEducation.periodEnd" /></div>
-                    <div class="form_field"><label>Speciality:</label> <input type="text" ng-model="newEducation.speciality" /></div>
-                    <div class="form_field"><label>degree:</label> <input type="text" ng-model="newEducation.degree" /></div>
-                    <div class="intoform"><a class="addbutton" >lisa CV'sse</a></div>
+                    <div class="form_field"><label>Name:</label> <input type="text"
+                                                                        ng-model="newEducation.institution"/></div>
+                    <div class="form_field"><label>Start:</label> <input type="text"
+                                                                         ng-model="newEducation.periodStart"/></div>
+                    <div class="form_field"><label>end:</label> <input type="text" ng-model="newEducation.periodEnd"/>
+                    </div>
+                    <div class="form_field"><label>Speciality:</label> <input type="text"
+                                                                              ng-model="newEducation.speciality"/></div>
+                    <div class="form_field"><label>degree:</label> <input type="text" ng-model="newEducation.degree"/>
+                    </div>
+                    <div class="intoform"><a class="addbutton">lisa CV'sse</a></div>
                 </div>
-                
             </div>
-
             <div class="xp sections">
                 <h1 translate="form.xp">Töökogemus</h1>
                 <div ng-show="!workExperience.length" translate="form.noxp">Töökogemused puuduvad</div>
                 <div class="form-group" ng-repeat="(key,experience) in workExperience">
-                    <input type="text" class="hidden" ng-model="experience.id" ></input>
-
+                    <input type="text" class="hidden" ng-model="experience.id"></input>
                     <div class="form_field">
-                        <label translate="form.position">position:</label> 
+                        <label translate="form.position">position:</label>
                         <input type="text" ng-model="experience.position" ng-required="true"/>
                     </div>
                     <div class="form_field">
                         <label class="control-label" for="field_periodStart" translate="form.start">PeriodStart</label>
-                            <input id="field_periodStart" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="experience.periodStart" is-open="datePickerForXPPeriodStart.status.opened[key]" ng-required="true"
-                            />
+                        <input id="field_periodStart" type="text" class="form-control"
+                               uib-datepicker-popup="{{dateformat}}" ng-model="experience.periodStart"
+                               is-open="datePickerForXPPeriodStart.status.opened[key]" ng-required="true"
+                        />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="datePickerForXPPeriodStartOpen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-default"
+                                        ng-click="datePickerForXPPeriodStartOpen($event,key)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
                             </span>
-                
+
                     </div>
                     <div class="form_field">
                         <label class="control-label" for="field_periodStart" translate="form.end">End</label>
-                            <input id="field_periodEnd" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="experience.periodEnd" is-open="datePickerForXPPeriodEnd.status.opened[key]"
-                            />
+                        <input id="field_periodEnd" type="text" class="form-control"
+                               uib-datepicker-popup="{{dateformat}}" ng-model="experience.periodEnd"
+                               is-open="datePickerForXPPeriodEnd.status.opened[key]"
+                        />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="datePickerForXPPeriodEndOpen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-default"
+                                        ng-click="datePickerForXPPeriodEndOpen($event,key)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
                             </span>
-                    
-                   </div><div class="form_field"><label translate="form.location">location:</label> <input type="text" ng-model="experience.location" ng-required="true"/></div>
-                    <div class="form_field"><label translate="form.organization">organization:</label> <input type="text" ng-model="experience.organization" ng-required="true"/></div>
+
+                    </div>
+                    <div class="form_field">
+                        <label translate="form.location">location:</label>
+                        <input type="text" ng-model="experience.location" ng-required="true"/>
+                    </div>
+                    <div class="form_field">
+                        <label translate="form.organization">organization:</label>
+                        <input type="text" ng-model="experience.organization" ng-required="true"/></div>
+                    <div class="form-group" ng-repeat="(value,assignment) in experience.workAssignments">
+                        <input type="text" class="hidden" ng-model="experience.id"/>
+                        <div class="form_field">
+                            <label translate="form.description">description:</label>
+                            <textarea type="text" ng-model="assignment.description" ng-required="true"/>
+                        </div>
+                    </div>
                     <button class="removebutton" ng-click="removexp(key)" translate="form.remove"></button>
                 </div>
-
                 <div class="form-group hidden">
-                    <div class="form_field"><label>position:</label> <input type="text" ng-model="newExperience.position" /></div>
-                    <div class="form_field"><label>Start:</label> <input type="text" ng-model="newExperience.periodStart" /></div>
-                    <div class="form_field"><label>end:</label> <input type="text" ng-model="newExperience.periodEnd" /></div>
-                    <div class="form_field"><label>location:</label> <input type="text" ng-model="newExperience.location" /></div>
-                    <div class="form_field"><label>organization:</label> <input type="text" ng-model="newExperience.organization" /></div>
-                    
+                    <div class="form_field"><label>position:</label> <input type="text"
+                                                                            ng-model="newExperience.position"/></div>
+                    <div class="form_field"><label>Start:</label> <input type="text"
+                                                                         ng-model="newExperience.periodStart"/></div>
+                    <div class="form_field"><label>end:</label> <input type="text" ng-model="newExperience.periodEnd"/>
+                    </div>
+                    <div class="form_field"><label>location:</label> <input type="text"
+                                                                            ng-model="newExperience.location"/></div>
+                    <div class="form_field"><label>organization:</label> <input type="text"
+                                                                                ng-model="newExperience.organization"/>
+                    </div>
+
                 </div>
             </div>
             <div class="govxp sections">
                 <h1 translate="form.goverment">Riigihanked</h1>
                 <div ng-show="!govWorkExperience.length" translate="form.nogoverment">Riigihanked puuduvad</div>
                 <div class="form-group" ng-repeat="(key,govExperience) in govWorkExperience">
-                    <input type="text" class="hidden" ng-model="govExperience.project.id" ></input>
-                    <input type="text" class="hidden" ng-model="govExperience.gov.id" ></input>
+                    <input type="text" class="hidden" ng-model="govExperience.governmentProject.id"></input>
+                    <input type="text" class="hidden" ng-model="govExperience.id"></input>
                     <div class="form_field">
-                        <label translate="form.position">position:</label> 
-                        <input type="text" ng-model="govExperience.gov.position" ng-required="true"/>
+                        <label translate="form.position">position:</label>
+                        <input type="text" ng-model="govExperience.position" ng-required="true"/>
                     </div>
                     <div class="form_field">
                         <label class="control-label" for="field_periodStart" translate="form.start">PeriodStart</label>
-                            <input id="field_periodStart" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="govExperience.gov.periodStart" is-open="datePickerForGovPeriodStart.status.opened[key]" ng-required="true"
-                            />
+                        <input id="field_periodStart" type="text" class="form-control"
+                               uib-datepicker-popup="{{dateformat}}" ng-model="govExperience.periodStart"
+                               is-open="datePickerForGovPeriodStart.status.opened[key]" ng-required="true"
+                        />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="datePickerForGovPeriodStartOpen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-default"
+                                        ng-click="datePickerForGovPeriodStartOpen($event,key)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
                             </span>
-                    
+
                     </div>
                     <div class="form_field">
                         <label class="control-label" for="field_periodStart" translate="form.end">End</label>
-                            <input id="field_periodEnd" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="govExperience.gov.periodEnd" is-open="datePickerForGovPeriodEnd.status.opened[key]" ng-required="true"
-                            />
+                        <input id="field_periodEnd" type="text" class="form-control"
+                               uib-datepicker-popup="{{dateformat}}" ng-model="govExperience.periodEnd"
+                               is-open="datePickerForGovPeriodEnd.status.opened[key]" ng-required="true"
+                        />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="datePickerForGovPeriodEndOpen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-default"
+                                        ng-click="datePickerForGovPeriodEndOpen($event,key)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
                             </span>
-                    
+
                     </div>
                     <div class="form_field">
-                        <label translate="form.hours">hours:</label> 
-                        <input type="text" ng-model="govExperience.gov.personalWorkHours" ng-required="true"/>
+                        <label translate="form.hours">hours:</label>
+                        <input type="text" ng-model="govExperience.personalWorkHours" ng-required="true"/>
                     </div>
                     <div class="form_field">
-                        <label translate="form.buyer">Buyer:</label> 
-                        <input type="text" ng-model="govExperience.project.buyer"ng-required="true" />
+                        <label translate="form.buyer">Buyer:</label>
+                        <input type="text" ng-model="govExperience.governmentProject.buyer" ng-required="true"/>
                     </div>
                     <div class="form_field">
-                        <label translate="form.servicename">Service name:</label> 
-                        <input type="text" ng-model="govExperience.project.serviceName" ng-required="true"/>
+                        <label translate="form.servicename">Service name:</label>
+                        <input type="text" ng-model="govExperience.governmentProject.serviceName" ng-required="true"/>
                     </div>
                     <div class="form_field">
-                        <label translate="form.totalhours">total hours:</label> 
-                        <input type="text" ng-model="govExperience.project.totalProjectWorkHours" ng-required="true"/>
+                        <label translate="form.totalhours">total hours:</label>
+                        <input type="text" ng-model="govExperience.governmentProject.totalProjectWorkHours"
+                               ng-required="true"/>
                     </div>
-                    <div class="form-group" ng-repeat="(value,govtech) in govExperience.tech">
-                           
-                            <input type="text" class="hidden"  ng-model="govtech.governmentProjectId" />
-                            <input type="text" class="hidden"  ng-model="govtech.id" />
-                            <div class="form_field">
-                                <label translate="form.type">type:</label> 
-                                <input type="text" ng-model="govtech.type" ng-required="true"/>
-                            </div>
-                            <div class="form_field">
-                                <label translate="form.description">description:</label> 
-                                <input type="text" ng-model="govtech.description" ng-required="true"/>
-                            </div>
-                            <button class="removebutton" ng-click="removetech(value,key)" translate="form.remove"></button>
-                            
+                    <div class="form-group" ng-repeat="(value,assignment) in govExperience.workAssignments">
+                        <input type="text" class="hidden" ng-model="govExperience.id"/>
+                        <div class="form_field">
+                            <label translate="form.description">description:</label>
+                            <textarea type="text" ng-model="assignment.description" ng-required="true"/>
+                        </div>
                     </div>
-                    <div class="form-group hidden" >
+                    <div class="form-group" ng-repeat="(value,tech) in govExperience.governmentProject.technologies">
+                        <input type="text" class="hidden" ng-model="govExperience.governmentProject.id"/>
+                        <div class="form_field">
+                            <label translate="form.type">description:</label>
+                            <input type="text" ng-model="tech.type" ng-required="true"/>
+                        </div>
+                        <div class="form_field">
+                            <label translate="form.description">description:</label>
+                            <input type="text" ng-model="tech.description" ng-required="true"/>
+                        </div>
+                        <button class="removebutton" ng-click="removetech(value,key)" translate="form.remove"></button>
+                    </div>
+                    <div class="form-group hidden">
                         <div class="form_field">
                             <label>type:</label>
-                            <input type="text" ng-model="newgovTechnology.type" />
+                            <input type="text" ng-model="newgovTechnology.type"/>
                         </div>
                         <div class="form_field">
-                            <label>description:</label> 
-                            <input type="text" ng-model="newgovTechnology.description" />
+                            <label>description:</label>
+                            <input type="text" ng-model="newgovTechnology.description"/>
                         </div>
-                        
+
                     </div>
                     <div class="intoform">
-                        <a class="addbutton" ng-click="addgovpro(key)" translate="form.addtech">Lisa tehnoloogia cv'sse</a>
+                        <a class="addbutton" ng-click="addgovpro(key)" translate="form.addtech">Lisa tehnoloogia
+                            cv'sse</a>
                     </div>
                     <button class="removebutton" ng-click="removegov(key)" translate="form.remove"></button>
-                    
                 </div>
                 <div class="form-group hidden">
                     <div class="form_field">
-                        <label>position:</label> 
-                        <input type="text" ng-model="newgovExperience.gov.position" />
+                        <label>position:</label>
+                        <input type="text" ng-model="newgovExperience.position"/>
                     </div>
                     <div class="form_field">
-                        <label>Start:</label> 
-                        <input type="text" ng-model="newgovExperience.gov.periodStart" />
+                        <label>Start:</label>
+                        <input type="text" ng-model="newgovExperience.periodStart"/>
                     </div>
                     <div class="form_field">
-                        <label>end:</label> 
-                        <input type="text" ng-model="newgovExperience.gov.periodEnd" />
+                        <label>end:</label>
+                        <input type="text" ng-model="newgovExperience.periodEnd"/>
                     </div>
                     <div class="form_field">
-                        <label>hours:</label> 
-                        <input type="text" ng-model="newgovExperience.gov.personalWorkHours" />
+                        <label>hours:</label>
+                        <input type="text" ng-model="newgovExperience.personalWorkHours"/>
                     </div>
                     <div class="form_field">
-                        <label>Buyer:</label> 
-                        <input type="text" ng-model="newgovExperience.project.buyer" />
+                        <label>Buyer:</label>
+                        <input type="text" ng-model="newgovExperience.project.buyer"/>
                     </div>
                     <div class="form_field">
-                        <label>Service name:</label> 
-                        <input type="text" ng-model="newgovExperience.project.serviceName" />
+                        <label>Service name:</label>
+                        <input type="text" ng-model="newgovExperience.project.serviceName"/>
                     </div>
                     <div class="form_field">
-                        <label>total hours:</label> 
-                        <input type="text" ng-model="newgovExperience.project.totalProjectWorkHours" />
+                        <label>total hours:</label>
+                        <input type="text" ng-model="newgovExperience.project.totalProjectWorkHours"/>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="study sections">
                 <h1 translate="form.study">Koolitused</h1>
                 <div ng-show="!additionalStudy.length" translate="form.nostudy">koolitused puuduvad</div>
                 <div class="form-group" ng-repeat="(key,study) in additionalStudy">
-                    <input type="text" class="hidden" ng-model="study.id" ></input>
+                    <input type="text" class="hidden" ng-model="study.id"></input>
 
-                    <div class="form_field"><label translate="form.institution">institution:</label> <input type="text" ng-model="study.institution" ng-required="true"/></div>
-                     <div class="form_field">
+                    <div class="form_field"><label translate="form.institution">institution:</label> <input type="text"
+                                                                                                            ng-model="study.institution"
+                                                                                                            ng-required="true"/>
+                    </div>
+                    <div class="form_field">
                         <label class="control-label" for="field_periodStart" translate="form.start">PeriodStart</label>
-                            <input id="field_periodStart" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="study.periodStart" is-open="datePickerForStudyPeriodStart.status.opened[key]" ng-required="true"
-                            />
+                        <input id="field_periodStart" type="text" class="form-control"
+                               uib-datepicker-popup="{{dateformat}}" ng-model="study.periodStart"
+                               is-open="datePickerForStudyPeriodStart.status.opened[key]" ng-required="true"
+                        />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="datePickerForStudyPeriodStartOpen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-default"
+                                        ng-click="datePickerForStudyPeriodStartOpen($event,key)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
                             </span>
-                    
+
                     </div>
                     <div class="form_field">
                         <label class="control-label" for="field_periodStart" translate="form.end">End</label>
-                            <input id="field_periodEnd" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="study.periodEnd" is-open="datePickerForStudyPeriodEnd.status.opened[key]" ng-required="true"
-                            />
+                        <input id="field_periodEnd" type="text" class="form-control"
+                               uib-datepicker-popup="{{dateformat}}" ng-model="study.periodEnd"
+                               is-open="datePickerForStudyPeriodEnd.status.opened[key]" ng-required="true"
+                        />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="datePickerForStudyPeriodEndOpen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-default"
+                                        ng-click="datePickerForStudyPeriodEndOpen($event,key)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
                             </span>
-                    
-                   </div>
-                   <div class="form_field"><label translate="form.description">description:</label> <input type="text" ng-model="study.description" ng-required="true"/></div>
+
+                    </div>
+                    <div class="form_field"><label translate="form.description">description:</label> <input type="text"
+                                                                                                            ng-model="study.description"
+                                                                                                            ng-required="true"/>
+                    </div>
                     <button class="removebutton" ng-click="removestudy(key)" translate="form.remove"></button>
                 </div>
                 <div class="form-group  hidden">
-                    <div class="form_field"><label>Institition:</label> <input type="text" ng-model="newadditionalStudy.institution" /></div>
-                    <div class="form_field"><label>Start:</label> <input type="text" ng-model="newadditionalStudy.periodStart" /></div>
-                    <div class="form_field"><label>end:</label> <input type="text" ng-model="newadditionalStudy.periodEnd" /></div>
-                    <div class="form_field"><label>description:</label> <input type="text" ng-model="newadditionalStudy.description" /></div>
-                 
+                    <div class="form_field"><label>Institition:</label> <input type="text"
+                                                                               ng-model="newadditionalStudy.institution"/>
+                    </div>
+                    <div class="form_field"><label>Start:</label> <input type="text"
+                                                                         ng-model="newadditionalStudy.periodStart"/>
+                    </div>
+                    <div class="form_field"><label>end:</label> <input type="text"
+                                                                       ng-model="newadditionalStudy.periodEnd"/></div>
+                    <div class="form_field"><label>description:</label> <input type="text"
+                                                                               ng-model="newadditionalStudy.description"/>
+                    </div>
+
                 </div>
             </div>
-            <div class="study sections">
+            <div class="skill sections">
                 <h1 translate="form.skill">Skills</h1>
                 <div ng-show="!additionalSkill.length" translate="form.noskill">Skillid puuduvad</div>
                 <div class="form-group" ng-repeat="(key,skill) in additionalSkill">
-                    <input type="text" class="hidden" ng-model="skill.id" ></input>
-                    
-                    <div class="form_field"><label translate="form.type">type:</label> <input type="text" ng-model="skill.type" ng-required="true"/></div>
-                    <div class="form_field"><label translate="form.description">description:</label> <input type="text" ng-model="skill.description" ng-required="true"/></div>
+                    <input type="text" class="hidden" ng-model="skill.id"></input>
+                    <div class="form_field"><label translate="form.type">type:</label>
+                        <input type="text" ng-model="skill.type" ng-required="true"/></div>
+                    <div class="form_field"><label translate="form.description">description:</label>
+                        <input type="text" ng-model="skill.description" ng-required="true"/>
+                    </div>
                     <button class="removebutton" ng-click="removeskill(key)" translate="form.remove"></button>
-                    
                 </div>
                 <div class="form-group hidden">
-                    <div class="form_field"><label>type:</label> <input type="text" ng-model="newadditionalSkill.type" /></div>
-                    <div class="form_field"><label>description:</label> <input type="text" ng-model="newadditionalSkill.description" /></div>
-          
+                    <div class="form_field"><label>type:</label> <input type="text" ng-model="newadditionalSkill.type"/>
+                    </div>
+                    <div class="form_field"><label>description:</label> <input type="text"
+                                                                               ng-model="newadditionalSkill.description"/>
+                    </div>
+
                 </div>
             </div>
             <div class="language sections">
                 <h1 translate="form.language">Keeleoskus</h1>
                 <div ng-show="!additionalLanguage.length" translate="form.nolanguage">Keeleoskused puuduvad</div>
                 <div class="form-group" ng-repeat="(key,language) in additionalLanguage">
-                    <input type="text" class="hidden" ng-model="language.id" ></input>
-                    
-                    <div class="form_field"><label translate="form.languagename">language:</label> <input type="text" ng-model="language.language" ng-required="true"/></div>
-                    <div class="form_field"><label translate="form.speaking">speaking:</label> <input type="text" ng-model="language.speaking" ng-required="true"/></div>
-                    <div class="form_field"><label translate="form.writing">writing:</label> <input type="text" ng-model="language.writing" ng-required="true"/></div>
+                    <input type="text" class="hidden" ng-model="language.id"></input>
+
+                    <div class="form_field"><label translate="form.languagename">language:</label> <input type="text"
+                                                                                                          ng-model="language.language"
+                                                                                                          ng-required="true"/>
+                    </div>
+                    <div class="form_field"><label translate="form.speaking">speaking:</label> <input type="text"
+                                                                                                      ng-model="language.speaking"
+                                                                                                      ng-required="true"/>
+                    </div>
+                    <div class="form_field"><label translate="form.writing">writing:</label> <input type="text"
+                                                                                                    ng-model="language.writing"
+                                                                                                    ng-required="true"/>
+                    </div>
                     <button class="removebutton" ng-click="removelang(key)" translate="form.remove"></button>
-                    
+
                 </div>
                 <div class="form-group hidden">
-                    
-                    <div class="form_field"><label>language:</label> <input type="text" ng-model="newadditionallanguage.language" /></div>
-                    <div class="form_field"><label>speaking:</label> <input type="text" ng-model="newadditionallanguage.speaking" /></div>
-                    <div class="form_field"><label>writing:</label> <input type="text" ng-model="newadditionallanguage.writing" /></div>
-          
+
+                    <div class="form_field"><label>language:</label> <input type="text"
+                                                                            ng-model="newadditionallanguage.language"/>
+                    </div>
+                    <div class="form_field"><label>speaking:</label> <input type="text"
+                                                                            ng-model="newadditionallanguage.speaking"/>
+                    </div>
+                    <div class="form_field"><label>writing:</label> <input type="text"
+                                                                           ng-model="newadditionallanguage.writing"/>
+                    </div>
+
                 </div>
             </div>
             <div class="submit_cv intoform">
@@ -317,10 +410,6 @@
                 <div class="options" ng-click="addlanguage()" translate="form.addlang">Lisa keeleoskus</div>
             </div>
         </form>
-        </div>
     </div>
 </div>
-<div class="loading">
-    <span class="loadingtct">Loading</span>
-    <img src="/assets/images/loading.svg">
 </div>

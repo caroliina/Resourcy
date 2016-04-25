@@ -1,6 +1,7 @@
 package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.resourcy.app.domain.Position;
 import com.resourcy.app.service.WorkExperienceService;
 import com.resourcy.app.web.rest.dto.WorkExperienceDTO;
 import com.resourcy.app.web.rest.mapper.WorkExperienceMapper;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,13 +29,13 @@ import java.util.Optional;
 public class WorkExperienceController {
 
     private final Logger log = LoggerFactory.getLogger(WorkExperienceController.class);
-        
+
     @Inject
     private WorkExperienceService workExperienceService;
-    
+
     @Inject
     private WorkExperienceMapper workExperienceMapper;
-    
+
     /**
      * POST  /workExperiences -> Create a new workExperience.
      */
@@ -129,5 +131,11 @@ public class WorkExperienceController {
     @RequestMapping(value = "/workExperience", method = RequestMethod.POST)
     public WorkExperienceDTO addWorkExperience(@RequestBody WorkExperienceDTO dto) {
         return workExperienceService.addWorkExperience(dto);
+    }
+
+    @RequestMapping(value = "/workExperiences/positions", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Position> positions(){
+        return Arrays.asList(Position.values());
     }
 }
