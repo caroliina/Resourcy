@@ -6,6 +6,8 @@ This is a Spring Boot application which means that we have embedded Tomcat and t
 
 This project uses `JDK 1.8` and at least `Maven 3.0` is required.
 
+# Profiles
+
 There are two profiles for running the application:
 * `dev` for development which focuses on ease of development and productivity
 * `prod` for production which focuses on performance and scalability
@@ -20,15 +22,23 @@ There are also two additional Spring profiles used as switches and can be used w
 * `mvn -Pprod "-Drun.profiles=no-liquibase"` - disables Liquibase
 * `mvn -Pprod "-Drun.profiles=no-swagger"` - disables Swagger
 
+# Database
+
 For development H2 database is used. This means you have an in-memory databse running inside your application, and it can be accessed from [http://localhost:8080/h2-console](http://localhost:8080/h2-console) by default. For production PostgreSQL database is being used.
 
 If you add or modify a JPA entity, you will need to update your database schema. Liquibase manages the database updates and stores its configuration in the `/src/main/resources/config/liquibase/` directory.
 
+# Integrated development environment
+
 All team members used `Intellij IDEA` for development. To import this project there should be nothing more to do than just import it - Maven should be detected and the project will build automatically.
 
-Some suggestions:
-* Right-click on `src/main/webapp/bower_components` and "Mark Directory As" "Excluded"
-* You should also exclude `.tmp/`, `node_modules/` and `src/main/webapp/dist`
+# Suggestions
+
+1. Right-click on `src/main/webapp/bower_components` and "Mark Directory As" "Excluded"
+2. You should also exclude `.tmp/`, `node_modules/` and `src/main/webapp/dist`
+3. To access our Swagger generated interactive API documentation go to [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+# Building
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
 
