@@ -16,7 +16,9 @@ The Maven profiles are used at build time: `mvn -Pprod package` will package a p
 
 By default, `dev` profile will be used. You can run this application in production directly using Maven: `mvn -Pprod`
 
-When running production application use `./java -jar jhipster-0.0.1-SNAPSHOT.war --spring.profiles.active=prod`
+When running production application use:
+    
+    ./java -jar jhipster-0.0.1-SNAPSHOT.war --spring.profiles.active=prod
 
 There are also two additional Spring profiles used as switches and can be used with Maven as follows:
 * `mvn -Pprod "-Drun.profiles=no-liquibase"` - disables Liquibase
