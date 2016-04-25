@@ -1,9 +1,7 @@
 package com.resourcy.app.service;
 
-import com.resourcy.app.domain.LanguageSkill;
 import com.resourcy.app.web.rest.dto.LanguageSkillDTO;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -39,4 +37,6 @@ public interface LanguageSkillService {
      * to the query.
      */
     public List<LanguageSkillDTO> search(String query);
+
+    LanguageSkillDTO addLanguage(LanguageSkillDTO languageSkillDTO);
 }

@@ -1,9 +1,0 @@
-{
-    "activate": {
-        "title": "Aktiveerimine",
-        "messages": {
-            "success": "<strong>Kasutaja on aktiveeritud.</strong> Palun <a class=\"alert-link\" href=\"#/login\">Logi sisse</a>.",
-            "error": "<strong>Kasutaja aktiveerimine ebaõnnestus.</strong> Registreerige kasutajaks."
-        }
-    }
-}
