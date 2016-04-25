@@ -1,6 +1,7 @@
 package com.resourcy.app.web.rest;
 
 import com.resourcy.app.Application;
+import com.resourcy.app.domain.Position;
 import com.resourcy.app.domain.WorkExperience;
 import com.resourcy.app.repository.WorkExperienceRepository;
 import com.resourcy.app.service.WorkExperienceService;
@@ -46,8 +47,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class WorkExperienceControllerIntTest {
 
-    private static final String DEFAULT_POSITION = "AAAAA";
-    private static final String UPDATED_POSITION = "BBBBB";
+    private static final Position DEFAULT_POSITION = Position.TESTIJA;
+    private static final Position UPDATED_POSITION = Position.PROGRAMMEERIJA;
 
     private static final LocalDate DEFAULT_PERIOD_START = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_PERIOD_START = LocalDate.now(ZoneId.systemDefault());
