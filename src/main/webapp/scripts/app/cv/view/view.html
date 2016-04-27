@@ -11,15 +11,55 @@
                 </tr>
                 <tr valign="top">
                     <td>
-                        <div>1. <span translate="form.lastname"></span>:<span contenteditable="{{ editmode ? 'true' : 'false'}}" strip-br="true"
-        strip-tags="true" ng-model="persons.lastName"> </span></div>
-                        <div>2. <span translate="form.firstname"></span>:<span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="persons.firstName"> </span></div>
-                        <div>3. <span translate="form.birthday"></span>:<span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="persons.birthday"></span></div>
-                        <div ng-if="editmode">
-                            3.1. <span translate="form.idcode"></span>:<span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="persons.idCode"></span>
+                        <div>1. <span translate="form.lastname"></span>:
+                            <span ng-if="editmode == true">  
+                                <input type="text" ng-model="persons.lastName" >
+                            </span>
+                            <span ng-if="editmode == false">    
+                                <span contenteditable="false" ng-model="persons.lastName"  ></span>
+                            </span>
                         </div>
-                        <div>4. <span translate="form.nationality"></span>:<span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="persons.nationality"> </span></div>
-                        <div>5. <span translate="form.email"></span>:<span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="persons.email"></span></div>
+                        <div>2. <span translate="form.firstname"></span>:
+                            <span ng-if="editmode == true">  
+                                <input type="text" ng-model="persons.firstName" >
+                            </span>
+                            <span ng-if="editmode == false">    
+                                <span contenteditable="false" ng-model="persons.firstName"  ></span>
+                            </span>
+                        </div>
+                        <div>3. <span translate="form.birthday"></span>:
+                            <span ng-if="editmode == true">  
+                                <input type="text" ng-model="persons.birthday" >
+                            </span>
+                            <span ng-if="editmode == false">    
+                                <span contenteditable="false" ng-model="persons.birthday"  ></span>
+                            </span>
+                        </div>
+                        <div ng-if="editmode">
+                            3.1. <span translate="form.idcode"></span>:
+                            <span ng-if="editmode == true">  
+                                <input type="text" ng-model="persons.idCode">
+                            </span>
+                            <span ng-if="editmode == false">    
+                                <span contenteditable="false" ng-model="persons.idCode" ></span>
+                            </span>
+                        </div>
+                        <div>4. <span translate="form.nationality"></span>:
+                            <span ng-if="editmode == true">  
+                                <input type="text" ng-model="persons.nationality" >
+                            </span>
+                            <span ng-if="editmode == false">    
+                                <span contenteditable="false" ng-model="persons.nationality"  ></span>
+                            </span>
+                        </div>
+                        <div>5. <span translate="form.email"></span>:
+                            <span ng-if="editmode == true">  
+                                <input type="text"  ng-model="persons.email" >
+                            </span>
+                            <span ng-if="editmode == false">    
+                                <span contenteditable="false"  ng-model="persons.email"  ></span>
+                            </span>
+                        </div>
                     </td>
                 </tr>
                 <tr valign="top">
@@ -48,8 +88,22 @@
                             </tr>
                             
                             <tr valign="top" ng-repeat="(key,education) in educations | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" class="hidden" ng-model="education.id"></td>
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="education.institution"></td>
+                                <td style="padding: 5px 10px" class="hidden">
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" ng-model="education.id" >
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="education.id"  ></span>
+                                    </span>
+                                </td>
+                                <td style="padding: 5px 10px">
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" ng-model="education.institution">
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="education.institution"></span>
+                                    </span>
+                                </td>
                                 <td style="padding: 5px 10px"  >
                                         
                                     <div ng-if="editmode == false">
@@ -76,8 +130,22 @@
                                         <span >{{education.periodEnd | date:"dd.MM.yyyy"}}</span>
                                     </div> 
                                 </td>
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="education.speciality"></td>
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="education.degree"></td>
+                                <td style="padding: 5px 10px">
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" ng-model="education.speciality">
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="education.speciality"></span>
+                                    </span>
+                                </td>
+                                <td style="padding: 5px 10px">
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" ng-model="education.degree">
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="education.degree"></span>
+                                    </span>
+                                </td>
                                 <td style="padding: 5px 10px" ng-if="editmode" ng-click="removeEdu(key)">X</td>
                             </tr>
                         </table>
@@ -88,10 +156,20 @@
                         <div><h3>7. <span translate="form.xp"></span><div class="addbutton"  ng-if="editmode"  ng-click="addworkXP()">+</div></h3></div>
                         <table class="xp" width="100%" border="1px" style="margin-bottom: 30px;" ng-repeat="(key,workxp) in workExperience | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
                             
-                            <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" class="hidden" ng-model="workxp.id"></td>
+                            <td style="padding: 5px 10px" contenteditable="false" class="hidden" ng-model="workxp.id"></td>
                                 
                             <tr valign="top">
-                                <td style="padding: 5px 10px" colspan="2"><span translate="form.position"></span>: <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="workxp.position"></span></td>
+                                <td style="padding: 5px 10px" colspan="2"><span translate="form.position"></span>: 
+                                <span ng-if="editmode == true">  
+                                    <select ng-model="workxp.position">
+                                      <option ng-repeat="option in positions" value="{{option}}" translate="positions.{{option}}"></option>
+                                    </select>
+                                </span>
+                                <span ng-if="editmode == false">    
+                                    <span contenteditable="false" ng-model="workxp.position" translate="positions.{{workxp.position}}" ></span>
+                                </span> 
+                                </td>
+                                <td style="padding: 5px 10px" ng-if="editmode" ng-click="removeXP(key)">X</td>
                             </tr>
                             <tr valign="top">
                                 <td width="30%" style="padding: 5px 10px" >Ajaperiood (<span translate="form.start"></span> <span translate="form.end"></span>):</td>
@@ -119,20 +197,46 @@
                             </tr>
                             <tr valign="top">
                                 <td width="30%" style="padding: 5px 10px" ><span translate="form.organization"></span>:</td>
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="workxp.organization" ></td>
+                                <td style="padding: 5px 10px">
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" ng-model="workxp.organization">
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="workxp.organization" ></span>
+                                    </span> 
+
+                                </td>
                             </tr>
                             <tr valign="top">
                                 <td width="30%" style="padding: 5px 10px" ><span translate="form.location"></span>:</td>
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="workxp.location" ></td>
+                                <td style="padding: 5px 10px" >
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" ng-model="workxp.location" >
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="workxp.location"  ></span>
+                                    </span>
+                                </td>
                             </tr>
                             <tr valign="top">
-                                <td width="30%" style="padding: 5px 10px" ><span translate="form.maintasks"></span>:</td>
-                                <td style="padding: 5px 10px" ><span ng-repeat="(key,tasks) in workxp.workAssignments">
-                                <span  contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="tasks.description"></span>
+                                <td width="30%" style="padding: 5px 10px" ><span translate="form.maintasks"></span>: <div class="addbutton"  ng-if="editmode"  ng-click="addxpTasks(key)">+</div></td>
+                                <td style="padding: 5px 10px" ><span ng-repeat="(keys,tasks) in workxp.workAssignments">
+
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" class="hidden" ng-model="tasks.id" >
+                                        <input type="text"  ng-model="tasks.description" >
+                                        <span style="padding: 5px 10px" ng-if="editmode" ng-click="removeXPAssignment(key,keys)">X</span>
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false"  ng-model="tasks.description"  ></span>
+                                    </span>
                                 <span ng-if="!$last">, </span></span> </td>
                             </tr>
+
                         </table>
                     </td>
+                    
+
                 </tr>
                 <tr valign="top">
                     <td>
@@ -157,6 +261,16 @@
                             </tr>
                             
                             <tr valign="top" ng-repeat="(key,govxp) in govWorkExperience | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+                                <td style="padding: 5px 10px" class="hidden">
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" ng-model="govxp.id" >
+                                        <input type="text" ng-model="govxp.governmentProject.id" >
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="govxp.id"  ></span>
+                                        <span contenteditable="false" ng-model="govxp.governmentProject.id"  ></span>
+                                    </span>
+                                </td>
                                 <td style="padding: 5px 10px" >
                                 
                                       
@@ -184,25 +298,75 @@
                                    
                                    
                                 </td>
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="govxp.governmentProject.buyer"></td>
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="govxp.governmentProject.serviceName"></td>
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="govxp.position"></td>
+                                <td style="padding: 5px 10px" >
+                                    <!--<span ng-if="editmode == true">  
+                                        <input type="text" ng-model="govxp.governmentProject.buyer" >
+                                    </span>
+                                    <span ng-if="editmode == false">-->    
+                                        <span contenteditable="false" ng-model="govxp.governmentProject.buyer"  ></span>
+                                    <!--</span>-->
+                                </td>
+                                <td style="padding: 5px 10px" >
+                                    <!--<span ng-if="editmode == true">  
+                                        <input type="text" ng-model="govxp.governmentProject.serviceName" >
+                                    </span>
+                                    <span ng-if="editmode == false">-->    
+                                        <span contenteditable="false" ng-model="govxp.governmentProject.serviceName"  ></span>
+                                    <!--</span>-->
+                                </td>
+                                <td style="padding: 5px 10px">
+                                    <span ng-if="editmode == true">  
+                                        <select ng-model="govxp.position">
+                                          <option ng-repeat="option in positions" value="{{option}}" translate="positions.{{option}}"></option>
+                                        </select>
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="govxp.position" translate="positions.{{workxp.position}}" ></span>
+                                    </span>
+                                </td>
                                 <td style="padding: 5px 10px" >
                                     <div>Tööülesanded:
                                     <div class="addbutton"  ng-if="editmode"  ng-click="addGovAssignment(key)">+</div>
-                                        <div ng-repeat="(key,assign) in govxp.workAssignments"><span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="assign.description"></span></span>
+                                        <div ng-repeat="(keys,assign) in govxp.workAssignments">
+                                            <span ng-if="editmode == true">  
+                                                <input type="text"ng-model="assign.description">-<span style="padding: 5px 10px" ng-if="editmode" ng-click="removeGovAssignment(key,keys)">X</span>
+                                            </span>
+                                            <span ng-if="editmode == false">    
+                                                <span contenteditable="false" ng-model="assign.description"></span>
+                                            </span>
                                         </div>
                                     </div><br>
                                     <div>
-                                    <span >Isiklike töötundide maht projekti raames: <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="govxp.personalWorkHours"></span></span>
+                                    <span >Isiklike töötundide maht projekti raames: 
+                                        <span ng-if="editmode == true">  
+                                            <input type="text"  ng-model="govxp.personalWorkHours">
+                                        </span>
+                                        <span ng-if="editmode == false">    
+                                            <span contenteditable="false" ng-model="govxp.personalWorkHours"></span>
+                                        </span>
+                                    
                                     </div><br>
                                     <div>
-                                    Projekti kogumaht: <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="govxp.governmentProject.totalProjectWorkHours"></span>
+                                    Projekti kogumaht: 
+                                        <!--<span ng-if="editmode == true"> 
+                                            <input type="text" ng-model="govxp.governmentProject.totalProjectWorkHours"> 
+                                        </span>
+                                        <span ng-if="editmode == false">-->    
+                                            <span contenteditable="false" ng-model="govxp.governmentProject.totalProjectWorkHours"></span>
+                                        <!--</span>-->
+                                    
                                     </div><br>
                                     <div>
                                         Kasutatud platvormid/prog keeled:  
                                         <div class="addbutton"  ng-if="editmode"  ng-click="addGovTechs(key)">+</div>
-                                        <div ng-repeat="(key,techs) in govxp.governmentProject.technologies"><span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="techs.type"></span> - <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="techs.description"></span><span nf-if="!$last"></span>
+                                        <div ng-repeat="(keys,techs) in govxp.governmentProject.technologies">
+                                            <span ng-if="editmode == true">  
+                                                <input type="text" ng-model="techs.type"> - <input type="text" ng-model="techs.description"> ----<span style="padding: 5px 10px" ng-if="editmode" ng-click="removeGovTechs(key,keys)">X</span>
+                                            </span>
+                                            <span ng-if="editmode == false">    
+                                                <span contenteditable="false" ng-model="techs.type"></span> - <span contenteditable="false" ng-model="techs.description"></span><span nf-if="!$last"></span>
+                                            </span>
+                                           
                                         </div>
                                     </div>
 
@@ -210,6 +374,7 @@
 
                                     
                                 </td>
+                                <td style="padding: 5px 10px" ng-if="editmode" ng-click="removeGov(key)">X</td>
                             </tr>
                         </table>
                     </td>
@@ -255,9 +420,23 @@
                                     </div>
                                     
                                 </td>
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="study.institution">{{study.institution}}</td>
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="study.description">{{study.description}}</td>
-                               
+                                <td style="padding: 5px 10px" >
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" ng-model="study.institution"> 
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="study.institution"></span>
+                                    </span>
+                                </td>
+                                <td style="padding: 5px 10px" >
+                                    <span ng-if="editmode == true">  
+                                        <textarea type="text" ng-model="study.description"> </textarea>
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="study.description"></span>
+                                    </span>
+                                </td>
+                                <td style="padding: 5px 10px" ng-if="editmode" ng-click="removeStudy(key)">X</td>
                             </tr>
 
                         </table>
@@ -281,10 +460,31 @@
                             </tr>
                             
                             <tr valign="top" ng-repeat="(key,language) in additionalLanguage | orderBy:(sorting? 'language':''):(sorting? 'true':'')">
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="language.language"></td>
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="language.speaking"></td>
-                                <td style="padding: 5px 10px" contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="language.writing"></td>
-                               
+                                <td style="padding: 5px 10px" >
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" ng-model="language.language"> 
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="language.language"></span>
+                                    </span>
+                                </td>
+                                <td style="padding: 5px 10px" >
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" ng-model="language.speaking"> 
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="language.speaking"></span>
+                                    </span>
+                                </td>
+                                <td style="padding: 5px 10px" >
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" ng-model="language.writing"> 
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="language.writing"></span>
+                                    </span>
+                                </td>
+                                <td style="padding: 5px 10px" ng-if="editmode" ng-click="removeLang(key)">X</td>
                             </tr>
                         </table>
                     </td>
@@ -293,16 +493,15 @@
                     <td>
                         <div><h3>11. Muud oskused (arvutioskus):<div class="addbutton"  ng-if="editmode"  ng-click="addSkills()">+</div></h3></div>
                             <ul >
-                                <div ng-if="sorting">
-                                  <li ng-repeat="(type, skills) in additionalSkill |  ownerGrouping">
-                                    {{ type }}: <span ng-repeat="skill in skills">{{ skill.description }}<span ng-if="!$last">, </span></span> 
-                                  </li>
-                                </div>
-                                <div ng-if="editmode">
                                   <li ng-repeat="(key, skills) in additionalSkill">
-                                    <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="skills.type"></span> : <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="skills.description"></span> -- kogemust : <span contenteditable="{{ editmode ? 'true' : 'false'}}" ng-model="skills.experience"></span> aasta(t) 
+                                    <span ng-if="editmode == true">  
+                                        <input type="text" ng-model="skills.type"> - <input type="text" ng-model="skills.description"> - <input type="text" ng-model="skills.experience"> -----
+                                        <span style="padding: 5px 10px" ng-if="editmode" ng-click="removeSkill(key)">X</span>
+                                    </span>
+                                    <span ng-if="editmode == false">    
+                                        <span contenteditable="false" ng-model="skills.type"></span> : <span contenteditable="false" ng-model="skills.description"></span> -- kogemust : <span contenteditable="false" ng-model="skills.experience"></span> aasta(t) 
+                                    </span>
                                   </li>
-                                </div>
                             </ul>
                         </table>
                     </td>
@@ -314,6 +513,33 @@
                 </tr>
             </table>
         </form>
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <h3 translate="form.addNewProject"></h3>
+                <form name="position">
+                <select ng-model="getProject" required>
+                  <option ng-repeat="option in projects" value="{{option.id}}">{{option.buyer}} - {{option.serviceName}}</option>
+                  <option translate="form.newproject" value="new"></option>
+                </select>
+                <div ng-if="getProject == 'new'">
+
+                    <span translate="form.buyer"></span>
+                    <input type="text" ng-model="newPorject.buyer" required ><br>
+                    <span translate="form.servicename"></span>
+                    <input type="text" ng-model="newPorject.serviceName" required><br>
+                    <span translate="form.totalhours"></span>
+                    <input type="text" ng-model="newPorject.totalProjectWorkHours" required><br>
+                </div> 
+                <input type="submit" translate="form.add" ng-click="addProject()">
+                </form>       
+            </div>
+          </div>
+        </div>
+        <button type="button" ng-show="false" id="togglemodal" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+          Launch demo modal
+        </button>
+
         </div>
     </div>
 </div>

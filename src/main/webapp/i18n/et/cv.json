@@ -53,7 +53,11 @@
 		"addskill":"Lisa oskus",
 		"addlang":"Lisa keeleoskus",
 		"remove":"x",
-        "idcode": "Isikukood"
+        "idcode": "Isikukood",
+        "maintasks": "Peamised ülesanded",
+        "newproject": "Uus projekt",
+        "addNewProject": "Lisa projekt",
+        "add": "Lisa"
     },
     "positions" : {
         "ANALYYTIK" : "Analüütik-konsultant",

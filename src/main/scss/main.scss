@@ -357,3 +357,13 @@ a.addbutton {
     background-color: #D20909;
     color: #fff;
 }
+.addbutton {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background-color: green;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+}
