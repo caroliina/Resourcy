@@ -196,19 +196,22 @@ angular.module('resourcyApp')
             angular.element('#togglemodal').trigger('click');
         }
         $scope.addProject = function(){
-          if($scope.getProject != "new"){
+          if($scope.position.$valid){
+            if($scope.getProject != "new"){
 
-            Restangular.one('api').one('governmentProjects/'+$scope.getProject).get().then(function(response){
-              $scope.addGovXP(response);
-              angular.element('#togglemodal').trigger('click');
+              Restangular.one('api').one('governmentProjects/'+$scope.getProject).get().then(function(response){
+                $scope.addGovXP(response);
+                angular.element('#togglemodal').trigger('click');
 
-            })
-          }else{
-            $http.put("api/governmentProjects", $scope.newPorject).then(function (response) {
-              $scope.addGovXP(response.data);
-              angular.element('#togglemodal').trigger('click');
-            })
+              })
+            }else{
+              $http.put("api/governmentProjects", $scope.newPorject).then(function (response) {
+                $scope.addGovXP(response.data);
+                angular.element('#togglemodal').trigger('click');
+              })
+            }  
           }
+          
         }
         $scope.addGovXP = function(response){
             console.log(response.buyer)
