@@ -508,7 +508,8 @@ angular.module('resourcyApp')
                 $http.put("api/technologys", assign).then(function (responses) {
                 })
               })
-              $http.post("api/governmentWorkExperiences", $scope.govWorkExperience[id]).then(function (govXP) {
+              
+              $http.post("api/govWorkExperience", $scope.govWorkExperience[id]).then(function (govXP) {
                   angular.forEach($scope.govWorkExperience[id].workAssignments,function(assign,key){
                     assign['governmentWorkExperienceId'] = govXP.data.id;
                     $http.put("api/workAssignments", assign).then(function (responses) {

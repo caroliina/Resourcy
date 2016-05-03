@@ -16,7 +16,7 @@
                             <span ng-if="editmode == true && personData == false">  
                                 <input type="text" ng-model="persons.lastName" >
                             </span>
-                            <span ng-if="editmode == false || personData == true">    
+                            <span ng-if="editmode == false && personData == true">    
                                 <span contenteditable="false" ng-model="persons.lastName"  ></span>
                             </span>
                         </div>
@@ -24,7 +24,7 @@
                             <span ng-if="editmode == true && personData == false">  
                                 <input type="text" ng-model="persons.firstName" >
                             </span>
-                            <span ng-if="editmode == false || personData == true">    
+                            <span ng-if="editmode == false && personData == true">    
                                 <span contenteditable="false" ng-model="persons.firstName"  ></span>
                             </span>
                         </div>
@@ -38,7 +38,7 @@
                                         </span>
                                   
                             </span>
-                            <span ng-if="editmode == false || personData == true">    
+                            <span ng-if="editmode == false && personData == true">    
                                 <span contenteditable="false" ng-model="persons.birthday"  ></span>
                             </span>
                         </div>
@@ -47,7 +47,7 @@
                             <span ng-if="editmode == true && personData == false">  
                                 <input type="text" ng-model="persons.idCode">
                             </span>
-                            <span ng-if="editmode == false || personData == true">    
+                            <span ng-if="editmode == false && personData == true">    
                                 <span contenteditable="false" ng-model="persons.idCode" ></span>
                             </span>
                         </div>
@@ -55,19 +55,19 @@
                             <span ng-if="editmode == true && personData == false">  
                                 <input type="text" ng-model="persons.nationality" >
                             </span>
-                            <span ng-if="editmode == false || personData == true">    
+                            <span ng-if="editmode == false && personData == true">    
                                 <span contenteditable="false" ng-model="persons.nationality"  ></span>
                             </span>
                         </div>
                         <div>5. <span translate="form.email"></span>:
-                            <span ng-if="editmode == true  && personData == false">  
+                            <span ng-if="editmode == true && personData == false">  
                                 <input type="text"  ng-model="persons.email" >
                             </span>
-                            <span ng-if="editmode == false || personData == true">    
+                            <span ng-if="editmode == false && personData == true">    
                                 <span contenteditable="false"  ng-model="persons.email"  ></span>
                             </span>
                         </div>
-                        <button class="savebutton"  ng-if="editmode && personData == false"  ng-click="saveEmployee()">Salvesta</button>
+                        <button class="savebutton"  ng-if="editmode"  ng-click="saveEmployee()">Salvesta</button>
                     </td>
                 </tr>
                 <tr valign="top" ng-if="personData">
@@ -243,13 +243,13 @@
                                 </td>
                             </tr>
                             <tr valign="top">
-                                <td width="30%" style="padding: 5px 10px" ><span translate="form.maintasks"></span>: <div class="addbutton" ng-if="editmode"  ng-click="addxpTasks(key)">+</div></td>
+                                <td width="30%" style="padding: 5px 10px" ><span translate="form.maintasks"></span>: <div  class="addbutton" ng-if="editmode && workExperience[key].editmode == true"  ng-click="addxpTasks(key)">+</div></td>
                                 <td style="padding: 5px 10px" ><span ng-repeat="(keys,tasks) in workxp.workAssignments">
 
                                     <span ng-if="workExperience[key].editmode == true">  
                                         <input type="text" class="hidden" ng-model="tasks.id" >
                                         <input type="text"  ng-model="tasks.description" >
-                                        <span style="padding: 5px 10px" ng-if="workExperience[key].editmode == true" confirmed-click="removeXPAssignment(key)" ng-confirm-click="Kindel?" >Kustuta</span>
+                                        <span style="padding: 5px 10px" ng-if="workExperience[key].editmode == true" confirmed-click="removeXPAssignment(key,keys)" ng-confirm-click="Kindel?" >Kustuta</span>
                                     </span>
                                     <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">    
                                         <span contenteditable="false"  ng-model="tasks.description"  ></span>
@@ -347,7 +347,7 @@
                                 </td>
                                 <td style="padding: 5px 10px" >
                                     <div>Tööülesanded:
-                                    <div class="addbutton" ng-if="editmode"  ng-click="addGovAssignment(key)">+</div>
+                                    <div class="addbutton" ng-if="editmode && govWorkExperience[key].editmode == true"  ng-click="addGovAssignment(key)">+</div>
                                         <div ng-repeat="(keys,assign) in govxp.workAssignments">
                                             <span ng-if="govWorkExperience[key].editmode == true">  
                                                 <input type="text"ng-model="assign.description">-<span style="padding: 5px 10px" ng-if="editmode" confirmed-click="removeGovAssignment(key,keys)" ng-confirm-click="Kindel?">Kustuta</span>
@@ -379,7 +379,7 @@
                                     </div><br>
                                     <div>
                                         Kasutatud platvormid/prog keeled:  
-                                        <div class="addbutton" ng-if="editmode"  ng-click="addGovTechs(key)">+</div>
+                                        <div class="addbutton" ng-if="editmode && govWorkExperience[key].editmode == true"  ng-click="addGovTechs(key)">+</div>
                                         <div ng-repeat="(keys,techs) in govxp.governmentProject.technologies">
                                             <span ng-if="govWorkExperience[key].editmode == true">  
                                                 <input type="text" ng-model="techs.type"> - <input type="text" ng-model="techs.description"> ----<span style="padding: 5px 10px" ng-if="editmode"  confirmed-click="removeGovTechs(key,keys)" ng-confirm-click="Kindel?">Kustuta</span>
