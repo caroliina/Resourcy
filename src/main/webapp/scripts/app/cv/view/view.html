@@ -16,7 +16,7 @@
                             <span ng-if="editmode == true && personData == false">  
                                 <input type="text" ng-model="persons.lastName" >
                             </span>
-                            <span ng-if="editmode == false && personData == true">    
+                            <span ng-if="editmode == false || personData == true">    
                                 <span contenteditable="false" ng-model="persons.lastName"  ></span>
                             </span>
                         </div>
@@ -24,7 +24,7 @@
                             <span ng-if="editmode == true && personData == false">  
                                 <input type="text" ng-model="persons.firstName" >
                             </span>
-                            <span ng-if="editmode == false && personData == true">    
+                            <span ng-if="editmode == false || personData == true">    
                                 <span contenteditable="false" ng-model="persons.firstName"  ></span>
                             </span>
                         </div>
@@ -38,7 +38,7 @@
                                         </span>
                                   
                             </span>
-                            <span ng-if="editmode == false && personData == true">    
+                            <span ng-if="editmode == false || personData == true">    
                                 <span contenteditable="false" ng-model="persons.birthday"  ></span>
                             </span>
                         </div>
@@ -47,7 +47,7 @@
                             <span ng-if="editmode == true && personData == false">  
                                 <input type="text" ng-model="persons.idCode">
                             </span>
-                            <span ng-if="editmode == false && personData == true">    
+                            <span ng-if="editmode == false || personData == true">    
                                 <span contenteditable="false" ng-model="persons.idCode" ></span>
                             </span>
                         </div>
@@ -55,7 +55,7 @@
                             <span ng-if="editmode == true && personData == false">  
                                 <input type="text" ng-model="persons.nationality" >
                             </span>
-                            <span ng-if="editmode == false && personData == true">    
+                            <span ng-if="editmode == false || personData == true">    
                                 <span contenteditable="false" ng-model="persons.nationality"  ></span>
                             </span>
                         </div>
@@ -63,7 +63,7 @@
                             <span ng-if="editmode == true && personData == false">  
                                 <input type="text"  ng-model="persons.email" >
                             </span>
-                            <span ng-if="editmode == false && personData == true">    
+                            <span ng-if="editmode == false || personData == true">    
                                 <span contenteditable="false"  ng-model="persons.email"  ></span>
                             </span>
                         </div>
