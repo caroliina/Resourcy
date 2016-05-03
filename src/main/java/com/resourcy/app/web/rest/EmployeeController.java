@@ -40,12 +40,10 @@ public class EmployeeController {
     @Inject
     private EmployeeMapper employeeMapper;
 
-
     @RequestMapping(method = RequestMethod.PUT)
-    public EmployeeDTO saveSocialTaxReturnDTO(@RequestBody EmployeeDTO employeeDTO) {
+    public EmployeeDTO save(@RequestBody EmployeeDTO employeeDTO) {
         return employeeService.save(employeeDTO);
     }
-
 
     /**
      * GET  /employees -> get all the employees.
