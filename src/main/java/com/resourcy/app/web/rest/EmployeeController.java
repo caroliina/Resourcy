@@ -40,7 +40,7 @@ public class EmployeeController {
     @Inject
     private EmployeeMapper employeeMapper;
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(value = "/employee",method = RequestMethod.PUT)
     public EmployeeDTO save(@RequestBody EmployeeDTO employeeDTO) {
         return employeeService.save(employeeDTO);
     }

@@ -13,23 +13,23 @@
                     <td>
                         <input type="text" ng-if="personData" ng-model="persons.id"  class="hidden">
                         <div>1. <span translate="form.lastname"></span>:
-                            <span ng-if="editmode == true && personData == false">  
+                            <span ng-if="editmode == true || personData == false">  
                                 <input type="text" ng-model="persons.lastName" >
                             </span>
-                            <span ng-if="editmode == false || personData == true">    
+                            <span ng-if="editmode == false">    
                                 <span contenteditable="false" ng-model="persons.lastName"  ></span>
                             </span>
                         </div>
                         <div>2. <span translate="form.firstname"></span>:
-                            <span ng-if="editmode == true && personData == false">  
+                            <span ng-if="editmode == true || personData == false">  
                                 <input type="text" ng-model="persons.firstName" >
                             </span>
-                            <span ng-if="editmode == false || personData == true">    
+                            <span ng-if="editmode == false">    
                                 <span contenteditable="false" ng-model="persons.firstName"  ></span>
                             </span>
                         </div>
                         <div>3. <span translate="form.birthday"></span>:
-                            <span ng-if="editmode == true && personData == false"  class="dater">  
+                            <span ng-if="editmode == true || personData == false"  class="dater">  
                                 
                                         <input type="text"  class="" uib-datepicker-popup="{{format}}" ng-model="persons.birthday" is-open="birthdayOpen[0]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
                                     
@@ -38,32 +38,32 @@
                                         </span>
                                   
                             </span>
-                            <span ng-if="editmode == false || personData == true">    
+                            <span ng-if="editmode == false">    
                                 <span contenteditable="false" ng-model="persons.birthday"  ></span>
                             </span>
                         </div>
                         <div ng-if="editmode">
                             3.1. <span translate="form.idcode"></span>:
-                            <span ng-if="editmode == true && personData == false">  
+                            <span ng-if="editmode == true || personData == false">  
                                 <input type="text" ng-model="persons.idCode">
                             </span>
-                            <span ng-if="editmode == false || personData == true">    
+                            <span ng-if="editmode == false">    
                                 <span contenteditable="false" ng-model="persons.idCode" ></span>
                             </span>
                         </div>
                         <div>4. <span translate="form.nationality"></span>:
-                            <span ng-if="editmode == true && personData == false">  
+                            <span ng-if="editmode == true || personData == false">  
                                 <input type="text" ng-model="persons.nationality" >
                             </span>
-                            <span ng-if="editmode == false || personData == true">    
+                            <span ng-if="editmode == false">    
                                 <span contenteditable="false" ng-model="persons.nationality"  ></span>
                             </span>
                         </div>
                         <div>5. <span translate="form.email"></span>:
-                            <span ng-if="editmode == true && personData == false">  
+                            <span ng-if="editmode == true || personData == false">  
                                 <input type="text"  ng-model="persons.email" >
                             </span>
-                            <span ng-if="editmode == false || personData == true">    
+                            <span ng-if="editmode == false">    
                                 <span contenteditable="false"  ng-model="persons.email"  ></span>
                             </span>
                         </div>
@@ -298,20 +298,20 @@
                                 <td style="padding: 5px 10px" >
                                 
                                         <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
-                                            <span >{{govxp.periodStart | date:'dd.MM.yyyy'}}</span>
+                                            <span >{{govxp.periodStart | date:'yyyy-MM-dd'}}</span>
                                         </span> 
                                         <div ng-if="govWorkExperience[key].editmode == true" class="dater">
-                                        <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ui-date="{ dateFormat: 'yyyy-NN-dd' }" ng-model="govxp.periodStart" is-open="govopened[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="govxp.periodStart" is-open="govopened[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
                                           <span class="input-group-btn">
                                             <button class="btn btn-default" ng-click="govopen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
                                           </span>
                                         </div>
                                         - 
                                         <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
-                                            <span >{{govxp.periodEnd | date:"dd.MM.yyyy"}}</span>
+                                            <span >{{govxp.periodEnd | date:"yyyy-MM-dd"}}</span>
                                         </span> 
                                         <div ng-if="govWorkExperience[key].editmode == true" class="dater">
-                                        <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="govxp.periodEnd" is-open="govclosed[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                        <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd"  ui-date="{ dateFormat: 'yyyy-MM-dd' }" ng-model="govxp.periodEnd" is-open="govclosed[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
                                           <span class="input-group-btn">
                                             <button class="btn btn-default" ng-click="govclose($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
                                           </span>

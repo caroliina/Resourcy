@@ -9,7 +9,10 @@ angular.module('resourcyApp')
         $scope.persons = {};
         $scope.eduopened = [];
         $scope.birthdayOpen = [];
-
+        $scope.formatDate = function(date){
+              var dateOut = new Date(date);
+              return dateOut;
+        };
         //calendars
         $scope.birthdayopen = function($event) {
           $scope.birthdayOpen[0] = true;
@@ -484,6 +487,7 @@ angular.module('resourcyApp')
 
         $scope.saveXP = function (id) {
             $scope.workExperience[id].curriculumVitaeId = $scope.cv_id;
+            console.log($scope.workExperience[id])
             $http.put("api/workExperiences", $scope.workExperience[id]).then(function (response) {
              
               angular.forEach($scope.workExperience[id].workAssignments,function(assign,key){
@@ -502,12 +506,12 @@ angular.module('resourcyApp')
             $scope.govWorkExperience[id].curriculumVitaeId = $scope.cv_id;
             
               $scope.govWorkExperience['governmentProjectId'] = $scope.govWorkExperience[id].governmentProject.id;
-              console.log($scope.govWorkExperience[id].periodStart)
               angular.forEach($scope.govWorkExperience[id].governmentProject.technologies,function(assign,key){
                 assign['governmentProjectId'] =  $scope.govWorkExperience[id].governmentProject.id;
                 $http.put("api/technologys", assign).then(function (responses) {
                 })
               })
+              console.log($scope.govWorkExperience[id])
               
               $http.post("api/govWorkExperience", $scope.govWorkExperience[id]).then(function (govXP) {
                   angular.forEach($scope.govWorkExperience[id].workAssignments,function(assign,key){
@@ -522,8 +526,9 @@ angular.module('resourcyApp')
         
         $scope.saveEmployee = function(){
           if($scope.personData){
-            $http.post("api/employees", $scope.persons).then(function (response) {             
-              console.log(response)  
+            
+            $http.put("api/employee", $scope.persons).then(function (response) {             
+             
             });
           }else{
             Restangular.all("api").all("employee").post($scope.persons).then(function (resp) {
