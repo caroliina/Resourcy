@@ -178,22 +178,22 @@
                             <table id="workxp" valign="top" class="xp" width="100%" border="1px">
                                 <tr valign="top">
                                     <th style="padding: 5px 10px">
-                                        Ametikoht
+                                        <span translate="form.position"></span>
                                     </th>
                                     <th style="padding: 5px 10px">
-                                        Algusaeg
+                                        <span translate="form.start"></span>
                                     </th>
                                     <th style="padding: 5px 10px">
-                                        Lõpuaeg
+                                        <span translate="form.end"></span>
                                     </th>
                                     <th style="padding: 5px 10px">
-                                        Ettevõte/organisatsioon
+                                        <span translate="form.organization"></span>
                                     </th>
                                     <th style="padding: 5px 10px">
-                                        Asukoht
+                                        <span translate="form.location"></span>
                                     </th>
                                     <th style="padding: 5px 10px">
-                                        Peamised ülesanded
+                                        <span translate="form.maintasks"></span>
                                     </th>
                                 </tr>
                                 <tr valign="top"
@@ -235,19 +235,19 @@
                             <table valign="top" id="govxp" class="edication" width="100%" border="1px">
                                 <tr valign="top">
                                     <th style="padding: 5px 10px" width="20%">
-                                        Algusaeg
+                                        <span translate="form.start"></span>
                                     </th>
                                     <th style="padding: 5px 10px" width="20%">
-                                        Lõpuaeg
+                                        <span translate="form.end"></span>
                                     </th>
                                     <th style="padding: 5px 10px" width="20%">
                                         Ostja
                                     </th>
                                     <th style="padding: 5px 10px" width="15%">
-                                        Teenuse nimetus
+                                        <span translate="form.servicename"></span>
                                     </th>
                                     <th style="padding: 5px 10px" width="20%">
-                                        Ametikoht
+                                        <span translate="form.position"></span>
                                     </th>
                                     <th style="padding: 5px 10px" width="30%">
                                         Muu
@@ -355,16 +355,16 @@
                             <table id="additionaledu" valign="top" class="edication" width="100%" border="1px">
                                 <tr valign="top">
                                     <th style="padding: 5px 10px" width="15%">
-                                        Algusaeg
+                                        <span translate="form.start"></span>
                                     </th>
                                     <th style="padding: 5px 10px" width="15%">
-                                        Lõpuaeg
+                                        <span translate="form.end"></span>
                                     </th>
                                     <th style="padding: 5px 10px" width="30%">
-                                        Koolitusasutus
+                                        <span translate="form.institution"></span>
                                     </th>
                                     <th style="padding: 5px 10px" width="45%">
-                                        Täiendkursuse nimetus ja kirjeldus
+                                        <span translate="form.description"></span>
                                     </th>
 
                                 </tr>
@@ -405,13 +405,13 @@
                             <table id="languages" valign="top" class="edication" width="100%" border="1px">
                                 <tr valign="top">
                                     <th style="padding: 5px 10px" width="15%">
-                                        Keel
+                                        <span translate="form.languagename"></span>
                                     </th>
                                     <th style="padding: 5px 10px" width="30%">
-                                        Kõnes
+                                        <span translate="form.speaking"></span>
                                     </th>
                                     <th style="padding: 5px 10px" width="45%">
-                                        Kirjas
+                                        <span translate="form.writing"></span>
                                     </th>
 
                                 </tr>
@@ -445,18 +445,6 @@
                                         <span contenteditable="false" ng-model="language.writing"></span>
                                     </span>
                                     </td>
-                                    <td style="padding: 5px 10px" ng-if="editmode" confirmed-click="removeLang(key)"
-                                        ng-confirm-click="Kindel?" ng-click="">Kustuta
-                                    </td>
-                                    <td style="padding: 5px 10px" ng-if="editmode" ng-click="editLang(key)">
-                                    <span ng-if="additionalLanguage[key].editmode == true">
-                                        Save
-                                    </span>
-                                    <span
-                                        ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode">
-                                        Edit
-                                    </span>
-                                    </td>
                                 </tr>
                             </table>
                         </td>
@@ -471,10 +459,10 @@
                             <table id="additional" valign="top" class="additional" width="100%" border="1px">
                                 <tr valign="top">
                                     <th style="padding: 5px 10px">
-                                        Nimetus
+                                        <span translate="form.type"></span>
                                     </th>
                                     <th style="padding: 5px 10px">
-                                        Kirjeldus
+                                        <span translate="form.description"></span>
                                     </th>
                                     <th style="padding: 5px 10px">
                                         Kogemus aastates
