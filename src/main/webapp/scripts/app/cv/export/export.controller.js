@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('resourcyApp')
-    .controller('ExportController', function ($scope, $state, $http, Restangular, $window) {
+    .controller('ExportController', function ($scope, $state, $http, Restangular, $window, $location) {
+
 
         $scope.editmode = false;
         $scope.sorting = true;
@@ -53,7 +54,7 @@ angular.module('resourcyApp')
             var doc = new jsPDF('p', 'pt');
             var endPos;
             var res = doc.autoTableHtmlToJson(document.getElementById("personal"));
-            
+
             doc.text("Curriculum Vitae", 40, 50);
             doc.autoTable(res.columns, res.data, {startY:120});
             $.map(boxes, function(box) {
@@ -68,8 +69,7 @@ angular.module('resourcyApp')
         };
 
         $scope.loadEmployee = function () {
-
-            Restangular.one("api").one("currentEmployee").get().then(function (resp) {
+            Restangular.one("api").one("employees", $location.search().id).get().then(function (resp) {
                 $scope.persons = resp;
                 $scope.personID = resp.id;
                 $scope.loadCurriculum();
