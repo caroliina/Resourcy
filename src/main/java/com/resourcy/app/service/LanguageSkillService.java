@@ -9,34 +9,37 @@ import java.util.List;
  */
 public interface LanguageSkillService {
 
-    /**
-     * Save a languageSkill.
-     * @return the persisted entity
-     */
-    public LanguageSkillDTO save(LanguageSkillDTO languageSkillDTO);
+   /**
+    * Save a languageSkill.
+    *
+    * @return the persisted entity
+    */
+   LanguageSkillDTO save(LanguageSkillDTO languageSkillDTO);
 
-    /**
-     *  get all the languageSkills.
-     *  @return the list of entities
-     */
-    public List<LanguageSkillDTO> findAll();
+   /**
+    * get all the languageSkills.
+    *
+    * @return the list of entities
+    */
+   List<LanguageSkillDTO> findAll();
 
-    /**
-     *  get the "id" languageSkill.
-     *  @return the entity
-     */
-    public LanguageSkillDTO findOne(Long id);
+   /**
+    * get the "id" languageSkill.
+    *
+    * @return the entity
+    */
+   LanguageSkillDTO findOne(Long id);
 
-    /**
-     *  delete the "id" languageSkill.
-     */
-    public void delete(Long id);
+   /**
+    * delete the "id" languageSkill.
+    */
+   void delete(Long id);
 
-    /**
-     * search for the languageSkill corresponding
-     * to the query.
-     */
-    public List<LanguageSkillDTO> search(String query);
+   /**
+    * search for the languageSkill corresponding
+    * to the query.
+    */
+   List<LanguageSkillDTO> search(String query);
 
-    LanguageSkillDTO addLanguage(LanguageSkillDTO languageSkillDTO);
+   LanguageSkillDTO addLanguage(LanguageSkillDTO languageSkillDTO);
 }

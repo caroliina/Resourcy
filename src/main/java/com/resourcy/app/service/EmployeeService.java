@@ -12,36 +12,39 @@ import java.util.List;
  */
 public interface EmployeeService {
 
-    /**
-     * Save a employee.
-     * @return the persisted entity
-     */
-    public EmployeeDTO save(EmployeeDTO employeeDTO);
+   /**
+    * Save a employee.
+    *
+    * @return the persisted entity
+    */
+   EmployeeDTO save(EmployeeDTO employeeDTO);
 
-    /**
-     *  get all the employees.
-     *  @return the list of entities
-     */
-    public Page<Employee> findAll(Pageable pageable);
+   /**
+    * get all the employees.
+    *
+    * @return the list of entities
+    */
+   Page<Employee> findAll(Pageable pageable);
 
-    /**
-     *  get the "id" employee.
-     *  @return the entity
-     */
-    public EmployeeDTO findOne(Long id);
+   /**
+    * get the "id" employee.
+    *
+    * @return the entity
+    */
+   EmployeeDTO findOne(Long id);
 
-    /**
-     *  delete the "id" employee.
-     */
-    public void delete(Long id);
+   /**
+    * delete the "id" employee.
+    */
+   void delete(Long id);
 
-    /**
-     * search for the employee corresponding
-     * to the query.
-     */
-    public List<EmployeeDTO> search(String query);
+   /**
+    * search for the employee corresponding
+    * to the query.
+    */
+   List<EmployeeDTO> search(String query);
 
-    EmployeeDTO getCurrentEmployee();
+   EmployeeDTO getCurrentEmployee();
 
-    EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) throws Exception;
+   EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) throws Exception;
 }

@@ -9,34 +9,37 @@ import java.util.List;
  */
 public interface WorkExperienceService {
 
-    /**
-     * Save a workExperience.
-     * @return the persisted entity
-     */
-    public WorkExperienceDTO save(WorkExperienceDTO workExperienceDTO);
+   /**
+    * Save a workExperience.
+    *
+    * @return the persisted entity
+    */
+   WorkExperienceDTO save(WorkExperienceDTO workExperienceDTO);
 
-    /**
-     *  get all the workExperiences.
-     *  @return the list of entities
-     */
-    public List<WorkExperienceDTO> findAll();
+   /**
+    * get all the workExperiences.
+    *
+    * @return the list of entities
+    */
+   List<WorkExperienceDTO> findAll();
 
-    /**
-     *  get the "id" workExperience.
-     *  @return the entity
-     */
-    public WorkExperienceDTO findOne(Long id);
+   /**
+    * get the "id" workExperience.
+    *
+    * @return the entity
+    */
+   WorkExperienceDTO findOne(Long id);
 
-    /**
-     *  delete the "id" workExperience.
-     */
-    public void delete(Long id);
+   /**
+    * delete the "id" workExperience.
+    */
+   void delete(Long id);
 
-    /**
-     * search for the workExperience corresponding
-     * to the query.
-     */
-    public List<WorkExperienceDTO> search(String query);
+   /**
+    * search for the workExperience corresponding
+    * to the query.
+    */
+   List<WorkExperienceDTO> search(String query);
 
-    WorkExperienceDTO addWorkExperience(WorkExperienceDTO dto);
+   WorkExperienceDTO addWorkExperience(WorkExperienceDTO dto);
 }

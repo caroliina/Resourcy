@@ -12,34 +12,37 @@ import java.util.List;
  */
 public interface CurriculumVitaeService {
 
-    /**
-     * Save a curriculumVitae.
-     * @return the persisted entity
-     */
-    public CurriculumVitaeDTO save(CurriculumVitaeDTO curriculumVitaeDTO);
+   /**
+    * Save a curriculumVitae.
+    *
+    * @return the persisted entity
+    */
+   CurriculumVitaeDTO save(CurriculumVitaeDTO curriculumVitaeDTO);
 
-    /**
-     *  get all the curriculumVitaes.
-     *  @return the list of entities
-     */
-    public Page<CurriculumVitae> findAll(Pageable pageable);
+   /**
+    * get all the curriculumVitaes.
+    *
+    * @return the list of entities
+    */
+   Page<CurriculumVitae> findAll(Pageable pageable);
 
-    /**
-     *  get the "id" curriculumVitae.
-     *  @return the entity
-     */
-    public CurriculumVitaeDTO findOne(Long id);
+   /**
+    * get the "id" curriculumVitae.
+    *
+    * @return the entity
+    */
+   CurriculumVitaeDTO findOne(Long id);
 
-    /**
-     *  delete the "id" curriculumVitae.
-     */
-    public void delete(Long id);
+   /**
+    * delete the "id" curriculumVitae.
+    */
+   void delete(Long id);
 
-    /**
-     * search for the curriculumVitae corresponding
-     * to the query.
-     */
-    public List<CurriculumVitaeDTO> search(String query);
+   /**
+    * search for the curriculumVitae corresponding
+    * to the query.
+    */
+   List<CurriculumVitaeDTO> search(String query);
 
-    CurriculumVitaeDTO getEmployeeCvEst();
+   CurriculumVitaeDTO getEmployeeCvEst();
 }

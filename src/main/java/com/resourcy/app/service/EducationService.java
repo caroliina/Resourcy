@@ -9,34 +9,37 @@ import java.util.List;
  */
 public interface EducationService {
 
-    /**
-     * Save a education.
-     * @return the persisted entity
-     */
-    public EducationDTO save(EducationDTO educationDTO);
+   /**
+    * Save a education.
+    *
+    * @return the persisted entity
+    */
+   EducationDTO save(EducationDTO educationDTO);
 
-    /**
-     *  get all the educations.
-     *  @return the list of entities
-     */
-    public List<EducationDTO> findAll();
+   /**
+    * get all the educations.
+    *
+    * @return the list of entities
+    */
+   List<EducationDTO> findAll();
 
-    /**
-     *  get the "id" education.
-     *  @return the entity
-     */
-    public EducationDTO findOne(Long id);
+   /**
+    * get the "id" education.
+    *
+    * @return the entity
+    */
+   EducationDTO findOne(Long id);
 
-    /**
-     *  delete the "id" education.
-     */
-    public void delete(Long id);
+   /**
+    * delete the "id" education.
+    */
+   void delete(Long id);
 
-    /**
-     * search for the education corresponding
-     * to the query.
-     */
-    public List<EducationDTO> search(String query);
+   /**
+    * search for the education corresponding
+    * to the query.
+    */
+   List<EducationDTO> search(String query);
 
-    EducationDTO addEducation(EducationDTO educationDTO);
+   EducationDTO addEducation(EducationDTO educationDTO);
 }
