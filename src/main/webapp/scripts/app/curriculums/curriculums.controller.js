@@ -25,6 +25,7 @@ angular.module('resourcyApp')
         $scope.saveEducation = function () {
             $scope.education.curriculumVitaeId = $scope.curriculumVitae.id;
             Restangular.all("api").all("educations").post($scope.education).then(function (resp) {
+                console.log("olin siin");
                 $scope.refresh();
             });
         };

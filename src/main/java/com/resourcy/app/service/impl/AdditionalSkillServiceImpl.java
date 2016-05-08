@@ -5,6 +5,7 @@ import com.resourcy.app.domain.AdditionalSkill;
 import com.resourcy.app.repository.AdditionalSkillRepository;
 import com.resourcy.app.repository.CurriculumVitaeRepository;
 import com.resourcy.app.repository.search.AdditionalSkillSearchRepository;
+import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.AdditionalSkillDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalSkillMapper;
 import org.apache.commons.collections.CollectionUtils;

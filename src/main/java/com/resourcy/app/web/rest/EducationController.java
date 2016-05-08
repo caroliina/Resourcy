@@ -3,6 +3,7 @@ package com.resourcy.app.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.repository.EducationRepository;
 import com.resourcy.app.service.EducationService;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.EducationDTO;
 import com.resourcy.app.web.rest.mapper.EducationMapper;
 import com.resourcy.app.web.rest.util.HeaderUtil;
@@ -28,16 +29,16 @@ import java.util.Optional;
 public class EducationController {
 
     private final Logger log = LoggerFactory.getLogger(EducationController.class);
-        
+
     @Inject
     private EducationService educationService;
-    
+
     @Inject
     private EducationMapper educationMapper;
 
     @Inject
     private EducationRepository educationRepository;
-    
+
     /**
      * POST  /educations -> Create a new education.
      */
@@ -45,7 +46,7 @@ public class EducationController {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<EducationDTO> createEducation(@RequestBody EducationDTO educationDTO) throws URISyntaxException {
+    public ResponseEntity<EducationDTO> createEducation(@RequestBody EducationDTO educationDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to save Education : {}", educationDTO);
         if (educationDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("education", "idexists", "A new education cannot already have an ID")).body(null);
@@ -63,7 +64,7 @@ public class EducationController {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<EducationDTO> updateEducation(@RequestBody EducationDTO educationDTO) throws URISyntaxException {
+    public ResponseEntity<EducationDTO> updateEducation(@RequestBody EducationDTO educationDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to update Education : {}", educationDTO);
         if (educationDTO.getId() == null) {
             return createEducation(educationDTO);

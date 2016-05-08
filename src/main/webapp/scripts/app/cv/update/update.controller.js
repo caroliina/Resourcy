@@ -260,8 +260,8 @@ angular.module('resourcyApp')
 
         $scope.saveEducation = function (id) {
             $.each($scope.educations, function (i, val) {
+                console.log("olin siin 2");
                 val['curriculumVitaeId'] = id;
-
                 $http.put("api/educations", val).then(function (response) {
                 });
             })
