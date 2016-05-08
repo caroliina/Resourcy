@@ -4,8 +4,10 @@ import com.resourcy.app.service.AdditionalStudyService;
 import com.resourcy.app.domain.AdditionalStudy;
 import com.resourcy.app.repository.AdditionalStudyRepository;
 import com.resourcy.app.repository.search.AdditionalStudySearchRepository;
+import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.AdditionalStudyDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalStudyMapper;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,22 +32,27 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class AdditionalStudyServiceImpl implements AdditionalStudyService{
 
     private final Logger log = LoggerFactory.getLogger(AdditionalStudyServiceImpl.class);
-    
+
     @Inject
     private AdditionalStudyRepository additionalStudyRepository;
-    
+
     @Inject
     private AdditionalStudyMapper additionalStudyMapper;
-    
+
     @Inject
     private AdditionalStudySearchRepository additionalStudySearchRepository;
-    
+
+    @Inject
+    private ValidatorService additionalStudyValidatorService;
     /**
      * Save a additionalStudy.
      * @return the persisted entity
      */
     public AdditionalStudyDTO save(AdditionalStudyDTO additionalStudyDTO) {
         log.debug("Request to save AdditionalStudy : {}", additionalStudyDTO);
+        if (CollectionUtils.isEmpty(additionalStudyValidatorService.validate(additionalStudyDTO).getErrorMessage())) {
+            throw new UnsupportedOperationException();
+        }
         AdditionalStudy additionalStudy = additionalStudyMapper.additionalStudyDTOToAdditionalStudy(additionalStudyDTO);
         additionalStudy = additionalStudyRepository.save(additionalStudy);
         AdditionalStudyDTO result = additionalStudyMapper.additionalStudyToAdditionalStudyDTO(additionalStudy);
@@ -60,7 +67,7 @@ public class AdditionalStudyServiceImpl implements AdditionalStudyService{
      *  get all the additionalStudys.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<AdditionalStudyDTO> findAll() {
         log.debug("Request to get all AdditionalStudys");
         List<AdditionalStudyDTO> result = additionalStudyRepository.findAll().stream()
@@ -73,7 +80,7 @@ public class AdditionalStudyServiceImpl implements AdditionalStudyService{
      *  get one additionalStudy by id.
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public AdditionalStudyDTO findOne(Long id) {
         log.debug("Request to get AdditionalStudy : {}", id);
         AdditionalStudy additionalStudy = additionalStudyRepository.findOne(id);
@@ -94,9 +101,9 @@ public class AdditionalStudyServiceImpl implements AdditionalStudyService{
      * search for the additionalStudy corresponding
      * to the query.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<AdditionalStudyDTO> search(String query) {
-        
+
         log.debug("REST request to search AdditionalStudys for query {}", query);
         return StreamSupport
             .stream(additionalStudySearchRepository.search(queryStringQuery(query)).spliterator(), false)

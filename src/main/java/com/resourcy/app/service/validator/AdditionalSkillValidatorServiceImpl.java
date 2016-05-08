@@ -16,7 +16,7 @@ public class AdditionalSkillValidatorServiceImpl implements ValidatorService<Add
         ValidationResponse validationResponse = new ValidationResponse();
 
         if (skill.getDescription() == null || skill.getType() == null) {
-            validationResponse.getErrorMessage().add("mllllm");
+            validationResponse.getErrorMessage().add("Some fields are empty in additional skill");
         }
 
 

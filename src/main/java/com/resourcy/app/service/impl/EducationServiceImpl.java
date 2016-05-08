@@ -4,8 +4,11 @@ import com.resourcy.app.service.EducationService;
 import com.resourcy.app.domain.Education;
 import com.resourcy.app.repository.EducationRepository;
 import com.resourcy.app.repository.search.EducationSearchRepository;
+import com.resourcy.app.service.validator.EducationValidatorServiceImpl;
+import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.EducationDTO;
 import com.resourcy.app.web.rest.mapper.EducationMapper;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +43,9 @@ public class EducationServiceImpl implements EducationService {
     @Inject
     private EducationSearchRepository educationSearchRepository;
 
+    @Inject
+    private ValidatorService educationValidatorService;
+
     /**
      * Save a education.
      *
@@ -47,6 +53,9 @@ public class EducationServiceImpl implements EducationService {
      */
     public EducationDTO save(EducationDTO educationDTO) {
         log.debug("Request to save Education : {}", educationDTO);
+        if (CollectionUtils.isEmpty(educationValidatorService.validate(educationDTO).getErrorMessage())) {
+            throw new UnsupportedOperationException();
+        }
         Education education = educationMapper.educationDTOToEducation(educationDTO);
         education = educationRepository.save(education);
         EducationDTO result = educationMapper.educationToEducationDTO(education);
