@@ -3,6 +3,7 @@ package com.resourcy.app.domain;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -18,11 +19,15 @@ public class LanguageSkill extends AbstractAuditingEntity implements Serializabl
     @Column(name = "language")
     private String language;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "speaking")
-    private String speaking;
+    private LanguageLevel speaking;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "writing")
-    private String writing;
+    private LanguageLevel writing;
 
     @ManyToOne
     @JoinColumn(name = "curriculum_vitae_id")
@@ -44,19 +49,19 @@ public class LanguageSkill extends AbstractAuditingEntity implements Serializabl
         this.language = language;
     }
 
-    public String getSpeaking() {
+    public LanguageLevel getSpeaking() {
         return speaking;
     }
 
-    public void setSpeaking(String speaking) {
+    public void setSpeaking(LanguageLevel speaking) {
         this.speaking = speaking;
     }
 
-    public String getWriting() {
+    public LanguageLevel getWriting() {
         return writing;
     }
 
-    public void setWriting(String writing) {
+    public void setWriting(LanguageLevel writing) {
         this.writing = writing;
     }
 

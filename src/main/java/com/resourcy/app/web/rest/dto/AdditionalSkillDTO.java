@@ -1,5 +1,7 @@
 package com.resourcy.app.web.rest.dto;
 
+import com.resourcy.app.domain.Type;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,8 +10,7 @@ public class AdditionalSkillDTO extends AbstractAuditingEntityDTO implements Ser
 
     private Long id;
 
-    private String type;
-
+    private Type type;
 
     private String description;
 
@@ -24,11 +25,11 @@ public class AdditionalSkillDTO extends AbstractAuditingEntityDTO implements Ser
     public void setId(Long id) {
         this.id = id;
     }
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
     public String getDescription() {

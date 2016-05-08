@@ -1,5 +1,7 @@
 package com.resourcy.app.web.rest.dto;
 
+import com.resourcy.app.domain.LanguageLevel;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,10 +13,10 @@ public class LanguageSkillDTO extends AbstractAuditingEntityDTO implements Seria
     private String language;
 
 
-    private String speaking;
+    private LanguageLevel speaking;
 
 
-    private String writing;
+    private LanguageLevel writing;
 
 
     private Long curriculumVitaeId;
@@ -32,18 +34,18 @@ public class LanguageSkillDTO extends AbstractAuditingEntityDTO implements Seria
     public void setLanguage(String language) {
         this.language = language;
     }
-    public String getSpeaking() {
+    public LanguageLevel getSpeaking() {
         return speaking;
     }
 
-    public void setSpeaking(String speaking) {
+    public void setSpeaking(LanguageLevel speaking) {
         this.speaking = speaking;
     }
-    public String getWriting() {
+    public LanguageLevel getWriting() {
         return writing;
     }
 
-    public void setWriting(String writing) {
+    public void setWriting(LanguageLevel writing) {
         this.writing = writing;
     }
 

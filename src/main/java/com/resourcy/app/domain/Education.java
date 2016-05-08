@@ -3,6 +3,7 @@ package com.resourcy.app.domain;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -29,7 +30,9 @@ public class Education extends AbstractAuditingEntity implements Serializable {
     private String speciality;
 
     @Column(name = "degree")
-    private String degree;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private EducationDegrees degree;
 
     @ManyToOne
     @JoinColumn(name = "curriculum_vitae_id")
@@ -75,11 +78,11 @@ public class Education extends AbstractAuditingEntity implements Serializable {
         this.speciality = speciality;
     }
 
-    public String getDegree() {
+    public EducationDegrees getDegree() {
         return degree;
     }
 
-    public void setDegree(String degree) {
+    public void setDegree(EducationDegrees degree) {
         this.degree = degree;
     }
 

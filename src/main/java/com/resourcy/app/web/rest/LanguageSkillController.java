@@ -1,6 +1,7 @@
 package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.resourcy.app.domain.LanguageLevel;
 import com.resourcy.app.service.LanguageSkillService;
 import com.resourcy.app.web.rest.dto.LanguageSkillDTO;
 import com.resourcy.app.web.rest.mapper.LanguageSkillMapper;
@@ -18,6 +19,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * REST controller for managing LanguageSkill.
@@ -129,5 +131,11 @@ public class LanguageSkillController {
     @RequestMapping(value = "/addLanguage", method = RequestMethod.POST)
     public LanguageSkillDTO addLanguages(@RequestBody LanguageSkillDTO languageSkillDTO) {
         return languageSkillService.addLanguage(languageSkillDTO);
+    }
+
+    @RequestMapping(value = "/languageSkills/languageLevels", method = RequestMethod.GET)
+    @ResponseBody
+    public String[] languageLevels(){
+        return Stream.of(LanguageLevel.values()).map(LanguageLevel::name).toArray(String[]::new);
     }
 }
