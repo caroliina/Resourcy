@@ -114,7 +114,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="workExperience in curriculumVitae.workExperiences track by workExperience.id">
-                    <td>{{workExperience.position}}</td>
+                    <td>{{workExperience.position | translate}}</td>
                     <td>{{workExperience.periodStart | date:'mediumDate'}}</td>
                     <td>{{workExperience.periodEnd | date:'mediumDate'}}</td>
                     <td>{{workExperience.location}}</td>
@@ -202,7 +202,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="governmentWorkExperience in curriculumVitae.governmentWorkExperiences track by governmentWorkExperience.id">
-                    <td>{{governmentWorkExperience.position}}</td>
+                    <td>{{governmentWorkExperience.position | translate}}</td>
                     <td>{{governmentWorkExperience.periodStart | date:'mediumDate'}}</td>
                     <td>{{governmentWorkExperience.periodEnd | date:'mediumDate'}}</td>
                     <td>{{governmentWorkExperience.personalWorkHours}}</td>
@@ -312,7 +312,7 @@
                 <td>{{education.periodStart | date:'mediumDate'}}</td>
                 <td>{{education.periodEnd | date:'mediumDate'}}</td>
                 <td>{{education.speciality}}</td>
-                <td>{{education.degree}}</td>
+                <td>{{education.degree | translate}}</td>
 
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
@@ -468,8 +468,8 @@
             <tbody>
             <tr ng-repeat="languageSkill in curriculumVitae.languageSkills track by languageSkill.id">
                 <td>{{languageSkill.language}}</td>
-                <td>{{languageSkill.speaking}}</td>
-                <td>{{languageSkill.writing}}</td>
+                <td>{{languageSkill.speaking | translate}}</td>
+                <td>{{languageSkill.writing | translate}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
@@ -538,7 +538,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="additionalSkill in curriculumVitae.additionalSkills track by additionalSkill.id">
-                <td>{{additionalSkill.type}}</td>
+                <td>{{additionalSkill.type | translate}}</td>
                 <td>{{additionalSkill.description}}</td>
                 <td>{{additionalSkill.experience}}</td>
                 <td class="text-right">

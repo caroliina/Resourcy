@@ -369,4 +369,45 @@
         </insert>
 
     </changeSet>
+
+
+    <changeSet id="update language_skill table" author="Kreete">
+        <update tableName="language_skill">
+            <column name="speaking" value='NATIVE' type="varchar(255)"/><where>speaking='Emakeel'</where></update>
+        <update tableName="language_skill">
+            <column name="writing" value='NATIVE' type="varchar(255)"/><where>writing='Emakeel'</where></update>
+    </changeSet>
+
+    <changeSet id="update education table" author="Kreete">
+        <update tableName="education">
+            <column name="degree" value='BACHELOR' type="varchar(255)"/><where>degree='Bakalaureus'</where></update>
+        <update tableName="education">
+            <column name="degree" value='MASTER' type="varchar(255)"/><where>degree='Magister'</where></update>
+        <update tableName="education">
+            <column name="degree" value='SECONDARY_SPECIALIZED' type="varchar(255)"/><where>degree='Keskeriharidus'</where></update>
+    </changeSet>
+
+    <changeSet id="update additional_skill table" author="Kreete">
+        <update tableName="additional_skill">
+            <column name="type" value='PROGRAMMING_LANGUAGE' type="varchar(255)"/><where>type='Programmeerimiskeel'</where></update>
+        <update tableName="additional_skill">
+            <column name="type" value='DATABASE' type="varchar(255)"/><where>type='Andmebaas'</where></update>
+        <update tableName="additional_skill">
+            <column name="type" value='DEVELOPMENT_IDE' type="varchar(255)"/><where>type='Arendusvahend'</where></update>
+    </changeSet>
+
+    <changeSet id="update work_experience table" author="Kreete">
+        <update tableName="work_experience">
+            <column name="position" value='ANALYST' type="varchar(255)"/><where>position='ANALYYTIK'</where></update>
+        <update tableName="work_experience">
+            <column name="position" value='SYS_ANALYST' type="varchar(255)"/><where>position='SYSANALYYTIK'</where></update>
+        <update tableName="work_experience">
+            <column name="position" value='PROGRAMMER' type="varchar(255)"/><where>position='PROGRAMMEERIJA'</where></update>
+    </changeSet>
+
+    <changeSet id="update government_work_experience table" author="Kreete">
+        <update tableName="government_work_experience">
+            <column name="position" value='PROGRAMMER' type="varchar(255)"/><where>position='PROGRAMMEERIJA'</where></update>
+    </changeSet>
+
 </databaseChangeLog>
