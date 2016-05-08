@@ -1,5 +1,7 @@
 package com.resourcy.app.web.rest.dto;
 
+import com.resourcy.app.domain.Position;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,7 +18,7 @@ public class GovernmentWorkExperienceDTO extends AbstractAuditingEntityDTO imple
 
     private Integer personalWorkHours;
 
-    private String position;
+    private Position position;
 
     private List<WorkAssignmentDTO> workAssignments;
 
@@ -69,11 +71,11 @@ public class GovernmentWorkExperienceDTO extends AbstractAuditingEntityDTO imple
         this.governmentProject = governmentProject;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 

@@ -2,6 +2,7 @@ package com.resourcy.app.web.rest.mapper.mapperImpl;
 
 import com.resourcy.app.domain.CurriculumVitae;
 import com.resourcy.app.domain.GovernmentWorkExperience;
+import com.resourcy.app.domain.Position;
 import com.resourcy.app.domain.WorkAssignment;
 import com.resourcy.app.web.rest.dto.GovernmentWorkExperienceDTO;
 import com.resourcy.app.web.rest.dto.WorkAssignmentDTO;
@@ -31,7 +32,9 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
 
         GovernmentWorkExperienceDTO governmentWorkExperienceDTO = new GovernmentWorkExperienceDTO();
 
-        governmentWorkExperienceDTO.setGovernmentProject(governmentProjectMapper.governmentProjectToGovernmentProjectDTO(governmentWorkExperience.getGovernmentProject()));
+        if(governmentWorkExperience.getGovernmentProject() != null ){
+            governmentWorkExperienceDTO.setGovernmentProject(governmentProjectMapper.governmentProjectToGovernmentProjectDTO(governmentWorkExperience.getGovernmentProject()));
+        }
 
         governmentWorkExperienceDTO.setCurriculumVitaeId( governmentWorkExperienceCurriculumVitaeId( governmentWorkExperience ) );
         governmentWorkExperienceDTO.setCreatedDate( governmentWorkExperience.getCreatedDate() );
@@ -42,7 +45,7 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
         governmentWorkExperienceDTO.setPeriodStart( governmentWorkExperience.getPeriodStart() );
         governmentWorkExperienceDTO.setPeriodEnd( governmentWorkExperience.getPeriodEnd() );
         governmentWorkExperienceDTO.setPersonalWorkHours( governmentWorkExperience.getPersonalWorkHours() );
-        governmentWorkExperienceDTO.setPosition( governmentWorkExperience.getPosition() );
+        governmentWorkExperienceDTO.setPosition(governmentWorkExperience.getPosition());
 
 
         if(governmentWorkExperience.getWorkAssignments()!=null){
@@ -65,7 +68,9 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
 
         GovernmentWorkExperience governmentWorkExperience = new GovernmentWorkExperience();
 
-        governmentWorkExperience.setGovernmentProject(governmentProjectFromId(governmentWorkExperienceDTO.getGovernmentProject().getId()));
+        if (governmentWorkExperienceDTO.getGovernmentProject() != null) {
+            governmentWorkExperience.setGovernmentProject(governmentProjectFromId(governmentWorkExperienceDTO.getGovernmentProject().getId()));
+        }
         governmentWorkExperience.setCurriculumVitae( curriculumVitaeFromId( governmentWorkExperienceDTO.getCurriculumVitaeId() ) );
         governmentWorkExperience.setCreatedBy( governmentWorkExperienceDTO.getCreatedBy() );
         governmentWorkExperience.setCreatedDate( governmentWorkExperienceDTO.getCreatedDate() );
@@ -75,8 +80,7 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
         governmentWorkExperience.setPeriodStart( governmentWorkExperienceDTO.getPeriodStart() );
         governmentWorkExperience.setPeriodEnd( governmentWorkExperienceDTO.getPeriodEnd() );
         governmentWorkExperience.setPersonalWorkHours( governmentWorkExperienceDTO.getPersonalWorkHours() );
-        governmentWorkExperience.setPosition( governmentWorkExperienceDTO.getPosition() );
-
+        governmentWorkExperience.setPosition(governmentWorkExperienceDTO.getPosition());
 
         if(governmentWorkExperienceDTO.getWorkAssignments()!=null){
 
@@ -90,7 +94,6 @@ public class GovernmentWorkExperienceMapperImpl implements GovernmentWorkExperie
 
         return governmentWorkExperience;
     }
-
 
     private Long governmentWorkExperienceCurriculumVitaeId(GovernmentWorkExperience governmentWorkExperience) {
 

@@ -1,9 +1,7 @@
 package com.resourcy.app.service;
 
-import com.resourcy.app.domain.WorkAssignment;
 import com.resourcy.app.web.rest.dto.WorkAssignmentDTO;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -39,4 +37,6 @@ public interface WorkAssignmentService {
      * to the query.
      */
     public List<WorkAssignmentDTO> search(String query);
+
+    WorkAssignmentDTO addWorkAssignment(WorkAssignmentDTO dto);
 }

@@ -2,10 +2,9 @@ package com.resourcy.app.service.impl;
 
 import com.resourcy.app.service.EducationService;
 import com.resourcy.app.domain.Education;
+import com.resourcy.app.repository.CurriculumVitaeRepository;
 import com.resourcy.app.repository.EducationRepository;
 import com.resourcy.app.repository.search.EducationSearchRepository;
-import com.resourcy.app.service.validator.EducationValidatorServiceImpl;
-import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.EducationDTO;
 import com.resourcy.app.web.rest.mapper.EducationMapper;
 import org.apache.commons.collections.CollectionUtils;
@@ -13,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.ZoneId;
@@ -42,6 +42,13 @@ public class EducationServiceImpl implements EducationService {
 
     @Inject
     private EducationSearchRepository educationSearchRepository;
+
+    @Inject
+    private CurriculumVitaeRepository cvRepository;
+
+    @Inject
+    private UserService userService;
+
 
     @Inject
     private ValidatorService educationValidatorService;
@@ -114,5 +121,17 @@ public class EducationServiceImpl implements EducationService {
                 .stream(educationSearchRepository.search(queryStringQuery(query)).spliterator(), false)
                 .map(educationMapper::educationToEducationDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Override
+    public EducationDTO addEducation(EducationDTO educationDTO) {
+        Education education = educationMapper.educationDTOToEducation(educationDTO);
+        education.setCurriculumVitae(cvRepository.findOne(educationDTO.getCurriculumVitaeId()));
+        educationRepository.save(education);
+        if (education.getCurriculumVitae() != null) {
+            education.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
+        return educationMapper.educationToEducationDTO(education);
     }
 }

@@ -1,9 +1,7 @@
 package com.resourcy.app.service;
 
-import com.resourcy.app.domain.GovernmentWorkExperience;
 import com.resourcy.app.web.rest.dto.GovernmentWorkExperienceDTO;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -39,4 +37,6 @@ public interface GovernmentWorkExperienceService {
      * to the query.
      */
     public List<GovernmentWorkExperienceDTO> search(String query);
+
+    GovernmentWorkExperienceDTO addGovernmentWorkExperience(GovernmentWorkExperienceDTO dto);
 }

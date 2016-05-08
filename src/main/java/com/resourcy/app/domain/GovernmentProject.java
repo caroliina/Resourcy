@@ -1,17 +1,16 @@
 package com.resourcy.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "government_project")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "governmentproject")
 public class GovernmentProject extends AbstractAuditingEntity implements Serializable {
 
@@ -34,7 +33,6 @@ public class GovernmentProject extends AbstractAuditingEntity implements Seriali
 
     @OneToMany(mappedBy = "governmentProject")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List<Technology> technologys = new ArrayList<>();
 
     public Long getId() {

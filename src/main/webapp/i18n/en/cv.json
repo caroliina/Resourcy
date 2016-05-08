@@ -63,7 +63,35 @@
         "addskill":"Add skill",
         "addlang":"Add language",
         "remove":"x",
-        "idcode": "Isikukood"
+        "idcode": "Identification number"
+    },
+    "positions" : {
+        "ANALYYTIK" : "Analyst",
+        "DIVISJONIJUHT" : "Division manager",
+        "EELTOOTLUS" : "Operator",
+        "JUHTIV_ANALYYTIK" : "Lead analyst",
+        "JUHTIVPROJEKTEERIJA" : "Lead architect",
+        "JUHTIVTESTIJA" : "Lead tester",
+        "KASUTAJATUGI" : "Support specialist",
+        "KAUGSEIRE" : "Consultant",
+        "KLIENDITUGI" : "Senior system admin",
+        "MEESKONNAJUHT" : "Team lead",
+        "NOOREMPROGRAMMEERIJA" : "Junior Developer",
+        "PROGRAMMEERIJA_PRAKTIKANT" : "Junior Developer/Intern",
+        "NOOREMSYSANALYYTIK" : "Junior analyst",
+        "TESTIJA_PRAKTIKANT" : "Junior tester/Intern",
+        "ORACLEDBA" : "OracleDBA",
+        "PROGRAMMEERIJA" : "Programmer",
+        "PROJEKTEERIJA" : "Architect",
+        "PROJEKTIJUHT" : "Project manager",
+        "RAKENDUSADMIN" : "Application admin",
+        "RELIISIJUHT" : "Release lead",
+        "SYSANALYYTIK" : "System analyst",
+        "TARKVARAARENDAJA" : "Software developer",
+        "TARKVARAARHITEKT" : "Software architect",
+        "TESTIJA" : "Tester",
+        "TESTIMISEJUHT" : "Test lead",
+        "VANEMPROGRAMMEERIJA" : "Senior Developer",
+        "ARIKONSULTANT" : "Business application consultant"
     }
-
 }

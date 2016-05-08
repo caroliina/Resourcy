@@ -14,9 +14,8 @@ public interface EmployeeService {
 
     /**
      * Save a employee.
-     * @return the persisted entity
      */
-    public EmployeeDTO save(EmployeeDTO employeeDTO);
+    EmployeeDTO save(EmployeeDTO employeeDTO);
 
     /**
      *  get all the employees.
@@ -42,4 +41,6 @@ public interface EmployeeService {
     public List<EmployeeDTO> search(String query);
 
     EmployeeDTO getCurrentEmployee();
+
+    EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) throws Exception;
 }

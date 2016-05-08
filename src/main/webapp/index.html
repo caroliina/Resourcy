@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Resourcy</title>
+        <title>CGI</title>
         <meta name="description" content="">
         <meta name="google" value="notranslate">
         <meta name="viewport" content="width=device-width">
@@ -22,13 +22,11 @@
         <!--[if lt IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
         <div ui-view="navbar" ng-cloak=""></div>
         <div class="container">
             <div class="well" ui-view="content"></div>
 
             <div class="footer">
-                <p translate="footer">This is your footer</p>
             </div>
         </div>
 
@@ -48,7 +46,6 @@
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-aria/angular-aria.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-        <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
         <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
@@ -81,18 +78,11 @@
     <script src="scripts/components/auth/principal.service.js"></script>
     <script src="scripts/components/auth/authority.directive.js"></script>
     <script src="scripts/components/auth/services/account.service.js"></script>
-    <script src="scripts/components/auth/services/activate.service.js"></script>
-    <script src="scripts/components/auth/services/password.service.js"></script>
-    <script src="scripts/components/auth/services/register.service.js"></script>
     <script src="scripts/components/form/form.directive.js"></script>
     <script src="scripts/components/form/maxbytes.directive.js"></script>
     <script src="scripts/components/form/minbytes.directive.js"></script>
     <script src="scripts/components/form/uib-pager.config.js"></script>
     <script src="scripts/components/form/uib-pagination.config.js"></script>
-    <script src="scripts/components/admin/audits.service.js"></script>
-    <script src="scripts/components/admin/logs.service.js"></script>
-    <script src="scripts/components/admin/configuration.service.js"></script>
-    <script src="scripts/components/admin/monitoring.service.js"></script>
     <script src="scripts/components/interceptor/auth.interceptor.js"></script>
     <script src="scripts/components/interceptor/errorhandler.interceptor.js"></script>
     <script src="scripts/components/interceptor/notification.interceptor.js"></script>
@@ -109,41 +99,12 @@
     <script src="scripts/components/util/data-util.service.js"></script>
     <script src="scripts/components/util/sort.directive.js"></script>
     <script src="scripts/app/account/account.js"></script>
-    <script src="scripts/app/account/activate/activate.js"></script>
-    <script src="scripts/app/account/activate/activate.controller.js"></script>
     <script src="scripts/app/account/login/login.js"></script>
     <script src="scripts/app/account/login/login.controller.js"></script>
-    <script src="scripts/app/account/password/password.js"></script>
-    <script src="scripts/app/account/password/password.controller.js"></script>
-    <script src="scripts/app/account/password/password.directive.js"></script>
-    <script src="scripts/app/account/register/register.js"></script>
-    <script src="scripts/app/account/register/register.controller.js"></script>
     <script src="scripts/app/account/settings/settings.js"></script>
     <script src="scripts/app/account/settings/settings.controller.js"></script>
-    <script src="scripts/app/account/reset/finish/reset.finish.controller.js"></script>
-    <script src="scripts/app/account/reset/finish/reset.finish.js"></script>
-    <script src="scripts/app/account/reset/request/reset.request.controller.js"></script>
-    <script src="scripts/app/account/reset/request/reset.request.js"></script>
     <script src="scripts/app/admin/admin.js"></script>
-    <script src="scripts/app/admin/audits/audits.js"></script>
-    <script src="scripts/app/admin/audits/audits.controller.js"></script>
-    <script src="scripts/app/admin/configuration/configuration.js"></script>
-    <script src="scripts/app/admin/configuration/configuration.controller.js"></script>
     <script src="scripts/app/admin/docs/docs.js"></script>
-    <script src="scripts/app/admin/health/health.js"></script>
-    <script src="scripts/app/admin/health/health.controller.js"></script>
-    <script src="scripts/app/admin/health/health.modal.controller.js"></script>
-    <script src="scripts/app/admin/logs/logs.js"></script>
-    <script src="scripts/app/admin/logs/logs.controller.js"></script>
-    <script src="scripts/app/admin/metrics/metrics.js"></script>
-    <script src="scripts/app/admin/metrics/metrics.controller.js"></script>
-    <script src="scripts/app/admin/metrics/metrics.modal.controller.js"></script>
-    <script src="scripts/app/admin/user-management/user-management-detail.controller.js"></script>
-    <script src="scripts/app/admin/user-management/user-management-dialog.controller.js"></script>
-    <script src="scripts/app/admin/user-management/user-management-delete-dialog.controller.js"></script>
-    <script src="scripts/app/admin/user-management/user-management.controller.js"></script>
-    <script src="scripts/app/admin/user-management/user-management.js"></script>
-    <script src="scripts/app/entities/entity.js"></script>
     <script src="scripts/app/error/error.js"></script>
     <script src="scripts/app/main/main.js"></script>
     <script src="scripts/app/main/main.controller.js"></script>    
@@ -151,6 +112,8 @@
     <script src="scripts/app/cv/cv.controller.js"></script> 
     <script src="scripts/app/cv/insert/insert.js"></script>
     <script src="scripts/app/cv/insert/insert.controller.js"></script>
+    <script src="scripts/app/cv/view/view.js"></script>
+    <script src="scripts/app/cv/view/view.controller.js"></script>
     <script src="scripts/app/cv/update/update.js"></script>
     <script src="scripts/app/cv/update/update.controller.js"></script>
     <script src="bower_components/messageformat/locale/et.js"></script>
@@ -158,92 +121,10 @@
     <script src="bower_components/messageformat/locale/fr.js"></script>
     <script src="scripts/components/language/language.service.js"></script>
     <script src="scripts/components/language/language.controller.js"></script>
-    <script src="scripts/components/auth/services/sessions.service.js"></script>
     <script src="scripts/components/auth/provider/auth.session.service.js"></script>
-    <script src="scripts/app/account/sessions/sessions.js"></script>
-    <script src="scripts/app/account/sessions/sessions.controller.js"></script>
-    <script src="scripts/app/admin/tracker/tracker.js"></script>
-    <script src="scripts/app/admin/tracker/tracker.controller.js"></script>
     <script src="scripts/components/tracker/tracker.service.js"></script>
-    <script src="scripts/app/entities/employee/employee.js"></script>
-    <script src="scripts/app/entities/employee/employee.controller.js"></script>
-    <script src="scripts/app/entities/employee/employee-dialog.controller.js"></script>
-    <script src="scripts/app/entities/employee/employee-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/employee/employee-detail.controller.js"></script>
-    <script src="scripts/components/entities/employee/employee.service.js"></script>
-    <script src="scripts/components/entities/employee/employee.search.service.js"></script>
-    <script src="scripts/app/entities/curriculumVitae/curriculumVitae.js"></script>
-    <script src="scripts/app/entities/curriculumVitae/curriculumVitae.controller.js"></script>
-    <script src="scripts/app/entities/curriculumVitae/curriculumVitae-dialog.controller.js"></script>
-    <script src="scripts/app/entities/curriculumVitae/curriculumVitae-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/curriculumVitae/curriculumVitae-detail.controller.js"></script>
-    <script src="scripts/components/entities/curriculumVitae/curriculumVitae.service.js"></script>
-    <script src="scripts/components/entities/curriculumVitae/curriculumVitae.search.service.js"></script>
-    <script src="scripts/app/entities/education/education.js"></script>
-    <script src="scripts/app/entities/education/education.controller.js"></script>
-    <script src="scripts/app/entities/education/education-dialog.controller.js"></script>
-    <script src="scripts/app/entities/education/education-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/education/education-detail.controller.js"></script>
-    <script src="scripts/components/entities/education/education.service.js"></script>
-    <script src="scripts/components/entities/education/education.search.service.js"></script>
-    <script src="scripts/app/entities/workExperience/workExperience.js"></script>
-    <script src="scripts/app/entities/workExperience/workExperience.controller.js"></script>
-    <script src="scripts/app/entities/workExperience/workExperience-dialog.controller.js"></script>
-    <script src="scripts/app/entities/workExperience/workExperience-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/workExperience/workExperience-detail.controller.js"></script>
-    <script src="scripts/components/entities/workExperience/workExperience.service.js"></script>
-    <script src="scripts/components/entities/workExperience/workExperience.search.service.js"></script>
-    <script src="scripts/app/entities/governmentProject/governmentProject.js"></script>
-    <script src="scripts/app/entities/governmentProject/governmentProject.controller.js"></script>
-    <script src="scripts/app/entities/governmentProject/governmentProject-dialog.controller.js"></script>
-    <script src="scripts/app/entities/governmentProject/governmentProject-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/governmentProject/governmentProject-detail.controller.js"></script>
-    <script src="scripts/components/entities/governmentProject/governmentProject.service.js"></script>
-    <script src="scripts/components/entities/governmentProject/governmentProject.search.service.js"></script>
-    <script src="scripts/app/entities/technology/technology.js"></script>
-    <script src="scripts/app/entities/technology/technology.controller.js"></script>
-    <script src="scripts/app/entities/technology/technology-dialog.controller.js"></script>
-    <script src="scripts/app/entities/technology/technology-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/technology/technology-detail.controller.js"></script>
-    <script src="scripts/components/entities/technology/technology.service.js"></script>
-    <script src="scripts/components/entities/technology/technology.search.service.js"></script>
-    <script src="scripts/app/entities/governmentWorkExperience/governmentWorkExperience.js"></script>
-    <script src="scripts/app/entities/governmentWorkExperience/governmentWorkExperience.controller.js"></script>
-    <script src="scripts/app/entities/governmentWorkExperience/governmentWorkExperience-dialog.controller.js"></script>
-    <script src="scripts/app/entities/governmentWorkExperience/governmentWorkExperience-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/governmentWorkExperience/governmentWorkExperience-detail.controller.js"></script>
-    <script src="scripts/components/entities/governmentWorkExperience/governmentWorkExperience.service.js"></script>
-    <script src="scripts/components/entities/governmentWorkExperience/governmentWorkExperience.search.service.js"></script>
-    <script src="scripts/app/entities/workAssignment/workAssignment.js"></script>
-    <script src="scripts/app/entities/workAssignment/workAssignment.controller.js"></script>
-    <script src="scripts/app/entities/workAssignment/workAssignment-dialog.controller.js"></script>
-    <script src="scripts/app/entities/workAssignment/workAssignment-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/workAssignment/workAssignment-detail.controller.js"></script>
-    <script src="scripts/components/entities/workAssignment/workAssignment.service.js"></script>
-    <script src="scripts/components/entities/workAssignment/workAssignment.search.service.js"></script>
-    <script src="scripts/app/entities/additionalStudy/additionalStudy.js"></script>
-    <script src="scripts/app/entities/additionalStudy/additionalStudy.controller.js"></script>
-    <script src="scripts/app/entities/additionalStudy/additionalStudy-dialog.controller.js"></script>
-    <script src="scripts/app/entities/additionalStudy/additionalStudy-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/additionalStudy/additionalStudy-detail.controller.js"></script>
-    <script src="scripts/components/entities/additionalStudy/additionalStudy.service.js"></script>
-    <script src="scripts/components/entities/additionalStudy/additionalStudy.search.service.js"></script>
-    <script src="scripts/app/entities/languageSkill/languageSkill.js"></script>
-    <script src="scripts/app/entities/languageSkill/languageSkill.controller.js"></script>
-    <script src="scripts/app/entities/languageSkill/languageSkill-dialog.controller.js"></script>
-    <script src="scripts/app/entities/languageSkill/languageSkill-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/languageSkill/languageSkill-detail.controller.js"></script>
-    <script src="scripts/components/entities/languageSkill/languageSkill.service.js"></script>
-    <script src="scripts/components/entities/languageSkill/languageSkill.search.service.js"></script>
-    <script src="scripts/app/entities/additionalSkill/additionalSkill.js"></script>
-    <script src="scripts/app/entities/additionalSkill/additionalSkill.controller.js"></script>
-    <script src="scripts/app/entities/additionalSkill/additionalSkill-dialog.controller.js"></script>
-    <script src="scripts/app/entities/additionalSkill/additionalSkill-delete-dialog.controller.js"></script>
-    <script src="scripts/app/entities/additionalSkill/additionalSkill-detail.controller.js"></script>
     <script src="scripts/app/employees/employees.js"></script>
     <script src="scripts/app/employees/employees.controller.js"></script>
-    <script src="scripts/components/entities/additionalSkill/additionalSkill.service.js"></script>
-    <script src="scripts/components/entities/additionalSkill/additionalSkill.search.service.js"></script>
     <script src="scripts/app/curriculums/curriculums.js"></script>
     <script src="scripts/app/curriculums/curriculums.controller.js"></script>
     <!-- endbuild -->

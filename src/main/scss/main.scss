@@ -357,3 +357,29 @@ a.addbutton {
     background-color: #D20909;
     color: #fff;
 }
+.addbutton {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background-color: green;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+}
+span.input-group-btn button {
+    padding: 0 5px;
+    height: 25px;
+    vertical-align: middle;
+}
+span.input-group-btn {
+    display: inline-block;
+    right: -4px;
+    top: 4px;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+}
+.dater.ng-scope {
+    position: relative;
+}

@@ -1,8 +1,6 @@
 package com.resourcy.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -14,7 +12,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "employee")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "employee")
 public class Employee extends AbstractAuditingEntity implements Serializable {
 
@@ -39,7 +36,6 @@ public class Employee extends AbstractAuditingEntity implements Serializable {
 
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<CurriculumVitae> curriculumVitaes = new HashSet<>();
 
     @JsonIgnore

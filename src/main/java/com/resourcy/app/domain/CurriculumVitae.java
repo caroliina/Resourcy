@@ -1,18 +1,17 @@
 package com.resourcy.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "curriculum_vitae")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "curriculumvitae")
 public class CurriculumVitae extends AbstractAuditingEntity implements Serializable {
 
@@ -31,32 +30,26 @@ public class CurriculumVitae extends AbstractAuditingEntity implements Serializa
 
     @OneToMany(mappedBy = "curriculumVitae")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List<Education> educations = new ArrayList<>();
 
     @OneToMany(mappedBy = "curriculumVitae")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List<WorkExperience> workExperiences = new ArrayList<>();
 
     @OneToMany(mappedBy = "curriculumVitae")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List<GovernmentWorkExperience> governmentWorkExperiences = new ArrayList<>();
 
     @OneToMany(mappedBy = "curriculumVitae")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List<AdditionalStudy> additionalStudys = new ArrayList<>();
 
     @OneToMany(mappedBy = "curriculumVitae")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List<LanguageSkill> languageSkills = new ArrayList<>();
 
     @OneToMany(mappedBy = "curriculumVitae")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List<AdditionalSkill> additionalSkills = new ArrayList<>();
 
     public Long getId() {

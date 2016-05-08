@@ -1,6 +1,9 @@
 package com.resourcy.app.service.impl;
 
+import com.resourcy.app.domain.CurriculumVitae;
 import com.resourcy.app.domain.Employee;
+import com.resourcy.app.domain.LanguageType;
+import com.resourcy.app.repository.CurriculumVitaeRepository;
 import com.resourcy.app.repository.EmployeeRepository;
 import com.resourcy.app.repository.search.EmployeeSearchRepository;
 import com.resourcy.app.service.EmployeeService;
@@ -15,7 +18,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -40,20 +46,25 @@ public class EmployeeServiceImpl implements EmployeeService{
     private EmployeeSearchRepository employeeSearchRepository;
 
     @Inject
+    private CurriculumVitaeRepository curriculumVitaeRepository;
+
+    @Inject
     private UserService userService;
     
     /**
      * Save a employee.
-     * @return the persisted entity
      */
     public EmployeeDTO save(EmployeeDTO employeeDTO) {
-        log.debug("Request to save Employee : {}", employeeDTO);
-        Employee employee = employeeMapper.employeeDTOToEmployee(employeeDTO);
-        employee.setUser(userService.getUserWithAuthorities());
-        employee = employeeRepository.save(employee);
-        EmployeeDTO result = employeeMapper.employeeToEmployeeDTO(employee);
-        employeeSearchRepository.save(employee);
-        return result;
+        Employee employee = employeeRepository.findOne(employeeDTO.getId());
+        employee.setFirstName(employee.getFirstName());
+        employee.setLastName(employee.getLastName());
+        employee.setBirthday(employeeDTO.getBirthday());
+        employee.setIdCode(employeeDTO.getIdCode());
+        employee.setNationality(employeeDTO.getNationality());
+        employee.setEmail(employeeDTO.getEmail());
+
+        employeeRepository.save(employee);
+        return employeeMapper.employeeToEmployeeDTO(employee);
     }
 
     /**
@@ -107,4 +118,46 @@ public class EmployeeServiceImpl implements EmployeeService{
         Employee employee = employeeRepository.findOne(userService.getUserWithAuthorities().getEmployee().getId());
         return employeeMapper.employeeToEmployeeDTO(employee);
     }
+
+    @Override
+    public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) throws Exception {
+
+        if(employeeDTO.getId() != null){
+            throw new Exception("User already exsists");
+        }
+
+        Employee employee = employeeMapper.employeeDTOToEmployee(employeeDTO);
+        employee.setUser(userService.getUserWithAuthorities());
+        employee = employeeRepository.save(employee);
+
+        Set<CurriculumVitae> curriculums = addCurriculums(employee);
+
+        employee.setCurriculumVitaes(curriculums);
+        employee = employeeRepository.save(employee);
+
+        return employeeMapper.employeeToEmployeeDTO(employee);
+    }
+
+    private Set<CurriculumVitae> addCurriculums(Employee employee) {
+        Set<CurriculumVitae> curriculums = new HashSet<>();
+        CurriculumVitae curriculumVitaeENG = createCV(employee, LanguageType.ENG);
+        CurriculumVitae curriculumVitaeEST = createCV(employee, LanguageType.EST);
+        curriculums.add(curriculumVitaeENG);
+        curriculums.add(curriculumVitaeEST);
+        return curriculums;
+    }
+
+    private CurriculumVitae createCV(Employee employee, LanguageType type) {
+        CurriculumVitae cv = new CurriculumVitae();
+        cv.setEmployee(employeeRepository.findOne(employee.getId()));
+        cv.setLanguageType(type);
+        cv.setCreatedDate(ZonedDateTime.now());
+        cv.setCreatedBy(userService.getUserWithAuthorities().getUsername());
+        cv.setLastModifiedDate(ZonedDateTime.now());
+        cv.setLastModifiedBy(userService.getUserWithAuthorities().getUsername());
+        curriculumVitaeRepository.save(cv);
+        return cv;
+    }
+
+
 }

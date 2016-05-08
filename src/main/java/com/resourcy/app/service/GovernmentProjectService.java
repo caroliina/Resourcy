@@ -1,9 +1,7 @@
 package com.resourcy.app.service;
 
-import com.resourcy.app.domain.GovernmentProject;
 import com.resourcy.app.web.rest.dto.GovernmentProjectDTO;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -44,4 +42,6 @@ public interface GovernmentProjectService {
      * to the query.
      */
     public List<GovernmentProjectDTO> search(String query);
+
+    GovernmentProjectDTO addGovernmentProject(GovernmentProjectDTO dto);
 }
