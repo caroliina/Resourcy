@@ -2,21 +2,20 @@ package com.resourcy.app.web.rest;
 
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.GovernmentWorkExperience;
+import com.resourcy.app.domain.Position;
 import com.resourcy.app.repository.GovernmentWorkExperienceRepository;
 import com.resourcy.app.service.GovernmentWorkExperienceService;
 import com.resourcy.app.web.rest.dto.GovernmentWorkExperienceDTO;
 import com.resourcy.app.web.rest.mapper.GovernmentWorkExperienceMapper;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -31,6 +30,7 @@ import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -55,6 +55,9 @@ public class GovernmentWorkExperienceControllerIntTest {
 
     private static final Integer DEFAULT_PERSONAL_WORK_HOURS = 1;
     private static final Integer UPDATED_PERSONAL_WORK_HOURS = 2;
+
+    private static final Position DEFAULT_POSITION = Position.TESTER;
+    private static final Position UPDATED_POSITION = Position.PROGRAMMER;
 
     @Inject
     private GovernmentWorkExperienceRepository governmentWorkExperienceRepository;
@@ -92,6 +95,7 @@ public class GovernmentWorkExperienceControllerIntTest {
         governmentWorkExperience.setPeriodStart(DEFAULT_PERIOD_START);
         governmentWorkExperience.setPeriodEnd(DEFAULT_PERIOD_END);
         governmentWorkExperience.setPersonalWorkHours(DEFAULT_PERSONAL_WORK_HOURS);
+        governmentWorkExperience.setPosition(DEFAULT_POSITION);
     }
 
     @Test
@@ -114,6 +118,7 @@ public class GovernmentWorkExperienceControllerIntTest {
         assertThat(testGovernmentWorkExperience.getPeriodStart()).isEqualTo(DEFAULT_PERIOD_START);
         assertThat(testGovernmentWorkExperience.getPeriodEnd()).isEqualTo(DEFAULT_PERIOD_END);
         assertThat(testGovernmentWorkExperience.getPersonalWorkHours()).isEqualTo(DEFAULT_PERSONAL_WORK_HOURS);
+        assertThat(testGovernmentWorkExperience.getPosition()).isEqualTo(DEFAULT_POSITION);
     }
 
     @Test
@@ -129,7 +134,8 @@ public class GovernmentWorkExperienceControllerIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(governmentWorkExperience.getId().intValue())))
                 .andExpect(jsonPath("$.[*].periodStart").value(hasItem(DEFAULT_PERIOD_START.toString())))
                 .andExpect(jsonPath("$.[*].periodEnd").value(hasItem(DEFAULT_PERIOD_END.toString())))
-                .andExpect(jsonPath("$.[*].personalWorkHours").value(hasItem(DEFAULT_PERSONAL_WORK_HOURS)));
+                .andExpect(jsonPath("$.[*].personalWorkHours").value(hasItem(DEFAULT_PERSONAL_WORK_HOURS)))
+                .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION.toString())));
     }
 
     @Test
@@ -145,7 +151,8 @@ public class GovernmentWorkExperienceControllerIntTest {
             .andExpect(jsonPath("$.id").value(governmentWorkExperience.getId().intValue()))
             .andExpect(jsonPath("$.periodStart").value(DEFAULT_PERIOD_START.toString()))
             .andExpect(jsonPath("$.periodEnd").value(DEFAULT_PERIOD_END.toString()))
-            .andExpect(jsonPath("$.personalWorkHours").value(DEFAULT_PERSONAL_WORK_HOURS));
+            .andExpect(jsonPath("$.personalWorkHours").value(DEFAULT_PERSONAL_WORK_HOURS))
+            .andExpect(jsonPath("$.position").value(DEFAULT_POSITION.toString()));
     }
 
     @Test
@@ -168,6 +175,7 @@ public class GovernmentWorkExperienceControllerIntTest {
         governmentWorkExperience.setPeriodStart(UPDATED_PERIOD_START);
         governmentWorkExperience.setPeriodEnd(UPDATED_PERIOD_END);
         governmentWorkExperience.setPersonalWorkHours(UPDATED_PERSONAL_WORK_HOURS);
+        governmentWorkExperience.setPosition(UPDATED_POSITION);
         GovernmentWorkExperienceDTO governmentWorkExperienceDTO = governmentWorkExperienceMapper.governmentWorkExperienceToGovernmentWorkExperienceDTO(governmentWorkExperience);
 
         restGovernmentWorkExperienceMockMvc.perform(put("/api/governmentWorkExperiences")
@@ -182,6 +190,7 @@ public class GovernmentWorkExperienceControllerIntTest {
         assertThat(testGovernmentWorkExperience.getPeriodStart()).isEqualTo(UPDATED_PERIOD_START);
         assertThat(testGovernmentWorkExperience.getPeriodEnd()).isEqualTo(UPDATED_PERIOD_END);
         assertThat(testGovernmentWorkExperience.getPersonalWorkHours()).isEqualTo(UPDATED_PERSONAL_WORK_HOURS);
+        assertThat(testGovernmentWorkExperience.getPosition()).isEqualTo(UPDATED_POSITION);
     }
 
     @Test

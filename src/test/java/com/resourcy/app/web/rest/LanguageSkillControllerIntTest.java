@@ -1,22 +1,21 @@
 package com.resourcy.app.web.rest;
 
 import com.resourcy.app.Application;
+import com.resourcy.app.domain.LanguageLevel;
 import com.resourcy.app.domain.LanguageSkill;
 import com.resourcy.app.repository.LanguageSkillRepository;
 import com.resourcy.app.service.LanguageSkillService;
 import com.resourcy.app.web.rest.dto.LanguageSkillDTO;
 import com.resourcy.app.web.rest.mapper.LanguageSkillMapper;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -29,6 +28,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -46,10 +46,10 @@ public class LanguageSkillControllerIntTest {
 
     private static final String DEFAULT_LANGUAGE = "AAAAA";
     private static final String UPDATED_LANGUAGE = "BBBBB";
-    private static final String DEFAULT_SPEAKING = "AAAAA";
-    private static final String UPDATED_SPEAKING = "BBBBB";
-    private static final String DEFAULT_WRITING = "AAAAA";
-    private static final String UPDATED_WRITING = "BBBBB";
+    private static final LanguageLevel DEFAULT_SPEAKING = LanguageLevel.A1;
+    private static final LanguageLevel UPDATED_SPEAKING = LanguageLevel.A2;
+    private static final LanguageLevel DEFAULT_WRITING = LanguageLevel.A1;
+    private static final LanguageLevel UPDATED_WRITING = LanguageLevel.A2;
 
     @Inject
     private LanguageSkillRepository languageSkillRepository;
