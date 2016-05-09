@@ -5,8 +5,12 @@ import com.resourcy.app.repository.GovernmentProjectRepository;
 import com.resourcy.app.repository.TechnologyRepository;
 import com.resourcy.app.repository.search.TechnologySearchRepository;
 import com.resourcy.app.service.TechnologyService;
+import com.resourcy.app.service.validator.ValidationException;
+import com.resourcy.app.service.validator.ValidationResponse;
+import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.TechnologyDTO;
 import com.resourcy.app.web.rest.mapper.TechnologyMapper;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -28,25 +32,32 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 public class TechnologyServiceImpl implements TechnologyService{
 
     private final Logger log = LoggerFactory.getLogger(TechnologyServiceImpl.class);
-    
+
     @Inject
     private TechnologyRepository technologyRepository;
-    
+
     @Inject
     private TechnologyMapper technologyMapper;
 
     @Inject
     private GovernmentProjectRepository governmentProjectRepository;
-    
+
     @Inject
     private TechnologySearchRepository technologySearchRepository;
-    
+
+    @Inject
+    private ValidatorService technologyValidatorService;
+
     /**
      * Save a technology.
      * @return the persisted entity
      */
-    public TechnologyDTO save(TechnologyDTO technologyDTO) {
+    public TechnologyDTO save(TechnologyDTO technologyDTO) throws ValidationException {
         log.debug("Request to save Technology : {}", technologyDTO);
+        ValidationResponse validationResponse = technologyValidatorService.validate(technologyDTO);
+        if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
+            throw new ValidationException(validationResponse);
+        }
         Technology technology = technologyMapper.technologyDTOToTechnology(technologyDTO);
         technology = technologyRepository.save(technology);
         TechnologyDTO result = technologyMapper.technologyToTechnologyDTO(technology);
@@ -58,7 +69,7 @@ public class TechnologyServiceImpl implements TechnologyService{
      *  get all the technologys.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<TechnologyDTO> findAll() {
         log.debug("Request to get all Technologys");
         List<TechnologyDTO> result = technologyRepository.findAll().stream()
@@ -71,7 +82,7 @@ public class TechnologyServiceImpl implements TechnologyService{
      *  get one technology by id.
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public TechnologyDTO findOne(Long id) {
         log.debug("Request to get Technology : {}", id);
         Technology technology = technologyRepository.findOne(id);
@@ -92,9 +103,9 @@ public class TechnologyServiceImpl implements TechnologyService{
      * search for the technology corresponding
      * to the query.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<TechnologyDTO> search(String query) {
-        
+
         log.debug("REST request to search Technologys for query {}", query);
         return StreamSupport
             .stream(technologySearchRepository.search(queryStringQuery(query)).spliterator(), false)

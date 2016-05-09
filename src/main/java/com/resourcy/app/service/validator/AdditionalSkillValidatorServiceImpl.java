@@ -15,11 +15,15 @@ public class AdditionalSkillValidatorServiceImpl implements ValidatorService<Add
     public ValidationResponse validate(AdditionalSkillDTO skill) {
         ValidationResponse validationResponse = new ValidationResponse();
 
-        if (skill.getDescription() == null || skill.getType() == null) {
-            validationResponse.getErrorMessage().add("Some fields are empty in additional skill");
+        if (skill.getDescription() == null) {
+            validationResponse.getErrorMessage().add("ERROR_ADD_SKILL_DESCRIPTION_ISEMPTY");
         }
-
-
+        if (skill.getType() == null) {
+            validationResponse.getErrorMessage().add("ERROR_ADD_SKILL_TYPE_ISEMPTY");
+        }
+        if (skill.getExperience() == 0) {
+            validationResponse.getErrorMessage().add("ERROR_ADD_SKILL_TYPE_ISEMPTY");
+        }
         return validationResponse;
     }
 }

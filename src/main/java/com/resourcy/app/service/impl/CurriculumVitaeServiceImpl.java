@@ -6,6 +6,8 @@ import com.resourcy.app.repository.CurriculumVitaeRepository;
 import com.resourcy.app.repository.search.CurriculumVitaeSearchRepository;
 import com.resourcy.app.service.CurriculumVitaeService;
 import com.resourcy.app.service.UserService;
+import com.resourcy.app.service.validator.ValidationException;
+import com.resourcy.app.service.validator.ValidationResponse;
 import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.CurriculumVitaeDTO;
 import com.resourcy.app.web.rest.mapper.CurriculumVitaeMapper;
@@ -52,12 +54,12 @@ public class CurriculumVitaeServiceImpl implements CurriculumVitaeService{
      * Save a curriculumVitae.
      * @return the persisted entity
      */
-    public CurriculumVitaeDTO save(CurriculumVitaeDTO curriculumVitaeDTO) {
+    public CurriculumVitaeDTO save(CurriculumVitaeDTO curriculumVitaeDTO) throws ValidationException {
         log.debug("Request to save CurriculumVitae : {}", curriculumVitaeDTO);
-        if (CollectionUtils.isEmpty(curriculumVitaeValidatorService.validate(curriculumVitaeDTO).getErrorMessage())) {
-            throw new UnsupportedOperationException();
+        ValidationResponse validationResponse = curriculumVitaeValidatorService.validate(curriculumVitaeDTO);
+        if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
+            throw new ValidationException(validationResponse);
         }
-
         CurriculumVitae curriculumVitae = curriculumVitaeMapper.curriculumVitaeDTOToCurriculumVitae(curriculumVitaeDTO);
         curriculumVitae.setEmployee(userService.getUserWithAuthorities().getEmployee());
         curriculumVitae = curriculumVitaeRepository.save(curriculumVitae);

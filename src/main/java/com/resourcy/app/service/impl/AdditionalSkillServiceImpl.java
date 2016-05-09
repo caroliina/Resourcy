@@ -5,6 +5,8 @@ import com.resourcy.app.domain.AdditionalSkill;
 import com.resourcy.app.repository.AdditionalSkillRepository;
 import com.resourcy.app.repository.CurriculumVitaeRepository;
 import com.resourcy.app.repository.search.AdditionalSkillSearchRepository;
+import com.resourcy.app.service.validator.ValidationException;
+import com.resourcy.app.service.validator.ValidationResponse;
 import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.AdditionalSkillDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalSkillMapper;
@@ -54,10 +56,11 @@ public class AdditionalSkillServiceImpl implements AdditionalSkillService{
      * Save a additionalSkill.
      * @return the persisted entity
      */
-    public AdditionalSkillDTO save(AdditionalSkillDTO additionalSkillDTO) {
+    public AdditionalSkillDTO save(AdditionalSkillDTO additionalSkillDTO) throws ValidationException {
         log.debug("Request to save AdditionalSkill : {}", additionalSkillDTO);
-        if (CollectionUtils.isEmpty(additionalSkillValidatorService.validate(additionalSkillDTO).getErrorMessage())) {
-            throw new UnsupportedOperationException();
+        ValidationResponse validationResponse = additionalSkillValidatorService.validate(additionalSkillDTO);
+        if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
+            throw new ValidationException(validationResponse);
         }
         AdditionalSkill additionalSkill = additionalSkillMapper.additionalSkillDTOToAdditionalSkill(additionalSkillDTO);
         additionalSkill = additionalSkillRepository.save(additionalSkill);

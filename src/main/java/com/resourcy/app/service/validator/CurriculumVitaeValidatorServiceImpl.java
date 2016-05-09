@@ -20,7 +20,7 @@ public class CurriculumVitaeValidatorServiceImpl implements ValidatorService<Cur
         if (!CollectionUtils.isEmpty(curriculumVitaeDTO.getAdditionalSkills())) {
             for (AdditionalSkillDTO skill : curriculumVitaeDTO.getAdditionalSkills()) {
                 if (skill.getDescription() == null || skill.getType() == null) {
-                    validationResponse.getErrorMessage().add("mllllm");
+                    validationResponse.getErrorMessage().add("midagi l2ks valesti");
                 }
             }
         }

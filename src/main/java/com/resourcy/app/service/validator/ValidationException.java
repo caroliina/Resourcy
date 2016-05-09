@@ -10,7 +10,7 @@ public class ValidationException extends Exception {
     ValidationResponse validationResponse;
 
     public ValidationException(ValidationResponse validationResponse) {
-        super(StringUtils.join(validationResponse.getErrorMessage(), ", "));
+        super(StringUtils.join(validationResponse.getErrorMessage(), ","));
         this.validationResponse = validationResponse;
     }
 

@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.WorkExperienceDTO;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface WorkExperienceService {
      * Save a workExperience.
      * @return the persisted entity
      */
-    public WorkExperienceDTO save(WorkExperienceDTO workExperienceDTO);
+    public WorkExperienceDTO save(WorkExperienceDTO workExperienceDTO) throws ValidationException;
 
     /**
      *  get all the workExperiences.

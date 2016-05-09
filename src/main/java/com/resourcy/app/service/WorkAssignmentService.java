@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.WorkAssignmentDTO;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface WorkAssignmentService {
      * Save a workAssignment.
      * @return the persisted entity
      */
-    public WorkAssignmentDTO save(WorkAssignmentDTO workAssignmentDTO);
+    public WorkAssignmentDTO save(WorkAssignmentDTO workAssignmentDTO) throws ValidationException;
 
     /**
      *  get all the workAssignments.

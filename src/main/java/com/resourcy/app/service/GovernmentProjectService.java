@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.GovernmentProjectDTO;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface GovernmentProjectService {
      * Save a governmentProject.
      * @return the persisted entity
      */
-    public GovernmentProjectDTO save(GovernmentProjectDTO governmentProjectDTO);
+    public GovernmentProjectDTO save(GovernmentProjectDTO governmentProjectDTO) throws ValidationException;
 
     /**
      *  get all the governmentProjects.

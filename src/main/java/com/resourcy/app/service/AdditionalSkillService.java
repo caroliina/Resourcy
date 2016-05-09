@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.AdditionalSkillDTO;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface AdditionalSkillService {
      * Save a additionalSkill.
      * @return the persisted entity
      */
-    public AdditionalSkillDTO save(AdditionalSkillDTO additionalSkillDTO);
+    public AdditionalSkillDTO save(AdditionalSkillDTO additionalSkillDTO) throws ValidationException;
 
     /**
      *  get all the additionalSkills.

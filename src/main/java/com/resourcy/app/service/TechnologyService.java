@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.TechnologyDTO;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface TechnologyService {
      * Save a technology.
      * @return the persisted entity
      */
-    public TechnologyDTO save(TechnologyDTO technologyDTO);
+    public TechnologyDTO save(TechnologyDTO technologyDTO) throws ValidationException;
 
     /**
      *  get all the technologys.

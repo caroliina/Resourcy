@@ -8,8 +8,12 @@ import com.resourcy.app.repository.EmployeeRepository;
 import com.resourcy.app.repository.search.EmployeeSearchRepository;
 import com.resourcy.app.service.EmployeeService;
 import com.resourcy.app.service.UserService;
+import com.resourcy.app.service.validator.ValidationException;
+import com.resourcy.app.service.validator.ValidationResponse;
+import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.EmployeeDTO;
 import com.resourcy.app.web.rest.mapper.EmployeeMapper;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -35,13 +39,13 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 public class EmployeeServiceImpl implements EmployeeService{
 
     private final Logger log = LoggerFactory.getLogger(EmployeeServiceImpl.class);
-    
+
     @Inject
     private EmployeeRepository employeeRepository;
-    
+
     @Inject
     private EmployeeMapper employeeMapper;
-    
+
     @Inject
     private EmployeeSearchRepository employeeSearchRepository;
 
@@ -50,11 +54,18 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Inject
     private UserService userService;
-    
+
+    @Inject
+    private ValidatorService employeeValidatorService;
+
     /**
      * Save a employee.
      */
-    public EmployeeDTO save(EmployeeDTO employeeDTO) {
+    public EmployeeDTO save(EmployeeDTO employeeDTO) throws ValidationException {
+        ValidationResponse validationResponse = employeeValidatorService.validate(employeeDTO);
+        if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
+            throw new ValidationException(validationResponse);
+        }
         Employee employee = employeeRepository.findOne(employeeDTO.getId());
         employee.setFirstName(employee.getFirstName());
         employee.setLastName(employee.getLastName());
@@ -71,10 +82,10 @@ public class EmployeeServiceImpl implements EmployeeService{
      *  get all the employees.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<Employee> findAll(Pageable pageable) {
         log.debug("Request to get all Employees");
-        Page<Employee> result = employeeRepository.findAll(pageable); 
+        Page<Employee> result = employeeRepository.findAll(pageable);
         return result;
     }
 
@@ -82,7 +93,7 @@ public class EmployeeServiceImpl implements EmployeeService{
      *  get one employee by id.
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public EmployeeDTO findOne(Long id) {
         log.debug("Request to get Employee : {}", id);
         Employee employee = employeeRepository.findOne(id);
@@ -103,9 +114,9 @@ public class EmployeeServiceImpl implements EmployeeService{
      * search for the employee corresponding
      * to the query.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<EmployeeDTO> search(String query) {
-        
+
         log.debug("REST request to search Employees for query {}", query);
         return StreamSupport
             .stream(employeeSearchRepository.search(queryStringQuery(query)).spliterator(), false)

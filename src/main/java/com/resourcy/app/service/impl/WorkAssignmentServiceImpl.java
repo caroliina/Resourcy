@@ -6,8 +6,12 @@ import com.resourcy.app.repository.WorkAssignmentRepository;
 import com.resourcy.app.repository.WorkExperienceRepository;
 import com.resourcy.app.repository.search.WorkAssignmentSearchRepository;
 import com.resourcy.app.service.WorkAssignmentService;
+import com.resourcy.app.service.validator.ValidationException;
+import com.resourcy.app.service.validator.ValidationResponse;
+import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.WorkAssignmentDTO;
 import com.resourcy.app.web.rest.mapper.WorkAssignmentMapper;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -45,12 +49,19 @@ public class WorkAssignmentServiceImpl implements WorkAssignmentService{
     @Inject
     private GovernmentWorkExperienceRepository govWorkExperienceRepository;
 
+    @Inject
+    private ValidatorService workAssignmentValidatorService;
+
     /**
      * Save a workAssignment.
      * @return the persisted entity
      */
-    public WorkAssignmentDTO save(WorkAssignmentDTO workAssignmentDTO) {
+    public WorkAssignmentDTO save(WorkAssignmentDTO workAssignmentDTO) throws ValidationException {
         log.debug("Request to save WorkAssignment : {}", workAssignmentDTO);
+        ValidationResponse validationResponse = workAssignmentValidatorService.validate(workAssignmentDTO);
+        if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
+            throw new ValidationException(validationResponse);
+        }
         WorkAssignment workAssignment = workAssignmentMapper.workAssignmentDTOToWorkAssignment(workAssignmentDTO);
         workAssignment = workAssignmentRepository.save(workAssignment);
         WorkAssignmentDTO result = workAssignmentMapper.workAssignmentToWorkAssignmentDTO(workAssignment);

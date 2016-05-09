@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.AdditionalStudyDTO;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface AdditionalStudyService {
      * Save a additionalStudy.
      * @return the persisted entity
      */
-    public AdditionalStudyDTO save(AdditionalStudyDTO additionalStudyDTO);
+    public AdditionalStudyDTO save(AdditionalStudyDTO additionalStudyDTO) throws ValidationException;
 
     /**
      *  get all the additionalStudys.

@@ -15,8 +15,14 @@ public class AdditionalStudyValidatorServiceImpl implements ValidatorService<Add
     public ValidationResponse validate(AdditionalStudyDTO study) {
         ValidationResponse validationResponse = new ValidationResponse();
 
-        if (study.getInstitution() == null || study.getPeriodStart() == null || study.getDescription() == null) {
-            validationResponse.getErrorMessage().add("Some fields are empty in additional study");
+        if (study.getInstitution() == null)  {
+            validationResponse.getErrorMessage().add("ERROR_ADD_STUDY_INSTITUTION_ISEMPTY");
+        }
+        if (study.getPeriodStart() == null)  {
+            validationResponse.getErrorMessage().add("ERROR_ADD_STUDY_PERIODSTART_ISEMPTY");
+        }
+        if (study.getDescription() == null)  {
+            validationResponse.getErrorMessage().add("ERROR_ADD_STUDY_DESCRIPTION_ISEMPTY");
         }
         return validationResponse;
     }

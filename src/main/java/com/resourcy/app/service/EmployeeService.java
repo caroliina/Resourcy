@@ -1,6 +1,7 @@
 package com.resourcy.app.service;
 
 import com.resourcy.app.domain.Employee;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.EmployeeDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +16,7 @@ public interface EmployeeService {
     /**
      * Save a employee.
      */
-    EmployeeDTO save(EmployeeDTO employeeDTO);
+    EmployeeDTO save(EmployeeDTO employeeDTO) throws ValidationException;
 
     /**
      *  get all the employees.

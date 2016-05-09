@@ -15,10 +15,19 @@ public class EducationValidatorServiceImpl implements ValidatorService<Education
     public ValidationResponse validate(EducationDTO education) {
         ValidationResponse validationResponse = new ValidationResponse();
 
-        if (education.getInstitution() == null || education.getPeriodStart() == null || education.getSpeciality() == null ||
-            education.getDegree() == null) {
-            validationResponse.getErrorMessage().add("Some fields are empty in education");
+        if (education.getInstitution() == null)  {
+            validationResponse.getErrorMessage().add("ERROR_EDUCATION_INSTITUTION_ISEMPTY");
         }
+        if (education.getPeriodStart() == null)  {
+            validationResponse.getErrorMessage().add("ERROR_EDUCATION_PERIODSTART_ISEMPTY");
+        }
+        if (education.getSpeciality() == null)  {
+            validationResponse.getErrorMessage().add("ERROR_EDUCATION_SPECIALITY_ISEMPTY");
+        }
+        if (education.getDegree() == null)  {
+            validationResponse.getErrorMessage().add("ERROR_EDUCATION_DEGREE_ISEMPTY");
+        }
+
         return validationResponse;
     }
 

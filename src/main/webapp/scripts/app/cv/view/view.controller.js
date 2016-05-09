@@ -408,11 +408,24 @@ angular.module('resourcyApp')
         //edits
         $scope.editEdu = function (id) {
             if ($scope.educations[id].editmode === true) {
-                $scope.saveEdu(id);
-                $scope.educations[id].editmode = false
+                $scope.saveEdu(id)
+                    .then(function(result) {
+                        $scope.educations[id].editmode = false
+                    },
+                    function(result) {
+                        console.log(result);
+                        addError('educationArea', result.data.message);
+                    }
+                );
             } else {
                 $scope.educations[id].editmode = true
             }
+        };
+        function addError(area, message) {
+            if (!$scope.error) {
+                $scope.error = {};
+            }
+            $scope.error[area] = message;
         }
 
         $scope.editLang = function (id) {
@@ -461,11 +474,7 @@ angular.module('resourcyApp')
         // save lines
         $scope.saveEdu = function (id) {
             $scope.educations[id].curriculumVitaeId = $scope.cv_id;
-            console.log("olen j2ll");
-            $http.put("api/educations", $scope.educations[id]).then(function (response) {
-            }, function (response) {
-                console.log(response);
-            });
+            return $http.put("api/educations", $scope.educations[id]);
         };
 
         $scope.saveLang = function (id) {

@@ -2,6 +2,7 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.AdditionalSkillService;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.AdditionalSkillDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalSkillMapper;
 import com.resourcy.app.web.rest.util.HeaderUtil;
@@ -27,13 +28,13 @@ import java.util.Optional;
 public class AdditionalSkillController {
 
     private final Logger log = LoggerFactory.getLogger(AdditionalSkillController.class);
-        
+
     @Inject
     private AdditionalSkillService additionalSkillService;
-    
+
     @Inject
     private AdditionalSkillMapper additionalSkillMapper;
-    
+
     /**
      * POST  /additionalSkills -> Create a new additionalSkill.
      */
@@ -41,7 +42,7 @@ public class AdditionalSkillController {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<AdditionalSkillDTO> createAdditionalSkill(@RequestBody AdditionalSkillDTO additionalSkillDTO) throws URISyntaxException {
+    public ResponseEntity<AdditionalSkillDTO> createAdditionalSkill(@RequestBody AdditionalSkillDTO additionalSkillDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to save AdditionalSkill : {}", additionalSkillDTO);
         if (additionalSkillDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("additionalSkill", "idexists", "A new additionalSkill cannot already have an ID")).body(null);
@@ -59,7 +60,7 @@ public class AdditionalSkillController {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<AdditionalSkillDTO> updateAdditionalSkill(@RequestBody AdditionalSkillDTO additionalSkillDTO) throws URISyntaxException {
+    public ResponseEntity<AdditionalSkillDTO> updateAdditionalSkill(@RequestBody AdditionalSkillDTO additionalSkillDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to update AdditionalSkill : {}", additionalSkillDTO);
         if (additionalSkillDTO.getId() == null) {
             return createAdditionalSkill(additionalSkillDTO);
