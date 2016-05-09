@@ -86,6 +86,7 @@ angular.module('resourcyApp')
             $scope.additionalSkill = resp.additionalSkills;
             $scope.workExperience = resp.workExperiences;
             $scope.govWorkExperience = resp.governmentWorkExperiences;
+            console.log($scope.govWorkExperience)
           });
           Restangular.one('api').one('workExperiences/positions').get().then(function(response){
             $scope.positions = response;
@@ -511,9 +512,17 @@ angular.module('resourcyApp')
                 $http.put("api/technologys", assign).then(function (responses) {
                 })
               })
+              if($scope.govWorkExperience[id].id){
+                console.log($scope.govWorkExperience[id])
+
+              }else{
+                $scope.govWorkExperience[id].id = null;
+                console.log('not found')
+                console.log($scope.govWorkExperience[id])
+              }
+              $scope.govWorkExperience[id].personalWorkHours = parseInt($scope.govWorkExperience[id].personalWorkHours)
               console.log($scope.govWorkExperience[id])
-              
-              $http.post("api/govWorkExperience", $scope.govWorkExperience[id]).then(function (govXP) {
+              $http.put("api/governmentWorkExperiences", $scope.govWorkExperience[id]).then(function (govXP) {
                   angular.forEach($scope.govWorkExperience[id].workAssignments,function(assign,key){
                     assign['governmentWorkExperienceId'] = govXP.data.id;
                     $http.put("api/workAssignments", assign).then(function (responses) {
