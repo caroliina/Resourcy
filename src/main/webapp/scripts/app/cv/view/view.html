@@ -10,6 +10,9 @@
                     <tr valign="top">
                         <td><h1>CV {{persons.firstName}} {{persons.lastName}} </h1></td>
                     </tr>
+                    <div class="alert alert-danger" ng-if="error.personArea">
+                        <p ng-repeat="alert in error.personArea" ng-bind="alert | translate"></p>
+                    </div>
                     <tr valign="top">
                         <td>
                             <input type="text" ng-if="personData" ng-model="persons.id" class="hidden">

@@ -416,7 +416,8 @@ angular.module('resourcyApp')
             if ($scope.educations[id].editmode === true) {
                 $scope.saveEdu(id)
                     .then(function (result) {
-                        $scope.educations[id].editmode = false
+                        $scope.educations[id].editmode = false;
+                        clearError();
                     },
                     function (result) {
                         if (result && result.data && result.data.message) {
@@ -428,11 +429,16 @@ angular.module('resourcyApp')
                 $scope.educations[id].editmode = true
             }
         };
+
         function addError(area, message) {
             if (!$scope.error) {
                 $scope.error = {};
             }
             $scope.error[area] = message;
+        }
+
+        function clearError() {
+            $scope.error = {};
         }
 
         $scope.editLang = function (id) {
@@ -586,10 +592,15 @@ angular.module('resourcyApp')
 
         $scope.saveEmployee = function () {
             if ($scope.personData) {
+                return $http.put("api/employee", $scope.persons)
+                    .then(function (response) {
 
-                return $http.put("api/employee", $scope.persons).then(function (response) {
-
-                });
+                },function (result) {
+                        if (result && result.data && result.data.message) {
+                            addError('personArea', result.data.message.split(","));
+                        }
+                    }
+                );
             } else {
                 Restangular.all("api").all("employee").post($scope.persons).then(function (resp) {
                     console.log(resp)
