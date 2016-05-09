@@ -22,7 +22,7 @@ public class AdditionalSkillValidatorServiceImpl implements ValidatorService<Add
             validationResponse.getErrorMessage().add("ERROR_ADD_SKILL_TYPE_ISEMPTY");
         }
         if (skill.getExperience() == 0) {
-            validationResponse.getErrorMessage().add("ERROR_ADD_SKILL_TYPE_ISEMPTY");
+            validationResponse.getErrorMessage().add("ERROR_ADD_SKILL_EXPERIENCE_ISEMPTY");
         }
         return validationResponse;
     }

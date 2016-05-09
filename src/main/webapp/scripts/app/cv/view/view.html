@@ -5,8 +5,6 @@
                 <button ng-click="changeView()" ng-if="personData"><span ng-if="!editmode">Change CV data</span><span
                         ng-if="editmode">Cancel</span></button>
             </div>
-            Tere on siin: <h1 ng-bind="tere"></h1>
-
             <form name="cvForm">
                 <table class="fullcv" cellpadding="0" cellspacing="0" width="100%">
                     <tr valign="top">
@@ -80,13 +78,13 @@
                     </tr>
                     <tr valign="top" ng-if="personData">
                         <td>
-                            <div class="alert alert-danger" ng-if="error.educationArea">
-                                <span ng-bind="error.educationArea"></span>
-                            </div>
                             <div>
                                 <h3>6. <span translate="form.education"></span>
                                     <div class="addbutton" ng-if="editmode" ng-click="addEducation()">+</div>
                                 </h3>
+                                <div class="alert alert-danger" ng-if="error.educationArea">
+                                    <p ng-repeat="alert in error.educationArea" ng-bind="alert | translate"></p>
+                                </div>
                             </div>
                             <table class="edication" width="100%" border="1px">
                                 <tr valign="top">
@@ -200,6 +198,9 @@
 
                                     <div class="addbutton" ng-if="editmode" ng-click="addworkXP()">+</div>
                                 </h3>
+                                <div class="alert alert-danger" ng-if="error.workExperienceArea">
+                                    <p ng-repeat="alert in error.workExperienceArea" ng-bind="alert | translate"></p>
+                                </div>
                             </div>
                             <table class="xp" width="100%" border="1px" style="margin-bottom: 30px;"
                                    ng-repeat="(key,workxp) in workExperience | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
@@ -326,6 +327,9 @@
                                 <h3>8. Töökogemus riigihanke objektiga sarnastel objektidel, nende loetelu ja töö maht:
                                     <div class="addbutton" ng-if="editmode" ng-click="addGov()">+</div>
                                 </h3>
+                                <div class="alert alert-danger" ng-if="error.govWorkExperienceArea">
+                                    <p ng-repeat="alert in error.govWorkExperienceArea" ng-bind="alert | translate"></p>
+                                </div>
                             </div>
                             <table valign="top" class="edication" width="100%" border="1px">
                                 <tr valign="top">
@@ -512,6 +516,9 @@
                                 <h3>9. Erialane täiendkoolitus:
                                     <div class="addbutton" ng-if="editmode" ng-click="addStudy()">+</div>
                                 </h3>
+                                <div class="alert alert-danger" ng-if="error.studyArea">
+                                    <p ng-repeat="alert in error.studyArea" ng-bind="alert | translate"></p>
+                                </div>
                             </div>
                             <table valign="top" class="edication" width="100%" border="1px">
                                 <tr valign="top">
@@ -600,6 +607,9 @@
                                 <h3>10. Keelteoskus: Tasemed A1-C2.
                                     <div class="addbutton" ng-if="editmode" ng-click="addLanguage()">+</div>
                                 </h3>
+                                <div class="alert alert-danger" ng-if="error.languageArea">
+                                    <p ng-repeat="alert in error.languageArea" ng-bind="alert | translate"></p>
+                                </div>
                             </div>
                             <table valign="top" class="edication" width="100%" border="1px">
                                 <tr valign="top">
@@ -662,6 +672,9 @@
                                 <h3>11. Muud oskused (arvutioskus):
                                     <div class="addbutton" ng-if="editmode" ng-click="addSkills()">+</div>
                                 </h3>
+                                <div class="alert alert-danger" ng-if="error.additionalSkillArea">
+                                    <p ng-repeat="alert in error.additionalSkillArea" ng-bind="alert | translate"></p>
+                                </div>
                             </div>
                             <ul>
                                 <li ng-repeat="(key, skills) in additionalSkill">
@@ -699,6 +712,9 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <h3 translate="form.addNewProject"></h3>
+                        <div class="alert alert-danger" ng-if="error.projectArea">
+                            <p ng-repeat="alert in error.projectArea" ng-bind="alert | translate"></p>
+                        </div>
 
                         <form name="position">
                             <select ng-model="getProject" required>
@@ -711,11 +727,11 @@
                             <div ng-if="getProject == 'new'">
 
                                 <span translate="form.buyer"></span>
-                                <input type="text" ng-model="newPorject.buyer" required><br>
+                                <input type="text" ng-model="newPorject.buyer" ><br>
                                 <span translate="form.servicename"></span>
-                                <input type="text" ng-model="newPorject.serviceName" required><br>
+                                <input type="text" ng-model="newPorject.serviceName" ><br>
                                 <span translate="form.totalhours"></span>
-                                <input type="text" ng-model="newPorject.totalProjectWorkHours" required><br>
+                                <input type="text" ng-model="newPorject.totalProjectWorkHours" ><br>
                             </div>
                             <input type="submit" translate="form.add" ng-click="addProject()">
                         </form>

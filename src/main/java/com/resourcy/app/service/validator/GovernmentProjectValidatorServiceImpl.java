@@ -23,9 +23,6 @@ public class GovernmentProjectValidatorServiceImpl implements ValidatorService<G
         if (governmentProject.getServiceName() == null)  {
             validationResponse.getErrorMessage().add("ERROR_GOV-PROJECT_SERVICENAME_ISEMPTY");
         }
-        if (CollectionUtils.isEmpty(governmentProject.getTechnologies()))  {
-            validationResponse.getErrorMessage().add("ERROR_GOV-PROJECT_TECHNOLOGIES_ISEMPTY");
-        }
         if (governmentProject.getTotalProjectWorkHours() == null)  {
             validationResponse.getErrorMessage().add("ERROR_GOV-PROJECT_WORK-HOURS_ISEMPTY");
         }
