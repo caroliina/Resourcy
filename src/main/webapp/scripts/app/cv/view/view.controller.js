@@ -462,7 +462,9 @@ angular.module('resourcyApp')
         // save lines
         $scope.saveEdu = function (id) {
             $scope.educations[id].curriculumVitaeId = $scope.cv_id;
+
             $http.put("api/educations", $scope.educations[id]).then(function (response) {
+              console.log(response);
                           });
         };
 
