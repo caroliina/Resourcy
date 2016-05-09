@@ -2,6 +2,7 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.LanguageSkillService;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.LanguageSkillDTO;
 import com.resourcy.app.web.rest.mapper.LanguageSkillMapper;
 import com.resourcy.app.web.rest.util.HeaderUtil;
@@ -27,13 +28,13 @@ import java.util.Optional;
 public class LanguageSkillController {
 
     private final Logger log = LoggerFactory.getLogger(LanguageSkillController.class);
-        
+
     @Inject
     private LanguageSkillService languageSkillService;
-    
+
     @Inject
     private LanguageSkillMapper languageSkillMapper;
-    
+
     /**
      * POST  /languageSkills -> Create a new languageSkill.
      */
@@ -41,7 +42,7 @@ public class LanguageSkillController {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<LanguageSkillDTO> createLanguageSkill(@RequestBody LanguageSkillDTO languageSkillDTO) throws URISyntaxException {
+    public ResponseEntity<LanguageSkillDTO> createLanguageSkill(@RequestBody LanguageSkillDTO languageSkillDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to save LanguageSkill : {}", languageSkillDTO);
         if (languageSkillDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("languageSkill", "idexists", "A new languageSkill cannot already have an ID")).body(null);
@@ -59,7 +60,7 @@ public class LanguageSkillController {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<LanguageSkillDTO> updateLanguageSkill(@RequestBody LanguageSkillDTO languageSkillDTO) throws URISyntaxException {
+    public ResponseEntity<LanguageSkillDTO> updateLanguageSkill(@RequestBody LanguageSkillDTO languageSkillDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to update LanguageSkill : {}", languageSkillDTO);
         if (languageSkillDTO.getId() == null) {
             return createLanguageSkill(languageSkillDTO);

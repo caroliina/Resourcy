@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
  * Created by Salome on 19.04.2016.
  */
 
-@Service("workAssignmentService")
-public class WorkAssignmentServiceImpl implements ValidatorService<WorkAssignmentDTO> {
+@Service("workAssignmentValidatorService")
+public class WorkAssignmentValidatorServiceImpl implements ValidatorService<WorkAssignmentDTO> {
 
     @Override
     public ValidationResponse validate(WorkAssignmentDTO workAssignment) {

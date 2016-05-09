@@ -2,6 +2,7 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.AdditionalStudyService;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.AdditionalStudyDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalStudyMapper;
 import com.resourcy.app.web.rest.util.HeaderUtil;
@@ -27,13 +28,13 @@ import java.util.Optional;
 public class AdditionalStudyController {
 
     private final Logger log = LoggerFactory.getLogger(AdditionalStudyController.class);
-        
+
     @Inject
     private AdditionalStudyService additionalStudyService;
-    
+
     @Inject
     private AdditionalStudyMapper additionalStudyMapper;
-    
+
     /**
      * POST  /additionalStudys -> Create a new additionalStudy.
      */
@@ -41,7 +42,7 @@ public class AdditionalStudyController {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<AdditionalStudyDTO> createAdditionalStudy(@RequestBody AdditionalStudyDTO additionalStudyDTO) throws URISyntaxException {
+    public ResponseEntity<AdditionalStudyDTO> createAdditionalStudy(@RequestBody AdditionalStudyDTO additionalStudyDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to save AdditionalStudy : {}", additionalStudyDTO);
         if (additionalStudyDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("additionalStudy", "idexists", "A new additionalStudy cannot already have an ID")).body(null);
@@ -59,7 +60,7 @@ public class AdditionalStudyController {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<AdditionalStudyDTO> updateAdditionalStudy(@RequestBody AdditionalStudyDTO additionalStudyDTO) throws URISyntaxException {
+    public ResponseEntity<AdditionalStudyDTO> updateAdditionalStudy(@RequestBody AdditionalStudyDTO additionalStudyDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to update AdditionalStudy : {}", additionalStudyDTO);
         if (additionalStudyDTO.getId() == null) {
             return createAdditionalStudy(additionalStudyDTO);

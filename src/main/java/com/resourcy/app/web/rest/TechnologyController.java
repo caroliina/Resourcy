@@ -2,6 +2,7 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.TechnologyService;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.TechnologyDTO;
 import com.resourcy.app.web.rest.mapper.TechnologyMapper;
 import com.resourcy.app.web.rest.util.HeaderUtil;
@@ -27,13 +28,13 @@ import java.util.Optional;
 public class TechnologyController {
 
     private final Logger log = LoggerFactory.getLogger(TechnologyController.class);
-        
+
     @Inject
     private TechnologyService technologyService;
-    
+
     @Inject
     private TechnologyMapper technologyMapper;
-    
+
     /**
      * POST  /technologys -> Create a new technology.
      */
@@ -41,7 +42,7 @@ public class TechnologyController {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<TechnologyDTO> createTechnology(@RequestBody TechnologyDTO technologyDTO) throws URISyntaxException {
+    public ResponseEntity<TechnologyDTO> createTechnology(@RequestBody TechnologyDTO technologyDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to save Technology : {}", technologyDTO);
         if (technologyDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("technology", "idexists", "A new technology cannot already have an ID")).body(null);
@@ -59,7 +60,7 @@ public class TechnologyController {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<TechnologyDTO> updateTechnology(@RequestBody TechnologyDTO technologyDTO) throws URISyntaxException {
+    public ResponseEntity<TechnologyDTO> updateTechnology(@RequestBody TechnologyDTO technologyDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to update Technology : {}", technologyDTO);
         if (technologyDTO.getId() == null) {
             return createTechnology(technologyDTO);

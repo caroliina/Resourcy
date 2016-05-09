@@ -2,6 +2,7 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.WorkAssignmentService;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.WorkAssignmentDTO;
 import com.resourcy.app.web.rest.mapper.WorkAssignmentMapper;
 import com.resourcy.app.web.rest.util.HeaderUtil;
@@ -27,13 +28,13 @@ import java.util.Optional;
 public class WorkAssignmentController {
 
     private final Logger log = LoggerFactory.getLogger(WorkAssignmentController.class);
-        
+
     @Inject
     private WorkAssignmentService workAssignmentService;
-    
+
     @Inject
     private WorkAssignmentMapper workAssignmentMapper;
-    
+
     /**
      * POST  /workAssignments -> Create a new workAssignment.
      */
@@ -41,7 +42,7 @@ public class WorkAssignmentController {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<WorkAssignmentDTO> createWorkAssignment(@RequestBody WorkAssignmentDTO workAssignmentDTO) throws URISyntaxException {
+    public ResponseEntity<WorkAssignmentDTO> createWorkAssignment(@RequestBody WorkAssignmentDTO workAssignmentDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to save WorkAssignment : {}", workAssignmentDTO);
         if (workAssignmentDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("workAssignment", "idexists", "A new workAssignment cannot already have an ID")).body(null);
@@ -59,7 +60,7 @@ public class WorkAssignmentController {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<WorkAssignmentDTO> updateWorkAssignment(@RequestBody WorkAssignmentDTO workAssignmentDTO) throws URISyntaxException {
+    public ResponseEntity<WorkAssignmentDTO> updateWorkAssignment(@RequestBody WorkAssignmentDTO workAssignmentDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to update WorkAssignment : {}", workAssignmentDTO);
         if (workAssignmentDTO.getId() == null) {
             return createWorkAssignment(workAssignmentDTO);
