@@ -40,41 +40,10 @@ public class EmployeeController {
     @Inject
     private EmployeeMapper employeeMapper;
 
-    /**
-     * POST  /employees -> Create a new employee.
-     */
-/*    @RequestMapping(value = "/employees",
-        method = RequestMethod.POST,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) throws URISyntaxException {
-        log.debug("REST request to save Employee : {}", employeeDTO);
-        if (employeeDTO.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("employee", "idexists", "A new employee cannot already have an ID")).body(null);
-        }
-        EmployeeDTO result = employeeService.save(employeeDTO);
-        return ResponseEntity.created(new URI("/api/employees/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("employee", result.getId().toString()))
-            .body(result);
-    }*/
-
-    /**
-     * PUT  /employees -> Updates an existing employee.
-     */
-/*    @RequestMapping(value = "/employees",
-        method = RequestMethod.PUT,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed*/
-/*    public ResponseEntity<EmployeeDTO> updateEmployee(@RequestBody EmployeeDTO employeeDTO) throws URISyntaxException {
-        log.debug("REST request to update Employee : {}", employeeDTO);
-        if (employeeDTO.getId() == null) {
-            return createEmployee(employeeDTO);
-        }
-        EmployeeDTO result = employeeService.save(employeeDTO);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("employee", employeeDTO.getId().toString()))
-            .body(result);
-    }*/
+    @RequestMapping(value = "/employee",method = RequestMethod.PUT)
+    public EmployeeDTO save(@RequestBody EmployeeDTO employeeDTO) {
+        return employeeService.save(employeeDTO);
+    }
 
     /**
      * GET  /employees -> get all the employees.

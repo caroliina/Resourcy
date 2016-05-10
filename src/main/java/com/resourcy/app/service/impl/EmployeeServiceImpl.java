@@ -53,16 +53,18 @@ public class EmployeeServiceImpl implements EmployeeService{
     
     /**
      * Save a employee.
-     * @return the persisted entity
      */
     public EmployeeDTO save(EmployeeDTO employeeDTO) {
-        log.debug("Request to save Employee : {}", employeeDTO);
-        Employee employee = employeeMapper.employeeDTOToEmployee(employeeDTO);
-        employee.setUser(userService.getUserWithAuthorities());
-        employee = employeeRepository.save(employee);
-        EmployeeDTO result = employeeMapper.employeeToEmployeeDTO(employee);
-        employeeSearchRepository.save(employee);
-        return result;
+        Employee employee = employeeRepository.findOne(employeeDTO.getId());
+        employee.setFirstName(employee.getFirstName());
+        employee.setLastName(employee.getLastName());
+        employee.setBirthday(employeeDTO.getBirthday());
+        employee.setIdCode(employeeDTO.getIdCode());
+        employee.setNationality(employeeDTO.getNationality());
+        employee.setEmail(employeeDTO.getEmail());
+
+        employeeRepository.save(employee);
+        return employeeMapper.employeeToEmployeeDTO(employee);
     }
 
     /**

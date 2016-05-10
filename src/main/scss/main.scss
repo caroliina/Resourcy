@@ -262,8 +262,6 @@ a.addbutton {
     float: right;
     margin-right: 45px;
     padding: 10px 15px;
-    border: 2px solid #373737;
-    color: #373737;
     text-transform: uppercase;
 }
 .sections {
@@ -356,4 +354,37 @@ a.addbutton {
     border: none;
     background-color: #D20909;
     color: #fff;
+}
+.addbutton {
+}
+span.input-group-btn button {
+    padding: 0 5px;
+    height: 25px;
+    vertical-align: middle;
+}
+span.input-group-btn {
+    display: inline-block;
+    right: -4px;
+    top: 4px;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+}
+.dater.ng-scope {
+    position: relative;
+}
+.cursorpointer{
+    cursor: pointer;
+}
+.addbutton {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+    position: relative;
+    top: -3px;
+}
+.techs{
+    display: inline-block;
+    width: 100%;
+    margin-top: 15px;
 }
