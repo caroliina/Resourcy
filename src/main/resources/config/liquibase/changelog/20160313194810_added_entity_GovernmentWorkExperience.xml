@@ -21,7 +21,7 @@
             <column name="period_end" type="date"/>
             <column name="personal_work_hours" type="integer"/>
             <column name="curriculum_vitae_id" type="bigint"/>
-            <column name="government_project_id" type="bigint"><constraints unique="true"/></column>
+            <column name="government_project_id" type="bigint"></column>
             <column name="created_date" type="TIMESTAMP"/>
             <column name="created_by" type="varchar(50)"/>
             <column name="last_modified_date" type="TIMESTAMP"/>
