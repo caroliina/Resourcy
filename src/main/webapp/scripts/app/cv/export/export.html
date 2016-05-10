@@ -1,0 +1,499 @@
+<div ng-cloak>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="exportview">
+                <button ng-click="exportView()">Export CV data</button>
+            </div>
+            <form name="cvForm" id="export-content">
+                <div name="cvTable" class="fullcv" id="fullcv" cellpadding="0" cellspacing="0" width="100%">
+                    <tr valign="top">
+                        <td><h1>CV {{persons.firstName}} {{persons.lastName}} </h1></td>
+                    </tr>
+                    <tr valign="top">
+                        <td>
+                            <input type="text" ng-if="personData" ng-model="persons.id" class="hidden">
+                            <table id="personal" class="personal" width="100%" border="1px">
+                                <tr valign="top">
+                                    <th style="padding: 5px 10px" width="20%" class="hidden">
+                                        <span translate="form.lastname"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.firstname"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.birthday"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.idcode"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.nationality"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.email"></span>
+                                    </th>
+                                </tr>
+                                <tr valign="top">
+                                    <td style="padding: 5px 10px" class="hidden">
+                                        <span contenteditable="false" ng-model="persons.lastName"></span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <span contenteditable="false" ng-model="persons.firstName"></span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <span contenteditable="false" ng-model="persons.birthday"></span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <span contenteditable="false" ng-model="persons.idCode"></span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <span contenteditable="false" ng-model="persons.nationality"></span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <span contenteditable="false" ng-model="persons.email"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr valign="top" ng-if="personData">
+                        <td>
+                            <div>
+                                <h3><span translate="form.education"></span>
+                                    <input id="education_btn" class="addbutton" type="checkbox"/>
+                                </h3>
+                            </div>
+                            <table id="education" class="edication" width="100%" border="1px">
+                                <tr valign="top">
+                                    <th style="padding: 5px 10px" width="20%" class="hidden">
+                                        <span translate="form.institution"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.institution"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.start"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.end"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.speciality"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.degree"></span>
+                                    </th>
+                                </tr>
+
+                                <tr valign="top"
+                                    ng-repeat="(key,education) in educations | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+                                    <td style="padding: 5px 10px" class="hidden">
+                                    <span ng-if="educations[key].editmode == true">
+                                        <input type="text" ng-model="education.id">
+                                    </span>
+                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">
+                                        <span contenteditable="false" ng-model="education.id"></span>
+                                    </span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="educations[key].editmode == true">
+                                        <input type="text" ng-model="education.institution">
+                                    </span>
+                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">
+                                        <span contenteditable="false" ng-model="education.institution"></span>
+                                    </span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+
+                                        <div ng-if="educations[key].editmode == false || !educations[key].editmode">
+                                            <span>{{education.periodStart | date:'dd.MM.yyyy'}}</span>
+                                        </div>
+                                        <div ng-if="educations[key].editmode == true" class="dater">
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                                   ng-model="education.periodStart" is-open="eduopened[key]"
+                                                   uib-datepicker-options="dateOptions"
+                                                   date-disabled="disabled(date, mode)" close-text="Close"/>
+
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" ng-click="eduopen($event,key)"><i
+                                                    class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </td>
+
+                                    <td style="padding: 5px 10px">
+                                        <div ng-if="educations[key].editmode == true" class="dater">
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                                   ng-model="education.periodEnd" is-open="educlosed[key]"
+                                                   uib-datepicker-options="dateOptions"
+                                                   date-disabled="disabled(date, mode)" close-text="Close"/>
+
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="educlose($event,key)"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                        </div>
+                                        <div ng-if="educations[key].editmode == false || !educations[key].editmode">
+                                            <span>{{education.periodEnd | date:"dd.MM.yyyy"}}</span>
+                                        </div>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="educations[key].editmode == true">
+                                        <input type="text" ng-model="education.speciality">
+                                    </span>
+                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">
+                                        <span contenteditable="false" ng-model="education.speciality"></span>
+                                    </span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="educations[key].editmode == true">
+                                        <input type="text" ng-model="education.degree">
+                                    </span>
+                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">
+                                        <span contenteditable="false" ng-model="education.degree"></span>
+                                    </span>
+                                    </td>
+                                    <td style="padding: 5px 10px" ng-if="educations[key].editmode"
+                                        confirmed-click="removeEdu(key)" ng-confirm-click="Kindel?">Kustuta
+                                    </td>
+                                    <td style="padding: 5px 10px" ng-if="editmode" ng-click="editEdu(key)">
+                                    <span ng-if="educations[key].editmode == true">
+                                        Save
+                                    </span>
+                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">
+                                        Edit
+                                    </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr valign="top" ng-if="personData">
+                        <td>
+                            <div>
+                                <h3><span translate="form.xp"></span>
+                                    <input id="workxp_btn" class="addbutton" type="checkbox"/>
+                                </h3>
+                            </div>
+                            <table id="workxp" valign="top" class="xp" width="100%" border="1px">
+                                <tr valign="top">
+                                    <th style="padding: 5px 10px">
+                                        <span translate="form.position"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px">
+                                        <span translate="form.start"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px">
+                                        <span translate="form.end"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px">
+                                        <span translate="form.organization"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px">
+                                        <span translate="form.location"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px">
+                                        <span translate="form.maintasks"></span>
+                                    </th>
+                                </tr>
+                                <tr valign="top"
+                                    ng-repeat="(key,workxp) in workExperience | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+                                    <td style="padding: 5px 10px">
+                                        <span contenteditable="false" ng-model="workxp.position"
+                                              translate="positions.{{workxp.position}}"></span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <div>{{workxp.periodStart | date:'dd.MM.yyyy'}}</div>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <div>{{workxp.periodEnd | date:'dd.MM.yyyy'}}</div>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <span contenteditable="false" ng-model="workxp.organization"></span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <span contenteditable="false" ng-model="workxp.location"></span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <span ng-repeat="(keys,tasks) in workxp.workAssignments">
+                                    <span
+                                        ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">
+                                        <span contenteditable="false" ng-model="tasks.description"></span>
+                                    </span></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr valign="top" ng-if="personData">
+                        <td>
+                            <div>
+                                <h3>Töökogemus riigihanke objektiga sarnastel objektidel, nende loetelu ja töö maht:
+                                    <input id="govxp_btn" class="addbutton" type="checkbox"/>
+                                </h3>
+                            </div>
+                            <table valign="top" id="govxp" class="edication" width="100%" border="1px">
+                                <tr valign="top">
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.start"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.end"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        Ostja
+                                    </th>
+                                    <th style="padding: 5px 10px" width="15%">
+                                        <span translate="form.servicename"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.position"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="30%">
+                                        Muu
+                                    </th>
+                                </tr>
+                                <tr valign="top"
+                                    ng-repeat="(key,govxp) in govWorkExperience | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+                                    <td style="padding: 5px 10px">
+                                        <span
+                                            ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
+                                            <span>{{govxp.periodStart | date:'dd.MM.yyyy'}}</span>
+                                        </span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                       <span
+                                           ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
+                                            <span>{{govxp.periodEnd | date:"dd.MM.yyyy"}}</span>
+                                        </span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <!--<span ng-if="govWorkExperience[key].editmode == true">
+                                            <input type="text" ng-model="govxp.governmentProject.buyer" >
+                                        </span>
+                                        <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">-->
+                                        <span contenteditable="false" ng-model="govxp.governmentProject.buyer"></span>
+                                        <!--</span>-->
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <!--<span ng-if="govWorkExperience[key].editmode == true">
+                                            <input type="text" ng-model="govxp.governmentProject.serviceName" >
+                                        </span>
+                                        <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">-->
+                                        <span contenteditable="false"
+                                              ng-model="govxp.governmentProject.serviceName"></span>
+                                        <!--</span>-->
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="govWorkExperience[key].editmode == true">
+                                        <select ng-model="govxp.position">
+                                            <option ng-repeat="option in positions" value="{{option}}"
+                                                    translate="positions.{{option}}"></option>
+                                        </select>
+                                    </span>
+                                    <span
+                                        ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
+                                        <span contenteditable="false" ng-model="govxp.position"
+                                              translate="positions.{{govxp.position}}"></span>
+                                    </span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <div>Tööülesanded:
+                                            <div ng-repeat="(keys,assign) in govxp.workAssignments">
+                                            <span ng-if="govWorkExperience[key].editmode == true">
+                                                <input type="text" ng-model="assign.description">-<span
+                                                style="padding: 5px 10px" ng-if="editmode"
+                                                confirmed-click="removeGovAssignment(key,keys)"
+                                                ng-confirm-click="Kindel?">Kustuta</span>
+                                            </span>
+                                            <span
+                                                ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
+                                                <span contenteditable="false" ng-model="assign.description"></span>
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div>Isiklike töötundide maht projekti raames:
+                                        <span
+                                            ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
+                                            <span contenteditable="false" ng-model="govxp.personalWorkHours"></span>
+                                        </span>
+                                        </div>
+                                        <div>
+                                            Projekti kogumaht:
+                                            <span contenteditable="false"
+                                                  ng-model="govxp.governmentProject.totalProjectWorkHours"></span>
+                                        </div>
+                                        <div>
+                                            Kasutatud platvormid/prog keeled:
+                                            <div ng-repeat="(keys,techs) in govxp.governmentProject.technologies">
+                                            <span ng-if="govWorkExperience[key].editmode == true">
+                                                <input type="text" ng-model="techs.type"> - <input type="text"
+                                                                                                   ng-model="techs.description"> ----<span
+                                                style="padding: 5px 10px" ng-if="editmode"
+                                                confirmed-click="removeGovTechs(key,keys)" ng-confirm-click="Kindel?">Kustuta</span>
+                                            </span>
+                                            <span
+                                                ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
+                                                <span contenteditable="false" ng-model="techs.type"></span> - <span
+                                                contenteditable="false" ng-model="techs.description"></span><span
+                                                nf-if="!$last"></span>
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr valign="top" ng-if="personData">
+                        <td>
+                            <div>
+                                <h3>Erialane täiendkoolitus:
+                                    <input id="additionaledu_btn" class="addbutton" type="checkbox"/>
+                                </h3>
+                            </div>
+                            <table id="additionaledu" valign="top" class="edication" width="100%" border="1px">
+                                <tr valign="top">
+                                    <th style="padding: 5px 10px" width="15%">
+                                        <span translate="form.start"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="15%">
+                                        <span translate="form.end"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="30%">
+                                        <span translate="form.institution"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="45%">
+                                        <span translate="form.description"></span>
+                                    </th>
+
+                                </tr>
+                                <tr valign="top"
+                                    ng-repeat="(key,study) in additionalStudy | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+                                    <td style="padding: 5px 10px">
+                                        <div>{{study.periodStart | date:'dd.MM.yyyy'}}</div>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <div>{{study.periodEnd | date:'dd.MM.yyyy'}}</div>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span
+                                        ng-if="additionalStudy[key].editmode == false || !additionalStudy[key].editmode">
+                                        <span contenteditable="false" ng-model="study.institution"></span>
+                                    </span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="additionalStudy[key].editmode == true">
+                                        <textarea type="text" ng-model="study.description"> </textarea>
+                                    </span>
+                                    <span
+                                        ng-if="additionalStudy[key].editmode == false || !additionalStudy[key].editmode">
+                                        <span contenteditable="false" ng-model="study.description"></span>
+                                    </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr valign="top" ng-if="personData">
+                        <td>
+                            <div>
+                                <h3>Keelteoskus: Tasemed A1-C2.
+                                    <input id="languages_btn" class="addbutton" type="checkbox"/>
+                                </h3>
+                            </div>
+                            <table id="languages" valign="top" class="edication" width="100%" border="1px">
+                                <tr valign="top">
+                                    <th style="padding: 5px 10px" width="15%">
+                                        <span translate="form.languagename"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="30%">
+                                        <span translate="form.speaking"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="45%">
+                                        <span translate="form.writing"></span>
+                                    </th>
+
+                                </tr>
+
+                                <tr valign="top"
+                                    ng-repeat="(key,language) in additionalLanguage | orderBy:(sorting? 'language':''):(sorting? 'true':'')">
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="additionalLanguage[key].editmode == true">
+                                        <input type="text" ng-model="language.language">
+                                    </span>
+                                    <span
+                                        ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode">
+                                        <span contenteditable="false" ng-model="language.language"></span>
+                                    </span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="additionalLanguage[key].editmode == true">
+                                        <input type="text" ng-model="language.speaking">
+                                    </span>
+                                    <span
+                                        ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode">
+                                        <span contenteditable="false" ng-model="language.speaking"></span>
+                                    </span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="additionalLanguage[key].editmode == true">
+                                        <input type="text" ng-model="language.writing">
+                                    </span>
+                                    <span
+                                        ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode">
+                                        <span contenteditable="false" ng-model="language.writing"></span>
+                                    </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr valign="top" ng-if="personData">
+                        <td>
+                            <div>
+                                <h3>Muud oskused (arvutioskus):
+                                    <input id="additional_btn" class="addbutton" type="checkbox"/>
+                                </h3>
+                            </div>
+                            <table id="additional" valign="top" class="additional" width="100%" border="1px">
+                                <tr valign="top">
+                                    <th style="padding: 5px 10px">
+                                        <span translate="form.type"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px">
+                                        <span translate="form.description"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px">
+                                        Kogemus aastates
+                                    </th>
+                                </tr>
+                                <tr valign="top" ng-repeat="(key, skills) in additionalSkill">
+                                    <td style="padding: 5px 10px">
+                                    <span
+                                        ng-if="additionalSkill[key].editmode == false || !additionalSkill[key].editmode">
+                                        <span contenteditable="false" ng-model="skills.type"></span>
+                                    </span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span
+                                        ng-if="additionalSkill[key].editmode == false || !additionalSkill[key].editmode">
+                                        <span contenteditable="false" ng-model="skills.description"></span>
+                                    </span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span
+                                        ng-if="additionalSkill[key].editmode == false || !additionalSkill[key].editmode">
+                                        <span contenteditable="false" ng-model="skills.experience"></span>
+                                    </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
