@@ -151,7 +151,7 @@
                                         <input type="text" ng-model="education.degree">
                                     </span>
                                     <span ng-if="educations[key].editmode == false || !educations[key].editmode">    
-                                        <span contenteditable="false" ng-model="education.degree"></span>
+                                        <span contenteditable="false" ng-model="education.degree" translate="{{education.degree}}"></span>
                                     </span>
                                 </td>
                                 <td style="padding: 5px 10px;width: 50px;text-align: center;" ng-if="educations[key].editmode" confirmed-click="removeEdu(key)" ng-confirm-click="Kindel?" ><span class="cursorpointer" uib-tooltip="Delete"><img height="24px" src="/assets/images/delete.svg"> </span>
@@ -179,11 +179,11 @@
                                 <td style="padding: 5px 10px" colspan="2"><span translate="form.position"></span>: 
                                 <span ng-if="workExperience[key].editmode == true">  
                                     <select ng-model="workxp.position">
-                                      <option ng-repeat="option in positions" value="{{option}}" translate="positions.{{option}}"></option>
+                                      <option ng-repeat="option in positions" value="{{option}}" translate="{{option}}"></option>
                                     </select>
                                 </span>
                                 <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">    
-                                    <span contenteditable="false" ng-model="workxp.position" translate="positions.{{workxp.position}}" ></span>
+                                    <span contenteditable="false" ng-model="workxp.position" translate="{{workxp.position}}" ></span>
                                 </span> 
                                 </td>
                                 <td style="padding: 5px 0px;width: 50px;text-align: center;" ng-if="workExperience[key].editmode == true" confirmed-click="removeXP(key)" ng-confirm-click="Kindel?"  ><span class="cursorpointer" uib-tooltip="Delete"><img height="24px" src="/assets/images/delete.svg"></span> </td>
@@ -340,11 +340,11 @@
                                 <td style="padding: 5px 10px">
                                     <span ng-if="govWorkExperience[key].editmode == true">  
                                         <select ng-model="govxp.position">
-                                          <option ng-repeat="option in positions" value="{{option}}" translate="positions.{{option}}"></option>
+                                          <option ng-repeat="option in positions" value="{{option}}" translate="{{option}}"></option>
                                         </select>
                                     </span>
                                     <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">    
-                                        <span contenteditable="false" ng-model="govxp.position" translate="positions.{{govxp.position}}" ></span>
+                                        <span contenteditable="false" ng-model="govxp.position" translate="{{govxp.position}}" ></span>
                                     </span>
                                 </td>
                                 <td style="padding: 5px 10px" >
@@ -512,7 +512,7 @@
                                         <input type="text" ng-model="language.speaking"> 
                                     </span>
                                     <span ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode">    
-                                        <span contenteditable="false" ng-model="language.speaking"></span>
+                                        <span contenteditable="false" ng-model="language.speaking" translate="{{language.speaking}}"></span>
                                     </span>
                                 </td>
                                 <td style="padding: 5px 10px" >
@@ -520,7 +520,7 @@
                                         <input type="text" ng-model="language.writing"> 
                                     </span>
                                     <span ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode">    
-                                        <span contenteditable="false" ng-model="language.writing"></span>
+                                        <span contenteditable="false" ng-model="language.writing" translate="{{language.writing}}"></span>
                                     </span>
                                 </td>
                                 <td style="padding: 5px 10px;width:50px;" confirmed-click="removeLang(key)"  ng-if="additionalLanguage[key].editmode" ng-confirm-click="Kindel?" ng-click=""><span class="cursorpointer" uib-tooltip="Delete"><img height="24px" src="/assets/images/delete.svg"> </span></td>
@@ -547,7 +547,7 @@
 
                                     </span>
                                     <span ng-if="additionalSkill[key].editmode == false || !additionalSkill[key].editmode">    
-                                        <span contenteditable="false" ng-model="skills.type"></span> : <span contenteditable="false" ng-model="skills.description"></span> -- kogemust : <span contenteditable="false" ng-model="skills.experience"></span> aasta(t) 
+                                        <span contenteditable="false" ng-model="skills.type" translate="{{skills.type}}"></span> : <span contenteditable="false" ng-model="skills.description"></span> -- kogemust : <span contenteditable="false" ng-model="skills.experience"></span> aasta(t)
                                     </span>
                                     <span style="padding: 5px 10px;width:50px;" ng-if="editmode" ng-click="editSkill(key)">
                                         <span ng-if="additionalSkill[key].editmode == true" class="cursorpointer" uib-tooltip="Save">
