@@ -27,95 +27,101 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
  */
 @Service
 @Transactional
-public class AdditionalSkillServiceImpl implements AdditionalSkillService{
+public class AdditionalSkillServiceImpl implements AdditionalSkillService {
 
-    private final Logger log = LoggerFactory.getLogger(AdditionalSkillServiceImpl.class);
-    
-    @Inject
-    private AdditionalSkillRepository additionalSkillRepository;
+   private final Logger log = LoggerFactory.getLogger(AdditionalSkillServiceImpl.class);
 
-    @Inject
-    private CurriculumVitaeRepository cvRepository;
-    
-    @Inject
-    private AdditionalSkillMapper additionalSkillMapper;
-    
-    @Inject
-    private AdditionalSkillSearchRepository additionalSkillSearchRepository;
-    
-    /**
-     * Save a additionalSkill.
-     * @return the persisted entity
-     */
-    public AdditionalSkillDTO save(AdditionalSkillDTO additionalSkillDTO) {
-        log.debug("Request to save AdditionalSkill : {}", additionalSkillDTO);
-        AdditionalSkill additionalSkill = additionalSkillMapper.additionalSkillDTOToAdditionalSkill(additionalSkillDTO);
-        additionalSkill = additionalSkillRepository.save(additionalSkill);
-        AdditionalSkillDTO result = additionalSkillMapper.additionalSkillToAdditionalSkillDTO(additionalSkill);
-        additionalSkillSearchRepository.save(additionalSkill);
-        if (additionalSkill.getCurriculumVitae() != null) {
-            additionalSkill.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
-        }
-        return result;
-    }
+   @Inject
+   private AdditionalSkillRepository additionalSkillRepository;
 
-    /**
-     *  get all the additionalSkills.
-     *  @return the list of entities
-     */
-    @Transactional(readOnly = true) 
-    public List<AdditionalSkillDTO> findAll() {
-        log.debug("Request to get all AdditionalSkills");
-        List<AdditionalSkillDTO> result = additionalSkillRepository.findAll().stream()
-            .map(additionalSkillMapper::additionalSkillToAdditionalSkillDTO)
-            .collect(Collectors.toCollection(LinkedList::new));
-        return result;
-    }
+   @Inject
+   private CurriculumVitaeRepository cvRepository;
 
-    /**
-     *  get one additionalSkill by id.
-     *  @return the entity
-     */
-    @Transactional(readOnly = true) 
-    public AdditionalSkillDTO findOne(Long id) {
-        log.debug("Request to get AdditionalSkill : {}", id);
-        AdditionalSkill additionalSkill = additionalSkillRepository.findOne(id);
-        AdditionalSkillDTO additionalSkillDTO = additionalSkillMapper.additionalSkillToAdditionalSkillDTO(additionalSkill);
-        return additionalSkillDTO;
-    }
+   @Inject
+   private AdditionalSkillMapper additionalSkillMapper;
 
-    /**
-     *  delete the  additionalSkill by id.
-     */
-    public void delete(Long id) {
-        log.debug("Request to delete AdditionalSkill : {}", id);
-        additionalSkillRepository.delete(id);
-        additionalSkillSearchRepository.delete(id);
-    }
+   @Inject
+   private AdditionalSkillSearchRepository additionalSkillSearchRepository;
 
-    /**
-     * search for the additionalSkill corresponding
-     * to the query.
-     */
-    @Transactional(readOnly = true) 
-    public List<AdditionalSkillDTO> search(String query) {
-        
-        log.debug("REST request to search AdditionalSkills for query {}", query);
-        return StreamSupport
-            .stream(additionalSkillSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(additionalSkillMapper::additionalSkillToAdditionalSkillDTO)
-            .collect(Collectors.toList());
-    }
+   /**
+    * Save a additionalSkill.
+    *
+    * @return the persisted entity
+    */
+   public AdditionalSkillDTO save(AdditionalSkillDTO additionalSkillDTO) {
+      log.debug("Request to save AdditionalSkill : {}", additionalSkillDTO);
+      AdditionalSkill additionalSkill = additionalSkillMapper.additionalSkillDTOToAdditionalSkill(additionalSkillDTO);
+      additionalSkill = additionalSkillRepository.save(additionalSkill);
+      AdditionalSkillDTO result = additionalSkillMapper.additionalSkillToAdditionalSkillDTO(additionalSkill);
+      additionalSkillSearchRepository.save(additionalSkill);
+      if (additionalSkill.getCurriculumVitae() != null) {
+         additionalSkill.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+      }
+      return result;
+   }
 
-    @Override
-    public AdditionalSkillDTO addSkill(AdditionalSkillDTO dto) {
-        AdditionalSkill skill = additionalSkillMapper.additionalSkillDTOToAdditionalSkill(dto);
-        skill.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
-        additionalSkillRepository.save(skill);
-        if (skill.getCurriculumVitae() != null) {
-            skill.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
-        }
-        return additionalSkillMapper.additionalSkillToAdditionalSkillDTO(skill);
+   /**
+    * get all the additionalSkills.
+    *
+    * @return the list of entities
+    */
+   @Transactional(readOnly = true)
+   public List<AdditionalSkillDTO> findAll() {
+      log.debug("Request to get all AdditionalSkills");
+      List<AdditionalSkillDTO> result = additionalSkillRepository.findAll().stream()
+         .map(additionalSkillMapper::additionalSkillToAdditionalSkillDTO)
+         .collect(Collectors.toCollection(LinkedList::new));
+      return result;
+   }
 
-    }
+   /**
+    * get one additionalSkill by id.
+    *
+    * @return the entity
+    */
+   @Transactional(readOnly = true)
+   public AdditionalSkillDTO findOne(Long id) {
+      log.debug("Request to get AdditionalSkill : {}", id);
+      AdditionalSkill additionalSkill = additionalSkillRepository.findOne(id);
+      AdditionalSkillDTO additionalSkillDTO =
+         additionalSkillMapper.additionalSkillToAdditionalSkillDTO(additionalSkill);
+      return additionalSkillDTO;
+   }
+
+   /**
+    * delete the  additionalSkill by id.
+    */
+   public void delete(Long id) {
+      log.debug("Request to delete AdditionalSkill : {}", id);
+      additionalSkillRepository.delete(id);
+      additionalSkillSearchRepository.delete(id);
+   }
+
+   /**
+    * search for the additionalSkill corresponding
+    * to the query.
+    */
+   @Transactional(readOnly = true)
+   public List<AdditionalSkillDTO> search(String query) {
+
+      log.debug("REST request to search AdditionalSkills for query {}", query);
+      return StreamSupport
+         .stream(additionalSkillSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+         .map(additionalSkillMapper::additionalSkillToAdditionalSkillDTO)
+         .collect(Collectors.toList());
+   }
+
+   @Override
+   public AdditionalSkillDTO addSkill(AdditionalSkillDTO dto) {
+      AdditionalSkill skill = additionalSkillMapper.additionalSkillDTOToAdditionalSkill(dto);
+      if (dto.getCurriculumVitaeId() != null) {
+         skill.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
+      }
+      additionalSkillRepository.save(skill);
+      if (skill.getCurriculumVitae() != null) {
+         skill.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+      }
+      return additionalSkillMapper.additionalSkillToAdditionalSkillDTO(skill);
+
+   }
 }

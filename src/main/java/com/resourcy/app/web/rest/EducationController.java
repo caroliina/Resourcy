@@ -1,6 +1,7 @@
 package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.resourcy.app.domain.EducationDegrees;
 import com.resourcy.app.repository.EducationRepository;
 import com.resourcy.app.service.EducationService;
 import com.resourcy.app.web.rest.dto.EducationDTO;
@@ -19,6 +20,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * REST controller for managing Education.
@@ -130,8 +132,14 @@ public class EducationController {
         return educationService.search(query);
     }
 
-    @RequestMapping(value = "/educations", method = RequestMethod.POST)
+/*    @RequestMapping(value = "/educations", method = RequestMethod.POST)
     public EducationDTO addEducation(@RequestBody EducationDTO educationDTO) {
         return educationService.addEducation(educationDTO);
+    }*/
+
+    @RequestMapping(value = "/educations/degrees", method = RequestMethod.GET)
+    @ResponseBody
+    public String[] Degree(){
+        return Stream.of(EducationDegrees.values()).map(EducationDegrees::name).toArray(String[]::new);
     }
 }

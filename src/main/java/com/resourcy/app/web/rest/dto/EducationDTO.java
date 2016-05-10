@@ -1,7 +1,9 @@
 package com.resourcy.app.web.rest.dto;
 
-import java.time.LocalDate;
+import com.resourcy.app.domain.EducationDegrees;
+
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 
@@ -21,7 +23,7 @@ public class EducationDTO extends AbstractAuditingEntityDTO implements Serializa
     private String speciality;
 
 
-    private String degree;
+    private EducationDegrees degree;
 
     private Long curriculumVitaeId;
 
@@ -61,11 +63,11 @@ public class EducationDTO extends AbstractAuditingEntityDTO implements Serializa
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
-    public String getDegree() {
+    public EducationDegrees getDegree() {
         return degree;
     }
 
-    public void setDegree(String degree) {
+    public void setDegree(EducationDegrees degree) {
         this.degree = degree;
     }
 

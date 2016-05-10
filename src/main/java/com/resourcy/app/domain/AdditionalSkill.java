@@ -3,6 +3,7 @@ package com.resourcy.app.domain;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,8 +16,10 @@ public class AdditionalSkill extends AbstractAuditingEntity implements Serializa
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    private String type;
+    private Type type;
 
     @Column(name = "description")
     private String description;
@@ -36,11 +39,11 @@ public class AdditionalSkill extends AbstractAuditingEntity implements Serializa
         this.id = id;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 

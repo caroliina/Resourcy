@@ -9,34 +9,37 @@ import java.util.List;
  */
 public interface TechnologyService {
 
-    /**
-     * Save a technology.
-     * @return the persisted entity
-     */
-    public TechnologyDTO save(TechnologyDTO technologyDTO);
+   /**
+    * Save a technology.
+    *
+    * @return the persisted entity
+    */
+   TechnologyDTO save(TechnologyDTO technologyDTO);
 
-    /**
-     *  get all the technologys.
-     *  @return the list of entities
-     */
-    public List<TechnologyDTO> findAll();
+   /**
+    * get all the technologys.
+    *
+    * @return the list of entities
+    */
+   List<TechnologyDTO> findAll();
 
-    /**
-     *  get the "id" technology.
-     *  @return the entity
-     */
-    public TechnologyDTO findOne(Long id);
+   /**
+    * get the "id" technology.
+    *
+    * @return the entity
+    */
+   TechnologyDTO findOne(Long id);
 
-    /**
-     *  delete the "id" technology.
-     */
-    public void delete(Long id);
+   /**
+    * delete the "id" technology.
+    */
+   void delete(Long id);
 
-    /**
-     * search for the technology corresponding
-     * to the query.
-     */
-    public List<TechnologyDTO> search(String query);
+   /**
+    * search for the technology corresponding
+    * to the query.
+    */
+   List<TechnologyDTO> search(String query);
 
-    TechnologyDTO addTechnology(TechnologyDTO dto);
+   TechnologyDTO addTechnology(TechnologyDTO dto);
 }

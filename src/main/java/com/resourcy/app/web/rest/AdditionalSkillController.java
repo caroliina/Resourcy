@@ -1,6 +1,7 @@
 package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.resourcy.app.domain.Type;
 import com.resourcy.app.service.AdditionalSkillService;
 import com.resourcy.app.web.rest.dto.AdditionalSkillDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalSkillMapper;
@@ -18,6 +19,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * REST controller for managing AdditionalSkill.
@@ -129,5 +131,11 @@ public class AdditionalSkillController {
     @RequestMapping(value = "/addSkill", method = RequestMethod.POST)
     public AdditionalSkillDTO addSkills(@RequestBody AdditionalSkillDTO additionalSkillDTO) {
         return additionalSkillService.addSkill(additionalSkillDTO);
+    }
+
+    @RequestMapping(value = "/additionalSkills/types", method = RequestMethod.GET)
+    @ResponseBody
+    public String[] Types(){
+        return Stream.of(Type.values()).map(Type::name).toArray(String[]::new);
     }
 }

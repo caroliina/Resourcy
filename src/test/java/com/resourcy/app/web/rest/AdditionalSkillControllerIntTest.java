@@ -2,21 +2,20 @@ package com.resourcy.app.web.rest;
 
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.AdditionalSkill;
+import com.resourcy.app.domain.Type;
 import com.resourcy.app.repository.AdditionalSkillRepository;
 import com.resourcy.app.service.AdditionalSkillService;
 import com.resourcy.app.web.rest.dto.AdditionalSkillDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalSkillMapper;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -29,6 +28,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -44,8 +44,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class AdditionalSkillControllerIntTest {
 
-    private static final String DEFAULT_TYPE = "AAAAA";
-    private static final String UPDATED_TYPE = "BBBBB";
+    private static final Type DEFAULT_TYPE = Type.DATABASE;
+    private static final Type UPDATED_TYPE = Type.TECHNOLOGY;
     private static final String DEFAULT_DESCRIPTION = "AAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBB";
 

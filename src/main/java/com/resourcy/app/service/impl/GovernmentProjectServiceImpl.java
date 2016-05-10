@@ -25,102 +25,108 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
  */
 @Service
 @Transactional
-public class GovernmentProjectServiceImpl implements GovernmentProjectService{
+public class GovernmentProjectServiceImpl implements GovernmentProjectService {
 
-    private final Logger log = LoggerFactory.getLogger(GovernmentProjectServiceImpl.class);
-    
-    @Inject
-    private GovernmentProjectRepository governmentProjectRepository;
-    
-    @Inject
-    private GovernmentProjectMapper governmentProjectMapper;
-    
-    @Inject
-    private GovernmentProjectSearchRepository governmentProjectSearchRepository;
+   private final Logger log = LoggerFactory.getLogger(GovernmentProjectServiceImpl.class);
 
-    @Inject
-    private GovernmentWorkExperienceRepository govWorkExperienceRepository;
-    
-    /**
-     * Save a governmentProject.
-     * @return the persisted entity
-     */
-    public GovernmentProjectDTO save(GovernmentProjectDTO governmentProjectDTO) {
-        log.debug("Request to save GovernmentProject : {}", governmentProjectDTO);
-        GovernmentProject governmentProject = governmentProjectMapper.governmentProjectDTOToGovernmentProject(governmentProjectDTO);
-        governmentProject = governmentProjectRepository.save(governmentProject);
-        GovernmentProjectDTO result = governmentProjectMapper.governmentProjectToGovernmentProjectDTO(governmentProject);
-        governmentProjectSearchRepository.save(governmentProject);
-        return result;
-    }
+   @Inject
+   private GovernmentProjectRepository governmentProjectRepository;
 
-    /**
-     *  get all the governmentProjects.
-     *  @return the list of entities
-     */
-    @Transactional(readOnly = true) 
-    public List<GovernmentProjectDTO> findAll() {
-        log.debug("Request to get all GovernmentProjects");
-        List<GovernmentProjectDTO> result = governmentProjectRepository.findAll().stream()
-            .map(governmentProjectMapper::governmentProjectToGovernmentProjectDTO)
-            .collect(Collectors.toCollection(LinkedList::new));
-        return result;
-    }
+   @Inject
+   private GovernmentProjectMapper governmentProjectMapper;
+
+   @Inject
+   private GovernmentProjectSearchRepository governmentProjectSearchRepository;
+
+   @Inject
+   private GovernmentWorkExperienceRepository govWorkExperienceRepository;
+
+   /**
+    * Save a governmentProject.
+    *
+    * @return the persisted entity
+    */
+   public GovernmentProjectDTO save(GovernmentProjectDTO governmentProjectDTO) {
+      log.debug("Request to save GovernmentProject : {}", governmentProjectDTO);
+      GovernmentProject governmentProject =
+         governmentProjectMapper.governmentProjectDTOToGovernmentProject(governmentProjectDTO);
+      governmentProject = governmentProjectRepository.save(governmentProject);
+      GovernmentProjectDTO result = governmentProjectMapper.governmentProjectToGovernmentProjectDTO(governmentProject);
+      governmentProjectSearchRepository.save(governmentProject);
+      return result;
+   }
+
+   /**
+    * get all the governmentProjects.
+    *
+    * @return the list of entities
+    */
+   @Transactional(readOnly = true)
+   public List<GovernmentProjectDTO> findAll() {
+      log.debug("Request to get all GovernmentProjects");
+      List<GovernmentProjectDTO> result = governmentProjectRepository.findAll().stream()
+         .map(governmentProjectMapper::governmentProjectToGovernmentProjectDTO)
+         .collect(Collectors.toCollection(LinkedList::new));
+      return result;
+   }
 
 
-    /**
-     *  get all the governmentProjects where GovernmentWorkExperience is null.
-     *  @return the list of entities
-     */
-    @Transactional(readOnly = true) 
-    public List<GovernmentProjectDTO> findAllWhereGovernmentWorkExperienceIsNull() {
-        log.debug("Request to get all governmentProjects where GovernmentWorkExperience is null");
-        return StreamSupport
-            .stream(governmentProjectRepository.findAll().spliterator(), false)
-            .filter(governmentProject -> governmentProject.getGovernmentWorkExperience() == null)
-            .map(governmentProjectMapper::governmentProjectToGovernmentProjectDTO)
-            .collect(Collectors.toCollection(LinkedList::new));
-    }
+   /**
+    * get all the governmentProjects where GovernmentWorkExperience is null.
+    *
+    * @return the list of entities
+    */
+   @Transactional(readOnly = true)
+   public List<GovernmentProjectDTO> findAllWhereGovernmentWorkExperienceIsNull() {
+      log.debug("Request to get all governmentProjects where GovernmentWorkExperience is null");
+      return StreamSupport
+         .stream(governmentProjectRepository.findAll().spliterator(), false)
+         .filter(governmentProject -> governmentProject.getGovernmentWorkExperience() == null)
+         .map(governmentProjectMapper::governmentProjectToGovernmentProjectDTO)
+         .collect(Collectors.toCollection(LinkedList::new));
+   }
 
-    /**
-     *  get one governmentProject by id.
-     *  @return the entity
-     */
-    @Transactional(readOnly = true) 
-    public GovernmentProjectDTO findOne(Long id) {
-        log.debug("Request to get GovernmentProject : {}", id);
-        GovernmentProject governmentProject = governmentProjectRepository.findOne(id);
-        GovernmentProjectDTO governmentProjectDTO = governmentProjectMapper.governmentProjectToGovernmentProjectDTO(governmentProject);
-        return governmentProjectDTO;
-    }
+   /**
+    * get one governmentProject by id.
+    *
+    * @return the entity
+    */
+   @Transactional(readOnly = true)
+   public GovernmentProjectDTO findOne(Long id) {
+      log.debug("Request to get GovernmentProject : {}", id);
+      GovernmentProject governmentProject = governmentProjectRepository.findOne(id);
+      GovernmentProjectDTO governmentProjectDTO =
+         governmentProjectMapper.governmentProjectToGovernmentProjectDTO(governmentProject);
+      return governmentProjectDTO;
+   }
 
-    /**
-     *  delete the  governmentProject by id.
-     */
-    public void delete(Long id) {
-        log.debug("Request to delete GovernmentProject : {}", id);
-        governmentProjectRepository.delete(id);
-        governmentProjectSearchRepository.delete(id);
-    }
+   /**
+    * delete the  governmentProject by id.
+    */
+   public void delete(Long id) {
+      log.debug("Request to delete GovernmentProject : {}", id);
+      governmentProjectRepository.delete(id);
+      governmentProjectSearchRepository.delete(id);
+   }
 
-    /**
-     * search for the governmentProject corresponding
-     * to the query.
-     */
-    @Transactional(readOnly = true) 
-    public List<GovernmentProjectDTO> search(String query) {
-        
-        log.debug("REST request to search GovernmentProjects for query {}", query);
-        return StreamSupport
-            .stream(governmentProjectSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(governmentProjectMapper::governmentProjectToGovernmentProjectDTO)
-            .collect(Collectors.toList());
-    }
+   /**
+    * search for the governmentProject corresponding
+    * to the query.
+    */
+   @Transactional(readOnly = true)
+   public List<GovernmentProjectDTO> search(String query) {
 
-    @Override
-    public GovernmentProjectDTO addGovernmentProject(GovernmentProjectDTO dto) {
-        GovernmentProject govProject = governmentProjectMapper.governmentProjectDTOToGovernmentProject(dto);
-        governmentProjectRepository.save(govProject);
-        return governmentProjectMapper.governmentProjectToGovernmentProjectDTO(govProject);
-    }
+      log.debug("REST request to search GovernmentProjects for query {}", query);
+      return StreamSupport
+         .stream(governmentProjectSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+         .map(governmentProjectMapper::governmentProjectToGovernmentProjectDTO)
+         .collect(Collectors.toList());
+   }
+
+   @Override
+   public GovernmentProjectDTO addGovernmentProject(GovernmentProjectDTO dto) {
+      GovernmentProject govProject = governmentProjectMapper.governmentProjectDTOToGovernmentProject(dto);
+      governmentProjectRepository.save(govProject);
+      return governmentProjectMapper.governmentProjectToGovernmentProjectDTO(govProject);
+   }
 }

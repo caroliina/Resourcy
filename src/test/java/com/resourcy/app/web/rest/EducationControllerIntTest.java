@@ -2,21 +2,20 @@ package com.resourcy.app.web.rest;
 
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.Education;
+import com.resourcy.app.domain.EducationDegrees;
 import com.resourcy.app.repository.EducationRepository;
 import com.resourcy.app.service.EducationService;
 import com.resourcy.app.web.rest.dto.EducationDTO;
 import com.resourcy.app.web.rest.mapper.EducationMapper;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -31,6 +30,7 @@ import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -56,8 +56,8 @@ public class EducationControllerIntTest {
     private static final LocalDate UPDATED_PERIOD_END = LocalDate.now(ZoneId.systemDefault());
     private static final String DEFAULT_SPECIALITY = "AAAAA";
     private static final String UPDATED_SPECIALITY = "BBBBB";
-    private static final String DEFAULT_DEGREE = "AAAAA";
-    private static final String UPDATED_DEGREE = "BBBBB";
+    private static final EducationDegrees DEFAULT_DEGREE = EducationDegrees.BACHELOR;
+    private static final EducationDegrees UPDATED_DEGREE = EducationDegrees.MASTER;
 
     @Inject
     private EducationRepository educationRepository;
