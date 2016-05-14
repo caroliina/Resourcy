@@ -63,7 +63,8 @@
         "addskill":"Add skill",
         "addlang":"Add language",
         "remove":"x",
-        "idcode": "Identification number"
+        "idcode": "Identification number",
+        "experience":"Experience"
     },
     "ANALYST" : "Analyst",
     "DIVISION_MANAGER" : "Division manager",

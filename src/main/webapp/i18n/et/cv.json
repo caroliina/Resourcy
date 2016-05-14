@@ -57,7 +57,8 @@
         "maintasks": "Peamised ülesanded",
         "newproject": "Uus projekt",
         "addNewProject": "Lisa projekt",
-        "add": "Lisa"
+        "add": "Lisa",
+		"experience" : "Kogemus"
     },
 	"ANALYST" : "Analüütik-konsultant",
 	"DIVISION_MANAGER" : "Divisjonijuht",
