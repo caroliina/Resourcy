@@ -44,5 +44,5 @@ public interface CurriculumVitaeService {
     */
    List<CurriculumVitaeDTO> search(String query);
 
-   CurriculumVitaeDTO getEmployeeCvEst();
+   CurriculumVitaeDTO getEmployeeCvEst(Long employeeId);
 }

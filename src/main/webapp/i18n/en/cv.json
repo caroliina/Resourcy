@@ -20,7 +20,7 @@
         "personal" : "Personal info",
         "firstname":"First name",
         "lastname":"Last name",
-        "birthday":"Day of birth",
+        "birthday":"Birthday",
         "nationality":"Nationality",
         "email":"E-mail",
         "education":"Education",
@@ -63,7 +63,8 @@
         "addskill":"Add skill",
         "addlang":"Add language",
         "remove":"x",
-        "idcode": "Identification number"
+        "idcode": "Identification number",
+        "experience":"Experience"
     },
     "ANALYST" : "Analyst",
     "DIVISION_MANAGER" : "Division manager",
