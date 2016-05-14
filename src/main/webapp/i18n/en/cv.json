@@ -20,7 +20,7 @@
         "personal" : "Personal info",
         "firstname":"First name",
         "lastname":"Last name",
-        "birthday":"Day of birth",
+        "birthday":"Birthday",
         "nationality":"Nationality",
         "email":"E-mail",
         "education":"Education",

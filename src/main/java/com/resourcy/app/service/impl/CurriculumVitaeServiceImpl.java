@@ -109,10 +109,10 @@ public class CurriculumVitaeServiceImpl implements CurriculumVitaeService {
 
 
    @Transactional(readOnly = true)
-   public CurriculumVitaeDTO getEmployeeCvEst() {
+   public CurriculumVitaeDTO getEmployeeCvEst(Long employeeId) {
 
       CurriculumVitae result = curriculumVitaeRepository
-         .findByEmployeeIdAndLanguageType(userService.getUserWithAuthorities().getEmployee().getId(), LanguageType.EST);
+         .findByEmployeeIdAndLanguageType(employeeId, LanguageType.EST);
 
       return curriculumVitaeMapper.curriculumVitaeToCurriculumVitaeDTO(result);
    }

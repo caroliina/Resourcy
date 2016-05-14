@@ -242,4 +242,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", activationKey='" + activationKey + '\'' +
             "}";
     }
+
+    public void addAuthority(Authority role) {
+        if (authorities == null) {
+            authorities = new HashSet<>();
+        }
+        authorities.add(role);
+    }
 }
