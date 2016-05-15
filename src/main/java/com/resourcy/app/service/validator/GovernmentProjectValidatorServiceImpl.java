@@ -18,13 +18,13 @@ public class GovernmentProjectValidatorServiceImpl implements ValidatorService<G
         ValidationResponse validationResponse = new ValidationResponse();
 
         if (governmentProject.getBuyer() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_GOV-PROJECT_BUYER_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_GOV-PROJECT_BUYER_ISEMPTY");
         }
         if (governmentProject.getServiceName() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_GOV-PROJECT_SERVICENAME_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_GOV-PROJECT_SERVICENAME_ISEMPTY");
         }
         if (governmentProject.getTotalProjectWorkHours() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_GOV-PROJECT_WORK-HOURS_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_GOV-PROJECT_WORK-HOURS_ISEMPTY");
         }
         return validationResponse;
     }

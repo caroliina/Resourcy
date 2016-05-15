@@ -17,13 +17,13 @@ public class LanguageSkillValidatorServiceImpl implements ValidatorService<Langu
         ValidationResponse validationResponse = new ValidationResponse();
 
         if (languageSkill.getLanguage() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_LANGUAGE_LANGUAGE_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_LANGUAGE_LANGUAGE_ISEMPTY");
         }
         if (languageSkill.getSpeaking() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_LANGUAGE_SPEAKING_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_LANGUAGE_SPEAKING_ISEMPTY");
         }
         if (languageSkill.getWriting() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_LANGUAGE_WRITING_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_LANGUAGE_WRITING_ISEMPTY");
         }
         return validationResponse;
     }

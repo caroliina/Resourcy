@@ -16,13 +16,13 @@ public class AdditionalSkillValidatorServiceImpl implements ValidatorService<Add
         ValidationResponse validationResponse = new ValidationResponse();
 
         if (skill.getDescription() == null) {
-            validationResponse.getErrorMessage().add("ERROR_ADD_SKILL_DESCRIPTION_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_ADD_SKILL_DESCRIPTION_ISEMPTY");
         }
         if (skill.getType() == null) {
-            validationResponse.getErrorMessage().add("ERROR_ADD_SKILL_TYPE_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_ADD_SKILL_TYPE_ISEMPTY");
         }
         if (skill.getExperience() == 0) {
-            validationResponse.getErrorMessage().add("ERROR_ADD_SKILL_EXPERIENCE_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_ADD_SKILL_EXPERIENCE_ISEMPTY");
         }
         return validationResponse;
     }

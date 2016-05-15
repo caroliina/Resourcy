@@ -16,10 +16,10 @@ public class TechnologyValidatorServiceImpl implements ValidatorService<Technolo
         ValidationResponse validationResponse = new ValidationResponse();
 
         if (technology.getDescription() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_TECHNOLOGY_DESCRIPTION_ISEMPTY");
         }
+        validationResponse.getErrorMessage().add("validationerrors.ERROR_TECHNOLOGY_DESCRIPTION_ISEMPTY");
         if (technology.getType() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_TECHNOLOGY_TYPE_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_TECHNOLOGY_TYPE_ISEMPTY");
         }
         return validationResponse;
     }

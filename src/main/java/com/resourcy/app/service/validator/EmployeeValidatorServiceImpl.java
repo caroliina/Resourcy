@@ -17,19 +17,19 @@ public class EmployeeValidatorServiceImpl implements ValidatorService<EmployeeDT
         ValidationResponse validationResponse = new ValidationResponse();
 
         if (employee.getLastName() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_EMPLOYEE_LASTNAME_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_EMPLOYEE_LASTNAME_ISEMPTY");
         }
         if (employee.getFirstName() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_EMPLOYEE_FIRSTNAME_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_EMPLOYEE_FIRSTNAME_ISEMPTY");
         }
         if (employee.getBirthday() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_EMPLOYEE_BIRTHDAY_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_EMPLOYEE_BIRTHDAY_ISEMPTY");
         }
         if (employee.getIdCode() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_EMPLOYEE_IDCODE_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_EMPLOYEE_IDCODE_ISEMPTY");
         }
         if (employee.getEmail() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_EMPLOYEE_EMAIL_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_EMPLOYEE_EMAIL_ISEMPTY");
         }
         return validationResponse;
     }

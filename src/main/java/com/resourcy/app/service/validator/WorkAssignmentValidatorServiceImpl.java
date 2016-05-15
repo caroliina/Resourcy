@@ -16,7 +16,7 @@ public class WorkAssignmentValidatorServiceImpl implements ValidatorService<Work
         ValidationResponse validationResponse = new ValidationResponse();
 
         if (workAssignment.getDescription() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_WORK-ASSIGNMENT_DESCRIPTION_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_WORK-ASSIGNMENT_DESCRIPTION_ISEMPTY");
         }
         return validationResponse;
     }

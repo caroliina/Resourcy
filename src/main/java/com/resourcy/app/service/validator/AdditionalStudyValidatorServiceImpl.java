@@ -16,13 +16,13 @@ public class AdditionalStudyValidatorServiceImpl implements ValidatorService<Add
         ValidationResponse validationResponse = new ValidationResponse();
 
         if (study.getInstitution() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_ADD_STUDY_INSTITUTION_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_ADD_STUDY_INSTITUTION_ISEMPTY");
         }
         if (study.getPeriodStart() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_ADD_STUDY_PERIODSTART_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_ADD_STUDY_PERIODSTART_ISEMPTY");
         }
         if (study.getDescription() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_ADD_STUDY_DESCRIPTION_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_ADD_STUDY_DESCRIPTION_ISEMPTY");
         }
         return validationResponse;
     }

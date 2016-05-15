@@ -16,16 +16,16 @@ public class EducationValidatorServiceImpl implements ValidatorService<Education
         ValidationResponse validationResponse = new ValidationResponse();
 
         if (education.getInstitution() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_EDUCATION_INSTITUTION_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_EDUCATION_INSTITUTION_ISEMPTY");
         }
         if (education.getPeriodStart() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_EDUCATION_PERIODSTART_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_EDUCATION_PERIODSTART_ISEMPTY");
         }
         if (education.getSpeciality() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_EDUCATION_SPECIALITY_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_EDUCATION_SPECIALITY_ISEMPTY");
         }
         if (education.getDegree() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_EDUCATION_DEGREE_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_EDUCATION_DEGREE_ISEMPTY");
         }
 
         return validationResponse;

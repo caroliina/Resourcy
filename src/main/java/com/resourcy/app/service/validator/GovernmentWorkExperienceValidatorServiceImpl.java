@@ -19,16 +19,16 @@ public class GovernmentWorkExperienceValidatorServiceImpl implements ValidatorSe
         ValidationResponse validationResponse = new ValidationResponse();
 
         if (governmentWorkExperience.getPeriodStart() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_GOV-WORK-EXP_WORK-HOURS_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_GOV-WORK-EXP_PERIODSTART_ISEMPTY");
         }
         if (governmentWorkExperience.getPosition() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_GOV-WORK-EXP_POSITION_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_GOV-WORK-EXP_POSITION_ISEMPTY");
         }
         if (governmentWorkExperience.getPersonalWorkHours() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_GOV-WORK-EXP_WORk-HOURS_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_GOV-WORK-EXP_WORK-HOURS_ISEMPTY");
         }
         if (CollectionUtils.isEmpty(governmentWorkExperience.getWorkAssignments()))  {
-            validationResponse.getErrorMessage().add("ERROR_GOV-WORK-EXP_ASSIGNMENTS_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_GOV-WORK-EXP_ASSIGNMENTS_ISEMPTY");
         }
         return validationResponse;
     }

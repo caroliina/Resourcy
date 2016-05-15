@@ -17,19 +17,19 @@ public class WorkExperienceValidatorServiceImpl implements ValidatorService<Work
         ValidationResponse validationResponse = new ValidationResponse();
 
         if (workExperience.getPosition() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_WORK-EXPERIENCE_POSITION_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_WORK-EXPERIENCE_POSITION_ISEMPTY");
         }
         if (workExperience.getPeriodStart() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_WORK-EXPERIENCE_PERIODSTART_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_WORK-EXPERIENCE_PERIODSTART_ISEMPTY");
         }
         if (workExperience.getOrganization() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_WORK-EXPERIENCE_ORGANIZATION_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_WORK-EXPERIENCE_ORGANIZATION_ISEMPTY");
         }
         if (workExperience.getLocation() == null)  {
-            validationResponse.getErrorMessage().add("ERROR_WORK-EXPERIENCE_LOCATION_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_WORK-EXPERIENCE_LOCATION_ISEMPTY");
         }
         if (CollectionUtils.isEmpty(workExperience.getWorkAssignments()))  {
-            validationResponse.getErrorMessage().add("ERROR_WORK-EXPERIENCE_WORK-ASSIGNMENTS_ISEMPTY");
+            validationResponse.getErrorMessage().add("validationerrors.ERROR_WORK-EXPERIENCE_WORK-ASSIGNMENTS_ISEMPTY");
         }
         return validationResponse;
     }
