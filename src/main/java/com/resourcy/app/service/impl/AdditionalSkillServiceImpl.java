@@ -120,15 +120,17 @@ public class AdditionalSkillServiceImpl implements AdditionalSkillService{
             .collect(Collectors.toList());
     }
 
-    @Override
-    public AdditionalSkillDTO addSkill(AdditionalSkillDTO dto) {
-        AdditionalSkill skill = additionalSkillMapper.additionalSkillDTOToAdditionalSkill(dto);
-        skill.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
-        additionalSkillRepository.save(skill);
-        if (skill.getCurriculumVitae() != null) {
-            skill.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
-        }
-        return additionalSkillMapper.additionalSkillToAdditionalSkillDTO(skill);
+   @Override
+   public AdditionalSkillDTO addSkill(AdditionalSkillDTO dto) {
+      AdditionalSkill skill = additionalSkillMapper.additionalSkillDTOToAdditionalSkill(dto);
+      if (dto.getCurriculumVitaeId() != null) {
+         skill.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
+      }
+      additionalSkillRepository.save(skill);
+      if (skill.getCurriculumVitae() != null) {
+         skill.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+      }
+      return additionalSkillMapper.additionalSkillToAdditionalSkillDTO(skill);
 
     }
 }

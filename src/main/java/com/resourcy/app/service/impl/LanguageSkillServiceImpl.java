@@ -118,14 +118,16 @@ public class LanguageSkillServiceImpl implements LanguageSkillService {
             .collect(Collectors.toList());
     }
 
-    @Override
-    public LanguageSkillDTO addLanguage(LanguageSkillDTO dto) {
-        LanguageSkill language = languageSkillMapper.languageSkillDTOToLanguageSkill(dto);
-        language.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
-        languageSkillRepository.save(language);
-        if (language.getCurriculumVitae() != null) {
-            language.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
-        }
-        return languageSkillMapper.languageSkillToLanguageSkillDTO(language);
-    }
+   @Override
+   public LanguageSkillDTO addLanguage(LanguageSkillDTO dto) {
+      LanguageSkill language = languageSkillMapper.languageSkillDTOToLanguageSkill(dto);
+      if (dto.getCurriculumVitaeId() != null) {
+         language.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
+      }
+      languageSkillRepository.save(language);
+      if (language.getCurriculumVitae() != null) {
+         language.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+      }
+      return languageSkillMapper.languageSkillToLanguageSkillDTO(language);
+   }
 }

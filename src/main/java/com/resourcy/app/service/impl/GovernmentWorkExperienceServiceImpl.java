@@ -61,7 +61,7 @@ public class GovernmentWorkExperienceServiceImpl implements GovernmentWorkExperi
     public GovernmentWorkExperienceDTO save(GovernmentWorkExperienceDTO governmentWorkExperienceDTO) throws ValidationException {
         log.debug("Request to save GovernmentWorkExperience : {}", governmentWorkExperienceDTO);
         ValidationResponse validationResponse = governmentWorkExperienceValidatorService.validate(governmentWorkExperienceDTO);
-        if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
+        if (CollectionUtils.isEmpty(validationResponse.getErrorMessage())) {
             throw new ValidationException(validationResponse);
         }
         GovernmentWorkExperience governmentWorkExperience = governmentWorkExperienceMapper.governmentWorkExperienceDTOToGovernmentWorkExperience(governmentWorkExperienceDTO);
@@ -88,18 +88,19 @@ public class GovernmentWorkExperienceServiceImpl implements GovernmentWorkExperi
         return result;
     }
 
-    /**
-     * get one governmentWorkExperience by id.
-     *
-     * @return the entity
-     */
-    @Transactional(readOnly = true)
-    public GovernmentWorkExperienceDTO findOne(Long id) {
-        log.debug("Request to get GovernmentWorkExperience : {}", id);
-        GovernmentWorkExperience governmentWorkExperience = governmentWorkExperienceRepository.findOne(id);
-        GovernmentWorkExperienceDTO governmentWorkExperienceDTO = governmentWorkExperienceMapper.governmentWorkExperienceToGovernmentWorkExperienceDTO(governmentWorkExperience);
-        return governmentWorkExperienceDTO;
-    }
+   /**
+    * get one governmentWorkExperience by id.
+    *
+    * @return the entity
+    */
+   @Transactional(readOnly = true)
+   public GovernmentWorkExperienceDTO findOne(Long id) {
+      log.debug("Request to get GovernmentWorkExperience : {}", id);
+      GovernmentWorkExperience governmentWorkExperience = governmentWorkExperienceRepository.findOne(id);
+      GovernmentWorkExperienceDTO governmentWorkExperienceDTO =
+         governmentWorkExperienceMapper.governmentWorkExperienceToGovernmentWorkExperienceDTO(governmentWorkExperience);
+      return governmentWorkExperienceDTO;
+   }
 
     /**
      * delete the  governmentWorkExperience by id.
@@ -124,15 +125,20 @@ public class GovernmentWorkExperienceServiceImpl implements GovernmentWorkExperi
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public GovernmentWorkExperienceDTO addGovernmentWorkExperience(GovernmentWorkExperienceDTO dto) {
-        GovernmentWorkExperience govWorkExperience = governmentWorkExperienceMapper.governmentWorkExperienceDTOToGovernmentWorkExperience(dto);
-        govWorkExperience.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
-        govWorkExperience.setGovernmentProject(govProjectRepository.findOne(dto.getGovernmentProject().getId()));
-        governmentWorkExperienceRepository.save(govWorkExperience);
-        if (govWorkExperience.getCurriculumVitae() != null) {
-            govWorkExperience.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
-        }
-        return governmentWorkExperienceMapper.governmentWorkExperienceToGovernmentWorkExperienceDTO(govWorkExperience);
-    }
+   @Override
+   public GovernmentWorkExperienceDTO addGovernmentWorkExperience(GovernmentWorkExperienceDTO dto) {
+      GovernmentWorkExperience govWorkExperience =
+         governmentWorkExperienceMapper.governmentWorkExperienceDTOToGovernmentWorkExperience(dto);
+      if (dto.getCurriculumVitaeId() != null) {
+         govWorkExperience.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
+      }
+      if (dto.getGovernmentProject() != null) {
+         govWorkExperience.setGovernmentProject(govProjectRepository.findOne(dto.getGovernmentProject().getId()));
+      }
+      governmentWorkExperienceRepository.save(govWorkExperience);
+      if (govWorkExperience.getCurriculumVitae() != null) {
+         govWorkExperience.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+      }
+      return governmentWorkExperienceMapper.governmentWorkExperienceToGovernmentWorkExperienceDTO(govWorkExperience);
+   }
 }

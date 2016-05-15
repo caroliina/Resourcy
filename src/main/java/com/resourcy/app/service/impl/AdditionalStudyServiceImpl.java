@@ -118,14 +118,16 @@ public class AdditionalStudyServiceImpl implements AdditionalStudyService{
             .collect(Collectors.toList());
     }
 
-    @Override
-    public AdditionalStudyDTO addStudy(AdditionalStudyDTO dto) {
-        AdditionalStudy study = additionalStudyMapper.additionalStudyDTOToAdditionalStudy(dto);
-        study.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
-        additionalStudyRepository.save(study);
-        if (study.getCurriculumVitae() != null) {
-            study.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
-        }
-        return additionalStudyMapper.additionalStudyToAdditionalStudyDTO(study);
-    }
+   @Override
+   public AdditionalStudyDTO addStudy(AdditionalStudyDTO dto) {
+      AdditionalStudy study = additionalStudyMapper.additionalStudyDTOToAdditionalStudy(dto);
+      if (dto.getCurriculumVitaeId() != null) {
+         study.setCurriculumVitae(cvRepository.findOne(dto.getCurriculumVitaeId()));
+      }
+      additionalStudyRepository.save(study);
+      if (study.getCurriculumVitae() != null) {
+         study.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+      }
+      return additionalStudyMapper.additionalStudyToAdditionalStudyDTO(study);
+   }
 }
