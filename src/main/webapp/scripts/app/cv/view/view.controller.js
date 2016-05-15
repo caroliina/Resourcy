@@ -2,7 +2,7 @@
 
 angular.module('resourcyApp')
     .controller('ViewController', function ($scope, $state,$http,Restangular,$window) {
-        
+
         $scope.editmode = false;
         $scope.sorting = true;
         $scope.personData = false;
@@ -51,7 +51,7 @@ angular.module('resourcyApp')
         //endcalendars
 
         $scope.changeView=function(){
-          
+
           if(!$scope.editmode){
             $scope.loadCurriculum();
             $scope.editmode = true;
@@ -62,7 +62,7 @@ angular.module('resourcyApp')
             $scope.sorting = true;
           }
         };
-        
+
         $scope.loadEmployee = function(){
 
           Restangular.one("api").one("currentEmployee").get().then(function (resp) {
@@ -86,7 +86,6 @@ angular.module('resourcyApp')
             $scope.additionalSkill = resp.additionalSkills;
             $scope.workExperience = resp.workExperiences;
             $scope.govWorkExperience = resp.governmentWorkExperiences;
-            console.log($scope.govWorkExperience)
           });
           Restangular.one('api').one('workExperiences/positions').get().then(function(response){
             $scope.positions = response;
@@ -97,7 +96,7 @@ angular.module('resourcyApp')
 
         }
         $scope.getProject = "";
-        
+
 
         //edits
         $scope.editEdu = function(id){
@@ -119,7 +118,7 @@ angular.module('resourcyApp')
         }
 
         //endedtis
-        
+
         $scope.newEducation = {
             institution: null,
             periodStart: null,
@@ -203,7 +202,7 @@ angular.module('resourcyApp')
                 experience:null
             }
         }
-        
+
         $scope.addLanguage = function(){
             $scope.newLanguage.editmode = true;
             $scope.additionalLanguage.push($scope.newLanguage);
@@ -239,26 +238,32 @@ angular.module('resourcyApp')
         $scope.addGov = function(){
             angular.element('#togglemodal').trigger('click');
         }
-        $scope.addProject = function(){
-          if($scope.position.$valid){
-            if($scope.getProject != "new"){
+        $scope.addProject = function () {
+            if ($scope.position.$valid) {
+                if ($scope.getProject != "new") {
 
-              Restangular.one('api').one('governmentProjects/'+$scope.getProject).get().then(function(response){
-                $scope.addGovXP(response);
-                angular.element('#togglemodal').trigger('click');
+                    Restangular.one('api').one('governmentProjects/' + $scope.getProject).get().then(function (response) {
+                        $scope.addGovXP(response);
+                        angular.element('#togglemodal').trigger('click');
 
-              })
-            }else{
-              $http.put("api/governmentProjects", $scope.newPorject).then(function (response) {
-                $scope.addGovXP(response.data);
-                angular.element('#togglemodal').trigger('click');
-              })
-            }  
-            $scope.getProject = "";
-          }
-          
+                    })
+                } else {
+                    $http.put("api/governmentProjects", $scope.newPorject)
+                        .then(function (response) {
+                        $scope.addGovXP(response.data);
+                        angular.element('#togglemodal').trigger('click');
+                    },
+                        function (result) {
+                            if (result && result.data && result.data.message) {
+                                addError('projectArea', result.data.message.split(","));
+                            }
+                        })
+                }
+                $scope.getProject = "";
+            }
+
         }
-        $scope.addGovXP = function(response){
+        $scope.addGovXP = function (response) {
             $scope.newGovXP.governmentProject.buyer = response.buyer;
             $scope.newGovXP.governmentProject.id = response.id;
             $scope.newGovXP.governmentProjectId = response.id;
@@ -274,12 +279,12 @@ angular.module('resourcyApp')
                 personalWorkHours: null,
                 governmentProjectId: null,
                 workAssignments: [],
-                governmentProject:{
-                  id:null,
-                  serviceName:null,
-                  buyer:null,
-                  totalProjectWorkHours:null,
-                  technologies:[]
+                governmentProject: {
+                    id: null,
+                    serviceName: null,
+                    buyer: null,
+                    totalProjectWorkHours: null,
+                    technologies: []
                 }
             }
         }
@@ -309,7 +314,7 @@ angular.module('resourcyApp')
         $scope.removeEdu = function (id) {
             if ($scope.educations[id].id) {
                 $http.delete("api/educations/"+$scope.educations[id].id).then(function (response) {
-                  
+
                 })
             }
             $scope.educations.splice(id, 1);
@@ -317,7 +322,7 @@ angular.module('resourcyApp')
         $scope.removeLang = function (id) {
             if ($scope.additionalLanguage[id].id) {
                 $http.delete("api/languageSkills/"+$scope.additionalLanguage[id].id).then(function (response) {
-                  
+
                 })
             }
             $scope.additionalLanguage.splice(id, 1);
@@ -325,7 +330,7 @@ angular.module('resourcyApp')
         $scope.removeStudy = function (id) {
             if ($scope.additionalStudy[id].id) {
                 $http.delete("api/additionalStudys/"+$scope.additionalStudy[id].id).then(function (response) {
-                  
+
                 })
             }
             $scope.additionalStudy.splice(id, 1);
@@ -333,7 +338,7 @@ angular.module('resourcyApp')
         $scope.removeSkill = function (id) {
             if ($scope.additionalSkill[id].id) {
                 $http.delete("api/additionalSkills/"+$scope.additionalSkill[id].id).then(function (response) {
-                  
+
                 })
             }
             $scope.additionalSkill.splice(id, 1);
@@ -341,7 +346,7 @@ angular.module('resourcyApp')
         $scope.removeGovAssignment = function (govxpid,assignid) {
             if ($scope.govWorkExperience[govxpid].workAssignments[assignid].id) {
                 $http.delete("api/workAssignments/"+$scope.govWorkExperience[govxpid].workAssignments[assignid].id).then(function (response) {
-                  
+
                 })
             }
             $scope.govWorkExperience[govxpid].workAssignments.splice(assignid, 1);
@@ -349,7 +354,7 @@ angular.module('resourcyApp')
         $scope.removeGovTechs = function (govxpid,techid) {
             if ($scope.govWorkExperience[govxpid].governmentProject.technologies[techid].id) {
                 $http.delete("api/technologys/"+$scope.govWorkExperience[govxpid].governmentProject.technologies[techid].id).then(function (response) {
-                  
+
                 })
             }
             $scope.govWorkExperience[govxpid].governmentProject.technologies.splice(techid, 1);
@@ -357,35 +362,35 @@ angular.module('resourcyApp')
         $scope.removeXPAssignment = function (workxpid,assignid) {
             if ($scope.workExperience[workxpid].workAssignments[assignid].id) {
                 $http.delete("api/workAssignments/"+$scope.workExperience[workxpid].workAssignments[assignid].id).then(function (response) {
-                  
+
                 })
             }
             $scope.workExperience[workxpid].workAssignments.splice(assignid, 1);
         }
         $scope.removeXP = function (workxpid) {
-            
+
             angular.forEach($scope.workExperience[workxpid].workAssignments,function(assign,key){
 
               if (assign.id) {
                   $http.delete("api/workAssignments/"+assign.id).then(function (response) {
-                    
+
                   })
               }
             })
            if ($scope.workExperience[workxpid].id) {
                 $http.delete("api/workExperiences/"+$scope.workExperience[workxpid].id).then(function (response) {
-                  
+
                 })
             }
-          $scope.workExperience.splice(workxpid, 1); 
+          $scope.workExperience.splice(workxpid, 1);
         }
         $scope.removeGov = function (govid) {
-            
+
             angular.forEach($scope.govWorkExperience[govid].workAssignments,function(assign,key){
 
               if (assign.id) {
                   $http.delete("api/workAssignments/"+assign.id).then(function (response) {
-                    
+
                   })
               }
             })
@@ -393,68 +398,129 @@ angular.module('resourcyApp')
 
               if (assign.id) {
                   $http.delete("api/technologys/"+assign.id).then(function (response) {
-                    
+
                   })
               }
             })
            if ($scope.govWorkExperience[govid].id) {
                 $http.delete("api/governmentWorkExperiences/"+$scope.govWorkExperience[govid].id).then(function (response) {
-                  
+
                 })
             }
-          $scope.govWorkExperience.splice(govid, 1); 
+          $scope.govWorkExperience.splice(govid, 1);
         }
         //end remove line
 
         //edits
-        $scope.editEdu = function(id){
-          if($scope.educations[id].editmode === true){
-            $scope.saveEdu(id);
-            $scope.educations[id].editmode = false
-          }else{
-            $scope.educations[id].editmode = true
-          }
+        $scope.editEdu = function (id) {
+            if ($scope.educations[id].editmode === true) {
+                $scope.saveEdu(id)
+                    .then(function (result) {
+                        $scope.educations[id].editmode = false;
+                        clearError();
+                    },
+                    function (result) {
+                        if (result && result.data && result.data.message) {
+                            addError('educationArea', result.data.message.split(","));
+                        }
+                    }
+                );
+            } else {
+                $scope.educations[id].editmode = true
+            }
+        };
+
+        function addError(area, message) {
+            if (!$scope.error) {
+                $scope.error = {};
+            }
+            $scope.error[area] = message;
         }
 
-        $scope.editLang = function(id){
-          if($scope.additionalLanguage[id].editmode === true){
-            $scope.saveLang(id);
-            $scope.additionalLanguage[id].editmode = false
-          }else{
-            $scope.additionalLanguage[id].editmode = true
-          }
+        function clearError() {
+            $scope.error = {};
         }
-        $scope.editSkill = function(id){
-          if($scope.additionalSkill[id].editmode === true){
-            $scope.saveSkill(id);
-            $scope.additionalSkill[id].editmode = false
-          }else{
-            $scope.additionalSkill[id].editmode = true
-          }
+
+        $scope.editLang = function (id) {
+            if ($scope.additionalLanguage[id].editmode === true) {
+                $scope.saveLang(id)
+                    .then(function (result) {
+                        $scope.additionalLanguage[id].editmode = false
+                    },
+                    function (result) {
+                        if (result && result.data && result.data.message) {
+                            addError('languageArea', result.data.message.split(","));
+                        }
+                    }
+                );
+            } else {
+                $scope.additionalLanguage[id].editmode = true
+            }
         }
-        $scope.editStudy = function(id){
-          if($scope.additionalStudy[id].editmode === true){
-            $scope.saveStudy(id);
-            $scope.additionalStudy[id].editmode = false
-          }else{
-            $scope.additionalStudy[id].editmode = true
-          }
+        $scope.editSkill = function (id) {
+            if ($scope.additionalSkill[id].editmode === true) {
+                $scope.saveSkill(id)
+                    .then(function (result) {
+                        $scope.additionalSkill[id].editmode = false
+                    },
+                    function (result) {
+                        if (result && result.data && result.data.message) {
+                            addError('additionalSkillArea', result.data.message.split(","));
+                            console.log($scope.error);
+                        }
+                    }
+                );
+            } else {
+                $scope.additionalSkill[id].editmode = true
+            }
         }
-        $scope.editGov = function(id){
-          if($scope.govWorkExperience[id].editmode === true){
-            $scope.saveGov(id);
-            $scope.govWorkExperience[id].editmode = false
-          }else{
-            $scope.govWorkExperience[id].editmode = true
-          }
+        $scope.editStudy = function (id) {
+            if ($scope.additionalStudy[id].editmode === true) {
+                $scope.saveStudy(id)
+                    .then(function (result) {
+                        $scope.additionalStudy[id].editmode = false
+                    },
+                    function (result) {
+                        if (result && result.data && result.data.message) {
+                            addError('studyArea', result.data.message.split(","));
+                        }
+                    }
+                );
+            } else {
+                $scope.additionalStudy[id].editmode = true
+            }
         }
-        $scope.editXP = function(id){
-          if($scope.workExperience[id].editmode === true){
-            $scope.saveXP(id);
-            $scope.workExperience[id].editmode = false
-          }else{
-            $scope.workExperience[id].editmode = true
-          }
+        $scope.editGov = function (id) {
+            if ($scope.govWorkExperience[id].editmode === true) {
+                $scope.saveGov(id)
+                    .then(function (result) {
+                        $scope.govWorkExperience[id].editmode = false
+                    },
+                    function (result) {
+                        if (result && result.data && result.data.message) {
+                            addError('govWorkExperienceArea', result.data.message.split(","));
+                        }
+                    }
+                );
+            } else {
+                $scope.govWorkExperience[id].editmode = true
+            }
+        }
+        $scope.editXP = function (id) {
+            if ($scope.workExperience[id].editmode === true) {
+                $scope.saveXP(id)
+                    .then(function (result) {
+                        $scope.workExperience[id].editmode = false
+                    },
+                    function (result) {
+                        if (result && result.data && result.data.message) {
+                            addError('workExperienceArea', result.data.message.split(","));
+                        }
+                    }
+                );
+            } else {
+                $scope.workExperience[id].editmode = true
+            }
         }
 
         //endedtis
@@ -462,92 +528,86 @@ angular.module('resourcyApp')
         // save lines
         $scope.saveEdu = function (id) {
             $scope.educations[id].curriculumVitaeId = $scope.cv_id;
-
-            $http.put("api/educations", $scope.educations[id]).then(function (response) {
-              console.log(response);
-                          });
+            return $http.put("api/educations", $scope.educations[id]);
         };
 
         $scope.saveLang = function (id) {
             $scope.additionalLanguage[id].curriculumVitaeId = $scope.cv_id;
-            $http.put("api/languageSkills", $scope.additionalLanguage[id]).then(function (response) {             
-              
+            return $http.put("api/languageSkills", $scope.additionalLanguage[id]).then(function (response) {
+
             });
         };
 
         $scope.saveSkill = function (id) {
             $scope.additionalSkill[id].curriculumVitaeId = $scope.cv_id;
-            $http.put("api/additionalSkills", $scope.additionalSkill[id]).then(function (response) {             
-              
+            return $http.put("api/additionalSkills", $scope.additionalSkill[id]).then(function (response) {
+
             });
         };
         $scope.saveStudy = function (id) {
             $scope.additionalStudy[id].curriculumVitaeId = $scope.cv_id;
-            $http.put("api/additionalStudys", $scope.additionalStudy[id]).then(function (response) {             
-              console.log(response)  
+            return $http.put("api/additionalStudys", $scope.additionalStudy[id]).then(function (response) {
+                console.log(response)
             });
         };
 
         $scope.saveXP = function (id) {
             $scope.workExperience[id].curriculumVitaeId = $scope.cv_id;
             console.log($scope.workExperience[id])
-            $http.put("api/workExperiences", $scope.workExperience[id]).then(function (response) {
-             
-              angular.forEach($scope.workExperience[id].workAssignments,function(assign,key){
+            return $http.put("api/workExperiences", $scope.workExperience[id]).then(function (response) {
 
-                assign['workExperienceId'] = response.data.id;
-                $http.put("api/workAssignments", assign).then(function (responses) {
-                  
+                angular.forEach($scope.workExperience[id].workAssignments, function (assign, key) {
+
+                    assign['workExperienceId'] = response.data.id;
+                    $http.put("api/workAssignments", assign).then(function (responses) {
+
+                    })
                 })
-              })
-                
+
             });
         };
 
         $scope.saveGov = function (id) {
 
             $scope.govWorkExperience[id].curriculumVitaeId = $scope.cv_id;
-            
-              $scope.govWorkExperience['governmentProjectId'] = $scope.govWorkExperience[id].governmentProject.id;
-              angular.forEach($scope.govWorkExperience[id].governmentProject.technologies,function(assign,key){
-                assign['governmentProjectId'] =  $scope.govWorkExperience[id].governmentProject.id;
+
+            $scope.govWorkExperience['governmentProjectId'] = $scope.govWorkExperience[id].governmentProject.id;
+            angular.forEach($scope.govWorkExperience[id].governmentProject.technologies, function (assign, key) {
+                assign['governmentProjectId'] = $scope.govWorkExperience[id].governmentProject.id;
                 $http.put("api/technologys", assign).then(function (responses) {
                 })
               })
-              if($scope.govWorkExperience[id].id){
-                console.log($scope.govWorkExperience[id])
-
-              }else{
-                $scope.govWorkExperience[id].id = null;
-                console.log('not found')
-                console.log($scope.govWorkExperience[id])
-              }
-              $scope.govWorkExperience[id].personalWorkHours = parseInt($scope.govWorkExperience[id].personalWorkHours)
               console.log($scope.govWorkExperience[id])
-              $http.put("api/governmentWorkExperiences", $scope.govWorkExperience[id]).then(function (govXP) {
+
+              $http.post("api/govWorkExperience", $scope.govWorkExperience[id]).then(function (govXP) {
                   angular.forEach($scope.govWorkExperience[id].workAssignments,function(assign,key){
                     assign['governmentWorkExperienceId'] = govXP.data.id;
                     $http.put("api/workAssignments", assign).then(function (responses) {
                     })
                   })
-              }) 
-           
+              })
+
         };
 
-        
-        $scope.saveEmployee = function(){
-          if($scope.personData){
-            
-            $http.put("api/employee", $scope.persons).then(function (response) {             
-             
-            });
-          }else{
-            Restangular.all("api").all("employee").post($scope.persons).then(function (resp) {
-              console.log(resp)
-              $scope.loadEmployee();
-            });
-          }
-         
+
+        $scope.saveEmployee = function () {
+            if ($scope.personData) {
+                return $http.put("api/employee", $scope.persons)
+                    .then(function (response) {
+
+                },function (result) {
+                        if (result && result.data && result.data.message) {
+                            addError('personArea', result.data.message.split(","));
+                        }
+                    }
+                );
+            } else {
+                Restangular.all("api").all("employee").post($scope.persons).then(function (resp) {
+                    console.log(resp)
+                    $scope.loadEmployee();
+                });
+            }
+
         }
         //endsave lines
 
@@ -569,7 +629,7 @@ angular.module('resourcyApp')
                 }else{
 
                 }
-              
+
             });
              function readViewText() {
                   var html = element.html();

@@ -2,6 +2,7 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.GovernmentProjectService;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.GovernmentProjectDTO;
 import com.resourcy.app.web.rest.mapper.GovernmentProjectMapper;
 import com.resourcy.app.web.rest.util.HeaderUtil;
@@ -27,13 +28,13 @@ import java.util.Optional;
 public class GovernmentProjectController {
 
     private final Logger log = LoggerFactory.getLogger(GovernmentProjectController.class);
-        
+
     @Inject
     private GovernmentProjectService governmentProjectService;
-    
+
     @Inject
     private GovernmentProjectMapper governmentProjectMapper;
-    
+
     /**
      * POST  /governmentProjects -> Create a new governmentProject.
      */
@@ -41,7 +42,7 @@ public class GovernmentProjectController {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<GovernmentProjectDTO> createGovernmentProject(@RequestBody GovernmentProjectDTO governmentProjectDTO) throws URISyntaxException {
+    public ResponseEntity<GovernmentProjectDTO> createGovernmentProject(@RequestBody GovernmentProjectDTO governmentProjectDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to save GovernmentProject : {}", governmentProjectDTO);
         if (governmentProjectDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("governmentProject", "idexists", "A new governmentProject cannot already have an ID")).body(null);
@@ -59,7 +60,7 @@ public class GovernmentProjectController {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<GovernmentProjectDTO> updateGovernmentProject(@RequestBody GovernmentProjectDTO governmentProjectDTO) throws URISyntaxException {
+    public ResponseEntity<GovernmentProjectDTO> updateGovernmentProject(@RequestBody GovernmentProjectDTO governmentProjectDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to update GovernmentProject : {}", governmentProjectDTO);
         if (governmentProjectDTO.getId() == null) {
             return createGovernmentProject(governmentProjectDTO);

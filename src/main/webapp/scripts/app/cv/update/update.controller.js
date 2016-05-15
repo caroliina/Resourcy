@@ -260,8 +260,8 @@ angular.module('resourcyApp')
 
         $scope.saveEducation = function (id) {
             $.each($scope.educations, function (i, val) {
+                console.log("olin siin 2");
                 val['curriculumVitaeId'] = id;
-
                 $http.put("api/educations", val).then(function (response) {
                 });
             })
@@ -320,7 +320,7 @@ angular.module('resourcyApp')
             })
         };
         $scope.save_cv = function () {
-            if ($scope.cvForm.$valid) {
+
                 $scope.date = new Date($scope.persons.birthday);
                 if ($scope.date.getTimezoneOffset() * 60000 > 0) {
                     $scope.date = new Date($scope.date.getTime() + $scope.date.getTimezoneOffset() * 60000);
@@ -341,9 +341,7 @@ angular.module('resourcyApp')
 
 
                 });
-            } else {
 
-            }
         }
 
     });

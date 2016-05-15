@@ -14,7 +14,7 @@ public class AdditionalSkillDTO extends AbstractAuditingEntityDTO implements Ser
 
     private String description;
 
-    private double experience;
+    private Double experience;
 
     private Long curriculumVitaeId;
 
@@ -40,7 +40,7 @@ public class AdditionalSkillDTO extends AbstractAuditingEntityDTO implements Ser
         this.description = description;
     }
 
-    public double getExperience() {
+    public Double getExperience() {
         return experience;
     }
 

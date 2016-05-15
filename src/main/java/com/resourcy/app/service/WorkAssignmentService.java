@@ -9,37 +9,34 @@ import java.util.List;
  */
 public interface WorkAssignmentService {
 
-   /**
-    * Save a workAssignment.
-    *
-    * @return the persisted entity
-    */
-   WorkAssignmentDTO save(WorkAssignmentDTO workAssignmentDTO);
+    /**
+     * Save a workAssignment.
+     * @return the persisted entity
+     */
+    public WorkAssignmentDTO save(WorkAssignmentDTO workAssignmentDTO) throws ValidationException;
 
-   /**
-    * get all the workAssignments.
-    *
-    * @return the list of entities
-    */
-   List<WorkAssignmentDTO> findAll();
+    /**
+     *  get all the workAssignments.
+     *  @return the list of entities
+     */
+    public List<WorkAssignmentDTO> findAll();
 
-   /**
-    * get the "id" workAssignment.
-    *
-    * @return the entity
-    */
-   WorkAssignmentDTO findOne(Long id);
+    /**
+     *  get the "id" workAssignment.
+     *  @return the entity
+     */
+    public WorkAssignmentDTO findOne(Long id);
 
-   /**
-    * delete the "id" workAssignment.
-    */
-   void delete(Long id);
+    /**
+     *  delete the "id" workAssignment.
+     */
+    public void delete(Long id);
 
-   /**
-    * search for the workAssignment corresponding
-    * to the query.
-    */
-   List<WorkAssignmentDTO> search(String query);
+    /**
+     * search for the workAssignment corresponding
+     * to the query.
+     */
+    public List<WorkAssignmentDTO> search(String query);
 
-   WorkAssignmentDTO addWorkAssignment(WorkAssignmentDTO dto);
+    WorkAssignmentDTO addWorkAssignment(WorkAssignmentDTO dto);
 }
