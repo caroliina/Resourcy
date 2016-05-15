@@ -474,7 +474,7 @@
                                         <br>
 
                                         <div>
-                                    <span>Isiklike töötundide maht projekti raames:
+                                    <span>Isiklike töötundide maht projekti raames:</span>
                                         <span ng-if="govWorkExperience[key].editmode == true">
                                             <input type="text" ng-model="govxp.personalWorkHours">
                                         </span>
@@ -723,7 +723,8 @@
                                          ng-click="addSkills()"><img src="/assets/images/addbutton.svg" height="24px">
                                     </div>
                                     <div class="alert alert-danger" ng-if="error.additionalSkillArea">
-                                        <p ng-repeat="alert in error.additionalSkillArea" ng-bind="alert | translate"></p>
+                                        <p ng-repeat="alert in error.additionalSkillArea"
+                                           ng-bind="alert | translate"></p>
                                     </div>
                                 </h3>
                             </div>
@@ -768,6 +769,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <h3 translate="form.addNewProject"></h3>
+
                         <div class="alert alert-danger" ng-if="error.projectArea">
                             <p ng-repeat="alert in error.projectArea" ng-bind="alert | translate"></p>
                         </div>
