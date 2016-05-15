@@ -1,5 +1,6 @@
 package com.resourcy.app.web.rest.dto;
 
+
 import com.resourcy.app.domain.Type;
 
 import java.io.Serializable;

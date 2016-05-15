@@ -2,6 +2,7 @@ package com.resourcy.app.service;
 
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.GovernmentProject;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.GovernmentProjectDTO;
 import com.resourcy.app.web.rest.mapper.GovernmentProjectMapper;
 import org.junit.Test;
@@ -57,7 +58,7 @@ public class GovernmentProjectServiceTest {
 
    @Test
    @Transactional
-   public void testSaveGovernmentProject() {
+   public void testSaveGovernmentProject() throws ValidationException {
       GovernmentProjectDTO governmentProject = governmentProjectService.addGovernmentProject(newGovernmentProjectDTO());
       assertNotNull(governmentProject);
 

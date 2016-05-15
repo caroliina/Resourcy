@@ -5,8 +5,12 @@ import com.resourcy.app.repository.GovernmentProjectRepository;
 import com.resourcy.app.repository.GovernmentWorkExperienceRepository;
 import com.resourcy.app.repository.search.GovernmentProjectSearchRepository;
 import com.resourcy.app.service.GovernmentProjectService;
+import com.resourcy.app.service.validator.ValidationException;
+import com.resourcy.app.service.validator.ValidationResponse;
+import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.GovernmentProjectDTO;
 import com.resourcy.app.web.rest.mapper.GovernmentProjectMapper;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -74,55 +78,6 @@ public class GovernmentProjectServiceImpl implements GovernmentProjectService{
         return result;
     }
 
-
-    /**
-     *  get all the governmentProjects where GovernmentWorkExperience is null.
-     *  @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public List<GovernmentProjectDTO> findAllWhereGovernmentWorkExperienceIsNull() {
-        log.debug("Request to get all governmentProjects where GovernmentWorkExperience is null");
-        return StreamSupport
-            .stream(governmentProjectRepository.findAll().spliterator(), false)
-            .filter(governmentProject -> governmentProject.getGovernmentWorkExperience() == null)
-            .map(governmentProjectMapper::governmentProjectToGovernmentProjectDTO)
-            .collect(Collectors.toCollection(LinkedList::new));
-    }
-
-    /**
-     *  get one governmentProject by id.
-     *  @return the entity
-     */
-    @Transactional(readOnly = true)
-    public GovernmentProjectDTO findOne(Long id) {
-        log.debug("Request to get GovernmentProject : {}", id);
-        GovernmentProject governmentProject = governmentProjectRepository.findOne(id);
-        GovernmentProjectDTO governmentProjectDTO = governmentProjectMapper.governmentProjectToGovernmentProjectDTO(governmentProject);
-        return governmentProjectDTO;
-    }
-
-    /**
-     *  delete the  governmentProject by id.
-     */
-    public void delete(Long id) {
-        log.debug("Request to delete GovernmentProject : {}", id);
-        governmentProjectRepository.delete(id);
-        governmentProjectSearchRepository.delete(id);
-    }
-
-    /**
-     * search for the governmentProject corresponding
-     * to the query.
-     */
-    @Transactional(readOnly = true)
-    public List<GovernmentProjectDTO> search(String query) {
-
-        log.debug("REST request to search GovernmentProjects for query {}", query);
-        return StreamSupport
-            .stream(governmentProjectSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(governmentProjectMapper::governmentProjectToGovernmentProjectDTO)
-            .collect(Collectors.toList());
-    }
 
    /**
     * get all the governmentProjects where GovernmentWorkExperience is null.

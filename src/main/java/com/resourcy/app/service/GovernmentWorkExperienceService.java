@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.GovernmentWorkExperienceDTO;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface GovernmentWorkExperienceService {
      * Save a governmentWorkExperience.
      * @return the persisted entity
      */
-    public GovernmentWorkExperienceDTO save(GovernmentWorkExperienceDTO governmentWorkExperienceDTO);
+    public GovernmentWorkExperienceDTO save(GovernmentWorkExperienceDTO governmentWorkExperienceDTO) throws ValidationException;
 
     /**
      *  get all the governmentWorkExperiences.

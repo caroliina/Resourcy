@@ -2,6 +2,7 @@ package com.resourcy.app.service;
 
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.AdditionalStudy;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.AdditionalStudyDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalStudyMapper;
 import org.junit.Test;
@@ -61,7 +62,7 @@ public class AdditionalStudyServiceTest {
 
    @Test
    @Transactional
-   public void testSaveAdditionalStudy() {
+   public void testSaveAdditionalStudy() throws ValidationException {
       AdditionalStudyDTO additionalStudy = additionalStudyService.addStudy(newAdditionalStudyDTO());
       assertNotNull(additionalStudy);
 

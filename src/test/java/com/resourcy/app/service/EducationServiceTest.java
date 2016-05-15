@@ -3,6 +3,7 @@ package com.resourcy.app.service;
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.Education;
 import com.resourcy.app.domain.EducationDegrees;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.EducationDTO;
 import com.resourcy.app.web.rest.mapper.EducationMapper;
 import org.junit.Test;
@@ -63,7 +64,7 @@ public class EducationServiceTest {
 
    @Test
    @Transactional
-   public void testSaveEducation() {
+   public void testSaveEducation() throws ValidationException {
       EducationDTO education = educationService.addEducation(newEducationDTO());
       assertNotNull(education);
 

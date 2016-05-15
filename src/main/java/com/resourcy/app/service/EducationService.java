@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.EducationDTO;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface EducationService {
      * Save a education.
      * @return the persisted entity
      */
-    public EducationDTO save(EducationDTO educationDTO) throws ValidationException;
+    public EducationDTO save(EducationDTO educationDTO) throws  ValidationException;
 
     /**
      *  get all the educations.

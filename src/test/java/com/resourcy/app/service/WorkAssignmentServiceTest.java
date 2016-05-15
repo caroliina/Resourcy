@@ -2,6 +2,7 @@ package com.resourcy.app.service;
 
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.WorkAssignment;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.WorkAssignmentDTO;
 import com.resourcy.app.web.rest.mapper.WorkAssignmentMapper;
 import org.junit.Test;
@@ -53,7 +54,7 @@ public class WorkAssignmentServiceTest {
 
    @Test
    @Transactional
-   public void testSaveWorkAssignment() {
+   public void testSaveWorkAssignment() throws ValidationException {
       WorkAssignmentDTO workAssignment = workAssignmentService.addWorkAssignment(newWorkAssignmentDTO());
       assertNotNull(workAssignment);
 

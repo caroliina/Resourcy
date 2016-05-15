@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.WorkExperienceDTO;
 
 import java.util.List;

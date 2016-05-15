@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.LanguageSkillDTO;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface LanguageSkillService {
      * Save a languageSkill.
      * @return the persisted entity
      */
-    public LanguageSkillDTO save(LanguageSkillDTO languageSkillDTO) throws ValidationException;
+    public LanguageSkillDTO save(LanguageSkillDTO languageSkillDTO) throws  ValidationException;
 
     /**
      *  get all the languageSkills.

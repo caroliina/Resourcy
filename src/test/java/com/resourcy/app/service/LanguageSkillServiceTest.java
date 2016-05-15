@@ -3,6 +3,7 @@ package com.resourcy.app.service;
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.LanguageLevel;
 import com.resourcy.app.domain.LanguageSkill;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.LanguageSkillDTO;
 import com.resourcy.app.web.rest.mapper.LanguageSkillMapper;
 import org.junit.Test;
@@ -60,7 +61,7 @@ public class LanguageSkillServiceTest {
 
    @Test
    @Transactional
-   public void testSaveLanguageSkill() {
+   public void testSaveLanguageSkill() throws ValidationException {
       LanguageSkillDTO languageSkill = languageSkillService.addLanguage(newLanguageSkillDTO());
       assertNotNull(languageSkill);
 

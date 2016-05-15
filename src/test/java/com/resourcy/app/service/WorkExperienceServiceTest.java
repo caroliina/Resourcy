@@ -3,6 +3,7 @@ package com.resourcy.app.service;
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.WorkExperience;
 import com.resourcy.app.domain.Position;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.WorkExperienceDTO;
 import com.resourcy.app.web.rest.mapper.WorkExperienceMapper;
 import org.junit.Test;
@@ -65,7 +66,7 @@ public class WorkExperienceServiceTest {
 
    @Test
    @Transactional
-   public void testSaveWorkExperience() {
+   public void testSaveWorkExperience() throws ValidationException {
       WorkExperienceDTO workExperience = workExperienceService.addWorkExperience(newWorkExperienceDTO());
       assertNotNull(workExperience);
 

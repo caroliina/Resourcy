@@ -1,6 +1,7 @@
 package com.resourcy.app.service;
 
 import com.resourcy.app.domain.CurriculumVitae;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.CurriculumVitaeDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ public interface CurriculumVitaeService {
      * Save a curriculumVitae.
      * @return the persisted entity
      */
-    public CurriculumVitaeDTO save(CurriculumVitaeDTO curriculumVitaeDTO) throws ValidationException;
+    public CurriculumVitaeDTO save(CurriculumVitaeDTO curriculumVitaeDTO) throws  ValidationException;
 
     /**
      *  get all the curriculumVitaes.

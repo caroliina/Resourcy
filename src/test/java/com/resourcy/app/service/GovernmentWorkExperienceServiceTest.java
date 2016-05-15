@@ -3,6 +3,7 @@ package com.resourcy.app.service;
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.GovernmentWorkExperience;
 import com.resourcy.app.domain.Position;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.GovernmentWorkExperienceDTO;
 import com.resourcy.app.web.rest.mapper.GovernmentWorkExperienceMapper;
 import org.junit.Test;
@@ -27,7 +28,7 @@ import static org.junit.Assert.assertNotNull;
 @IntegrationTest
 @Transactional
 public class GovernmentWorkExperienceServiceTest {
-   
+
    @Inject
    private GovernmentWorkExperienceService governmentWorkExperienceService;
 
@@ -63,7 +64,7 @@ public class GovernmentWorkExperienceServiceTest {
 
    @Test
    @Transactional
-   public void testSaveGovernmentWorkExperience() {
+   public void testSaveGovernmentWorkExperience() throws ValidationException {
       GovernmentWorkExperienceDTO governmentWorkExperience = governmentWorkExperienceService.addGovernmentWorkExperience(newGovernmentWorkExperienceDTO());
       assertNotNull(governmentWorkExperience);
 
