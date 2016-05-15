@@ -57,7 +57,7 @@ public class TechnologyServiceImpl implements TechnologyService {
     public TechnologyDTO save(TechnologyDTO technologyDTO) throws ValidationException {
         log.debug("Request to save Technology : {}", technologyDTO);
         ValidationResponse validationResponse = technologyValidatorService.validate(technologyDTO);
-        if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
+        if (CollectionUtils.isEmpty(validationResponse.getErrorMessage())) {
             throw new ValidationException(validationResponse);
         }
         Technology technology = technologyMapper.technologyDTOToTechnology(technologyDTO);
