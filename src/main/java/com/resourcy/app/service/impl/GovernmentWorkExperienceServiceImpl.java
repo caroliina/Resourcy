@@ -61,7 +61,7 @@ public class GovernmentWorkExperienceServiceImpl implements GovernmentWorkExperi
     public GovernmentWorkExperienceDTO save(GovernmentWorkExperienceDTO governmentWorkExperienceDTO) throws ValidationException {
         log.debug("Request to save GovernmentWorkExperience : {}", governmentWorkExperienceDTO);
         ValidationResponse validationResponse = governmentWorkExperienceValidatorService.validate(governmentWorkExperienceDTO);
-        if (CollectionUtils.isEmpty(validationResponse.getErrorMessage())) {
+        if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
             throw new ValidationException(validationResponse);
         }
         GovernmentWorkExperience governmentWorkExperience = governmentWorkExperienceMapper.governmentWorkExperienceDTOToGovernmentWorkExperience(governmentWorkExperienceDTO);
@@ -126,7 +126,12 @@ public class GovernmentWorkExperienceServiceImpl implements GovernmentWorkExperi
     }
 
    @Override
-   public GovernmentWorkExperienceDTO addGovernmentWorkExperience(GovernmentWorkExperienceDTO dto) {
+   public GovernmentWorkExperienceDTO addGovernmentWorkExperience(GovernmentWorkExperienceDTO dto) throws ValidationException {
+       ValidationResponse validationResponse = governmentWorkExperienceValidatorService.validate(dto);
+       if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
+           throw new ValidationException(validationResponse);
+       }
+
       GovernmentWorkExperience govWorkExperience =
          governmentWorkExperienceMapper.governmentWorkExperienceDTOToGovernmentWorkExperience(dto);
       if (dto.getCurriculumVitaeId() != null) {

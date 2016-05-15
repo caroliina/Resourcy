@@ -649,10 +649,10 @@
                                     <div class="addbutton" uib-tooltip="Add new" ng-if="editmode"
                                          ng-click="addLanguage()"><img src="/assets/images/addbutton.svg" height="24px">
                                     </div>
-                                    <div class="alert alert-danger" ng-if="error.languageArea">
-                                        <p ng-repeat="alert in error.languageArea" ng-bind="alert | translate"></p>
-                                    </div>
                                 </h3>
+                                <div class="alert alert-danger" ng-if="error.languageArea">
+                                    <p ng-repeat="alert in error.languageArea" ng-bind="alert | translate"></p>
+                                </div>
                             </div>
                             <table valign="top" class="edication" width="100%" border="1px">
                                 <tr valign="top">
@@ -722,11 +722,11 @@
                                     <div class="addbutton" uib-tooltip="Add new" ng-if="editmode"
                                          ng-click="addSkills()"><img src="/assets/images/addbutton.svg" height="24px">
                                     </div>
-                                    <div class="alert alert-danger" ng-if="error.additionalSkillArea">
-                                        <p ng-repeat="alert in error.additionalSkillArea"
-                                           ng-bind="alert | translate"></p>
-                                    </div>
                                 </h3>
+                                <div class="alert alert-danger" ng-if="error.additionalSkillArea">
+                                    <p ng-repeat="alert in error.additionalSkillArea"
+                                       ng-bind="alert | translate"></p>
+                                </div>
                             </div>
                             <ul>
                                 <li ng-repeat="(key, skills) in additionalSkill">

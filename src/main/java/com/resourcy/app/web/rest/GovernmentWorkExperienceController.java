@@ -128,7 +128,7 @@ public class GovernmentWorkExperienceController {
     }
 
     @RequestMapping(value = "/govWorkExperience", method = RequestMethod.POST)
-    public GovernmentWorkExperienceDTO addGovernmentWorkExperience(@RequestBody GovernmentWorkExperienceDTO dto) {
+    public GovernmentWorkExperienceDTO addGovernmentWorkExperience(@RequestBody GovernmentWorkExperienceDTO dto) throws ValidationException {
         return governmentWorkExperienceService.addGovernmentWorkExperience(dto);
     }
 }

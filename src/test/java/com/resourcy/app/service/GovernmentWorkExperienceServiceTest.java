@@ -47,7 +47,7 @@ public class GovernmentWorkExperienceServiceTest {
 
    @Test
    @Transactional
-   public void testAddGovernmentWorkExperience(){
+   public void testAddGovernmentWorkExperience() throws ValidationException {
       GovernmentWorkExperienceDTO governmentWorkExperience = governmentWorkExperienceService.addGovernmentWorkExperience(newGovernmentWorkExperienceDTO());
       assertNotNull(governmentWorkExperience);
 
@@ -84,7 +84,7 @@ public class GovernmentWorkExperienceServiceTest {
 
    @Test
    @Transactional
-   public void testFindOneGovernmentWorkExperience(){
+   public void testFindOneGovernmentWorkExperience() throws ValidationException {
       GovernmentWorkExperienceDTO governmentWorkExperience = governmentWorkExperienceService.addGovernmentWorkExperience(newGovernmentWorkExperienceDTO());
       assertNotNull(governmentWorkExperience);
 
@@ -95,7 +95,7 @@ public class GovernmentWorkExperienceServiceTest {
 
    @Test
    @Transactional
-   public void testDeleteGovernmentWorkExperience() {
+   public void testDeleteGovernmentWorkExperience() throws ValidationException {
       GovernmentWorkExperienceDTO governmentWorkExperience = governmentWorkExperienceService.addGovernmentWorkExperience(newGovernmentWorkExperienceDTO());
       assertNotNull(governmentWorkExperience);
 

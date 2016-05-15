@@ -39,5 +39,5 @@ public interface GovernmentWorkExperienceService {
      */
     public List<GovernmentWorkExperienceDTO> search(String query);
 
-    GovernmentWorkExperienceDTO addGovernmentWorkExperience(GovernmentWorkExperienceDTO dto);
+    GovernmentWorkExperienceDTO addGovernmentWorkExperience(GovernmentWorkExperienceDTO dto) throws ValidationException;
 }

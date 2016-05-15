@@ -57,7 +57,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     public WorkExperienceDTO save(WorkExperienceDTO workExperienceDTO) throws ValidationException {
         log.debug("Request to save WorkExperience : {}", workExperienceDTO);
         ValidationResponse validationResponse = workExperienceValidatorService.validate(workExperienceDTO);
-        if (CollectionUtils.isEmpty(validationResponse.getErrorMessage())) {
+        if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
             throw new ValidationException(validationResponse);
         }
         WorkExperience workExperience = workExperienceMapper.workExperienceDTOToWorkExperience(workExperienceDTO);
