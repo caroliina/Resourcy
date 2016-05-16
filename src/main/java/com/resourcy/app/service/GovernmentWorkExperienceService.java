@@ -14,30 +14,30 @@ public interface GovernmentWorkExperienceService {
      * Save a governmentWorkExperience.
      * @return the persisted entity
      */
-    public GovernmentWorkExperienceDTO save(GovernmentWorkExperienceDTO governmentWorkExperienceDTO) throws ValidationException;
+    GovernmentWorkExperienceDTO save(GovernmentWorkExperienceDTO governmentWorkExperienceDTO) throws ValidationException;
 
     /**
      *  get all the governmentWorkExperiences.
      *  @return the list of entities
      */
-    public List<GovernmentWorkExperienceDTO> findAll();
+    List<GovernmentWorkExperienceDTO> findAll();
 
     /**
      *  get the "id" governmentWorkExperience.
      *  @return the entity
      */
-    public GovernmentWorkExperienceDTO findOne(Long id);
+    GovernmentWorkExperienceDTO findOne(Long id);
 
     /**
      *  delete the "id" governmentWorkExperience.
      */
-    public void delete(Long id);
+    void delete(Long id);
 
     /**
      * search for the governmentWorkExperience corresponding
      * to the query.
      */
-    public List<GovernmentWorkExperienceDTO> search(String query);
+    List<GovernmentWorkExperienceDTO> search(String query);
 
     GovernmentWorkExperienceDTO addGovernmentWorkExperience(GovernmentWorkExperienceDTO dto) throws ValidationException;
 }

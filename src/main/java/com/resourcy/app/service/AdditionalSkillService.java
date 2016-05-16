@@ -14,30 +14,30 @@ public interface AdditionalSkillService {
      * Save a additionalSkill.
      * @return the persisted entity
      */
-    public AdditionalSkillDTO save(AdditionalSkillDTO additionalSkillDTO) throws ValidationException;
+    AdditionalSkillDTO save(AdditionalSkillDTO additionalSkillDTO) throws ValidationException;
 
     /**
      *  get all the additionalSkills.
      *  @return the list of entities
      */
-    public List<AdditionalSkillDTO> findAll();
+    List<AdditionalSkillDTO> findAll();
 
     /**
      *  get the "id" additionalSkill.
      *  @return the entity
      */
-    public AdditionalSkillDTO findOne(Long id);
+    AdditionalSkillDTO findOne(Long id);
 
     /**
      *  delete the "id" additionalSkill.
      */
-    public void delete(Long id);
+    void delete(Long id);
 
     /**
      * search for the additionalSkill corresponding
      * to the query.
      */
-    public List<AdditionalSkillDTO> search(String query);
+    List<AdditionalSkillDTO> search(String query);
 
     AdditionalSkillDTO addSkill(AdditionalSkillDTO additionalSkillDTO);
 }

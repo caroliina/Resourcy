@@ -14,30 +14,30 @@ public interface EducationService {
      * Save a education.
      * @return the persisted entity
      */
-    public EducationDTO save(EducationDTO educationDTO) throws  ValidationException;
+    EducationDTO save(EducationDTO educationDTO) throws  ValidationException;
 
     /**
      *  get all the educations.
      *  @return the list of entities
      */
-    public List<EducationDTO> findAll();
+    List<EducationDTO> findAll();
 
     /**
      *  get the "id" education.
      *  @return the entity
      */
-    public EducationDTO findOne(Long id);
+    EducationDTO findOne(Long id);
 
     /**
      *  delete the "id" education.
      */
-    public void delete(Long id);
+    void delete(Long id);
 
     /**
      * search for the education corresponding
      * to the query.
      */
-    public List<EducationDTO> search(String query);
+    List<EducationDTO> search(String query);
 
     EducationDTO addEducation(EducationDTO educationDTO);
 }

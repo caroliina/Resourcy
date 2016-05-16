@@ -17,30 +17,30 @@ public interface CurriculumVitaeService {
      * Save a curriculumVitae.
      * @return the persisted entity
      */
-    public CurriculumVitaeDTO save(CurriculumVitaeDTO curriculumVitaeDTO) throws  ValidationException;
+    CurriculumVitaeDTO save(CurriculumVitaeDTO curriculumVitaeDTO) throws  ValidationException;
 
     /**
      *  get all the curriculumVitaes.
      *  @return the list of entities
      */
-    public Page<CurriculumVitae> findAll(Pageable pageable);
+    Page<CurriculumVitae> findAll(Pageable pageable);
 
     /**
      *  get the "id" curriculumVitae.
      *  @return the entity
      */
-    public CurriculumVitaeDTO findOne(Long id);
+    CurriculumVitaeDTO findOne(Long id);
 
     /**
      *  delete the "id" curriculumVitae.
      */
-    public void delete(Long id);
+    void delete(Long id);
 
     /**
      * search for the curriculumVitae corresponding
      * to the query.
      */
-    public List<CurriculumVitaeDTO> search(String query);
+    List<CurriculumVitaeDTO> search(String query);
 
     CurriculumVitaeDTO getEmployeeCvEst();
 }

@@ -14,30 +14,30 @@ public interface WorkAssignmentService {
      * Save a workAssignment.
      * @return the persisted entity
      */
-    public WorkAssignmentDTO save(WorkAssignmentDTO workAssignmentDTO) throws  ValidationException;
+    WorkAssignmentDTO save(WorkAssignmentDTO workAssignmentDTO) throws  ValidationException;
 
     /**
      *  get all the workAssignments.
      *  @return the list of entities
      */
-    public List<WorkAssignmentDTO> findAll();
+    List<WorkAssignmentDTO> findAll();
 
     /**
      *  get the "id" workAssignment.
      *  @return the entity
      */
-    public WorkAssignmentDTO findOne(Long id);
+    WorkAssignmentDTO findOne(Long id);
 
     /**
      *  delete the "id" workAssignment.
      */
-    public void delete(Long id);
+    void delete(Long id);
 
     /**
      * search for the workAssignment corresponding
      * to the query.
      */
-    public List<WorkAssignmentDTO> search(String query);
+    List<WorkAssignmentDTO> search(String query);
 
     WorkAssignmentDTO addWorkAssignment(WorkAssignmentDTO dto);
 }

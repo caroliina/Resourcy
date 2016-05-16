@@ -14,30 +14,30 @@ public interface LanguageSkillService {
      * Save a languageSkill.
      * @return the persisted entity
      */
-    public LanguageSkillDTO save(LanguageSkillDTO languageSkillDTO) throws  ValidationException;
+    LanguageSkillDTO save(LanguageSkillDTO languageSkillDTO) throws  ValidationException;
 
     /**
      *  get all the languageSkills.
      *  @return the list of entities
      */
-    public List<LanguageSkillDTO> findAll();
+    List<LanguageSkillDTO> findAll();
 
     /**
      *  get the "id" languageSkill.
      *  @return the entity
      */
-    public LanguageSkillDTO findOne(Long id);
+    LanguageSkillDTO findOne(Long id);
 
     /**
      *  delete the "id" languageSkill.
      */
-    public void delete(Long id);
+    void delete(Long id);
 
     /**
      * search for the languageSkill corresponding
      * to the query.
      */
-    public List<LanguageSkillDTO> search(String query);
+    List<LanguageSkillDTO> search(String query);
 
     LanguageSkillDTO addLanguage(LanguageSkillDTO languageSkillDTO);
 }

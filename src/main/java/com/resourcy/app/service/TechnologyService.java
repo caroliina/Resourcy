@@ -14,30 +14,30 @@ public interface TechnologyService {
      * Save a technology.
      * @return the persisted entity
      */
-    public TechnologyDTO save(TechnologyDTO technologyDTO) throws ValidationException, ValidationException;
+    TechnologyDTO save(TechnologyDTO technologyDTO) throws ValidationException;
 
     /**
      *  get all the technologys.
      *  @return the list of entities
      */
-    public List<TechnologyDTO> findAll();
+    List<TechnologyDTO> findAll();
 
     /**
      *  get the "id" technology.
      *  @return the entity
      */
-    public TechnologyDTO findOne(Long id);
+    TechnologyDTO findOne(Long id);
 
     /**
      *  delete the "id" technology.
      */
-    public void delete(Long id);
+    void delete(Long id);
 
     /**
      * search for the technology corresponding
      * to the query.
      */
-    public List<TechnologyDTO> search(String query);
+    List<TechnologyDTO> search(String query);
 
     TechnologyDTO addTechnology(TechnologyDTO dto);
 }
