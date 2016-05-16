@@ -67,8 +67,8 @@ public class EmployeeServiceImpl implements EmployeeService{
             throw new ValidationException(validationResponse);
         }
         Employee employee = employeeRepository.findOne(employeeDTO.getId());
-        employee.setFirstName(employee.getFirstName());
-        employee.setLastName(employee.getLastName());
+        employee.setFirstName(employeeDTO.getFirstName());
+        employee.setLastName(employeeDTO.getLastName());
         employee.setBirthday(employeeDTO.getBirthday());
         employee.setIdCode(employeeDTO.getIdCode());
         employee.setNationality(employeeDTO.getNationality());
