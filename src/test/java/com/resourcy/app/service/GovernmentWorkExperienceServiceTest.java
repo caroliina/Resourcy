@@ -3,6 +3,8 @@ package com.resourcy.app.service;
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.GovernmentWorkExperience;
 import com.resourcy.app.domain.Position;
+import com.resourcy.app.domain.WorkAssignment;
+import com.resourcy.app.repository.WorkAssignmentRepository;
 import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.GovernmentWorkExperienceDTO;
 import com.resourcy.app.web.rest.mapper.GovernmentWorkExperienceMapper;
@@ -16,11 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
@@ -35,14 +37,36 @@ public class GovernmentWorkExperienceServiceTest {
    @Inject
    private GovernmentWorkExperienceMapper governmentWorkExperienceMapper;
 
+   @Inject
+   private WorkAssignmentRepository workAssignmentRepository;
+
    private GovernmentWorkExperienceDTO newGovernmentWorkExperienceDTO() {
       GovernmentWorkExperience governmentWorkExperience = new GovernmentWorkExperience();
       governmentWorkExperience.setPosition(Position.PROGRAMMER);
       governmentWorkExperience.setPeriodStart(LocalDate.now());
       governmentWorkExperience.setPeriodEnd(LocalDate.now());
       governmentWorkExperience.setPersonalWorkHours(123);
+      governmentWorkExperience.setId(1L);
+      governmentWorkExperience.setCreatedBy("User");
+      governmentWorkExperience.setCreatedDate(ZonedDateTime.now());
+      governmentWorkExperience.setLastModifiedBy("User");
+      governmentWorkExperience.setLastModifiedDate(ZonedDateTime.now());
+      governmentWorkExperience.setWorkAssignments(newWorkAssignment(governmentWorkExperience));
       GovernmentWorkExperienceDTO governmentWorkExperienceDTO = governmentWorkExperienceMapper.governmentWorkExperienceToGovernmentWorkExperienceDTO(governmentWorkExperience);
       return governmentWorkExperienceDTO;
+   }
+
+   public  List<WorkAssignment> newWorkAssignment(GovernmentWorkExperience governmentWorkExperience){
+      List<WorkAssignment> workAssignments = new ArrayList<>();
+
+      WorkAssignment workAssignment = new WorkAssignment();
+      workAssignment.setDescription("description");
+      workAssignment.setGovernmentWorkExperience(governmentWorkExperience);
+      workAssignmentRepository.save(workAssignment);
+
+      workAssignments.add(workAssignment);
+
+      return workAssignments;
    }
 
    @Test
