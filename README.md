@@ -10,7 +10,7 @@ This project uses `JDK 1.8` and at least `Maven 3.0` is required.
 
 # Building
 
-First you need to create a local folder on your machine and clone this repository.
+To run this application locally on your machine, first you need to create a new folder and then clone this repository.
 
 Before you can build this project, you must install and configure the following dependencies on your machine. These commands must be run in the previously created folder.
 
