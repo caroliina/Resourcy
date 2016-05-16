@@ -31,13 +31,15 @@
                                  baseTableName="work_assignment"
                                  constraintName="fk_workassignment_workexperience_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="work_experience"/>
+                                 referencedTableName="work_experience"
+                                 onDelete="CASCADE"/>
 
         <addForeignKeyConstraint baseColumnNames="government_work_experience_id"
                                  baseTableName="work_assignment"
                                  constraintName="fk_workassignment_governmentworkexperience_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="government_work_experience"/>
+                                 referencedTableName="government_work_experience"
+                                 onDelete="CASCADE"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -2,6 +2,7 @@ package com.resourcy.app.service;
 
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.Technology;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.TechnologyDTO;
 import com.resourcy.app.web.rest.mapper.TechnologyMapper;
 import org.junit.Test;
@@ -57,7 +58,7 @@ public class TechnologyServiceTest {
 
    @Test
    @Transactional
-   public void testSaveTechnology() {
+   public void testSaveTechnology() throws ValidationException {
       TechnologyDTO technology = technologyService.addTechnology(newTechnologyDTO());
       assertNotNull(technology);
 

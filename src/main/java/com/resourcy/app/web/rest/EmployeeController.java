@@ -3,6 +3,7 @@ package com.resourcy.app.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.domain.Employee;
 import com.resourcy.app.service.EmployeeService;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.EmployeeDTO;
 import com.resourcy.app.web.rest.mapper.EmployeeMapper;
 import com.resourcy.app.web.rest.util.HeaderUtil;
@@ -41,7 +42,7 @@ public class EmployeeController {
     private EmployeeMapper employeeMapper;
 
     @RequestMapping(value = "/employee",method = RequestMethod.PUT)
-    public EmployeeDTO save(@RequestBody EmployeeDTO employeeDTO) {
+    public EmployeeDTO save(@RequestBody EmployeeDTO employeeDTO) throws ValidationException {
         return employeeService.save(employeeDTO);
     }
 

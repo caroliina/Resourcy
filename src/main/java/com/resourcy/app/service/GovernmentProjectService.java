@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.GovernmentProjectDTO;
 
 import java.util.List;
@@ -9,44 +10,39 @@ import java.util.List;
  */
 public interface GovernmentProjectService {
 
-   /**
-    * Save a governmentProject.
-    *
-    * @return the persisted entity
-    */
-   GovernmentProjectDTO save(GovernmentProjectDTO governmentProjectDTO);
+    /**
+     * Save a governmentProject.
+     * @return the persisted entity
+     */
+    GovernmentProjectDTO save(GovernmentProjectDTO governmentProjectDTO) throws ValidationException;
 
-   /**
-    * get all the governmentProjects.
-    *
-    * @return the list of entities
-    */
-   List<GovernmentProjectDTO> findAll();
+    /**
+     *  get all the governmentProjects.
+     *  @return the list of entities
+     */
+    List<GovernmentProjectDTO> findAll();
+    /**
+     *  get all the governmentProjects where GovernmentWorkExperience is null.
+     *  @return the list of entities
+     */
+    List<GovernmentProjectDTO> findAllWhereGovernmentWorkExperienceIsNull();
 
-   /**
-    * get all the governmentProjects where GovernmentWorkExperience is null.
-    *
-    * @return the list of entities
-    */
-   List<GovernmentProjectDTO> findAllWhereGovernmentWorkExperienceIsNull();
+    /**
+     *  get the "id" governmentProject.
+     *  @return the entity
+     */
+    GovernmentProjectDTO findOne(Long id);
 
-   /**
-    * get the "id" governmentProject.
-    *
-    * @return the entity
-    */
-   GovernmentProjectDTO findOne(Long id);
+    /**
+     *  delete the "id" governmentProject.
+     */
+    void delete(Long id);
 
-   /**
-    * delete the "id" governmentProject.
-    */
-   void delete(Long id);
+    /**
+     * search for the governmentProject corresponding
+     * to the query.
+     */
+    List<GovernmentProjectDTO> search(String query);
 
-   /**
-    * search for the governmentProject corresponding
-    * to the query.
-    */
-   List<GovernmentProjectDTO> search(String query);
-
-   GovernmentProjectDTO addGovernmentProject(GovernmentProjectDTO dto);
+    GovernmentProjectDTO addGovernmentProject(GovernmentProjectDTO dto);
 }

@@ -5,8 +5,12 @@ import com.resourcy.app.repository.CurriculumVitaeRepository;
 import com.resourcy.app.repository.WorkExperienceRepository;
 import com.resourcy.app.repository.search.WorkExperienceSearchRepository;
 import com.resourcy.app.service.WorkExperienceService;
+import com.resourcy.app.service.validator.ValidationException;
+import com.resourcy.app.service.validator.ValidationResponse;
+import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.WorkExperienceDTO;
 import com.resourcy.app.web.rest.mapper.WorkExperienceMapper;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -29,36 +33,42 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 @Transactional
 public class WorkExperienceServiceImpl implements WorkExperienceService {
 
-   private final Logger log = LoggerFactory.getLogger(WorkExperienceServiceImpl.class);
+    private final Logger log = LoggerFactory.getLogger(WorkExperienceServiceImpl.class);
 
-   @Inject
-   private WorkExperienceRepository workExperienceRepository;
+    @Inject
+    private WorkExperienceRepository workExperienceRepository;
 
-   @Inject
-   private WorkExperienceMapper workExperienceMapper;
+    @Inject
+    private WorkExperienceMapper workExperienceMapper;
 
-   @Inject
-   private WorkExperienceSearchRepository workExperienceSearchRepository;
+    @Inject
+    private WorkExperienceSearchRepository workExperienceSearchRepository;
 
-   @Inject
-   private CurriculumVitaeRepository cvRepository;
+    @Inject
+    private CurriculumVitaeRepository cvRepository;
 
-   /**
-    * Save a workExperience.
-    *
-    * @return the persisted entity
-    */
-   public WorkExperienceDTO save(WorkExperienceDTO workExperienceDTO) {
-      log.debug("Request to save WorkExperience : {}", workExperienceDTO);
-      WorkExperience workExperience = workExperienceMapper.workExperienceDTOToWorkExperience(workExperienceDTO);
-      workExperience = workExperienceRepository.save(workExperience);
-      WorkExperienceDTO result = workExperienceMapper.workExperienceToWorkExperienceDTO(workExperience);
-      workExperienceSearchRepository.save(workExperience);
-      if (workExperience.getCurriculumVitae() != null) {
-         workExperience.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
-      }
-      return result;
-   }
+    @Inject
+    private ValidatorService workExperienceValidatorService;
+
+    /**
+     * Save a workExperience.
+     * @return the persisted entity
+     */
+    public WorkExperienceDTO save(WorkExperienceDTO workExperienceDTO) throws ValidationException {
+        log.debug("Request to save WorkExperience : {}", workExperienceDTO);
+        ValidationResponse validationResponse = workExperienceValidatorService.validate(workExperienceDTO);
+        if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
+            throw new ValidationException(validationResponse);
+        }
+        WorkExperience workExperience = workExperienceMapper.workExperienceDTOToWorkExperience(workExperienceDTO);
+        workExperience = workExperienceRepository.save(workExperience);
+        WorkExperienceDTO result = workExperienceMapper.workExperienceToWorkExperienceDTO(workExperience);
+        workExperienceSearchRepository.save(workExperience);
+        if (workExperience.getCurriculumVitae() != null) {
+            workExperience.getCurriculumVitae().setLastModifiedDate(ZonedDateTime.now(ZoneId.systemDefault()));
+        }
+        return result;
+    }
 
    /**
     * get all the workExperiences.

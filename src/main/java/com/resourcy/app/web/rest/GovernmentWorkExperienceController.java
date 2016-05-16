@@ -2,6 +2,7 @@ package com.resourcy.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.service.GovernmentWorkExperienceService;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.GovernmentWorkExperienceDTO;
 import com.resourcy.app.web.rest.mapper.GovernmentWorkExperienceMapper;
 import com.resourcy.app.web.rest.util.HeaderUtil;
@@ -27,13 +28,13 @@ import java.util.Optional;
 public class GovernmentWorkExperienceController {
 
     private final Logger log = LoggerFactory.getLogger(GovernmentWorkExperienceController.class);
-        
+
     @Inject
     private GovernmentWorkExperienceService governmentWorkExperienceService;
-    
+
     @Inject
     private GovernmentWorkExperienceMapper governmentWorkExperienceMapper;
-    
+
     /**
      * POST  /governmentWorkExperiences -> Create a new governmentWorkExperience.
      */
@@ -41,7 +42,7 @@ public class GovernmentWorkExperienceController {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<GovernmentWorkExperienceDTO> createGovernmentWorkExperience(@RequestBody GovernmentWorkExperienceDTO governmentWorkExperienceDTO) throws URISyntaxException {
+    public ResponseEntity<GovernmentWorkExperienceDTO> createGovernmentWorkExperience(@RequestBody GovernmentWorkExperienceDTO governmentWorkExperienceDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to save GovernmentWorkExperience : {}", governmentWorkExperienceDTO);
         if (governmentWorkExperienceDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("governmentWorkExperience", "idexists", "A new governmentWorkExperience cannot already have an ID")).body(null);
@@ -59,7 +60,7 @@ public class GovernmentWorkExperienceController {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<GovernmentWorkExperienceDTO> updateGovernmentWorkExperience(@RequestBody GovernmentWorkExperienceDTO governmentWorkExperienceDTO) throws URISyntaxException {
+    public ResponseEntity<GovernmentWorkExperienceDTO> updateGovernmentWorkExperience(@RequestBody GovernmentWorkExperienceDTO governmentWorkExperienceDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to update GovernmentWorkExperience : {}", governmentWorkExperienceDTO);
         if (governmentWorkExperienceDTO.getId() == null) {
             return createGovernmentWorkExperience(governmentWorkExperienceDTO);
@@ -127,7 +128,7 @@ public class GovernmentWorkExperienceController {
     }
 
     @RequestMapping(value = "/govWorkExperience", method = RequestMethod.POST)
-    public GovernmentWorkExperienceDTO addGovernmentWorkExperience(@RequestBody GovernmentWorkExperienceDTO dto) {
+    public GovernmentWorkExperienceDTO addGovernmentWorkExperience(@RequestBody GovernmentWorkExperienceDTO dto) throws ValidationException {
         return governmentWorkExperienceService.addGovernmentWorkExperience(dto);
     }
 }

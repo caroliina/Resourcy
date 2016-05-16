@@ -1,595 +1,804 @@
 <div ng-cloak>
     <div class="row">
         <div class="col-md-12">
-        <div clasS="changeview">
-            <button ng-click="changeView()" ng-if="personData"><span ng-if="!editmode">Change CV data</span><span ng-if="editmode">Cancel</span></button>
-        </div>
-        <form name="cvForm">
-            <table class="fullcv" cellpadding="0" cellspacing="0" width="100%">
-                <tr valign="top">
-                    <td><h1 >CV {{persons.firstName}} {{persons.lastName}} </h1></td>
-                </tr>
-                <tr valign="top">
-                    <td>
-                        <input type="text" ng-if="personData" ng-model="persons.id"  class="hidden">
-                        <div>1. <span translate="form.lastname"></span>:
-                            <span ng-if="editmode == true || personData == false">  
-                                <input type="text" ng-model="persons.lastName" >
+            <div clasS="changeview">
+                <button ng-click="changeView()" ng-if="personData"><span ng-if="!editmode">Change CV data</span><span
+                        ng-if="editmode">Cancel</span></button>
+            </div>
+            <form name="cvForm">
+                <table class="fullcv" cellpadding="0" cellspacing="0" width="100%">
+                    <tr valign="top">
+                        <td><h1>CV {{persons.firstName}} {{persons.lastName}} </h1></td>
+                    </tr>
+                    <div class="alert alert-danger" ng-if="error.personArea">
+                        <p ng-repeat="alert in error.personArea" ng-bind="alert | translate"></p>
+                    </div>
+                    <tr valign="top">
+                        <td>
+                            <input type="text" ng-if="personData" ng-model="persons.id" class="hidden">
+
+                            <div>1. <span translate="form.lastname"></span>:
+                            <span ng-if="editmode == true || personData == false">
+                                <input type="text" ng-model="persons.lastName">
                             </span>
-                            <span ng-if="editmode == false">    
-                                <span contenteditable="false" ng-model="persons.lastName"  ></span>
+                            <span ng-if="editmode == false">
+                                <span contenteditable="false" ng-model="persons.lastName"></span>
                             </span>
-                        </div>
-                        <div>2. <span translate="form.firstname"></span>:
-                            <span ng-if="editmode == true || personData == false">  
-                                <input type="text" ng-model="persons.firstName" >
+                            </div>
+                            <div>2. <span translate="form.firstname"></span>:
+                            <span ng-if="editmode == true || personData == false">
+                                <input type="text" ng-model="persons.firstName">
                             </span>
-                            <span ng-if="editmode == false">    
-                                <span contenteditable="false" ng-model="persons.firstName"  ></span>
+                            <span ng-if="editmode == false">
+                                <span contenteditable="false" ng-model="persons.firstName"></span>
                             </span>
-                        </div>
-                        <div>3. <span translate="form.birthday"></span>:
-                            <span ng-if="editmode == true || personData == false"  class="dater">  
-                                
-                                        <input type="text"  class="" uib-datepicker-popup="{{format}}" ng-model="persons.birthday" is-open="birthdayOpen[0]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
-                                    
+                            </div>
+                            <div>3. <span translate="form.birthday"></span>:
+                            <span ng-if="editmode == true || personData == false" class="dater">
+
+                                        <input type="text" class="" uib-datepicker-popup="{{format}}"
+                                               ng-model="persons.birthday" is-open="birthdayOpen[0]"
+                                               uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                               close-text="Close"/>
+
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default" ng-click="birthdayopen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            <button class="btn btn-default" ng-click="birthdayopen($event)"><i
+                                                    class="glyphicon glyphicon-calendar"></i></button>
                                         </span>
-                                  
+
                             </span>
-                            <span ng-if="editmode == false">    
-                                <span contenteditable="false" ng-model="persons.birthday"  ></span>
+                            <span ng-if="editmode == false">
+                                <span contenteditable="false" ng-model="persons.birthday"></span>
                             </span>
-                        </div>
-                        <div ng-if="editmode">
-                            3.1. <span translate="form.idcode"></span>:
-                            <span ng-if="editmode == true || personData == false">  
+                            </div>
+                            <div ng-if="editmode">
+                                3.1. <span translate="form.idcode"></span>:
+                            <span ng-if="editmode == true || personData == false">
                                 <input type="text" ng-model="persons.idCode">
                             </span>
-                            <span ng-if="editmode == false">    
-                                <span contenteditable="false" ng-model="persons.idCode" ></span>
+                            <span ng-if="editmode == false">
+                                <span contenteditable="false" ng-model="persons.idCode"></span>
                             </span>
-                        </div>
-                        <div>4. <span translate="form.nationality"></span>:
-                            <span ng-if="editmode == true || personData == false">  
-                                <input type="text" ng-model="persons.nationality" >
+                            </div>
+                            <div>4. <span translate="form.nationality"></span>:
+                            <span ng-if="editmode == true || personData == false">
+                                <input type="text" ng-model="persons.nationality">
                             </span>
-                            <span ng-if="editmode == false">    
-                                <span contenteditable="false" ng-model="persons.nationality"  ></span>
+                            <span ng-if="editmode == false">
+                                <span contenteditable="false" ng-model="persons.nationality"></span>
                             </span>
-                        </div>
-                        <div>5. <span translate="form.email"></span>:
-                            <span ng-if="editmode == true || personData == false">  
-                                <input type="text"  ng-model="persons.email" >
+                            </div>
+                            <div>5. <span translate="form.email"></span>:
+                            <span ng-if="editmode == true || personData == false">
+                                <input type="text" ng-model="persons.email">
                             </span>
-                            <span ng-if="editmode == false">    
-                                <span contenteditable="false"  ng-model="persons.email"  ></span>
+                            <span ng-if="editmode == false">
+                                <span contenteditable="false" ng-model="persons.email"></span>
                             </span>
-                        </div>  
-                            <span class="savebutton"  ng-if="editmode"  ng-click="saveEmployee()" class="cursorpointer" uib-tooltip="Save User"><img height="24px" src="/assets/images/savebutton.svg"></span>
-                    </td>
-                </tr>
-                <tr valign="top" ng-if="personData">
-                    <td>
-                        <div><h3>6. <span translate="form.education"></span><div class="addbutton" uib-tooltip="Add new" ng-if="editmode"  ng-click="addEducation()"><img src="/assets/images/addbutton.svg" height="24px"></div></h3></div>
-                        <table class="edication" width="100%" border="1px" >
-                            <tr valign="top">
-                                <th  style="padding: 5px 10px" width="20%" class="hidden">
-                                    <span translate="form.institution"></span>
-                                </th>
-                                <th  style="padding: 5px 10px" width="20%">
-                                    <span translate="form.institution"></span>
-                                </th>
-                                <th  style="padding: 5px 10px" width="20%">
-                                    <span translate="form.start"></span>
-                                </th>
-                                <th  style="padding: 5px 10px" width="20%">
-                                    <span translate="form.end"></span>
-                                </th>
-                                <th  style="padding: 5px 10px" width="20%">
-                                    <span translate="form.speciality"></span>
-                                </th>
-                                <th  style="padding: 5px 10px" width="20%">
-                                    <span translate="form.degree"></span>
-                                </th>
-                            </tr>
-                            
-                            <tr valign="top" ng-repeat="(key,education) in educations | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
-                                <td style="padding: 5px 10px" class="hidden">
-                                    <span ng-if="educations[key].editmode == true">  
-                                        <input type="text" ng-model="education.id" >
+                            </div>
+                            <span class="savebutton" ng-if="editmode" ng-click="saveEmployee()" class="cursorpointer"
+                                  uib-tooltip="Save User"><img height="24px" src="/assets/images/savebutton.svg"></span>
+                        </td>
+                    </tr>
+                    <tr valign="top" ng-if="personData">
+                        <td>
+                            <div>
+                                <h3>6. <span translate="form.education"></span>
+
+                                    <div class="addbutton" uib-tooltip="Add new" ng-if="editmode"
+                                         ng-click="addEducation()"><img src="/assets/images/addbutton.svg"
+                                                                        height="24px">
+                                    </div>
+                                </h3>
+                                <div class="alert alert-danger" ng-if="error.educationArea">
+                                    <p ng-repeat="alert in error.educationArea" ng-bind="alert | translate"></p>
+                                </div>
+                            </div>
+                            <table class="edication" width="100%" border="1px">
+                                <tr valign="top">
+                                    <th style="padding: 5px 10px" width="20%" class="hidden">
+                                        <span translate="form.institution"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.institution"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.start"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.end"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.speciality"></span>
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        <span translate="form.degree"></span>
+                                    </th>
+                                </tr>
+
+                                <tr valign="top"
+                                    ng-repeat="(key,education) in educations | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+                                    <td style="padding: 5px 10px" class="hidden">
+                                    <span ng-if="educations[key].editmode == true">
+                                        <input type="text" ng-model="education.id">
                                     </span>
-                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">    
-                                        <span contenteditable="false" ng-model="education.id"  ></span>
+                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">
+                                        <span contenteditable="false" ng-model="education.id"></span>
                                     </span>
-                                </td>
-                                <td style="padding: 5px 10px">
-                                    <span ng-if="educations[key].editmode == true">  
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="educations[key].editmode == true">
                                         <input type="text" ng-model="education.institution">
                                     </span>
-                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">    
+                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">
                                         <span contenteditable="false" ng-model="education.institution"></span>
                                     </span>
-                                </td>
-                                <td style="padding: 5px 10px"  >
-                                        
-                                    <div ng-if="educations[key].editmode == false || !educations[key].editmode">
-                                        <span >{{education.periodStart | date:'dd.MM.yyyy'}}</span>
-                                    </div> 
+                                    </td>
+                                    <td style="padding: 5px 10px">
+
+                                        <div ng-if="educations[key].editmode == false || !educations[key].editmode">
+                                            <span>{{education.periodStart | date:'dd.MM.yyyy'}}</span>
+                                        </div>
                                         <div ng-if="educations[key].editmode == true" class="dater">
-                                            <input type="text"  class="form-control" uib-datepicker-popup="{{format}}" ng-model="education.periodStart" is-open="eduopened[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
-                                        
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                                   ng-model="education.periodStart" is-open="eduopened[key]"
+                                                   uib-datepicker-options="dateOptions"
+                                                   date-disabled="disabled(date, mode)" close-text="Close"/>
+
                                             <span class="input-group-btn">
-                                                <button class="btn btn-default" ng-click="eduopen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                <button class="btn btn-default" ng-click="eduopen($event,key)"><i
+                                                        class="glyphicon glyphicon-calendar"></i></button>
                                             </span>
                                         </div>
-                                </td>
-                               
-                                <td style="padding: 5px 10px" >
-                                    <div ng-if="educations[key].editmode == true" class="dater">
-                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="education.periodEnd" is-open="educlosed[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
-                                    
+                                    </td>
+
+                                    <td style="padding: 5px 10px">
+                                        <div ng-if="educations[key].editmode == true" class="dater">
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                                   ng-model="education.periodEnd" is-open="educlosed[key]"
+                                                   uib-datepicker-options="dateOptions"
+                                                   date-disabled="disabled(date, mode)" close-text="Close"/>
+
                                       <span class="input-group-btn">
-                                        <button class="btn btn-default" ng-click="educlose($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        <button class="btn btn-default" ng-click="educlose($event,key)"><i
+                                                class="glyphicon glyphicon-calendar"></i></button>
                                       </span>
-                                    </div> 
-                                    <div ng-if="educations[key].editmode == false || !educations[key].editmode">
-                                        <span >{{education.periodEnd | date:"dd.MM.yyyy"}}</span>
-                                    </div> 
-                                </td>
-                                <td style="padding: 5px 10px">
-                                    <span ng-if="educations[key].editmode == true">  
+                                        </div>
+                                        <div ng-if="educations[key].editmode == false || !educations[key].editmode">
+                                            <span>{{education.periodEnd | date:"dd.MM.yyyy"}}</span>
+                                        </div>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="educations[key].editmode == true">
                                         <input type="text" ng-model="education.speciality">
                                     </span>
-                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">    
+                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">
                                         <span contenteditable="false" ng-model="education.speciality"></span>
                                     </span>
-                                </td>
-                                <td style="padding: 5px 10px">
-                                    <span ng-if="educations[key].editmode == true">  
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="educations[key].editmode == true">
                                         <input type="text" ng-model="education.degree">
                                     </span>
-                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">    
-                                        <span contenteditable="false" ng-model="education.degree" translate="{{education.degree}}"></span>
+                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode">
+                                        <span contenteditable="false" ng-model="education.degree"
+                                              translate="{{education.degree}}"></span>
                                     </span>
-                                </td>
-                                <td style="padding: 5px 10px;width: 50px;text-align: center;" ng-if="educations[key].editmode" confirmed-click="removeEdu(key)" ng-confirm-click="Kindel?" ><span class="cursorpointer" uib-tooltip="Delete"><img height="24px" src="/assets/images/delete.svg"> </span>
-</td>
-                                <td style="padding: 5px 10px;width: 50px;text-align: center;" ng-if="editmode" ng-click="editEdu(key)">
-                                    <span ng-if="educations[key].editmode == true" class="cursorpointer" uib-tooltip="Save">
-                                        <img height="24px" src="/assets/images/savebutton.svg"> 
+                                    </td>
+                                    <td style="padding: 5px 10px;width: 50px;text-align: center;"
+                                        ng-if="educations[key].editmode" confirmed-click="removeEdu(key)"
+                                        ng-confirm-click="Kindel?"><span class="cursorpointer" uib-tooltip="Delete"><img
+                                            height="24px" src="/assets/images/delete.svg"> </span>
+                                    </td>
+                                    <td style="padding: 5px 10px;width: 50px;text-align: center;" ng-if="editmode"
+                                        ng-click="editEdu(key)">
+                                    <span ng-if="educations[key].editmode == true" class="cursorpointer"
+                                          uib-tooltip="Save">
+                                        <img height="24px" src="/assets/images/savebutton.svg">
                                     </span>
-                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode" class="cursorpointer" uib-tooltip="Edit">  
+                                    <span ng-if="educations[key].editmode == false || !educations[key].editmode"
+                                          class="cursorpointer" uib-tooltip="Edit">
                                         <img height="24px" src="/assets/images/edit.svg">
                                     </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr valign="top" ng-if="personData">
-                    <td>
-                        <div><h3>7. <span translate="form.xp"></span><div class="addbutton" uib-tooltip="Add new" ng-if="editmode"  ng-click="addworkXP()"><img src="/assets/images/addbutton.svg" height="24px"></div></h3></div>
-                        <table class="xp" width="100%" border="1px" style="margin-bottom: 30px;" ng-repeat="(key,workxp) in workExperience | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
-                            
-                            <td style="padding: 5px 10px" contenteditable="false" class="hidden" ng-model="workxp.id"></td>
-                                
-                            <tr valign="top">
-                                <td style="padding: 5px 10px" colspan="2"><span translate="form.position"></span>: 
-                                <span ng-if="workExperience[key].editmode == true">  
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr valign="top" ng-if="personData">
+                        <td>
+                            <div>
+                                <h3>7. <span translate="form.xp"></span>
+
+                                    <div class="addbutton" uib-tooltip="Add new" ng-if="editmode"
+                                         ng-click="addworkXP()"><img src="/assets/images/addbutton.svg" height="24px">
+                                    </div>
+                                </h3>
+                                <div class="alert alert-danger" ng-if="error.workExperienceArea">
+                                    <p ng-repeat="alert in error.workExperienceArea" ng-bind="alert | translate"></p>
+                                </div>
+                            </div>
+                            <table class="xp" width="100%" border="1px" style="margin-bottom: 30px;"
+                                   ng-repeat="(key,workxp) in workExperience | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+
+                                <td style="padding: 5px 10px" contenteditable="false" class="hidden"
+                                    ng-model="workxp.id"></td>
+
+                                <tr valign="top">
+                                    <td style="padding: 5px 10px" colspan="2"><span translate="form.position"></span>:
+                                <span ng-if="workExperience[key].editmode == true">
                                     <select ng-model="workxp.position">
-                                      <option ng-repeat="option in positions" value="{{option}}" translate="{{option}}"></option>
+                                        <option ng-repeat="option in positions" value="{{option}}"
+                                                translate="{{option}}"></option>
                                     </select>
                                 </span>
-                                <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">    
-                                    <span contenteditable="false" ng-model="workxp.position" translate="{{workxp.position}}" ></span>
-                                </span> 
-                                </td>
-                                <td style="padding: 5px 0px;width: 50px;text-align: center;" ng-if="workExperience[key].editmode == true" confirmed-click="removeXP(key)" ng-confirm-click="Kindel?"  ><span class="cursorpointer" uib-tooltip="Delete"><img height="24px" src="/assets/images/delete.svg"></span> </td>
-                                <td style="padding: 5px 0px;width: 50px;text-align: center;" ng-if="editmode" ng-click="editXP(key)">
-                                    <span ng-if="workExperience[key].editmode == true" class="cursorpointer" uib-tooltip="Save">
-                                        <img height="24px" src="/assets/images/savebutton.svg"> 
+                                <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">
+                                    <span contenteditable="false" ng-model="workxp.position"
+                                          translate="{{workxp.position}}"></span>
+                                </span>
+                                    </td>
+                                    <td style="padding: 5px 0px;width: 50px;text-align: center;"
+                                        ng-if="workExperience[key].editmode == true" confirmed-click="removeXP(key)"
+                                        ng-confirm-click="Kindel?"><span class="cursorpointer" uib-tooltip="Delete"><img
+                                            height="24px" src="/assets/images/delete.svg"></span></td>
+                                    <td style="padding: 5px 0px;width: 50px;text-align: center;" ng-if="editmode"
+                                        ng-click="editXP(key)">
+                                    <span ng-if="workExperience[key].editmode == true" class="cursorpointer"
+                                          uib-tooltip="Save">
+                                        <img height="24px" src="/assets/images/savebutton.svg">
                                     </span>
-                                    <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode" class="cursorpointer" uib-tooltip="Edit">  
+                                    <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode"
+                                          class="cursorpointer" uib-tooltip="Edit">
                                         <img height="24px" src="/assets/images/edit.svg">
                                     </span>
-                                    
-                                </td>
-                            </tr>
-                            <tr valign="top">
-                                <td width="30%" style="padding: 5px 10px" >Ajaperiood (<span translate="form.start"></span> <span translate="form.end"></span>):</td>
-                                <td style="padding: 5px 10px" >
+
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <td width="30%" style="padding: 5px 10px">Ajaperiood (<span
+                                            translate="form.start"></span> <span translate="form.end"></span>):
+                                    </td>
+                                    <td style="padding: 5px 10px">
                                     <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">
-                                        <span >{{workxp.periodStart | date:'dd.MM.yyyy'}}</span>
-                                    </span> 
-                                    <div ng-if="workExperience[key].editmode == true" class="dater">
-                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="workxp.periodStart" is-open="workopened[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                        <span>{{workxp.periodStart | date:'dd.MM.yyyy'}}</span>
+                                    </span>
+
+                                        <div ng-if="workExperience[key].editmode == true" class="dater">
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                                   ng-model="workxp.periodStart" is-open="workopened[key]"
+                                                   uib-datepicker-options="dateOptions"
+                                                   date-disabled="disabled(date, mode)" close-text="Close"/>
                                       <span class="input-group-btn">
-                                        <button class="btn btn-default" ng-click="workopen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        <button class="btn btn-default" ng-click="workopen($event,key)"><i
+                                                class="glyphicon glyphicon-calendar"></i></button>
                                       </span>
-                                    </div>
-                                    - 
+                                        </div>
+                                        -
                                     <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">
-                                        <span >{{workxp.periodEnd | date:"dd.MM.yyyy"}}</span>
-                                    </span> 
-                                    <div ng-if="workExperience[key].editmode == true" class="dater">
-                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="workxp.periodEnd" is-open="workclosed[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                        <span>{{workxp.periodEnd | date:"dd.MM.yyyy"}}</span>
+                                    </span>
+
+                                        <div ng-if="workExperience[key].editmode == true" class="dater">
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                                   ng-model="workxp.periodEnd" is-open="workclosed[key]"
+                                                   uib-datepicker-options="dateOptions"
+                                                   date-disabled="disabled(date, mode)" close-text="Close"/>
                                       <span class="input-group-btn">
-                                        <button class="btn btn-default" ng-click="workclose($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        <button class="btn btn-default" ng-click="workclose($event,key)"><i
+                                                class="glyphicon glyphicon-calendar"></i></button>
                                       </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr valign="top">
-                                <td width="30%" style="padding: 5px 10px" ><span translate="form.organization"></span>:</td>
-                                <td style="padding: 5px 10px">
-                                    <span ng-if="workExperience[key].editmode == true">  
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <td width="30%" style="padding: 5px 10px"><span
+                                            translate="form.organization"></span>:
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="workExperience[key].editmode == true">
                                         <input type="text" ng-model="workxp.organization">
                                     </span>
-                                    <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">    
-                                        <span contenteditable="false" ng-model="workxp.organization" ></span>
-                                    </span> 
+                                    <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">
+                                        <span contenteditable="false" ng-model="workxp.organization"></span>
+                                    </span>
 
-                                </td>
-                            </tr>
-                            <tr valign="top">
-                                <td width="30%" style="padding: 5px 10px" ><span translate="form.location"></span>:</td>
-                                <td style="padding: 5px 10px" >
-                                    <span ng-if="workExperience[key].editmode == true">  
-                                        <input type="text" ng-model="workxp.location" >
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <td width="30%" style="padding: 5px 10px"><span translate="form.location"></span>:
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="workExperience[key].editmode == true">
+                                        <input type="text" ng-model="workxp.location">
                                     </span>
-                                    <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">    
-                                        <span contenteditable="false" ng-model="workxp.location"  ></span>
+                                    <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">
+                                        <span contenteditable="false" ng-model="workxp.location"></span>
                                     </span>
-                                </td>
-                            </tr>
-                            <tr valign="top">
-                                <td width="30%" style="padding: 5px 10px" ><span translate="form.maintasks"></span>: <div  class="addbutton" uib-tooltip="Add new" ng-if="editmode && workExperience[key].editmode == true"  ng-click="addxpTasks(key)"><img src="/assets/images/addbutton.svg" height="24px"></div></td>
-                                <td style="padding: 5px 10px" ><span ng-repeat="(keys,tasks) in workxp.workAssignments">
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <td width="30%" style="padding: 5px 10px"><span translate="form.maintasks"></span>:
+                                        <div class="addbutton" uib-tooltip="Add new"
+                                             ng-if="editmode && workExperience[key].editmode == true"
+                                             ng-click="addxpTasks(key)"><img src="/assets/images/addbutton.svg"
+                                                                             height="24px"></div>
+                                    </td>
+                                    <td style="padding: 5px 10px"><span
+                                            ng-repeat="(keys,tasks) in workxp.workAssignments">
 
-                                    <span ng-if="workExperience[key].editmode == true">  
-                                        <input type="text" class="hidden" ng-model="tasks.id" >
-                                        <input type="text"  ng-model="tasks.description" >
-                                        <span style="padding: 5px 10px 0 0;position: relative;margin-left: -25px;top:-1px;" ng-if="workExperience[key].editmode == true" confirmed-click="removeXPAssignment(key,keys)" ng-confirm-click="Kindel?" ><span class="cursorpointer" uib-tooltip="Delete"><img height="20px" src="/assets/images/delete.svg"> </span></span>
+                                    <span ng-if="workExperience[key].editmode == true">
+                                        <input type="text" class="hidden" ng-model="tasks.id">
+                                        <input type="text" ng-model="tasks.description">
+                                        <span style="padding: 5px 10px 0 0;position: relative;margin-left: -25px;top:-1px;"
+                                              ng-if="workExperience[key].editmode == true"
+                                              confirmed-click="removeXPAssignment(key,keys)" ng-confirm-click="Kindel?"><span
+                                                class="cursorpointer" uib-tooltip="Delete"><img height="20px"
+                                                                                                src="/assets/images/delete.svg"> </span></span>
                                     </span>
-                                    <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">    
-                                        <span contenteditable="false"  ng-model="tasks.description"  ></span>
+                                    <span ng-if="workExperience[key].editmode == false || !workExperience[key].editmode">
+                                        <span contenteditable="false" ng-model="tasks.description"></span>
                                     </span>
-                                <span ng-if="!$last">, </span></span> </td>
-                            </tr>
+                                <span ng-if="!$last">, </span></span></td>
+                                </tr>
 
-                        </table>
-                    </td>
-                    
+                            </table>
+                        </td>
 
-                </tr>
-                <tr valign="top" ng-if="personData">
-                    <td>
-                        <div><h3>8. Töökogemus riigihanke objektiga sarnastel objektidel, nende loetelu ja töö maht:<div class="addbutton" uib-tooltip="Add new" ng-if="editmode"  ng-click="addGov()"><img src="/assets/images/addbutton.svg" height="24px"></div></h3></div>
-                        <table valign="top" class="edication" width="100%" border="1px" >
-                            <tr valign="top">
-                                <th  style="padding: 5px 10px" width="20%">
-                                    Ajaperiood
-                                </th>
-                                <th  style="padding: 5px 10px" width="20%">
-                                    Ostja
-                                </th>
-                                <th  style="padding: 5px 10px" width="15%">
-                                    Teenuse nimetus
-                                </th>
-                                <th  style="padding: 5px 10px" width="20%">
-                                    Ametikoht
-                                </th>
-                                <th  style="padding: 5px 10px" width="30%">
-                                    Muu
-                                </th>
-                            </tr>
-                            
-                            <tr valign="top" ng-repeat="(key,govxp) in govWorkExperience | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
-                                <td style="padding: 5px 10px" class="hidden">
-                                    <span ng-if="govWorkExperience[key].editmode == true">  
-                                        <input type="text" ng-model="govxp.id" >
-                                        <input type="text" ng-model="govxp.governmentProject.id" >
+
+                    </tr>
+                    <tr valign="top" ng-if="personData">
+                        <td>
+                            <div>
+                                <h3>8. Töökogemus riigihanke objektiga sarnastel objektidel, nende loetelu ja töö maht:
+                                    <div class="addbutton" uib-tooltip="Add new" ng-if="editmode" ng-click="addGov()">
+                                        <img src="/assets/images/addbutton.svg" height="24px"></div>
+                                </h3>
+                                <div class="alert alert-danger" ng-if="error.govWorkExperienceArea">
+                                    <p ng-repeat="alert in error.govWorkExperienceArea" ng-bind="alert | translate"></p>
+                                </div>
+                            </div>
+                            <table valign="top" class="edication" width="100%" border="1px">
+                                <tr valign="top">
+                                    <th style="padding: 5px 10px" width="20%">
+                                        Ajaperiood
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        Ostja
+                                    </th>
+                                    <th style="padding: 5px 10px" width="15%">
+                                        Teenuse nimetus
+                                    </th>
+                                    <th style="padding: 5px 10px" width="20%">
+                                        Ametikoht
+                                    </th>
+                                    <th style="padding: 5px 10px" width="30%">
+                                        Muu
+                                    </th>
+                                </tr>
+
+                                <tr valign="top"
+                                    ng-repeat="(key,govxp) in govWorkExperience | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+                                    <td style="padding: 5px 10px" class="hidden">
+                                    <span ng-if="govWorkExperience[key].editmode == true">
+                                        <input type="text" ng-model="govxp.id">
+                                        <input type="text" ng-model="govxp.governmentProject.id">
                                     </span>
-                                    <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">    
-                                        <span contenteditable="false" ng-model="govxp.id"  ></span>
-                                        <span contenteditable="false" ng-model="govxp.governmentProject.id"  ></span>
+                                    <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
+                                        <span contenteditable="false" ng-model="govxp.id"></span>
+                                        <span contenteditable="false" ng-model="govxp.governmentProject.id"></span>
                                     </span>
-                                </td>
-                                <td style="padding: 5px 10px" >
-                                
+                                    </td>
+                                    <td style="padding: 5px 10px">
+
                                         <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
-                                            <span >{{govxp.periodStart | date:'yyyy-MM-dd'}}</span>
-                                        </span> 
+                                            <span>{{govxp.periodStart | date:'yyyy-MM-dd'}}</span>
+                                        </span>
+
                                         <div ng-if="govWorkExperience[key].editmode == true" class="dater">
-                                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="govxp.periodStart" is-open="govopened[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                                   ng-model="govxp.periodStart" is-open="govopened[key]"
+                                                   uib-datepicker-options="dateOptions"
+                                                   date-disabled="disabled(date, mode)" close-text="Close"/>
                                           <span class="input-group-btn">
-                                            <button class="btn btn-default" ng-click="govopen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            <button class="btn btn-default" ng-click="govopen($event,key)"><i
+                                                    class="glyphicon glyphicon-calendar"></i></button>
                                           </span>
                                         </div>
-                                        - 
+                                        -
                                         <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
-                                            <span >{{govxp.periodEnd | date:"yyyy-MM-dd"}}</span>
-                                        </span> 
+                                            <span>{{govxp.periodEnd | date:"yyyy-MM-dd"}}</span>
+                                        </span>
+
                                         <div ng-if="govWorkExperience[key].editmode == true" class="dater">
-                                        <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd"  ui-date="{ dateFormat: 'yyyy-MM-dd' }" ng-model="govxp.periodEnd" is-open="govclosed[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                            <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd"
+                                                   ui-date="{ dateFormat: 'yyyy-MM-dd' }" ng-model="govxp.periodEnd"
+                                                   is-open="govclosed[key]" uib-datepicker-options="dateOptions"
+                                                   date-disabled="disabled(date, mode)" close-text="Close"/>
                                           <span class="input-group-btn">
-                                            <button class="btn btn-default" ng-click="govclose($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            <button class="btn btn-default" ng-click="govclose($event,key)"><i
+                                                    class="glyphicon glyphicon-calendar"></i></button>
                                           </span>
                                         </div>
-             
-                                   
-                                </td>
-                                <td style="padding: 5px 10px" >
-                                    <!--<span ng-if="govWorkExperience[key].editmode == true">  
-                                        <input type="text" ng-model="govxp.governmentProject.buyer" >
-                                    </span>
-                                    <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">-->    
-                                        <span contenteditable="false" ng-model="govxp.governmentProject.buyer"  ></span>
-                                    <!--</span>-->
-                                </td>
-                                <td style="padding: 5px 10px" >
-                                    <!--<span ng-if="govWorkExperience[key].editmode == true">  
-                                        <input type="text" ng-model="govxp.governmentProject.serviceName" >
-                                    </span>
-                                    <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">-->    
-                                        <span contenteditable="false" ng-model="govxp.governmentProject.serviceName"  ></span>
-                                    <!--</span>-->
-                                </td>
-                                <td style="padding: 5px 10px">
-                                    <span ng-if="govWorkExperience[key].editmode == true">  
+
+
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <!--<span ng-if="govWorkExperience[key].editmode == true">
+                                            <input type="text" ng-model="govxp.governmentProject.buyer" >
+                                        </span>
+                                        <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">-->
+                                        <span contenteditable="false" ng-model="govxp.governmentProject.buyer"></span>
+                                        <!--</span>-->
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <!--<span ng-if="govWorkExperience[key].editmode == true">
+                                            <input type="text" ng-model="govxp.governmentProject.serviceName" >
+                                        </span>
+                                        <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">-->
+                                        <span contenteditable="false"
+                                              ng-model="govxp.governmentProject.serviceName"></span>
+                                        <!--</span>-->
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="govWorkExperience[key].editmode == true">
                                         <select ng-model="govxp.position">
-                                          <option ng-repeat="option in positions" value="{{option}}" translate="{{option}}"></option>
+                                            <option ng-repeat="option in positions" value="{{option}}"
+                                                    translate="{{option}}"></option>
                                         </select>
                                     </span>
-                                    <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">    
-                                        <span contenteditable="false" ng-model="govxp.position" translate="{{govxp.position}}" ></span>
+                                    <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
+                                        <span contenteditable="false" ng-model="govxp.position"
+                                              translate="{{govxp.position}}"></span>
                                     </span>
-                                </td>
-                                <td style="padding: 5px 10px" >
-                                    <div>Tööülesanded:
-                                    <div class="addbutton" uib-tooltip="Add new" ng-if="editmode && govWorkExperience[key].editmode == true"  ng-click="addGovAssignment(key)"><img src="/assets/images/addbutton.svg" height="24px"></div>
-                                        <div ng-repeat="(keys,assign) in govxp.workAssignments">
-                                            <span ng-if="govWorkExperience[key].editmode == true">  
-                                                <input type="text"ng-model="assign.description"><span style="padding: 5px 10px 0 0;position: relative;margin-left: -25px;top:-1px;" ng-if="editmode" confirmed-click="removeGovAssignment(key,keys)" ng-confirm-click="Kindel?"><span class="cursorpointer" uib-tooltip="Delete"><img height="20px" src="/assets/images/delete.svg"> </span></span>
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                        <div>Tööülesanded:
+                                            <div class="addbutton" uib-tooltip="Add new"
+                                                 ng-if="editmode && govWorkExperience[key].editmode == true"
+                                                 ng-click="addGovAssignment(key)"><img
+                                                    src="/assets/images/addbutton.svg" height="24px"></div>
+                                            <div ng-repeat="(keys,assign) in govxp.workAssignments">
+                                            <span ng-if="govWorkExperience[key].editmode == true">
+                                                <input type="text" ng-model="assign.description"><span
+                                                    style="padding: 5px 10px 0 0;position: relative;margin-left: -25px;top:-1px;"
+                                                    ng-if="editmode" confirmed-click="removeGovAssignment(key,keys)"
+                                                    ng-confirm-click="Kindel?"><span class="cursorpointer"
+                                                                                     uib-tooltip="Delete"><img
+                                                    height="20px" src="/assets/images/delete.svg"> </span></span>
                                             </span>
-                                            <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">    
+                                            <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
                                                 <span contenteditable="false" ng-model="assign.description"></span>
                                             </span>
+                                            </div>
                                         </div>
-                                    </div><br>
-                                    <div>
-                                    <span >Isiklike töötundide maht projekti raames: 
-                                        <span ng-if="govWorkExperience[key].editmode == true">  
-                                            <input type="text"  ng-model="govxp.personalWorkHours">
+                                        <br>
+
+                                        <div>
+                                    <span>Isiklike töötundide maht projekti raames:</span>
+                                        <span ng-if="govWorkExperience[key].editmode == true">
+                                            <input type="text" ng-model="govxp.personalWorkHours">
                                         </span>
-                                        <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">    
+                                        <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
                                             <span contenteditable="false" ng-model="govxp.personalWorkHours"></span>
                                         </span>
-                                    
-                                    </div><br>
-                                    <div>
-                                    Projekti kogumaht: 
-                                        <!--<span ng-if="govWorkExperience[key].editmode == true"> 
-                                            <input type="text" ng-model="govxp.governmentProject.totalProjectWorkHours"> 
-                                        </span>
-                                        <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">-->    
-                                            <span contenteditable="false" ng-model="govxp.governmentProject.totalProjectWorkHours"></span>
-                                        <!--</span>-->
-                                    
-                                    </div><br>
-                                    <div>
-                                        Kasutatud platvormid/prog keeled:  
-                                        <div class="addbutton" uib-tooltip="Add new" ng-if="editmode && govWorkExperience[key].editmode == true"  ng-click="addGovTechs(key)"><img src="/assets/images/addbutton.svg" height="24px"></div>
-                                        <div ng-repeat="(keys,techs) in govxp.governmentProject.technologies" class="techs">
-                                            <span ng-if="govWorkExperience[key].editmode == true">  
-                                                <input type="text" ng-model="techs.type"> - <input type="text" ng-model="techs.description"><span style="padding: 5px 10px 0 0;position: relative;margin-left: -25px;top:-1px;" ng-if="editmode"  confirmed-click="removeGovTechs(key,keys)" ng-confirm-click="Kindel?"><span class="cursorpointer" uib-tooltip="Delete"><img height="20px" src="/assets/images/delete.svg"> </span></span>
-                                            </span>
-                                            <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">    
-                                                <span contenteditable="false" ng-model="techs.type"></span> - <span contenteditable="false" ng-model="techs.description"></span><span nf-if="!$last"></span>
-                                            </span>
-                                           
+
                                         </div>
-                                    </div>
+                                        <br>
 
-                                   
+                                        <div>
+                                            Projekti kogumaht:
+                                            <!--<span ng-if="govWorkExperience[key].editmode == true">
+                                                <input type="text" ng-model="govxp.governmentProject.totalProjectWorkHours">
+                                            </span>
+                                            <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">-->
+                                            <span contenteditable="false"
+                                                  ng-model="govxp.governmentProject.totalProjectWorkHours"></span>
+                                            <!--</span>-->
 
-                                    
-                                </td>
-                                <td style="padding: 5px 10px" confirmed-click="removeGov(key)" ng-if="govWorkExperience[key].editmode" ng-confirm-click="Kindel?" ><span class="cursorpointer" uib-tooltip="Delete"><img height="24px" src="/assets/images/delete.svg"> </span></td>
-                                <td style="padding: 5px 10px" ng-if="editmode" ng-click="editGov(key)">
-                                    <span ng-if="govWorkExperience[key].editmode == true" class="cursorpointer" uib-tooltip="Save">
-                                        <img height="24px" src="/assets/images/savebutton.svg"> 
+                                        </div>
+                                        <br>
+
+                                        <div>
+                                            Kasutatud platvormid/prog keeled:
+                                            <div class="addbutton" uib-tooltip="Add new"
+                                                 ng-if="editmode && govWorkExperience[key].editmode == true"
+                                                 ng-click="addGovTechs(key)"><img src="/assets/images/addbutton.svg"
+                                                                                  height="24px"></div>
+                                            <div ng-repeat="(keys,techs) in govxp.governmentProject.technologies"
+                                                 class="techs">
+                                            <span ng-if="govWorkExperience[key].editmode == true">
+                                                <input type="text" ng-model="techs.type"> - <input type="text"
+                                                                                                   ng-model="techs.description"><span
+                                                    style="padding: 5px 10px 0 0;position: relative;margin-left: -25px;top:-1px;"
+                                                    ng-if="editmode" confirmed-click="removeGovTechs(key,keys)"
+                                                    ng-confirm-click="Kindel?"><span class="cursorpointer"
+                                                                                     uib-tooltip="Delete"><img
+                                                    height="20px" src="/assets/images/delete.svg"> </span></span>
+                                            </span>
+                                            <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode">
+                                                <span contenteditable="false" ng-model="techs.type"></span> - <span
+                                                    contenteditable="false" ng-model="techs.description"></span><span
+                                                    nf-if="!$last"></span>
+                                            </span>
+
+                                            </div>
+                                        </div>
+
+
+                                    </td>
+                                    <td style="padding: 5px 10px" confirmed-click="removeGov(key)"
+                                        ng-if="govWorkExperience[key].editmode" ng-confirm-click="Kindel?"><span
+                                            class="cursorpointer" uib-tooltip="Delete"><img height="24px"
+                                                                                            src="/assets/images/delete.svg"> </span>
+                                    </td>
+                                    <td style="padding: 5px 10px" ng-if="editmode" ng-click="editGov(key)">
+                                    <span ng-if="govWorkExperience[key].editmode == true" class="cursorpointer"
+                                          uib-tooltip="Save">
+                                        <img height="24px" src="/assets/images/savebutton.svg">
                                     </span>
-                                    <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode" class="cursorpointer" uib-tooltip="Edit">  
+                                    <span ng-if="govWorkExperience[key].editmode == false || !govWorkExperience[key].editmode"
+                                          class="cursorpointer" uib-tooltip="Edit">
                                         <img height="24px" src="/assets/images/edit.svg">
                                     </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr valign="top" ng-if="personData">
-                    <td>
-                        <div><h3>9. Erialane täiendkoolitus:<div class="addbutton" uib-tooltip="Add new" ng-if="editmode"  ng-click="addStudy()"><img src="/assets/images/addbutton.svg" height="24px"></div></h3></div>
-                        <table valign="top" class="edication" width="100%" border="1px" >
-                            <tr valign="top">
-                                <th  style="padding: 5px 10px" width="15%">
-                                    Ajaperiood
-                                </th>
-                                <th  style="padding: 5px 10px" width="30%">
-                                    Koolitusasutus
-                                </th>
-                                <th  style="padding: 5px 10px" width="45%">
-                                    Täiendkursuse nimetus ja kirjeldus
-                                </th>
-                                
-                            </tr>
-                            
-                            <tr valign="top" ng-repeat="(key,study) in additionalStudy | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
-                                <td style="padding: 5px 10px" >
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr valign="top" ng-if="personData">
+                        <td>
+                            <div>
+                                <h3>9. Erialane täiendkoolitus:
+                                    <div class="addbutton" uib-tooltip="Add new" ng-if="editmode" ng-click="addStudy()">
+                                        <img src="/assets/images/addbutton.svg" height="24px"></div>
+                                </h3>
+                                <div class="alert alert-danger" ng-if="error.studyArea">
+                                    <p ng-repeat="alert in error.studyArea" ng-bind="alert | translate"></p>
+                                </div>
+                            </div>
+                            <table valign="top" class="edication" width="100%" border="1px">
+                                <tr valign="top">
+                                    <th style="padding: 5px 10px" width="15%">
+                                        Ajaperiood
+                                    </th>
+                                    <th style="padding: 5px 10px" width="30%">
+                                        Koolitusasutus
+                                    </th>
+                                    <th style="padding: 5px 10px" width="45%">
+                                        Täiendkursuse nimetus ja kirjeldus
+                                    </th>
+
+                                </tr>
+
+                                <tr valign="top"
+                                    ng-repeat="(key,study) in additionalStudy | orderBy:(sorting? 'periodStart':''):(sorting? 'true':'')">
+                                    <td style="padding: 5px 10px">
                                     <span ng-if="additionalStudy[key].editmode == false || !additionalStudy[key].editmode">
-                                        <span >{{study.periodStart | date:'dd.MM.yyyy'}}</span>
-                                    </span> 
-                                    <div ng-if="additionalStudy[key].editmode == true"  class="dater">
-                                       <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="study.periodStart" is-open="studyopened[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
-                                      <span class="input-group-btn">
-                                        <button class="btn btn-default" ng-click="studyopen($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                      </span>
-                                    </div>
-                                   
-                                    - 
-                                    <span ng-if="additionalStudy[key].editmode == false || !additionalStudy[key].editmode">
-                                        <span >{{study.periodEnd | date:"dd.MM.yyyy"}}</span>
-                                    </span> 
-                                    <div ng-if="additionalStudy[key].editmode == true" class="dater">
-                                      <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="study.periodEnd" is-open="studyclosed[key]"  uib-datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
-                                      <span class="input-group-btn">
-                                        <button class="btn btn-default" ng-click="studyclose($event,key)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                      </span>
-                                    </div>
-                                    
-                                </td>
-                                <td style="padding: 5px 10px" >
-                                    <span ng-if="additionalStudy[key].editmode == true">  
-                                        <input type="text" ng-model="study.institution"> 
+                                        <span>{{study.periodStart | date:'dd.MM.yyyy'}}</span>
                                     </span>
-                                    <span ng-if="additionalStudy[key].editmode == false || !additionalStudy[key].editmode">    
+
+                                        <div ng-if="additionalStudy[key].editmode == true" class="dater">
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                                   ng-model="study.periodStart" is-open="studyopened[key]"
+                                                   uib-datepicker-options="dateOptions"
+                                                   date-disabled="disabled(date, mode)" close-text="Close"/>
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="studyopen($event,key)"><i
+                                                class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                        </div>
+
+                                        -
+                                    <span ng-if="additionalStudy[key].editmode == false || !additionalStudy[key].editmode">
+                                        <span>{{study.periodEnd | date:"dd.MM.yyyy"}}</span>
+                                    </span>
+
+                                        <div ng-if="additionalStudy[key].editmode == true" class="dater">
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                                   ng-model="study.periodEnd" is-open="studyclosed[key]"
+                                                   uib-datepicker-options="dateOptions"
+                                                   date-disabled="disabled(date, mode)" close-text="Close"/>
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="studyclose($event,key)"><i
+                                                class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                        </div>
+
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="additionalStudy[key].editmode == true">
+                                        <input type="text" ng-model="study.institution">
+                                    </span>
+                                    <span ng-if="additionalStudy[key].editmode == false || !additionalStudy[key].editmode">
                                         <span contenteditable="false" ng-model="study.institution"></span>
                                     </span>
-                                </td>
-                                <td style="padding: 5px 10px" >
-                                    <span ng-if="additionalStudy[key].editmode == true">  
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="additionalStudy[key].editmode == true">
                                         <textarea type="text" ng-model="study.description"> </textarea>
                                     </span>
-                                    <span ng-if="additionalStudy[key].editmode == false || !additionalStudy[key].editmode">    
+                                    <span ng-if="additionalStudy[key].editmode == false || !additionalStudy[key].editmode">
                                         <span contenteditable="false" ng-model="study.description"></span>
                                     </span>
-                                </td>
-                                <td style="padding: 5px 10px;width:50px;" confirmed-click="removeStudy(key)" ng-if="additionalStudy[key].editmode" ng-confirm-click="Kindel?" ><span class="cursorpointer" uib-tooltip="Delete"><img height="24px" src="/assets/images/delete.svg"> </span></td>
-                                <td style="padding: 5px 10px;width:50px;" ng-if="editmode" ng-click="editStudy(key)">
-                                     <span ng-if="additionalStudy[key].editmode == true" class="cursorpointer" uib-tooltip="Save">
-                                        <img height="24px" src="/assets/images/savebutton.svg"> 
+                                    </td>
+                                    <td style="padding: 5px 10px;width:50px;" confirmed-click="removeStudy(key)"
+                                        ng-if="additionalStudy[key].editmode" ng-confirm-click="Kindel?"><span
+                                            class="cursorpointer" uib-tooltip="Delete"><img height="24px"
+                                                                                            src="/assets/images/delete.svg"> </span>
+                                    </td>
+                                    <td style="padding: 5px 10px;width:50px;" ng-if="editmode"
+                                        ng-click="editStudy(key)">
+                                     <span ng-if="additionalStudy[key].editmode == true" class="cursorpointer"
+                                           uib-tooltip="Save">
+                                        <img height="24px" src="/assets/images/savebutton.svg">
                                     </span>
-                                    <span ng-if="additionalStudy[key].editmode == false || !additionalStudy[key].editmode" class="cursorpointer" uib-tooltip="Edit">  
+                                    <span ng-if="additionalStudy[key].editmode == false || !additionalStudy[key].editmode"
+                                          class="cursorpointer" uib-tooltip="Edit">
                                         <img height="24px" src="/assets/images/edit.svg">
                                     </span>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
 
-                        </table>
-                    </td>
-                </tr>
-                <tr valign="top" ng-if="personData">
-                    <td>
-                        <div><h3>10. Keelteoskus: Tasemed A1-C2. <div class="addbutton" uib-tooltip="Add new" ng-if="editmode"  ng-click="addLanguage()"><img src="/assets/images/addbutton.svg" height="24px"></div></h3></div>
-                        <table valign="top" class="edication" width="100%" border="1px" >
-                            <tr valign="top">
-                                <th  style="padding: 5px 10px" width="15%">
-                                    Keel
-                                </th>
-                                <th  style="padding: 5px 10px" width="30%">
-                                    Kõnes
-                                </th>
-                                <th  style="padding: 5px 10px" width="45%">
-                                    Kirjas
-                                </th>
-                                
-                            </tr>
-                            
-                            <tr valign="top" ng-repeat="(key,language) in additionalLanguage | orderBy:(sorting? 'language':''):(sorting? 'true':'')">
-                                <td style="padding: 5px 10px" >
-                                    <span ng-if="additionalLanguage[key].editmode == true">  
-                                        <input type="text" ng-model="language.language"> 
+                            </table>
+                        </td>
+                    </tr>
+                    <tr valign="top" ng-if="personData">
+                        <td>
+                            <div>
+                                <h3>10. Keelteoskus: Tasemed A1-C2.
+                                    <div class="addbutton" uib-tooltip="Add new" ng-if="editmode"
+                                         ng-click="addLanguage()"><img src="/assets/images/addbutton.svg" height="24px">
+                                    </div>
+                                </h3>
+                                <div class="alert alert-danger" ng-if="error.languageArea">
+                                    <p ng-repeat="alert in error.languageArea" ng-bind="alert | translate"></p>
+                                </div>
+                            </div>
+                            <table valign="top" class="edication" width="100%" border="1px">
+                                <tr valign="top">
+                                    <th style="padding: 5px 10px" width="15%">
+                                        Keel
+                                    </th>
+                                    <th style="padding: 5px 10px" width="30%">
+                                        Kõnes
+                                    </th>
+                                    <th style="padding: 5px 10px" width="45%">
+                                        Kirjas
+                                    </th>
+
+                                </tr>
+
+                                <tr valign="top"
+                                    ng-repeat="(key,language) in additionalLanguage | orderBy:(sorting? 'language':''):(sorting? 'true':'')">
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="additionalLanguage[key].editmode == true">
+                                        <input type="text" ng-model="language.language">
                                     </span>
-                                    <span ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode">    
+                                    <span ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode">
                                         <span contenteditable="false" ng-model="language.language"></span>
                                     </span>
-                                </td>
-                                <td style="padding: 5px 10px" >
-                                    <span ng-if="additionalLanguage[key].editmode == true">  
-                                        <input type="text" ng-model="language.speaking"> 
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="additionalLanguage[key].editmode == true">
+                                        <input type="text" ng-model="language.speaking">
                                     </span>
-                                    <span ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode">    
-                                        <span contenteditable="false" ng-model="language.speaking" translate="{{language.speaking}}"></span>
+                                    <span ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode">
+                                        <span contenteditable="false" ng-model="language.speaking"
+                                              translate="{{language.speaking}}"></span>
                                     </span>
-                                </td>
-                                <td style="padding: 5px 10px" >
-                                    <span ng-if="additionalLanguage[key].editmode == true">  
-                                        <input type="text" ng-model="language.writing"> 
+                                    </td>
+                                    <td style="padding: 5px 10px">
+                                    <span ng-if="additionalLanguage[key].editmode == true">
+                                        <input type="text" ng-model="language.writing">
                                     </span>
-                                    <span ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode">    
-                                        <span contenteditable="false" ng-model="language.writing" translate="{{language.writing}}"></span>
+                                    <span ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode">
+                                        <span contenteditable="false" ng-model="language.writing"
+                                              translate="{{language.writing}}"></span>
                                     </span>
-                                </td>
-                                <td style="padding: 5px 10px;width:50px;" confirmed-click="removeLang(key)"  ng-if="additionalLanguage[key].editmode" ng-confirm-click="Kindel?" ng-click=""><span class="cursorpointer" uib-tooltip="Delete"><img height="24px" src="/assets/images/delete.svg"> </span></td>
-                                <td style="padding: 5px 10px;width:50px;" ng-if="editmode" ng-click="editLang(key)">
-                                     <span ng-if="additionalLanguage[key].editmode == true" class="cursorpointer" uib-tooltip="Save">
-                                        <img height="24px" src="/assets/images/savebutton.svg"> 
+                                    </td>
+                                    <td style="padding: 5px 10px;width:50px;" confirmed-click="removeLang(key)"
+                                        ng-if="additionalLanguage[key].editmode" ng-confirm-click="Kindel?" ng-click="">
+                                        <span class="cursorpointer" uib-tooltip="Delete"><img height="24px"
+                                                                                              src="/assets/images/delete.svg"> </span>
+                                    </td>
+                                    <td style="padding: 5px 10px;width:50px;" ng-if="editmode" ng-click="editLang(key)">
+                                     <span ng-if="additionalLanguage[key].editmode == true" class="cursorpointer"
+                                           uib-tooltip="Save">
+                                        <img height="24px" src="/assets/images/savebutton.svg">
                                     </span>
-                                    <span ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode" class="cursorpointer" uib-tooltip="Edit">  
+                                    <span ng-if="additionalLanguage[key].editmode == false || !additionalLanguage[key].editmode"
+                                          class="cursorpointer" uib-tooltip="Edit">
                                         <img height="24px" src="/assets/images/edit.svg">
                                     </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr valign="top" ng-if="personData">
-                    <td>
-                        <div><h3>11. Muud oskused (arvutioskus):<div class="addbutton" uib-tooltip="Add new" ng-if="editmode"  ng-click="addSkills()"><img src="/assets/images/addbutton.svg" height="24px"></div></h3></div>
-                            <ul >
-                                  <li ng-repeat="(key, skills) in additionalSkill">
-                                    <span ng-if="additionalSkill[key].editmode == true">  
-                                        <input type="text" ng-model="skills.type" placeholder="Type"> - <input type="text" ng-model="skills.description" placeholder="Description"> - <input type="text" ng-model="skills.experience" placeholder="Years"> -----
-                                        <span style="padding: 5px 10px" ng-if="editmode" confirmed-click="removeSkill(key)" ng-confirm-click="Kindel?"><span class="cursorpointer" uib-tooltip="Delete"><img height="24px" src="/assets/images/delete.svg"> </span></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr valign="top" ng-if="personData">
+                        <td>
+                            <div>
+                                <h3>11. Muud oskused (arvutioskus):
+                                    <div class="addbutton" uib-tooltip="Add new" ng-if="editmode"
+                                         ng-click="addSkills()"><img src="/assets/images/addbutton.svg" height="24px">
+                                    </div>
+                                </h3>
+                                <div class="alert alert-danger" ng-if="error.additionalSkillArea">
+                                    <p ng-repeat="alert in error.additionalSkillArea"
+                                       ng-bind="alert | translate"></p>
+                                </div>
+                            </div>
+                            <ul>
+                                <li ng-repeat="(key, skills) in additionalSkill">
+                                    <span ng-if="additionalSkill[key].editmode == true">
+                                        <input type="text" ng-model="skills.type" placeholder="Type"> - <input
+                                            type="text" ng-model="skills.description"
+                                            placeholder="Description"> - <input type="text" ng-model="skills.experience"
+                                                                                placeholder="Years"> -----
+                                        <span style="padding: 5px 10px" ng-if="editmode"
+                                              confirmed-click="removeSkill(key)" ng-confirm-click="Kindel?"><span
+                                                class="cursorpointer" uib-tooltip="Delete"><img height="24px"
+                                                                                                src="/assets/images/delete.svg"> </span></span>
 
                                     </span>
-                                    <span ng-if="additionalSkill[key].editmode == false || !additionalSkill[key].editmode">    
-                                        <span contenteditable="false" ng-model="skills.type" translate="{{skills.type}}"></span> : <span contenteditable="false" ng-model="skills.description"></span> -- kogemust : <span contenteditable="false" ng-model="skills.experience"></span> aasta(t)
+                                    <span ng-if="additionalSkill[key].editmode == false || !additionalSkill[key].editmode">
+                                        <span contenteditable="false" ng-model="skills.type"
+                                              translate="{{skills.type}}"></span> : <span contenteditable="false"
+                                                                                          ng-model="skills.description"></span> -- kogemust : <span
+                                            contenteditable="false" ng-model="skills.experience"></span> aasta(t)
                                     </span>
-                                    <span style="padding: 5px 10px;width:50px;" ng-if="editmode" ng-click="editSkill(key)">
-                                        <span ng-if="additionalSkill[key].editmode == true" class="cursorpointer" uib-tooltip="Save">
-                                            <img height="24px" src="/assets/images/savebutton.svg"> 
+                                    <span style="padding: 5px 10px;width:50px;" ng-if="editmode"
+                                          ng-click="editSkill(key)">
+                                        <span ng-if="additionalSkill[key].editmode == true" class="cursorpointer"
+                                              uib-tooltip="Save">
+                                            <img height="24px" src="/assets/images/savebutton.svg">
                                         </span>
-                                        <span ng-if="additionalSkill[key].editmode == false || !additionalSkill[key].editmode" class="cursorpointer" uib-tooltip="Edit">  
+                                        <span ng-if="additionalSkill[key].editmode == false || !additionalSkill[key].editmode"
+                                              class="cursorpointer" uib-tooltip="Edit">
                                             <img height="24px" src="/assets/images/edit.svg">
                                         </span>
                                     </span>
-                                  </li>
+                                </li>
                             </ul>
-                        </table>
-                    </td>
+                </table>
+                </td>
                 </tr>
-            </table>
-        </form>
-        <div class="modal fade" id="myModal" role="dialog">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <h3 translate="form.addNewProject"></h3>
-                <form name="position">
-                <select ng-model="getProject" required>
-                  <option ng-repeat="option in projects" value="{{option.id}}">{{option.buyer}} - {{option.serviceName}}</option>
-                  <option translate="form.newproject" value="new"></option>
-                </select>
-                <div ng-if="getProject == 'new'">
+                </table>
+            </form>
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <h3 translate="form.addNewProject"></h3>
 
-                    <span translate="form.buyer"></span>
-                    <input type="text" ng-model="newPorject.buyer" required ><br>
-                    <span translate="form.servicename"></span>
-                    <input type="text" ng-model="newPorject.serviceName" required><br>
-                    <span translate="form.totalhours"></span>
-                    <input type="text" ng-model="newPorject.totalProjectWorkHours" required><br>
-                </div> 
-                <input type="submit" translate="form.add" ng-click="addProject()">
-                </form>       
+                        <div class="alert alert-danger" ng-if="error.projectArea">
+                            <p ng-repeat="alert in error.projectArea" ng-bind="alert | translate"></p>
+                        </div>
+                        <form name="position">
+                            <select ng-model="getProject" required>
+                                <option ng-repeat="option in projects" value="{{option.id}}">{{option.buyer}} -
+                                    {{option.serviceName}}
+                                </option>
+                                <option translate="form.newproject" value="new"></option>
+                            </select>
+
+                            <div ng-if="getProject == 'new'">
+
+                                <span translate="form.buyer"></span>
+                                <input type="text" ng-model="newPorject.buyer" required><br>
+                                <span translate="form.servicename"></span>
+                                <input type="text" ng-model="newPorject.serviceName" required><br>
+                                <span translate="form.totalhours"></span>
+                                <input type="text" ng-model="newPorject.totalProjectWorkHours" required><br>
+                            </div>
+                            <input type="submit" translate="form.add" ng-click="addProject()">
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <button type="button" ng-show="false" id="togglemodal" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-          Launch demo modal
-        </button>
+            <button type="button" ng-show="false" id="togglemodal" class="btn btn-primary btn-lg" data-toggle="modal"
+                    data-target="#myModal">
+                Launch demo modal
+            </button>
 
         </div>
     </div>

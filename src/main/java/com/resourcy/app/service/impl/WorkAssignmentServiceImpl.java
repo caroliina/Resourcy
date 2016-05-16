@@ -6,8 +6,12 @@ import com.resourcy.app.repository.WorkAssignmentRepository;
 import com.resourcy.app.repository.WorkExperienceRepository;
 import com.resourcy.app.repository.search.WorkAssignmentSearchRepository;
 import com.resourcy.app.service.WorkAssignmentService;
+import com.resourcy.app.service.validator.ValidationException;
+import com.resourcy.app.service.validator.ValidationResponse;
+import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.WorkAssignmentDTO;
 import com.resourcy.app.web.rest.mapper.WorkAssignmentMapper;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -26,100 +30,103 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
  */
 @Service
 @Transactional
-public class WorkAssignmentServiceImpl implements WorkAssignmentService {
+public class WorkAssignmentServiceImpl implements WorkAssignmentService{
 
-   private final Logger log = LoggerFactory.getLogger(WorkAssignmentServiceImpl.class);
+    private final Logger log = LoggerFactory.getLogger(WorkAssignmentServiceImpl.class);
 
-   @Inject
-   private WorkAssignmentRepository workAssignmentRepository;
+    @Inject
+    private WorkAssignmentRepository workAssignmentRepository;
 
-   @Inject
-   private WorkAssignmentMapper workAssignmentMapper;
+    @Inject
+    private WorkAssignmentMapper workAssignmentMapper;
 
-   @Inject
-   private WorkAssignmentSearchRepository workAssignmentSearchRepository;
+    @Inject
+    private WorkAssignmentSearchRepository workAssignmentSearchRepository;
 
-   @Inject
-   private WorkExperienceRepository workExperienceRepository;
+    @Inject
+    private WorkExperienceRepository workExperienceRepository;
 
-   @Inject
-   private GovernmentWorkExperienceRepository govWorkExperienceRepository;
+    @Inject
+    private GovernmentWorkExperienceRepository govWorkExperienceRepository;
 
-   /**
-    * Save a workAssignment.
-    *
-    * @return the persisted entity
-    */
-   public WorkAssignmentDTO save(WorkAssignmentDTO workAssignmentDTO) {
-      log.debug("Request to save WorkAssignment : {}", workAssignmentDTO);
-      WorkAssignment workAssignment = workAssignmentMapper.workAssignmentDTOToWorkAssignment(workAssignmentDTO);
-      workAssignment = workAssignmentRepository.save(workAssignment);
-      WorkAssignmentDTO result = workAssignmentMapper.workAssignmentToWorkAssignmentDTO(workAssignment);
-      workAssignmentSearchRepository.save(workAssignment);
-      return result;
-   }
+    @Inject
+    private ValidatorService workAssignmentValidatorService;
 
-   /**
-    * get all the workAssignments.
-    *
-    * @return the list of entities
-    */
-   @Transactional(readOnly = true)
-   public List<WorkAssignmentDTO> findAll() {
-      log.debug("Request to get all WorkAssignments");
-      List<WorkAssignmentDTO> result = workAssignmentRepository.findAll().stream()
-         .map(workAssignmentMapper::workAssignmentToWorkAssignmentDTO)
-         .collect(Collectors.toCollection(LinkedList::new));
-      return result;
-   }
+    /**
+     * Save a workAssignment.
+     * @return the persisted entity
+     */
+    public WorkAssignmentDTO save(WorkAssignmentDTO workAssignmentDTO) throws ValidationException {
+        log.debug("Request to save WorkAssignment : {}", workAssignmentDTO);
+        ValidationResponse validationResponse = workAssignmentValidatorService.validate(workAssignmentDTO);
+        if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
+            throw new ValidationException(validationResponse);
+        }
+        WorkAssignment workAssignment = workAssignmentMapper.workAssignmentDTOToWorkAssignment(workAssignmentDTO);
+        workAssignment = workAssignmentRepository.save(workAssignment);
+        WorkAssignmentDTO result = workAssignmentMapper.workAssignmentToWorkAssignmentDTO(workAssignment);
+        workAssignmentSearchRepository.save(workAssignment);
+        return result;
+    }
 
-   /**
-    * get one workAssignment by id.
-    *
-    * @return the entity
-    */
-   @Transactional(readOnly = true)
-   public WorkAssignmentDTO findOne(Long id) {
-      log.debug("Request to get WorkAssignment : {}", id);
-      WorkAssignment workAssignment = workAssignmentRepository.findOne(id);
-      WorkAssignmentDTO workAssignmentDTO = workAssignmentMapper.workAssignmentToWorkAssignmentDTO(workAssignment);
-      return workAssignmentDTO;
-   }
+    /**
+     *  get all the workAssignments.
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public List<WorkAssignmentDTO> findAll() {
+        log.debug("Request to get all WorkAssignments");
+        List<WorkAssignmentDTO> result = workAssignmentRepository.findAll().stream()
+            .map(workAssignmentMapper::workAssignmentToWorkAssignmentDTO)
+            .collect(Collectors.toCollection(LinkedList::new));
+        return result;
+    }
 
-   /**
-    * delete the  workAssignment by id.
-    */
-   public void delete(Long id) {
-      log.debug("Request to delete WorkAssignment : {}", id);
-      workAssignmentRepository.delete(id);
-      workAssignmentSearchRepository.delete(id);
-   }
+    /**
+     *  get one workAssignment by id.
+     *  @return the entity
+     */
+    @Transactional(readOnly = true)
+    public WorkAssignmentDTO findOne(Long id) {
+        log.debug("Request to get WorkAssignment : {}", id);
+        WorkAssignment workAssignment = workAssignmentRepository.findOne(id);
+        WorkAssignmentDTO workAssignmentDTO = workAssignmentMapper.workAssignmentToWorkAssignmentDTO(workAssignment);
+        return workAssignmentDTO;
+    }
 
-   /**
-    * search for the workAssignment corresponding
-    * to the query.
-    */
-   @Transactional(readOnly = true)
-   public List<WorkAssignmentDTO> search(String query) {
+    /**
+     *  delete the  workAssignment by id.
+     */
+    public void delete(Long id) {
+        log.debug("Request to delete WorkAssignment : {}", id);
+        workAssignmentRepository.delete(id);
+        workAssignmentSearchRepository.delete(id);
+    }
 
-      log.debug("REST request to search WorkAssignments for query {}", query);
-      return StreamSupport
-         .stream(workAssignmentSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-         .map(workAssignmentMapper::workAssignmentToWorkAssignmentDTO)
-         .collect(Collectors.toList());
-   }
+    /**
+     * search for the workAssignment corresponding
+     * to the query.
+     */
+    @Transactional(readOnly = true)
+    public List<WorkAssignmentDTO> search(String query) {
 
-   @Override
-   public WorkAssignmentDTO addWorkAssignment(WorkAssignmentDTO dto) {
-      WorkAssignment workAssignment = workAssignmentMapper.workAssignmentDTOToWorkAssignment(dto);
-      if (dto.getWorkExperienceId() != null) {
-         workAssignment.setWorkExperience(workExperienceRepository.findOne(dto.getWorkExperienceId()));
-      }
-      if (dto.getGovernmentWorkExperienceId() != null) {
-         workAssignment
-            .setGovernmentWorkExperience(govWorkExperienceRepository.findOne(dto.getGovernmentWorkExperienceId()));
-      }
-      workAssignmentRepository.save(workAssignment);
-      return workAssignmentMapper.workAssignmentToWorkAssignmentDTO(workAssignment);
-   }
+        log.debug("REST request to search WorkAssignments for query {}", query);
+        return StreamSupport
+            .stream(workAssignmentSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .map(workAssignmentMapper::workAssignmentToWorkAssignmentDTO)
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public WorkAssignmentDTO addWorkAssignment(WorkAssignmentDTO dto) {
+        WorkAssignment workAssignment = workAssignmentMapper.workAssignmentDTOToWorkAssignment(dto);
+        if (dto.getWorkExperienceId() != null) {
+            workAssignment.setWorkExperience(workExperienceRepository.findOne(dto.getWorkExperienceId()));
+        }
+        if (dto.getGovernmentWorkExperienceId() != null) {
+            workAssignment.setGovernmentWorkExperience(govWorkExperienceRepository.findOne(dto.getGovernmentWorkExperienceId()));
+        }
+        workAssignmentRepository.save(workAssignment);
+        return workAssignmentMapper.workAssignmentToWorkAssignmentDTO(workAssignment);
+    }
 }

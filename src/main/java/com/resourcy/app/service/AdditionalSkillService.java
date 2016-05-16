@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.AdditionalSkillDTO;
 
 import java.util.List;
@@ -9,37 +10,34 @@ import java.util.List;
  */
 public interface AdditionalSkillService {
 
-   /**
-    * Save a additionalSkill.
-    *
-    * @return the persisted entity
-    */
-   AdditionalSkillDTO save(AdditionalSkillDTO additionalSkillDTO);
+    /**
+     * Save a additionalSkill.
+     * @return the persisted entity
+     */
+    AdditionalSkillDTO save(AdditionalSkillDTO additionalSkillDTO) throws ValidationException;
 
-   /**
-    * get all the additionalSkills.
-    *
-    * @return the list of entities
-    */
-   List<AdditionalSkillDTO> findAll();
+    /**
+     *  get all the additionalSkills.
+     *  @return the list of entities
+     */
+    List<AdditionalSkillDTO> findAll();
 
-   /**
-    * get the "id" additionalSkill.
-    *
-    * @return the entity
-    */
-   AdditionalSkillDTO findOne(Long id);
+    /**
+     *  get the "id" additionalSkill.
+     *  @return the entity
+     */
+    AdditionalSkillDTO findOne(Long id);
 
-   /**
-    * delete the "id" additionalSkill.
-    */
-   void delete(Long id);
+    /**
+     *  delete the "id" additionalSkill.
+     */
+    void delete(Long id);
 
-   /**
-    * search for the additionalSkill corresponding
-    * to the query.
-    */
-   List<AdditionalSkillDTO> search(String query);
+    /**
+     * search for the additionalSkill corresponding
+     * to the query.
+     */
+    List<AdditionalSkillDTO> search(String query);
 
-   AdditionalSkillDTO addSkill(AdditionalSkillDTO additionalSkillDTO);
+    AdditionalSkillDTO addSkill(AdditionalSkillDTO additionalSkillDTO);
 }

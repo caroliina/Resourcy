@@ -5,8 +5,12 @@ import com.resourcy.app.repository.GovernmentProjectRepository;
 import com.resourcy.app.repository.GovernmentWorkExperienceRepository;
 import com.resourcy.app.repository.search.GovernmentProjectSearchRepository;
 import com.resourcy.app.service.GovernmentProjectService;
+import com.resourcy.app.service.validator.ValidationException;
+import com.resourcy.app.service.validator.ValidationResponse;
+import com.resourcy.app.service.validator.ValidatorService;
 import com.resourcy.app.web.rest.dto.GovernmentProjectDTO;
 import com.resourcy.app.web.rest.mapper.GovernmentProjectMapper;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -25,50 +29,54 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
  */
 @Service
 @Transactional
-public class GovernmentProjectServiceImpl implements GovernmentProjectService {
+public class GovernmentProjectServiceImpl implements GovernmentProjectService{
 
-   private final Logger log = LoggerFactory.getLogger(GovernmentProjectServiceImpl.class);
+    private final Logger log = LoggerFactory.getLogger(GovernmentProjectServiceImpl.class);
 
-   @Inject
-   private GovernmentProjectRepository governmentProjectRepository;
+    @Inject
+    private GovernmentProjectRepository governmentProjectRepository;
 
-   @Inject
-   private GovernmentProjectMapper governmentProjectMapper;
+    @Inject
+    private GovernmentProjectMapper governmentProjectMapper;
 
-   @Inject
-   private GovernmentProjectSearchRepository governmentProjectSearchRepository;
+    @Inject
+    private GovernmentProjectSearchRepository governmentProjectSearchRepository;
 
-   @Inject
-   private GovernmentWorkExperienceRepository govWorkExperienceRepository;
+    @Inject
+    private GovernmentWorkExperienceRepository govWorkExperienceRepository;
 
-   /**
-    * Save a governmentProject.
-    *
-    * @return the persisted entity
-    */
-   public GovernmentProjectDTO save(GovernmentProjectDTO governmentProjectDTO) {
-      log.debug("Request to save GovernmentProject : {}", governmentProjectDTO);
-      GovernmentProject governmentProject =
-         governmentProjectMapper.governmentProjectDTOToGovernmentProject(governmentProjectDTO);
-      governmentProject = governmentProjectRepository.save(governmentProject);
-      GovernmentProjectDTO result = governmentProjectMapper.governmentProjectToGovernmentProjectDTO(governmentProject);
-      governmentProjectSearchRepository.save(governmentProject);
-      return result;
-   }
+    @Inject
+    private ValidatorService governmentProjectValidatorService;
 
-   /**
-    * get all the governmentProjects.
-    *
-    * @return the list of entities
-    */
-   @Transactional(readOnly = true)
-   public List<GovernmentProjectDTO> findAll() {
-      log.debug("Request to get all GovernmentProjects");
-      List<GovernmentProjectDTO> result = governmentProjectRepository.findAll().stream()
-         .map(governmentProjectMapper::governmentProjectToGovernmentProjectDTO)
-         .collect(Collectors.toCollection(LinkedList::new));
-      return result;
-   }
+    /**
+     * Save a governmentProject.
+     * @return the persisted entity
+     */
+    public GovernmentProjectDTO save(GovernmentProjectDTO governmentProjectDTO) throws ValidationException {
+        log.debug("Request to save GovernmentProject : {}", governmentProjectDTO);
+        ValidationResponse validationResponse = governmentProjectValidatorService.validate(governmentProjectDTO);
+        if (CollectionUtils.isNotEmpty(validationResponse.getErrorMessage())) {
+            throw new ValidationException(validationResponse);
+        }
+        GovernmentProject governmentProject = governmentProjectMapper.governmentProjectDTOToGovernmentProject(governmentProjectDTO);
+        governmentProject = governmentProjectRepository.save(governmentProject);
+        GovernmentProjectDTO result = governmentProjectMapper.governmentProjectToGovernmentProjectDTO(governmentProject);
+        governmentProjectSearchRepository.save(governmentProject);
+        return result;
+    }
+
+    /**
+     *  get all the governmentProjects.
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public List<GovernmentProjectDTO> findAll() {
+        log.debug("Request to get all GovernmentProjects");
+        List<GovernmentProjectDTO> result = governmentProjectRepository.findAll().stream()
+            .map(governmentProjectMapper::governmentProjectToGovernmentProjectDTO)
+            .collect(Collectors.toCollection(LinkedList::new));
+        return result;
+    }
 
 
    /**

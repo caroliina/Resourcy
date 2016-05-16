@@ -1,5 +1,6 @@
 package com.resourcy.app.service;
 
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.LanguageSkillDTO;
 
 import java.util.List;
@@ -9,37 +10,34 @@ import java.util.List;
  */
 public interface LanguageSkillService {
 
-   /**
-    * Save a languageSkill.
-    *
-    * @return the persisted entity
-    */
-   LanguageSkillDTO save(LanguageSkillDTO languageSkillDTO);
+    /**
+     * Save a languageSkill.
+     * @return the persisted entity
+     */
+    LanguageSkillDTO save(LanguageSkillDTO languageSkillDTO) throws  ValidationException;
 
-   /**
-    * get all the languageSkills.
-    *
-    * @return the list of entities
-    */
-   List<LanguageSkillDTO> findAll();
+    /**
+     *  get all the languageSkills.
+     *  @return the list of entities
+     */
+    List<LanguageSkillDTO> findAll();
 
-   /**
-    * get the "id" languageSkill.
-    *
-    * @return the entity
-    */
-   LanguageSkillDTO findOne(Long id);
+    /**
+     *  get the "id" languageSkill.
+     *  @return the entity
+     */
+    LanguageSkillDTO findOne(Long id);
 
-   /**
-    * delete the "id" languageSkill.
-    */
-   void delete(Long id);
+    /**
+     *  delete the "id" languageSkill.
+     */
+    void delete(Long id);
 
-   /**
-    * search for the languageSkill corresponding
-    * to the query.
-    */
-   List<LanguageSkillDTO> search(String query);
+    /**
+     * search for the languageSkill corresponding
+     * to the query.
+     */
+    List<LanguageSkillDTO> search(String query);
 
-   LanguageSkillDTO addLanguage(LanguageSkillDTO languageSkillDTO);
+    LanguageSkillDTO addLanguage(LanguageSkillDTO languageSkillDTO);
 }

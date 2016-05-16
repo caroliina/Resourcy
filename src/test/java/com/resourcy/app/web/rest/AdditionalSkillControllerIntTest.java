@@ -84,6 +84,7 @@ public class AdditionalSkillControllerIntTest {
         additionalSkill = new AdditionalSkill();
         additionalSkill.setType(DEFAULT_TYPE);
         additionalSkill.setDescription(DEFAULT_DESCRIPTION);
+        additionalSkill.setExperience(3);
     }
 
     @Test

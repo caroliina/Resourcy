@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.domain.CurriculumVitae;
 import com.resourcy.app.domain.LanguageType;
 import com.resourcy.app.service.CurriculumVitaeService;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.CurriculumVitaeDTO;
 import com.resourcy.app.web.rest.mapper.CurriculumVitaeMapper;
 import com.resourcy.app.web.rest.util.HeaderUtil;
@@ -36,13 +37,13 @@ import java.util.stream.Stream;
 public class CurriculumVitaeController {
 
     private final Logger log = LoggerFactory.getLogger(CurriculumVitaeController.class);
-        
+
     @Inject
     private CurriculumVitaeService curriculumVitaeService;
-    
+
     @Inject
     private CurriculumVitaeMapper curriculumVitaeMapper;
-    
+
     /**
      * POST  /curriculumVitaes -> Create a new curriculumVitae.
      */
@@ -50,7 +51,7 @@ public class CurriculumVitaeController {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<CurriculumVitaeDTO> createCurriculumVitae(@RequestBody CurriculumVitaeDTO curriculumVitaeDTO) throws URISyntaxException {
+    public ResponseEntity<CurriculumVitaeDTO> createCurriculumVitae(@RequestBody CurriculumVitaeDTO curriculumVitaeDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to save CurriculumVitae : {}", curriculumVitaeDTO);
         if (curriculumVitaeDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("curriculumVitae", "idexists", "A new curriculumVitae cannot already have an ID")).body(null);
@@ -68,7 +69,7 @@ public class CurriculumVitaeController {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<CurriculumVitaeDTO> updateCurriculumVitae(@RequestBody CurriculumVitaeDTO curriculumVitaeDTO) throws URISyntaxException {
+    public ResponseEntity<CurriculumVitaeDTO> updateCurriculumVitae(@RequestBody CurriculumVitaeDTO curriculumVitaeDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to update CurriculumVitae : {}", curriculumVitaeDTO);
         if (curriculumVitaeDTO.getId() == null) {
             return createCurriculumVitae(curriculumVitaeDTO);
@@ -90,7 +91,7 @@ public class CurriculumVitaeController {
     public ResponseEntity<List<CurriculumVitaeDTO>> getAllCurriculumVitaes(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of CurriculumVitaes");
-        Page<CurriculumVitae> page = curriculumVitaeService.findAll(pageable); 
+        Page<CurriculumVitae> page = curriculumVitaeService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/curriculumVitaes");
         return new ResponseEntity<>(page.getContent().stream()
             .map(curriculumVitaeMapper::curriculumVitaeToCurriculumVitaeDTO)

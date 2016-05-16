@@ -3,6 +3,7 @@ package com.resourcy.app.service;
 import com.resourcy.app.Application;
 import com.resourcy.app.domain.AdditionalSkill;
 import com.resourcy.app.domain.Type;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.AdditionalSkillDTO;
 import com.resourcy.app.web.rest.mapper.AdditionalSkillMapper;
 import org.junit.Test;
@@ -58,7 +59,7 @@ public class AdditionalSkillServiceTest {
 
    @Test
    @Transactional
-   public void testSaveAdditionalSkill() {
+   public void testSaveAdditionalSkill() throws ValidationException {
       AdditionalSkillDTO additionalSkill = additionalSkillService.addSkill(newAdditionalSkillDTO());
       assertNotNull(additionalSkill);
 

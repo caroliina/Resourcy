@@ -3,6 +3,7 @@ package com.resourcy.app.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.resourcy.app.domain.Position;
 import com.resourcy.app.service.WorkExperienceService;
+import com.resourcy.app.service.validator.ValidationException;
 import com.resourcy.app.web.rest.dto.WorkExperienceDTO;
 import com.resourcy.app.web.rest.mapper.WorkExperienceMapper;
 import com.resourcy.app.web.rest.util.HeaderUtil;
@@ -43,7 +44,7 @@ public class WorkExperienceController {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<WorkExperienceDTO> createWorkExperience(@RequestBody WorkExperienceDTO workExperienceDTO) throws URISyntaxException {
+    public ResponseEntity<WorkExperienceDTO> createWorkExperience(@RequestBody WorkExperienceDTO workExperienceDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to save WorkExperience : {}", workExperienceDTO);
         if (workExperienceDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("workExperience", "idexists", "A new workExperience cannot already have an ID")).body(null);
@@ -61,7 +62,7 @@ public class WorkExperienceController {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<WorkExperienceDTO> updateWorkExperience(@RequestBody WorkExperienceDTO workExperienceDTO) throws URISyntaxException {
+    public ResponseEntity<WorkExperienceDTO> updateWorkExperience(@RequestBody WorkExperienceDTO workExperienceDTO) throws URISyntaxException, ValidationException {
         log.debug("REST request to update WorkExperience : {}", workExperienceDTO);
         if (workExperienceDTO.getId() == null) {
             return createWorkExperience(workExperienceDTO);
