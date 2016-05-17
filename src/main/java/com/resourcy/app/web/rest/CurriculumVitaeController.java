@@ -142,8 +142,8 @@ public class CurriculumVitaeController {
     }
 
     @RequestMapping(value = "/curriculums", method = RequestMethod.GET)
-    public CurriculumVitaeDTO getEmployeeCurriculumVitaeEst() {
-        return curriculumVitaeService.getEmployeeCvEst();
+    public CurriculumVitaeDTO getEmployeeCurriculumVitaeEst(@RequestParam("employeeId") Long employeeId) {
+        return curriculumVitaeService.getEmployeeCvEst(employeeId);
     }
 
     @RequestMapping(value = "/curriculumVitaes/languageTypes", method = RequestMethod.GET)

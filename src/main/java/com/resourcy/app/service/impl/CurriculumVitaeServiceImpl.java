@@ -31,21 +31,21 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
  */
 @Service
 @Transactional
-public class CurriculumVitaeServiceImpl implements CurriculumVitaeService{
+public class CurriculumVitaeServiceImpl implements CurriculumVitaeService {
 
-    private final Logger log = LoggerFactory.getLogger(CurriculumVitaeServiceImpl.class);
+   private final Logger log = LoggerFactory.getLogger(CurriculumVitaeServiceImpl.class);
 
-    @Inject
-    private CurriculumVitaeRepository curriculumVitaeRepository;
+   @Inject
+   private CurriculumVitaeRepository curriculumVitaeRepository;
 
-    @Inject
-    private CurriculumVitaeMapper curriculumVitaeMapper;
+   @Inject
+   private CurriculumVitaeMapper curriculumVitaeMapper;
 
-    @Inject
-    private CurriculumVitaeSearchRepository curriculumVitaeSearchRepository;
+   @Inject
+   private CurriculumVitaeSearchRepository curriculumVitaeSearchRepository;
 
-    @Inject
-    private UserService userService;
+   @Inject
+   private UserService userService;
 
     @Inject
     private ValidatorService curriculumVitaeValidatorService;
@@ -68,59 +68,62 @@ public class CurriculumVitaeServiceImpl implements CurriculumVitaeService{
         return result;
     }
 
-    /**
-     *  get all the curriculumVitaes.
-     *  @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public Page<CurriculumVitae> findAll(Pageable pageable) {
-        log.debug("Request to get all CurriculumVitaes");
-        Page<CurriculumVitae> result = curriculumVitaeRepository.findAll(pageable);
-        return result;
-    }
+   /**
+    * get all the curriculumVitaes.
+    *
+    * @return the list of entities
+    */
+   @Transactional(readOnly = true)
+   public Page<CurriculumVitae> findAll(Pageable pageable) {
+      log.debug("Request to get all CurriculumVitaes");
+      Page<CurriculumVitae> result = curriculumVitaeRepository.findAll(pageable);
+      return result;
+   }
 
-    /**
-     *  get one curriculumVitae by id.
-     *  @return the entity
-     */
-    @Transactional(readOnly = true)
-    public CurriculumVitaeDTO findOne(Long id) {
-        log.debug("Request to get CurriculumVitae : {}", id);
-        CurriculumVitae curriculumVitae = curriculumVitaeRepository.findOne(id);
-        CurriculumVitaeDTO curriculumVitaeDTO = curriculumVitaeMapper.curriculumVitaeToCurriculumVitaeDTO(curriculumVitae);
-        return curriculumVitaeDTO;
-    }
+   /**
+    * get one curriculumVitae by id.
+    *
+    * @return the entity
+    */
+   @Transactional(readOnly = true)
+   public CurriculumVitaeDTO findOne(Long id) {
+      log.debug("Request to get CurriculumVitae : {}", id);
+      CurriculumVitae curriculumVitae = curriculumVitaeRepository.findOne(id);
+      CurriculumVitaeDTO curriculumVitaeDTO =
+         curriculumVitaeMapper.curriculumVitaeToCurriculumVitaeDTO(curriculumVitae);
+      return curriculumVitaeDTO;
+   }
 
-    /**
-     *  delete the  curriculumVitae by id.
-     */
-    public void delete(Long id) {
-        log.debug("Request to delete CurriculumVitae : {}", id);
-        curriculumVitaeRepository.delete(id);
-        curriculumVitaeSearchRepository.delete(id);
-    }
+   /**
+    * delete the  curriculumVitae by id.
+    */
+   public void delete(Long id) {
+      log.debug("Request to delete CurriculumVitae : {}", id);
+      curriculumVitaeRepository.delete(id);
+      curriculumVitaeSearchRepository.delete(id);
+   }
 
-    /**
-     * search for the curriculumVitae corresponding
-     * to the query.
-     */
-    @Transactional(readOnly = true)
-    public List<CurriculumVitaeDTO> search(String query) {
+   /**
+    * search for the curriculumVitae corresponding
+    * to the query.
+    */
+   @Transactional(readOnly = true)
+   public List<CurriculumVitaeDTO> search(String query) {
 
-        log.debug("REST request to search CurriculumVitaes for query {}", query);
-        return StreamSupport
-            .stream(curriculumVitaeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(curriculumVitaeMapper::curriculumVitaeToCurriculumVitaeDTO)
-            .collect(Collectors.toList());
-    }
+      log.debug("REST request to search CurriculumVitaes for query {}", query);
+      return StreamSupport
+         .stream(curriculumVitaeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+         .map(curriculumVitaeMapper::curriculumVitaeToCurriculumVitaeDTO)
+         .collect(Collectors.toList());
+   }
 
 
-    @Transactional(readOnly = true)
-    public CurriculumVitaeDTO getEmployeeCvEst() {
+   @Transactional(readOnly = true)
+   public CurriculumVitaeDTO getEmployeeCvEst(Long employeeId) {
 
-        CurriculumVitae result = curriculumVitaeRepository
-           .findByEmployeeIdAndLanguageType(userService.getUserWithAuthorities().getEmployee().getId(), LanguageType.EST);
+      CurriculumVitae result = curriculumVitaeRepository
+         .findByEmployeeIdAndLanguageType(employeeId, LanguageType.EST);
 
-        return curriculumVitaeMapper.curriculumVitaeToCurriculumVitaeDTO(result);
-    }
+      return curriculumVitaeMapper.curriculumVitaeToCurriculumVitaeDTO(result);
+   }
 }

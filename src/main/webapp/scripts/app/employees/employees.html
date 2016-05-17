@@ -21,7 +21,7 @@
                 <td>
                     <div class="btn-group" role="group" aria-label="...">
                         <a ng-repeat="cv in employee.cvList" ng-href="/#/export?id={{cv.id}}"
-                           ng-bind="languageType ? languageType : 'CV-' + $index"
+                           ng-bind="cv.languageType ? cv.languageType : 'CV-' + $index"
                            class="btn btn-default">
                         </a>
                     </div>
